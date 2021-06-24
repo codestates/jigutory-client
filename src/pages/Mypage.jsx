@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Cart(props) {
+function Mypage(props) {
   return (
     <div>
-      cart page
+      mypage
     </div>
   );
 }
 
-export default Cart;
+export default Mypage;

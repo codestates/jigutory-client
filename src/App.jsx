@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './styles/style.scss'
 import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-dom';
@@ -40,31 +40,32 @@ function App() {
         setUserinfo(obj);
     }
 
-    useEffect(() => {
-        const dataFormLocalStorage = localStorage.getItem('is-Login')
-        if (dataFormLocalStorage) {
-            setIsLogin(JSON.parse(dataFormLocalStorage))
-        }
-    }, [setIsLogin])
+    // useEffect(() => {
+    //     const dataFormLocalStorage = localStorage.getItem('is-Login')
+    //     if (dataFormLocalStorage) {
+    //         setIsLogin(JSON.parse(dataFormLocalStorage))
+    //     }
+    // }, [setIsLogin])
 
-    useEffect(() => {
-        localStorage.setItem('is-Login', JSON.stringify(isLogin))
-    }, [isLogin])
-
-
-    function propstest() {
-        console.log('전달 테스트')
-    }
+    // useEffect(() => {
+    //     localStorage.setItem('is-Login', JSON.stringify(isLogin))
+    // }, [isLogin])
 
     return (
         <div>
             <header>
-                <Nav />
+                <Nav
+                    isLogin={isLogin}
+                    handleLogin={handleLogin}
+                    handleLogout={handleLogout}
+                    handleUserInfo={handleUserInfo}
+                    accessToken={accessToken}
+                />
             </header>
             <Switch>
                 <Route path='/' exact={true} component={Intro} />
                 <Route path='/signin' exact={true} render={() =>
-                    (<SignIn propstest={propstest} handleLogin={handleLogin} accessToken={accessToken} />)} />
+                    (<SignIn handleLogin={handleLogin} accessToken={accessToken} />)} />
                 <Route path='/intro' exact={true} component={Intro} />
                 <Route path='/main' exact={true} component={Main} />
                 <Route path='/mypage' exact={true} component={Mypage} />

@@ -6,8 +6,7 @@ import { GoogleLogin } from 'react-google-login';
 axios.defaults.withCredentials = true;
 
 // nav 컴포넌트에서 props 가져올 것
-function SignIn({ accessToken, handleLogin, propstest }) {
-  propstest();
+function SignIn({ accessToken, handleLogin, openModal, closeModal }) {
 
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -69,17 +68,17 @@ function SignIn({ accessToken, handleLogin, propstest }) {
     }
   }
 
-  function responseGoogle(response) {
-    console.log(response);
-    console.log(response.profile);
-  }
+  // function responseGoogle(response) {
+  //   console.log(response);
+  //   console.log(response.profile);
+  // }
 
   return (
-    <div className="signin-modal_container show-modal">
-      <div className="signin-modal">
-        <button className="close"><i className="fas fa-times"></i></button>
+    <div className="modal-container show-modal" onClick={openModal}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="close" onClick={closeModal}><i className="fas fa-times"></i></button>
         <h2>로그인</h2>
-        <div className="signin-modal_contents">
+        <div className="modal-info">
           <input
             autoFocus
             type="email"
@@ -96,10 +95,10 @@ function SignIn({ accessToken, handleLogin, propstest }) {
             ref={passwordRef}
           />
           <GoogleLogin
-            clientId=""
+            clientId="925382932502-goj9fkkkr5nf6n4632vi0oo1nj4tbjmq.apps.googleusercontent.com"
             buttonText="Login"
-            onSuccess={responseGoole}
-            onFailure={responseGoogle}
+            // onSuccess={responseGoole}
+            // onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
           />
           <button className="signin-google">구글 로그인</button>

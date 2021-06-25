@@ -37,7 +37,6 @@ function App() {
     }
 
     function handleUserInfo(obj) {
-        // 유저정보 저장
         setUserinfo(obj);
     }
 
@@ -46,11 +45,12 @@ function App() {
         if (dataFormLocalStorage) {
             setIsLogin(JSON.parse(dataFormLocalStorage))
         }
-    }, [isLogin])
+    }, [setIsLogin])
 
     useEffect(() => {
         localStorage.setItem('is-Login', JSON.stringify(isLogin))
     }, [isLogin])
+
 
     function propstest() {
         console.log('전달 테스트')

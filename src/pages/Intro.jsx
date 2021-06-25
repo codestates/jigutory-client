@@ -1,11 +1,23 @@
 import React from 'react';
+import logo from '../image/jigu-logo.png';
+import { useHistory, withRouter } from "react-router-dom";
 
-const Intro = () => {
+function Intro() {
+  const history = useHistory();
+  function moveToIntro() {
+    history.push("/intro");
+  };
+
   return (
     <div className="intro-container">
-      <h2>인트로 페이지 라우팅 테스트</h2>
+      <div className="intro-overall">
+        <a href="#">
+          <img className="logo" src={logo} onClick={moveToIntro} alt="logo" width="50px" />
+        </a>
+        <h2>지구토리 인트로 페이지</h2>
+      </div>
     </div>
   );
 };
 
-export default Intro;
+export default withRouter(Intro);

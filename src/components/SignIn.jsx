@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom'
 import React, { useEffect, useState, useRef } from 'react';
 import '../styles/signin.scss'
 import axios from 'axios';
+import { GoogleLogin } from 'react-google-login';
 axios.defaults.withCredentials = true;
 
 // nav 컴포넌트에서 props 가져올 것
@@ -68,13 +69,13 @@ function SignIn({ accessToken, handleLogin, propstest }) {
     }
   }
 
-  useEffect(() => {
-    // 로그인 상태관리 useEffect로
-  })
-
+  function responseGoogle(response) {
+    console.log(response);
+    console.log(response.profile);
+  }
 
   return (
-    <div className="signin-modal_container">
+    <div className="signin-modal_container show-modal">
       <div className="signin-modal">
         <button className="close"><i className="fas fa-times"></i></button>
         <h2>로그인</h2>
@@ -90,9 +91,16 @@ function SignIn({ accessToken, handleLogin, propstest }) {
           <input
             type="password"
             placeholder="비밀번호"
-            onChange={handleEmail}
+            onChange={handlePassword}
             onKeyPress={onKeyPress}
             ref={passwordRef}
+          />
+          <GoogleLogin
+            clientId=""
+            buttonText="Login"
+            onSuccess={responseGoole}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
           />
           <button className="signin-google">구글 로그인</button>
           <button className="signin-kakao">카카오 로그인</button>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Signin from './SignIn';
 axios.defaults.withCredentials = true;
 
-function SignUp() {
+function SignUp({ handleSignUp, accessToken, openModal, closeModal, }) {
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -152,11 +153,11 @@ function SignUp() {
           {!errorMessage ? (
             ''
           ) : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>
-              {errorMessage}
-            </div>
-          )}
+              <div className="alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {errorMessage}
+              </div>
+            )}
         </div>
       </div>
     </div>

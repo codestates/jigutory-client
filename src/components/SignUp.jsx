@@ -68,7 +68,7 @@ function SignUp() {
 
     // 비밀번호 정규식 확인
     if (!reg.test(password)) {
-      setErrorMessage('어쩌구저쩌구');
+      setErrorMessage('어쩌구저쩌구d');
       return false;
     } else {
       setErrorMessage('');

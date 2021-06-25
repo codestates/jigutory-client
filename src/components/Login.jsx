@@ -1,72 +1,82 @@
-import { useHistory } from 'react-router-dom'
 import React, { useEffect, useState, useRef } from 'react';
-import '../styles/signin.scss'
-import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+import '../styles/Login.scss';
 axios.defaults.withCredentials = true;
 
 // nav 컴포넌트에서 props 가져올 것
-function SignIn({ accessToken, handleLogin, openModal, closeModal }) {
-
+function Login({ handleLogin, accessToken, openModal, closeModal }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  function handleEmail(e) {
+  const handleEmail = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
-    // 이메일이 올바르지 않을 경우 alert
     if (e.target.value !== email) {
-      setMessage('이메일을 확인해 주세요.')
+      // 이메일이 올바르지 않을 경우 alert
+      setErrorMessage('이메일을 확인해 주세요.');
     }
-  }
+  };
 
-  function handlePassword(e) {
+  const handlePassword = (e) => {
     e.preventDefault();
     setPassword(e.target.value);
     // 비밀번호가 올바르지 않을 경우 alert
     if (e.target.value !== password) {
-      setMessage('비밀번호를 확인해 주세요.')
+      setErrorMessage('비밀번호를 확인해 주세요.');
     }
-  }
+  };
 
-  function onKeyPress(e) {
+  const onKeyPress = (e) => {
     if (e.key === 'Enter') {
-      loginRequestHandler();
+      handleLogin();
     }
-  }
+  };
 
-  function loginRequestHandler() {
+  const handleLoginRequest = (e) => {
     // email 혹은 password 빈 칸인 경우
-    if (!email || !password) {
-      setMessage('이메일이나 비밀번호를 확인하세요.');
+    if (!email) {
+      setErrorMessage('이메일을 입력하세요.');
+    } else if (!password) {
+      setErrorMessage('비밀번호를 입력하세요.');
+    } else if (!email && !password) {
+      setErrorMessage('이메일과 비밀번호를 입력하세요.');
     }
-
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios.post('http://localhost:4000/signin',
-        { email: email, password: password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: accessToken,
+      axios
+        .post(
+          'http://localhost:4000/auth/login',
+          { email: email, password: password },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: accessToken,
+              withCredentials: true,
+            },
           },
-        }).then(res => {
-          handleLogin(res.data.data.accessToken)
+        )
+        .then((res) => {
+          handleLogin(res.data.data.accessToken);
           return res;
-        }).then(res => {
-          console.log(res.data) // 응답 : accessToken, refreshToken, email 
+        })
+        .then((res) => {
+          console.log('res.data :', res.data);
           localStorage.setItem('accessToken', res.data.data.accessToken);
           localStorage.setItem('refreshToken', res.data.data.refreshToken);
           localStorage.setItem('email', res.data.data.email);
-          setMessage('로그인에 성공하였습니다.')
-        }).catch(err => console.log(err));
+          setErrorMessage('로그인에 성공하였습니다.');
+          history.push('/intro');
+        })
+        .catch((err) => console.log(err));
     }
-  }
+  };
 
   // function responseGoogle(response) {
   //   console.log(response);
@@ -76,8 +86,10 @@ function SignIn({ accessToken, handleLogin, openModal, closeModal }) {
   return (
     <div className="modal-container show-modal" onClick={openModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={closeModal}><i className="fas fa-times"></i></button>
-        <h2>로그인</h2>
+        <button className="close" onClick={closeModal}>
+          <i className="fas fa-times"></i>
+        </button>
+        <h2 className="modal-header">로그인</h2>
         <div className="modal-info">
           <input
             autoFocus
@@ -101,15 +113,19 @@ function SignIn({ accessToken, handleLogin, openModal, closeModal }) {
             // onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
           />
-          <button className="signin-google">구글 로그인</button>
-          <button className="signin-kakao">카카오 로그인</button>
-          <button className="signin-btn" onClick={loginRequestHandler}>로그인</button>
-          <div>아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i> <a href="#">회원가입</a></div>
-
+          <button className="googlelogin-btn">구글 로그인</button>
+          <button className="kakaologin-btn">카카오 로그인</button>
+          <button className="login-btn" onClick={handleLoginRequest}>
+            로그인
+          </button>
+          <div>
+            아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>{' '}
+            <a href="#">회원가입</a>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default SignIn;
+export default Login;

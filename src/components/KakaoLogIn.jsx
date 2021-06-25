@@ -1,7 +1,7 @@
 import React from 'react';
 
-function KakaoSignUp() {
+function KakaoLogin() {
   return <div></div>;
 }
 
-export default KakaoSignUp;
+export default KakaoLogin;

@@ -7,9 +7,14 @@ import logo from '../image/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLoginRequest }) {
+function Nav({
+  isLogin,
+  handleUserInfo,
+  handleLoginRequest,
+  handleSignUpRequest,
+}) {
   const history = useHistory();
-  const [isLoginOpen, SetIsLoginOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const handleOpenLogin = () => {
@@ -34,8 +39,8 @@ function Nav({ isLogin, handleLoginRequest }) {
     console.log('회원가입 모달창 닫기');
   };
 
+  // 버튼 클릭 시 각 페이지 이동
   const clickIntroPage = () => {
-    // 로고 클릭
     history.push('/intro');
     console.log('인트로 페이지로 이동');
   };
@@ -60,30 +65,35 @@ function Nav({ isLogin, handleLoginRequest }) {
       {isLogin ? (
         <>
           <a href="#">
-            <img className="nav-logo" onClick={clickIntroPage} alt="logo" />
+            <img
+              className="nav-logo"
+              src={logo}
+              onClick={clickIntroPage}
+              alt="logo"
+              width="50px"
+            />
           </a>
-
           <div className="buttons">
             <a href="#">
-              <button className="nav-post nav-btn" onClick={clickMainPage}>
+              <button className="nav-main nav-btn" onClick={clickMainPage}>
                 {' '}
-                메인 페이지{' '}
+                메인{' '}
               </button>
             </a>
             <a href="#">
-              <button className="nav-post nav-btn" onClick={clickStorePage}>
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
                 {' '}
-                상점 페이지{' '}
+                상점{' '}
+              </button>
+            </a>
+            <a href="#">
+              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
+                {' '}
+                마이{' '}
               </button>
             </a>
             <a href="/">
               <button className="nav-logout nav-btn hide">로그아웃</button>
-            </a>
-            <a href="#">
-              <button className="nav-mypage nav-btn hide" onClick={clickMyPage}>
-                {' '}
-                마이 페이지{' '}
-              </button>
             </a>
           </div>
         </>
@@ -98,14 +108,33 @@ function Nav({ isLogin, handleLoginRequest }) {
             />
           </a>
           <div className="buttons">
-            <button className="nav-Login nav-btn" onClick={handleOpenLogin}>
+            <a href="#">
+              <button className="nav-main nav-btn" onClick={clickMainPage}>
+                {' '}
+                메인{' '}
+              </button>
+            </a>
+            <a href="#">
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
+                {' '}
+                상점{' '}
+              </button>
+            </a>
+            <a href="#">
+              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
+                {' '}
+                마이{' '}
+              </button>
+            </a>
+            <button className="nav-login nav-btn" onClick={handleOpenLogin}>
               로그인
             </button>
             {isLoginOpen && (
               <Login
                 openModal={handleOpenLogin}
-                closeModal={handleCloseLogin}
+                handleUserInfo={handleUserInfo}
                 handleLogin={handleLoginRequest}
+                closeModal={handleCloseLogin}
                 handleOpenSignup={handleOpenSignUp}
               />
             )}
@@ -116,9 +145,10 @@ function Nav({ isLogin, handleLoginRequest }) {
             {isSignUpOpen && (
               <SignUp
                 openModal={handleOpenSignUp}
+                handleUserInfo={handleUserInfo}
+                handleSignUp={handleSignUpRequest}
                 closeModal={handleCloseSignUp}
                 handleOpenLogin={handleOpenLogin}
-                handleOpenSignup={handleOpenSignUp}
               />
             )}
           </div>

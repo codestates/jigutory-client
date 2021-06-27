@@ -60,7 +60,7 @@ const Login = ({
     if (email && password) {
       axios
         .post(
-          'http://localhost:4000/auth/login',
+          `${process.env.REACT_APP_API_URL}/auth/login`,
           { email: email, password: password },
           {
             headers: {

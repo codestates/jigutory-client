@@ -18,7 +18,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     localStorage.setItem('Google-accessToken', token);
     axios
       .post(
-        'http://localhost:4000/auth/googlelogin',
+        `${process.env.REACT_APP_API_URL}/auth/googlelogin`,
         { token },
         {
           headers: {

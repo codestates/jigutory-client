@@ -7,9 +7,9 @@ import logo from '../image/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLoginRequest }) {
+function Nav({ isLogin, handleLogin, handleUserInfo }) {
   const history = useHistory();
-  const [isLoginOpen, SetIsLoginOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const handleOpenLogin = () => {
@@ -24,8 +24,8 @@ function Nav({ isLogin, handleLoginRequest }) {
   };
 
   const handleOpenSignUp = () => {
-    setIsSignUpOpen(false);
     setIsSignUpOpen(true);
+    setIsLoginOpen(false); // 수정함
     console.log('회원가입 모달창 열기');
   };
 
@@ -60,7 +60,7 @@ function Nav({ isLogin, handleLoginRequest }) {
       {isLogin ? (
         <>
           <a href="#">
-            <img className="nav-logo" onClick={clickIntroPage} alt="logo" />
+            <img className="nav-logo" onClick={clickIntroPage} src={logo} width="50px" />
           </a>
 
           <div className="buttons">
@@ -88,42 +88,38 @@ function Nav({ isLogin, handleLoginRequest }) {
           </div>
         </>
       ) : (
-        <>
-          <a href="#">
-            <img
-              className="nav-logo"
-              onClick={clickIntroPage}
-              src={logo}
-              alt="logo"
-            />
-          </a>
-          <div className="buttons">
-            <button className="nav-Login nav-btn" onClick={handleOpenLogin}>
-              로그인
+          <>
+            <a href="#">
+              <img className="nav-logo" onClick={clickIntroPage} src={logo} width="50px" />
+            </a>
+            <div className="buttons">
+              <button className="nav-Login nav-btn" onClick={handleOpenLogin}>
+                로그인
             </button>
-            {isLoginOpen && (
-              <Login
-                openModal={handleOpenLogin}
-                closeModal={handleCloseLogin}
-                handleLogin={handleLoginRequest}
-                handleOpenSignup={handleOpenSignUp}
-              />
-            )}
+              {isLoginOpen && (
+                <Login
+                  openModal={handleOpenLogin}
+                  closeModal={handleCloseLogin}
+                  handleLogin={handleLogin}
+                  handleOpenSignup={handleOpenSignUp}
+                  handleUserInfo={handleUserInfo}
+                />
+              )}
 
-            <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>
-              회원가입
+              <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>
+                회원가입
             </button>
-            {isSignUpOpen && (
-              <SignUp
-                openModal={handleOpenSignUp}
-                closeModal={handleCloseSignUp}
-                handleOpenLogin={handleOpenLogin}
-                handleOpenSignup={handleOpenSignUp}
-              />
-            )}
-          </div>
-        </>
-      )}
+              {isSignUpOpen && (
+                <SignUp
+                  openModal={handleOpenSignUp}
+                  closeModal={handleCloseSignUp}
+                  handleOpenLogin={handleOpenLogin}
+                  handleOpenSignup={handleOpenSignUp}
+                />
+              )}
+            </div>
+          </>
+        )}
     </div>
   );
 }

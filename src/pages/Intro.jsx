@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../image/jigu-logo.png';
 import { useHistory, withRouter } from "react-router-dom";
 
 function Intro() {
@@ -9,14 +8,20 @@ function Intro() {
   };
 
   return (
-    <div className="intro-container">
-      <div className="intro-overall">
-        <a href="#">
-          <img className="logo" src={logo} onClick={moveToIntro} alt="logo" width="50px" />
-        </a>
-        <h2>지구토리 인트로 페이지</h2>
+    <section className="intro-container">
+      <div className="intro-functions">
+        <h2>지구토리 서비스 사용법</h2>
       </div>
-    </div>
+      <div className="intro-purpose">
+        <h2>지구토리 서비스 목적</h2>
+      </div>
+      <div className="intro-join">
+        <h2>지구토리 시작하기</h2>
+      </div>
+      <div className="intro-review">
+        <h2>사용자 리뷰</h2>
+      </div>
+    </section>
   );
 };
 

@@ -1,13 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Sunflower:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&family=Sunflower:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Sunflower:wght@300;500;700&display=swap');
 @import './_variables.scss';
 @import './_mixins';
-@import './Login.scss';
+@import './AuthModal.scss';
+@import './Intro.scss';
+
+// 구글 폰트 
+// font-family: 'Do Hyeon', sans-serif;
+// font-family: 'Sunflower', sans-serif;
+// font-family: 'Nanum Gothic', sans-serif;
+// font-family: 'Noto Sans KR', sans-serif;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   color: $main-color;
+}
+
+h2 {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 input,
 textarea,
 button {
   outline: none;
+  border : none;
 }

@@ -39,7 +39,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
       {<GoogleLogin
         clientId={GOOGLE_API}
         render={props => (<button onClick={props.onClick} className="modal-info google-btn social-btn" >
-          <span><img width="15" src={googleLogo} className="social-logo" />구글 로그인</span></button>)}
+          <span><img width="17" src={googleLogo} className="social-logo" /><span>구글 로그인</span></span></button>)}
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
       />}

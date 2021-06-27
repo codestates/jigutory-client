@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
 import KaKaoLogin from './KakaoLogIn';
@@ -41,6 +41,7 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
 
 
   const handleLoginRequest = (e) => {
+    console.log('로그인 리퀘스트')
     // email 혹은 password 빈 칸인 경우
     if (!email) {
       setErrorMessage('이메일을 입력하세요.');
@@ -76,7 +77,7 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
   };
 
   return (
-    <div className="modal-container show-modal" onClick={openModal}>
+    <div div className="modal-container show-modal" onClick={openModal} >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={closeModal}>
           <i className="fas fa-times"></i>
@@ -99,10 +100,11 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
             ref={passwordRef}
           />
           <button className="login-btn" onClick={handleLoginRequest}>로그인</button>
-          <GoogleLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
-          <KaKaoLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
+          <div className="social-container">
+            <GoogleLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
+            <KaKaoLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
+          </div>
           {!errorMessage ? ('') : <div className="alert-box"><i className="fas fa-exclamation-circle"></i>{errorMessage}</div>}
-
         </div>
       </div>
     </div>

@@ -31,7 +31,7 @@ button {
 }
 
 .modal {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   max-width: 100%;
   padding: 50px;
   padding-top: 20px;
@@ -54,7 +54,7 @@ button {
 .modal-info {
   display: flex;
   flex-direction: column;
-  width : 19rem;
+  // width : 19rem;
   justify-content: center;
   input, button {
     background-color:transparent;
@@ -93,6 +93,9 @@ button {
 .social-btn {
   display: flex;
   align-items: center;
+  span {
+    display: flex;
+  }
 }
 
 .social-logo {
@@ -104,3 +107,8 @@ button {
   color : darkred;
   padding-top : 10px;
 }
+
+.social-container {
+  display: flex;
+}
+

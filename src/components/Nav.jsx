@@ -7,7 +7,7 @@ import logo from '../image/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLogin, handleUserInfo }) {
+function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
   const history = useHistory();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -87,7 +87,12 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
               </button>
             </a>
             <a href="/">
-              <button className="nav-logout nav-btn hide">로그아웃</button>
+              <button
+                className="nav-logout nav-btn hide"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
             </a>
           </div>
         </>

@@ -14,9 +14,11 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     console.log('google token : ', res.accessToken);
 
     const token = res.accessToken;
+    handleLogin(token);
+    localStorage.setItem('Google-accessToken', token);
     axios
       .post(
-        'http://localhost:4000/auth/googlesignin',
+        'http://localhost:4000/auth/googlelogin',
         { token },
         {
           headers: {
@@ -26,8 +28,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
       )
       .then((res) => {
         console.log('google axios res : ', res);
-        localStorage.setItem('Google-accessToken', token);
-        handleLogin(token);
         handleUserInfo({
           username: res.profileObj.givenName,
           email: res.profileObj.email,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
-import KaKaoLogin from './KakaoLogIn';
+// import KaKaoLogin from './KakaoLogIn';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
@@ -115,10 +115,10 @@ const Login = ({
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
             />
-            <KaKaoLogin
+            {/* <KaKaoLogin
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
-            />
+            /> */}
           </div>
           {!errorMessage ? (
             ''

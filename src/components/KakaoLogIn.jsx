@@ -15,7 +15,6 @@ const KakaoBtn = ({ handleLogin, handleUserInfo }) => {
     console.log(window.Kakao.isInitialized());
   }
 
-
   const responseKakao = (res) => {
     console.log('kakao res :', res);
     handleUserInfo({

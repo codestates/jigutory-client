@@ -6,6 +6,9 @@ import '../styles/AuthModal.scss';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
+// 토큰은 로컬스토리지에 저장하고, 유저정보만 서버로 넘기기
+// 서버에서 user table에 유저정보 저장
+// 
 const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
 

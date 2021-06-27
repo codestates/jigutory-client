@@ -7,7 +7,7 @@
 @import './AuthModal.scss';
 @import './Intro.scss';
 
-// 구글 폰트 
+// 구글 폰트
 // font-family: 'Do Hyeon', sans-serif;
 // font-family: 'Sunflower', sans-serif;
 // font-family: 'Nanum Gothic', sans-serif;
@@ -16,7 +16,6 @@
 * {
   box-sizing: border-box;
 }
-
 
 body {
   color: $main-color;
@@ -30,5 +29,5 @@ input,
 textarea,
 button {
   outline: none;
-  border : none;
+  border: none;
 }

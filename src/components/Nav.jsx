@@ -60,7 +60,12 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
       {isLogin ? (
         <>
           <a href="#">
-            <img className="nav-logo" onClick={clickIntroPage} src={logo} width="50px" />
+            <img
+              className="nav-logo"
+              onClick={clickIntroPage}
+              src={logo}
+              width="50px"
+            />
           </a>
           <div className="buttons">
             <a href="#">
@@ -87,62 +92,62 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
           </div>
         </>
       ) : (
-          <>
+        <>
+          <a href="#">
+            <img
+              className="nav-logo"
+              onClick={clickIntroPage}
+              src={logo}
+              alt="logo"
+            />
+          </a>
+          <div className="buttons">
             <a href="#">
-              <img
-                className="nav-logo"
-                onClick={clickIntroPage}
-                src={logo}
-                alt="logo"
-              />
-            </a>
-            <div className="buttons">
-              <a href="#">
-                <button className="nav-main nav-btn" onClick={clickMainPage}>
-                  {' '}
+              <button className="nav-main nav-btn" onClick={clickMainPage}>
+                {' '}
                 메인{' '}
-                </button>
-              </a>
-              <a href="#">
-                <button className="nav-store nav-btn" onClick={clickStorePage}>
-                  {' '}
+              </button>
+            </a>
+            <a href="#">
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
+                {' '}
                 상점{' '}
-                </button>
-              </a>
-              <a href="#">
-                <button className="nav-mypage nav-btn" onClick={clickMyPage}>
-                  {' '}
+              </button>
+            </a>
+            <a href="#">
+              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
+                {' '}
                 마이{' '}
-                </button>
-              </a>
-              <button className="nav-login nav-btn" onClick={handleOpenLogin}>
-                로그인
+              </button>
+            </a>
+            <button className="nav-login nav-btn" onClick={handleOpenLogin}>
+              로그인
             </button>
-              {isLoginOpen && (
-                <Login
-                  openModal={handleOpenLogin}
-                  closeModal={handleCloseLogin}
-                  handleUserInfo={handleUserInfo}
-                  handleLogin={handleLogin}
-                  handleOpenSignup={handleOpenSignUp}
-                />
-              )}
+            {isLoginOpen && (
+              <Login
+                openModal={handleOpenLogin}
+                closeModal={handleCloseLogin}
+                handleUserInfo={handleUserInfo}
+                handleLogin={handleLogin}
+                handleOpenSignup={handleOpenSignUp}
+              />
+            )}
 
-              <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>
-                회원가입
+            <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>
+              회원가입
             </button>
-              {isSignUpOpen && (
-                <SignUp
-                  openModal={handleOpenSignUp}
-                  closeModal={handleCloseSignUp}
-                  handleUserInfo={handleUserInfo}
-                  handleOpenLogin={handleOpenLogin}
-                />
-              )}
-            </div>
-          </>
-        )}
-    </div >
+            {isSignUpOpen && (
+              <SignUp
+                openModal={handleOpenSignUp}
+                closeModal={handleCloseSignUp}
+                handleUserInfo={handleUserInfo}
+                handleOpenLogin={handleOpenLogin}
+              />
+            )}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 

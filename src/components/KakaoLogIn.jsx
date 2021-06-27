@@ -15,46 +15,58 @@ const KakaoBtn = ({ handleLogin, handleUserInfo }) => {
     console.log(window.Kakao.isInitialized());
   }
 
-
   const responseKakao = (res) => {
     console.log('kakao res :', res);
     handleUserInfo({
       username: res.profile.kakao_account.profile.nickname,
       email: res.accessToken, // 아직 모름
-      imageUrl: res.profile.kakao_account.profile.profile_image_url
-    })
+      imageUrl: res.profile.kakao_account.profile.profile_image_url,
+    });
 
     const token = res.response.access_token; // should be updated after checking real response from kakao
-    axios.post('http://localhost:4000/auth/kakaosignin',
-      { token },
-      {
-        headers: {
-          Authorization: token,
-        }
-      })
+    axios
+      .post(
+        'http://localhost:4000/auth/kakaosignin',
+        { token },
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      )
       .then((res) => {
-        localStorage.setItem('Kakao-accessToken', token)
+        localStorage.setItem('Kakao-accessToken', token);
         handleLogin(token);
       })
-      .catch(res => console.log(res))
-  }
+      .catch((res) => console.log(res));
+  };
 
   return (
     <div className="kakao-login">
-      {<KaKaoLogin
-        jsKey={KAKAO_API}
-        render={props => (<button onClick={props.onClick} className="modal-info kakao-btn social-btn" >
-          <span><img width="22px" src={kakaoLogo} className="social-logo" /><span>카카오 로그인</span></span></button>)}
-        onSuccess={responseKakao}
-        onFailure={() => console.log('카카오 로그인 실패')}
-        getProfile={true}
-      />}
-    </div>);
-}
+      {
+        <KaKaoLogin
+          jsKey={KAKAO_API}
+          render={(props) => (
+            <button
+              onClick={props.onClick}
+              className="modal-info kakao-btn social-btn"
+            >
+              <span>
+                <img width="22px" src={kakaoLogo} className="social-logo" />
+                <span>카카오 로그인</span>
+              </span>
+            </button>
+          )}
+          onSuccess={responseKakao}
+          onFailure={() => console.log('카카오 로그인 실패')}
+          getProfile={true}
+        />
+      }
+    </div>
+  );
+};
 
 export default KakaoBtn;
-
-
 
 /*
 1. 권한 접근

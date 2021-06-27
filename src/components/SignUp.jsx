@@ -161,27 +161,27 @@ function SignUp({ accessToken, openModal, closeModal }) {
           {!usernameError ? (
             ''
           ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {usernameError}
-              </div>
-            )}
+            <div className="alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {usernameError}
+            </div>
+          )}
           {!emailError ? (
             ''
           ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {emailError}
-              </div>
-            )}
+            <div className="alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {emailError}
+            </div>
+          )}
           {!passwordError ? (
             ''
           ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {passwordError}
-              </div>
-            )}
+            <div className="alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {passwordError}
+            </div>
+          )}
         </div>
       </div>
     </div>

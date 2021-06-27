@@ -1,0 +1,113 @@
+button {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  opacity: 0;
+  pointer-events: auto;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show-modal {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background-color: rgba(255, 255, 255, 0.7);
+  max-width: 100%;
+  padding: 50px;
+  padding-top: 20px;
+  padding-bottom: 70px;
+  border-radius: 15px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.close {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  padding-left: 200px;
+  :hover {
+    font-weight: 800;
+    color: darkred;
+  }
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  input,
+  button {
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    margin: 3px;
+    border-radius: 8px;
+  }
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: rgba(8, 70, 99, 0.7);
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: background-color 0.4s ease-in-out;
+  }
+  button:hover {
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: none;
+    transition: background-color 0.1s ease-in-out;
+  }
+
+  .google-btn:hover {
+    background-color: #cc3731;
+    color: white;
+  }
+
+  .kakao-btn:hover {
+    background-color: #f2da00;
+    color: #3a1a1c;
+  }
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  span {
+    display: flex;
+  }
+}
+
+.social-logo {
+  margin-right: 10px;
+}
+
+.alert-box {
+  font-size: 12px;
+  color: darkred;
+  padding-top: 10px;
+}
+
+.social-container {
+  display: flex;
+}

@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { GoogleLogin } from 'react-google-login';
+import { useHistory, withRouter } from 'react-router-dom';
+import GoogleLogin from './GoogleLogin';
+import KaKaoLogin from './KakaoLogIn';
 import axios from 'axios';
-import '../styles/Login.scss';
+import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
 // nav 컴포넌트에서 props 가져올 것
-function Login({ handleLogin, accessToken, openModal, closeModal }) {
+const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo }) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -19,7 +21,6 @@ function Login({ handleLogin, accessToken, openModal, closeModal }) {
     e.preventDefault();
     setEmail(e.target.value);
     if (e.target.value !== email) {
-      // 이메일이 올바르지 않을 경우 alert
       setErrorMessage('이메일을 확인해 주세요.');
     }
   };
@@ -27,7 +28,6 @@ function Login({ handleLogin, accessToken, openModal, closeModal }) {
   const handlePassword = (e) => {
     e.preventDefault();
     setPassword(e.target.value);
-    // 비밀번호가 올바르지 않을 경우 alert
     if (e.target.value !== password) {
       setErrorMessage('비밀번호를 확인해 주세요.');
     }
@@ -39,7 +39,9 @@ function Login({ handleLogin, accessToken, openModal, closeModal }) {
     }
   };
 
+
   const handleLoginRequest = (e) => {
+    console.log('로그인 리퀘스트')
     // email 혹은 password 빈 칸인 경우
     if (!email) {
       setErrorMessage('이메일을 입력하세요.');
@@ -48,43 +50,34 @@ function Login({ handleLogin, accessToken, openModal, closeModal }) {
     } else if (!email && !password) {
       setErrorMessage('이메일과 비밀번호를 입력하세요.');
     }
+
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios
-        .post(
-          'http://localhost:4000/auth/login',
-          { email: email, password: password },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              authorization: accessToken,
-              withCredentials: true,
-            },
-          },
-        )
+      axios.post('http://localhost:4000/auth/login',
+        { email: email, password: password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: accessToken,
+          }
+        })
         .then((res) => {
           handleLogin(res.data.data.accessToken);
+          // handleUserInfo({})
           return res;
         })
         .then((res) => {
           console.log('res.data :', res.data);
           localStorage.setItem('accessToken', res.data.data.accessToken);
-          localStorage.setItem('refreshToken', res.data.data.refreshToken);
-          localStorage.setItem('email', res.data.data.email);
-          setErrorMessage('로그인에 성공하였습니다.');
+          setSuccessMessage('로그인에 성공하였습니다.');
           history.push('/intro');
         })
         .catch((err) => console.log(err));
     }
   };
 
-  // function responseGoogle(response) {
-  //   console.log(response);
-  //   console.log(response.profile);
-  // }
-
   return (
-    <div className="modal-container show-modal" onClick={openModal}>
+    <div div className="modal-container show-modal" onClick={openModal} >
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={closeModal}>
           <i className="fas fa-times"></i>
@@ -106,26 +99,28 @@ function Login({ handleLogin, accessToken, openModal, closeModal }) {
             onKeyPress={onKeyPress}
             ref={passwordRef}
           />
-          <GoogleLogin
-            clientId="925382932502-goj9fkkkr5nf6n4632vi0oo1nj4tbjmq.apps.googleusercontent.com"
-            buttonText="Login"
-            // onSuccess={responseGoole}
-            // onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-          <button className="googlelogin-btn">구글 로그인</button>
-          <button className="kakaologin-btn">카카오 로그인</button>
-          <button className="login-btn" onClick={handleLoginRequest}>
-            로그인
-          </button>
-          <div>
-            아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>{' '}
-            <a href="#">회원가입</a>
+          <button className="login-btn" onClick={handleLoginRequest}>로그인</button>
+          <div className="social-container">
+            <GoogleLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
+            <KaKaoLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
           </div>
+          {!errorMessage ? ('') : <div className="alert-box"><i className="fas fa-exclamation-circle"></i>{errorMessage}</div>}
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default withRouter(Login);
+
+
+
+// const clickSignUp = () => {
+//   history.push('/signup')
+//   console.log('회원가입으로 이동')
+// }
+
+{/* <div>
+  아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>
+  <button onClick={clickSignUp}>회원가입</button>
+</div> */}

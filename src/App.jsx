@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/style.scss';
 import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-dom';
 import Nav from './components/Nav';
@@ -9,14 +8,14 @@ import SignUp from './components/SignUp';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
 import Mypage from './pages/Mypage';
-import Cart from './pages/Cart';
 import Store from './pages/Store';
+import Cart from './pages/Cart';
 
 function App() {
     const history = useHistory();
 
     // 모든 페이지, 컴포넌트에서 필요한 상태들
-    const [userinfo, setUserinfo] = useState({
+    const [userInfo, setUserInfo] = useState({
         usename: '',
         email: '',
         imgUrl: '',
@@ -39,7 +38,7 @@ function App() {
     }
 
     function handleUserInfo(obj) {
-        setUserinfo(obj);
+        setUserInfo(obj);
     }
 
     useEffect(() => {

@@ -3,8 +3,8 @@ import { useHistory, withRouter } from "react-router-dom";
 
 function Intro() {
   const history = useHistory();
-  function moveToIntro() {
-    history.push("/intro");
+  const moveToIntro = () => {
+    history.push('/intro');
   };
 
   return (
@@ -23,6 +23,6 @@ function Intro() {
       </div>
     </section>
   );
-};
+}
 
 export default withRouter(Intro);

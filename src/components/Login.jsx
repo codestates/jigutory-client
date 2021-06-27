@@ -35,7 +35,7 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
 
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleLogin();
+      handleLoginRequest();
     }
   };
 

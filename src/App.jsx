@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/style.scss';
 import {
   Route,
@@ -14,37 +13,37 @@ import Login from './components/Login';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
 import Mypage from './pages/Mypage';
-import Cart from './pages/Cart';
 import Store from './pages/Store';
+import Cart from './pages/Cart';
 
 function App() {
   const history = useHistory();
 
   // 모든 페이지, 컴포넌트에서 필요한 상태들
-  const [userinfo, setUserinfo] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState('');
   const [level, setLevel] = useState('');
   const [badge, setBadge] = useState('');
 
-  function handleAccessToken(token) {
+  const handleAccessToken = (token) => {
     setAccessToken(token);
-  }
+  };
 
-  function handleLogin(token) {
+  const handleLogin = (token) => {
     setIsLogin(true);
     handleAccessToken(token);
-  }
+  };
 
-  function handleLogout(token) {
+  const handleLogout = () => {
     setIsLogin(false);
     localStorage.clear();
     history.push('/intro');
-  }
+  };
 
-  function handleUserInfo(obj) {
-    setUserinfo(obj);
-  }
+  const handleUserInfo = (obj) => {
+    setUserInfo(obj);
+  };
 
   // useEffect(() => {
   //     const dataFormLocalStorage = localStorage.getItem('is-Login')

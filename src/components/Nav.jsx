@@ -25,7 +25,7 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
 
   const handleOpenSignUp = () => {
     setIsSignUpOpen(true);
-    setIsLoginOpen(false); // 수정함
+    setIsLoginOpen(false);
     console.log('회원가입 모달창 열기');
   };
 

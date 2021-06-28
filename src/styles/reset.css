@@ -102,7 +102,11 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
+<<<<<<< HEAD
   content: "";
+=======
+  content: '';
+>>>>>>> ad355a73c32fffb0017145450decec365ba0b67e
   content: none;
 }
 table {

@@ -113,7 +113,7 @@ function SignUp({ accessToken, openModal, closeModal }) {
         })
         .catch((err) => {
           console.log(err);
-          setEmailError('이미 존재하는 이메일입니다.');
+          // setEmailError('이미 존재하는 이메일입니다.');
         });
     }
   };

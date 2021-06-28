@@ -7,7 +7,13 @@ import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
 // nav 컴포넌트에서 props 가져올 것
-const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo }) => {
+const Login = ({
+  handleLogin,
+  accessToken,
+  openModal,
+  closeModal,
+  handleUserInfo,
+}) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,9 +45,8 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
     }
   };
 
-
   const handleLoginRequest = (e) => {
-    console.log('로그인 리퀘스트')
+    console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
     if (!email) {
       setErrorMessage('이메일을 입력하세요.');
@@ -53,14 +58,17 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
 
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios.post('http://localhost:4000/auth/login',
-        { email: email, password: password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            authorization: accessToken,
-          }
-        })
+      axios
+        .post(
+          'http://localhost:4000/auth/login',
+          { email: email, password: password },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: accessToken,
+            },
+          },
+        )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
           // handleUserInfo({})
@@ -77,7 +85,7 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
   };
 
   return (
-    <div div className="modal-container show-modal" onClick={openModal} >
+    <div div className="modal-container show-modal" onClick={openModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={closeModal}>
           <i className="fas fa-times"></i>
@@ -99,28 +107,43 @@ const Login = ({ handleLogin, accessToken, openModal, closeModal, handleUserInfo
             onKeyPress={onKeyPress}
             ref={passwordRef}
           />
-          <button className="login-btn" onClick={handleLoginRequest}>로그인</button>
+          <button className="login-btn" onClick={handleLoginRequest}>
+            로그인
+          </button>
           <div className="social-container">
-            <GoogleLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
-            <KaKaoLogin handleLogin={handleLogin} handleUserInfo={handleUserInfo} />
+            <GoogleLogin
+              handleLogin={handleLogin}
+              handleUserInfo={handleUserInfo}
+            />
+            <KaKaoLogin
+              handleLogin={handleLogin}
+              handleUserInfo={handleUserInfo}
+            />
           </div>
-          {!errorMessage ? ('') : <div className="alert-box"><i className="fas fa-exclamation-circle"></i>{errorMessage}</div>}
+          {!errorMessage ? (
+            ''
+          ) : (
+              <div className="alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {errorMessage}
+              </div>
+            )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(Login);
-
-
 
 // const clickSignUp = () => {
 //   history.push('/signup')
 //   console.log('회원가입으로 이동')
 // }
 
-{/* <div>
+{
+  /* <div>
   아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>
   <button onClick={clickSignUp}>회원가입</button>
-</div> */}
+</div> */
+}

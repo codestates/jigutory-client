@@ -7,7 +7,7 @@ import logo from '../image/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLogin, handleUserInfo }) {
+function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
   const history = useHistory();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -25,7 +25,7 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
 
   const handleOpenSignUp = () => {
     setIsSignUpOpen(true);
-    setIsLoginOpen(false); // 수정함
+    setIsLoginOpen(false);
     console.log('회원가입 모달창 열기');
   };
 
@@ -60,7 +60,12 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
       {isLogin ? (
         <>
           <a href="#">
-            <img className="nav-logo" onClick={clickIntroPage} src={logo} width="50px" />
+            <img
+              className="nav-logo"
+              onClick={clickIntroPage}
+              src={logo}
+              width="50px"
+            />
           </a>
           <div className="buttons">
             <a href="#">
@@ -82,7 +87,12 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
               </button>
             </a>
             <a href="/">
-              <button className="nav-logout nav-btn hide">로그아웃</button>
+              <button
+                className="nav-logout nav-btn hide"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
             </a>
           </div>
         </>
@@ -142,7 +152,7 @@ function Nav({ isLogin, handleLogin, handleUserInfo }) {
             </div>
           </>
         )}
-    </div >
+    </div>
   );
 }
 

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './styles/style.scss';
-import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-dom';
+import {
+    Route,
+    Switch,
+    Redirect,
+    withRouter,
+    useHistory,
+} from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -26,31 +32,31 @@ function App() {
     const [badge, setBadge] = useState('');
 
     // 로그인 성공 => 로그인 상태 true & 유저정보 저장
-    function handleLogin(token) {
+    const handleLogin = (token) => {
         setIsLogin(true);
         setAccessToken(token);
-    }
+    };
 
-    function handleLogout(token) {
+    const handleLogout = (token) => {
         setIsLogin(false);
         localStorage.clear();
         history.push('/intro');
-    }
+    };
 
-    function handleUserInfo(obj) {
+    const handleUserInfo = (obj) => {
         setUserInfo(obj);
-    }
+    };
 
     useEffect(() => {
-        const dataFormLocalStorage = localStorage.getItem('is-Login')
+        const dataFormLocalStorage = localStorage.getItem('is-Login');
         if (dataFormLocalStorage) {
-            setIsLogin(JSON.parse(dataFormLocalStorage))
+            setIsLogin(JSON.parse(dataFormLocalStorage));
         }
-    }, [setIsLogin])
+    }, [setIsLogin]);
 
     useEffect(() => {
-        localStorage.setItem('is-Login', JSON.stringify(isLogin))
-    }, [isLogin])
+        localStorage.setItem('is-Login', JSON.stringify(isLogin));
+    }, [isLogin]);
 
     return (
         <div>

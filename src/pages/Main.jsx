@@ -71,6 +71,7 @@ function Map() {
     //   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     //   // 마커 생성
+    //
     //   const marker = new kakao.maps.Marker({
     //     map: map, // 마커를 표시할 지도
     //     position: positions[i].latlng, // 마커를 표시할 위치

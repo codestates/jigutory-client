@@ -1,4 +1,4 @@
-.wrap {
+.ovelay-wrap {
   position: absolute;
   left: 0;
   bottom: 40px;
@@ -12,11 +12,11 @@
   line-height: 1.5;
 }
 
-.wrap * {
+.ovelay-wrap * {
   padding: 0;
   margin: 0;
 }
-.wrap .info {
+.ovelay-wrap .ovelay-info {
   width: 286px;
   height: 120px;
   border-radius: 5px;
@@ -26,12 +26,12 @@
   background: #fff;
 }
 
-.wrap .info:nth-child(1) {
+.ovelay-wrap .ovelay-info:nth-child(1) {
   border: 0;
   box-shadow: 0px 1px 2px #888;
 }
 
-.info .title {
+.ovelay-info .ovelay-title {
   padding: 5px 0 0 10px;
   height: 30px;
   background: #eee;
@@ -40,55 +40,52 @@
   font-weight: bold;
 }
 
-.info .close {
+.ovelay-info .ovelay-close {
   position: absolute;
   top: 10px;
-  right: 10px;
-  color: #888;
-  width: 17px;
-  height: 17px;
-  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+  right: 15px;
+  font-size: 10px;
 }
 
-.info .close:hover {
+.ovelay-info .ovelay-close:hover {
   cursor: pointer;
 }
 
-.info .body {
+.ovelay-info .ovelay-body {
   position: relative;
   overflow: hidden;
 }
 
-.info .desc {
+.ovelay-info .ovelay-desc {
   position: relative;
   margin: 13px 0 0 90px;
   height: 75px;
 }
 
-.desc .ellipsis {
+.ovelay-desc .ovelay-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.desc .jibun {
+.ovelay-desc .ovelay-jibun {
   font-size: 11px;
   color: #888;
   margin-top: -2px;
 }
 
-.info .img {
+.ovelay-info .ovelay-img {
   position: absolute;
   top: 6px;
   left: 5px;
-  width: 73px;
-  height: 71px;
-  border: 1px solid #ddd;
+  // width: 73px;
+  // height: 71px;
+  // border: 1px solid #ddd;
   color: #888;
   overflow: hidden;
 }
 
-.info:after {
+.ovelay-info:after {
   content: '';
   position: absolute;
   margin-left: -12px;
@@ -99,6 +96,31 @@
   background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
 }
 
-.info .link {
+.ovelay-link {
   color: #5085bb;
+  // background: url('https://i.pinimg.com/originals/d2/e5/3e/d2e53ea31ec15e6a8129008563713de5.png');
+}
+
+.ovelay-detail-btn {
+  margin-left: 10px;
+  font-size: 10px;
+  background-color: rgba(80, 133, 187, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.ovelay-hide {
+  display: none;
+}
+
+.position-btn {
+  font-size: 20px;
+  color: #ffcd1a;
+  padding: 5px;
+  border-radius: 10px;
+  position: absolute;
 }

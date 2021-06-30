@@ -9,8 +9,6 @@ import {
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
 import Mypage from './pages/Mypage';
@@ -31,13 +29,18 @@ function App() {
     const [level, setLevel] = useState('');
     const [badge, setBadge] = useState('');
 
+    // 로그인시 유저정보 상태저장 (콘솔창 확인)
+    console.log('userinfo : ', userInfo)
+
     // 로그인 성공 => 로그인 상태 true & 유저정보 저장
     const handleLogin = (token) => {
-        setIsLogin(true);
         setAccessToken(token);
+        if (token) {
+            setIsLogin(true);
+        }
     };
 
-    const handleLogout = (token) => {
+    const handleLogout = () => {
         setIsLogin(false);
         localStorage.clear();
         history.push('/intro');
@@ -47,6 +50,7 @@ function App() {
         setUserInfo(obj);
     };
 
+    // 새로고침 후 상태유지
     useEffect(() => {
         const dataFormLocalStorage = localStorage.getItem('is-Login');
         if (dataFormLocalStorage) {

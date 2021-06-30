@@ -15,14 +15,21 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const responseGoogle = (res) => {
     console.log('google res : ', res);
     console.log('google token : ', res.accessToken);
+    console.log('google profileObj : ', res.profileObj.givenName);
 
     const token = res.accessToken;
+    const email = res.profileObj.email;
+    const username = res.profileObj.givenName;
     handleLogin(token);
     localStorage.setItem('Google-accessToken', token);
+    localStorage.setItem('usename', username);
+    localStorage.setItem('email', email);
+    handleUserInfo({ username: username, email: email });
+
     axios
       .post(
         'http://localhost:4000/auth/googlelogin',
-        { token },
+        { usename: username, email: email },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -31,11 +38,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
       )
       .then((res) => {
         console.log('google axios res : ', res);
-        handleUserInfo({
-          username: res.profileObj.givenName,
-          email: res.profileObj.email,
-          imgUrl: res.profileObj.imageUrl,
-        });
       })
       .catch((err) => console.log(err));
   };

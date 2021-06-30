@@ -98,7 +98,7 @@ function SignUp({ accessToken, openModal, closeModal }) {
     if (validUsername & validEmail && validPassword) {
       axios
         .post(
-          'http://localhost:4000/auth/signup',
+          'https://localhost:4000/auth/signup',
           { username: username, email: email, password: password },
           {
             headers: {

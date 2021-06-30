@@ -26,7 +26,7 @@
 //     const token = res.response.access_token; // should be updated after checking real response from kakao
 //     axios
 //       .post(
-//         'http://localhost:4000/auth/kakaosignin',
+//         'https://localhost:4000/auth/kakaosignin',
 //         { token },
 //         {
 //           headers: {

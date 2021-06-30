@@ -6,7 +6,6 @@ const { kakao } = window;
 
 function Map() {
   // DB에서 받은 cafe 정보들을 객체형태로 상태 저장
-  //const [cafes, setCafes] = useState([])
   const [cafeInfo, setCafeInfo] = useState(
     {
       name: '',
@@ -18,33 +17,28 @@ function Map() {
 
 
   console.log('cafeinfo state :', cafeInfo);
-
   let cafes = [];
-  let cafe = {};
 
   useEffect(() => {
-    axios.get('https://localhost:4000/cafe/list', {
+    axios.get('http://localhost:4000/cafe/list', {
       headers: {
         "Content-Type": "application/json",
       }
     })
       .then((res) => {
         console.log('res.data 정보 : ', res.data);
-        console.log('res.data.key 정보 : ', res.data[0].keyword.split(',')); //
 
-        // console.log(res.data.keyword); // 키워드 들어오는 타입확인하고 상태로 넣기
         for (let i = 0; i < res.data.length; i++) {
+          cafes.push(cafeInfo);
           setCafeInfo({
             name: res.data[i].name,
             latlng: [res.data[i].latitude, res.data[i].longitude],
             imgUrl: res.data[i].image,
-            keyword: res.data[0].keyword.split(','),
+            keyword: res.data[i].keyword.split(','),
             address: res.data[i].description,
           })
-          cafes.push(cafeInfo);
         }
       })
-      .catch(err => console.log(err))
   }, []);
 
   console.log('cafes : ', cafes)
@@ -52,8 +46,8 @@ function Map() {
   useEffect(() => {
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
-        center: new kakao.maps.LatLng(37.498225, 127.027686), // 지도의 중심좌표 (강남역)
-        level: 5, // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.474675616877455, 126.90353931151591), // 지도의 중심좌표 (데일리 로스팅)
+        level: 7, // 지도의 확대 레벨
         mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
       };
 
@@ -132,7 +126,7 @@ function Map() {
         map: map // 마커를 표시할 지도 객체
       });
 
-      var iwContent = `<div style="padding:5px;">${data[i].name}</div>`; // 인포윈도우에 표출될 내용 (9HTML 문자열이나 document element 가능)
+      var iwContent = `<div style="padding:5px;">${data[i].name}</div>`; // 인포윈도우에 표출될 내용 (HTML 문자열이나 document element 가능)
 
       // 인포윈도우 생성
       var infowindow = new kakao.maps.InfoWindow({

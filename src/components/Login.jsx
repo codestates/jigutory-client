@@ -20,23 +20,23 @@ const Login = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  // const emailRef = useRef();
+  // const passwordRef = useRef();
 
   const handleEmail = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
-    if (e.target.value !== email) {
-      setErrorMessage('이메일을 확인해 주세요.');
-    }
+    // if (e.target.value !== email) {
+    //   setErrorMessage('이메일을 확인해 주세요.');
+    // }
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
     setPassword(e.target.value);
-    if (e.target.value !== password) {
-      setErrorMessage('비밀번호를 확인해 주세요.');
-    }
+    // if (e.target.value !== password) {
+    //   setErrorMessage('비밀번호를 확인해 주세요.');
+    // }
   };
 
   const onKeyPress = (e) => {
@@ -60,7 +60,7 @@ const Login = ({
     if (email && password) {
       axios
         .post(
-          'https://localhost:4000/auth/signin',
+          'http://localhost:4000/auth/signin',
           { email: email, password: password },
           {
             headers: {
@@ -98,14 +98,14 @@ const Login = ({
             placeholder="이메일"
             onChange={handleEmail}
             onKeyPress={onKeyPress}
-            ref={emailRef}
+          //ref={emailRef}
           />
           <input
             type="password"
             placeholder="비밀번호"
             onChange={handlePassword}
             onKeyPress={onKeyPress}
-            ref={passwordRef}
+          //ref={passwordRef}
           />
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인

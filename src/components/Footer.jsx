@@ -20,16 +20,16 @@ const Footer = () => {
       </section>
       <section>
         <h3> Jigu-Story </h3>
-        <a href="https://github.com/codestates/jigutory-client/wiki" target="_blank">Jigutory Wiki</a>
-        <a href="https://www.notion.so/jigu-tory-5ebc7e34b47442289d02c44f52d7a79a" target="_blank">Jigutory Notion </a>
+        <a href="http://github.com/codestates/jigutory-client/wiki" target="_blank">Jigutory Wiki</a>
+        <a href="http://www.notion.so/jigu-tory-5ebc7e34b47442289d02c44f52d7a79a" target="_blank">Jigutory Notion </a>
       </section>
 
       <section className="footer-links">
         <h3><img className="github-logo" src={github} alt="move to github" /> Contact</h3>
-        <a href="https://github.com/i2sign" target="_blank">정다희_backend@github</a>
-        <a href="https://github.com/j21chon" target="_blank">김정호_backend@github</a>
-        <a href="https://github.com/kang-heesue" target="_blank">강희수_frontend@github</a>
-        <a href="https://github.com/Hyunsoosiesta" target="_blank">강현수_frontend@github</a>
+        <a href="http://github.com/i2sign" target="_blank">정다희_backend@github</a>
+        <a href="http://github.com/j21chon" target="_blank">김정호_backend@github</a>
+        <a href="http://github.com/kang-heesue" target="_blank">강희수_frontend@github</a>
+        <a href="http://github.com/Hyunsoosiesta" target="_blank">강현수_frontend@github</a>
       </section>
     </div>
   );

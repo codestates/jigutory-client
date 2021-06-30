@@ -8,11 +8,11 @@ function Map() {
   // DB에서 받은 cafe 정보들을 객체형태로 상태 저장
   const [cafeInfo, setCafeInfo] = useState(
     {
-      name: '',
-      latlng: [],
-      imgUrl: '',
-      keyword: [],
-      address: '',
+      // name: '',
+      // latlng: [],
+      // imgUrl: '',
+      // keyword: [],
+      // address: '',
     })
 
 
@@ -27,17 +27,17 @@ function Map() {
     })
       .then((res) => {
         console.log('res.data 정보 : ', res.data);
-
-        for (let i = 0; i < res.data.length; i++) {
-          cafes.push(cafeInfo);
-          setCafeInfo({
-            name: res.data[i].name,
-            latlng: [res.data[i].latitude, res.data[i].longitude],
-            imgUrl: res.data[i].image,
-            keyword: res.data[i].keyword.split(','),
-            address: res.data[i].description,
-          })
-        }
+        setCafeInfo(res.data);
+        // for (let i = 0; i < res.data.length; i++) {
+        //   cafes.push(cafeInfo);
+        //   setCafeInfo({
+        //     name: res.data[i].name,
+        //     latlng: [res.data[i].latitude, res.data[i].longitude],
+        //     imgUrl: res.data[i].image,
+        //     keyword: res.data[i].keyword.split(','),
+        //     address: res.data[i].description,
+        //   })
+        // }
       })
   }, []);
 
@@ -108,7 +108,7 @@ function Map() {
     // 반복문으로 생성될 여러개의 마커들(data)을 담을 배열
     let markers = [];
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < cafeInfo.length; i++) {
       // 마커 이미지의 주소 (커스텀 마커 생성)
       var markerImageUrl = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/location-pin-162-626841.png',
         markerImageSize = new kakao.maps.Size(30, 32), // 마커 이미지의 크기
@@ -121,12 +121,12 @@ function Map() {
 
       // 지도에 마커 생성 + 표시
       var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(data[i].latlng[0], data[i].latlng[1]), // 마커의 좌표
+        position: new kakao.maps.LatLng(cafeInfo[i].latitude, cafeInfo[i].longitude), // 마커의 좌표
         image: markerImage, // 마커의 이미지
         map: map // 마커를 표시할 지도 객체
       });
 
-      var iwContent = `<div style="padding:5px;">${data[i].name}</div>`; // 인포윈도우에 표출될 내용 (HTML 문자열이나 document element 가능)
+      var iwContent = `<div style="padding:5px;">${cafeInfo[i].name}</div>`; // 인포윈도우에 표출될 내용 (HTML 문자열이나 document element 가능)
 
       // 인포윈도우 생성
       var infowindow = new kakao.maps.InfoWindow({

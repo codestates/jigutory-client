@@ -5,38 +5,54 @@ import '../styles/Map.scss';
 const { kakao } = window;
 
 function Map() {
-  const [cafeInfo, setCafeInfo] = useState({
-    name: '',
-    latlng: [],
-    imgUrl: '',
-    keyword: [],
-    address: '',
-  })
-
-  axios.get('https://localhost:4000/cafeinfos', {
-    headers: {
-      "Content-Type": "application/json",
-    }, withCredentials: true
-  })
-    .then((res) => {
-      console.log(res);
-      console.log(res.data.keyword); // 키워드 들어오는 타입확인하고 상태로 넣기
-
-      setCafeInfo({
-        name: res.data.name,
-        latlng: [res.data.latitude, res.data.longitude],
-        imgUrl: res.data.image,
-        keyword: [],
-        address: res.data.description,
-      })
+  // DB에서 받은 cafe 정보들을 객체형태로 상태 저장
+  //const [cafes, setCafes] = useState([])
+  const [cafeInfo, setCafeInfo] = useState(
+    {
+      name: '',
+      latlng: [],
+      imgUrl: '',
+      keyword: [],
+      address: '',
     })
-    .catch(err => console.log(err))
 
+
+  console.log('cafeinfo state :', cafeInfo);
+
+  let cafes = [];
+  let cafe = {};
+
+  useEffect(() => {
+    axios.get('https://localhost:4000/cafe/list', {
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+      .then((res) => {
+        console.log('res.data 정보 : ', res.data);
+        console.log('res.data.key 정보 : ', res.data[0].keyword.split(',')); //
+
+        // console.log(res.data.keyword); // 키워드 들어오는 타입확인하고 상태로 넣기
+        for (let i = 0; i < res.data.length; i++) {
+          setCafeInfo({
+            name: res.data[i].name,
+            latlng: [res.data[i].latitude, res.data[i].longitude],
+            imgUrl: res.data[i].image,
+            keyword: res.data[0].keyword.split(','),
+            address: res.data[i].description,
+          })
+          cafes.push(cafeInfo);
+        }
+      })
+      .catch(err => console.log(err))
+  }, []);
+
+  console.log('cafes : ', cafes)
 
   useEffect(() => {
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
-        center: new kakao.maps.LatLng(37.474675616877455, 126.90353931151591), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.498225, 127.027686), // 지도의 중심좌표 (강남역)
         level: 5, // 지도의 확대 레벨
         mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
       };
@@ -49,13 +65,14 @@ function Map() {
       console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
     });
 
-    // 마커 클러스터러를 생성합니다 
+    // 마커 클러스터러 생성 (필수기능 아님)
     var clusterer = new kakao.maps.MarkerClusterer({
       map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
       averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
       minLevel: 10 // 클러스터 할 최소 지도 레벨 
     });
 
+    // DB에서 받아오기 전 임시 데이터
     const data = [
       {
         name: '데일리로스팅',
@@ -94,7 +111,7 @@ function Map() {
       },
     ];
 
-    // 반복문으로 생성될 마커들(data)을 담을 배열
+    // 반복문으로 생성될 여러개의 마커들(data)을 담을 배열
     let markers = [];
 
     for (let i = 0; i < data.length; i++) {
@@ -149,7 +166,7 @@ function Map() {
     }
   })
 
-  return <div id="map" style={{ width: '85%', height: '100vh' }}></div>;
+  return <div id="map" style={{ width: '95%', height: '80vh' }}></div>;
 }
 
 export default Map;

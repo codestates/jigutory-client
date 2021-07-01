@@ -5,7 +5,7 @@ import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
-function SignUp({ accessToken, openModal, closeModal }) {
+function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +41,7 @@ function SignUp({ accessToken, openModal, closeModal }) {
     const regUsernaae = /^[0-9a-z]+$/;
 
     if (!regUsernaae.test(username)) {
-      setUsernameError('영문(소문자)/숫자만 허용');
+      setUsernameError('유제네임 영문(소문자)/숫자만 허용');
       return false;
     } else {
       setUsernameError('');
@@ -53,7 +53,7 @@ function SignUp({ accessToken, openModal, closeModal }) {
     const regEmail = /^[0-9a-z-_.]+@[0-9a-z]+\.[0-9a-z]+$/;
 
     if (!regEmail.test(email)) {
-      setEmailError('영문(소문자)/숫자/특수문자(-_.)만 허용');
+      setEmailError('이메일 영문(소문자)/숫자/특수문자(-_.)만 허용');
       return false;
     } else {
       setEmailError('');
@@ -98,7 +98,7 @@ function SignUp({ accessToken, openModal, closeModal }) {
     if (validUsername & validEmail && validPassword) {
       axios
         .post(
-          'https://localhost:4000/auth/signup',
+          'http://localhost:4000/auth/signup',
           { username: username, email: email, password: password },
           {
             headers: {
@@ -108,7 +108,11 @@ function SignUp({ accessToken, openModal, closeModal }) {
           },
         )
         .then((res) => {
-          // console.log('res.data :', res.data);
+          console.log('signup res.data :', res.data);
+          handleUserInfo({
+            usename: res.data.username,
+            email: res.data.email,
+          })
           history.push('/intro');
         })
         .catch((err) => {
@@ -161,27 +165,27 @@ function SignUp({ accessToken, openModal, closeModal }) {
           {!usernameError ? (
             ''
           ) : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>
-              {usernameError}
-            </div>
-          )}
+              <div className="alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {usernameError}
+              </div>
+            )}
           {!emailError ? (
             ''
           ) : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>
-              {emailError}
-            </div>
-          )}
+              <div className="alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {emailError}
+              </div>
+            )}
           {!passwordError ? (
             ''
           ) : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>
-              {passwordError}
-            </div>
-          )}
+              <div className="alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {passwordError}
+              </div>
+            )}
         </div>
       </div>
     </div>

@@ -88,7 +88,7 @@ const Login = ({
     <div div className="modal-container show-modal" onClick={openModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={closeModal}>
-          <i className="fas fa-times"></i>
+          <i className="fas fa-times fa-lg"></i>
         </button>
         <h2 className="modal-header">로그인</h2>
         <div className="modal-info">
@@ -115,10 +115,10 @@ const Login = ({
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
             />
-            <KaKaoLogin
+            {/* <KaKaoLogin
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
-            />
+            /> */}
           </div>
           {!errorMessage ? (
             ''

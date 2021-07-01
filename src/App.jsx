@@ -29,7 +29,7 @@ function App() {
   const [level, setLevel] = useState('');
   const [badge, setBadge] = useState('');
 
-  console.log(userInfo)
+  console.log(userInfo);
   // 로그인 성공 => 로그인 상태 true & 유저정보 저장
   const handleLogin = (token) => {
     setAccessToken(token);
@@ -72,14 +72,16 @@ function App() {
       </header>
 
       <Switch>
-        <div className="app-container">
-          <Route path="/" exact={true} component={Intro} />
-          <Route path="/intro" exact={true} component={Intro} />
-          <Route path="/main" exact={true} component={Main} />
-          <Route path="/mypage" exact={true} component={Mypage} />
-          <Route path="/cart" exact={true} component={Cart} />
-          <Route path="/store" exact={true} component={Store} />
-        </div>
+        <>
+          <div className="app-container">
+            <Route path="/" exact={true} component={Intro} />
+            <Route path="/intro" exact={true} component={Intro} />
+            <Route path="/main" exact={true} component={Main} />
+            <Route path="/mypage" exact={true} component={Mypage} />
+            <Route path="/cart" exact={true} component={Cart} />
+            <Route path="/store" exact={true} component={Store} />
+          </div>
+        </>
       </Switch>
 
       <footer>

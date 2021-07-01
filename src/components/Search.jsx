@@ -30,10 +30,18 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
       name.includes(searchInput),
     );
 
-    const findOnKeyword = cafeList.filter(({ keyword }) =>
-      keyword.includes(searchInput),
-    );
-    setSearchResultList([...findOnName, ...findOnKeyword]);
+    // const findOnKeyword = cafeList.filter(({ keyword }) =>
+    //   keyword.includes(searchInput),
+    // );
+
+    setSearchResultList([...findOnName]);
+    // setSearchResultList([...findOnName, ...findOnKeyword]);
+  };
+
+  const handleSearchEnter = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   useEffect(() => {
@@ -44,22 +52,33 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     if (!markerManageRef) {
       return;
     }
-    cafeList.forEach(({ latitude, longitude, id }) => {
-      markerManageRef.current.addMarker(latitude, longitude, id);
+    cafeList.forEach(({ latitude, longitude, id, name }) => {
+      markerManageRef.current.addMarker(latitude, longitude, id, name);
     });
   }, [cafeList, markerManageRef]);
 
   return (
     <div id="search">
       <div id="search-bar">
-        <input value={searchInput} onChange={handleChangeInput} />
-        <button onClick={handleSearch}>검색</button>
+        <input
+          value={searchInput}
+          placeholder="카페명을 입력하세요!"
+          onChange={handleChangeInput}
+          onKeyPress={handleSearchEnter}
+        />
+        <button onClick={handleSearch}>
+          <img
+            alt="이미지 불러오기에 실패했습니다."
+            src="https://img.icons8.com/material-outlined/24/000000/search--v1.png"
+          />{' '}
+        </button>
       </div>
       <hr />
       <div id="search-result-list">
         {searchResultList?.length === 0 && '검색 결과가 없습니다.'}
-        {searchResultList
-          ? searchResultList.map(({ id, name, latitude, longitude }) => (
+        {
+          searchResultList ? (
+            searchResultList.map(({ id, name, latitude, longitude }) => (
               <div
                 id="search-result-item"
                 key={id}
@@ -68,15 +87,19 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
                 {name}
               </div>
             ))
-          : cafeList.map(({ id, name, latitude, longitude }) => (
-              <div
-                id="search-result-item"
-                key={id}
-                onClick={handleClickSearchResultItem(latitude, longitude)}
-              >
-                {name}
-              </div>
-            ))}
+          ) : (
+            <></>
+          )
+          // cafeList.map(({ id, name, latitude, longitude }) => (
+          //     <div
+          //       id="search-result-item"
+          //       key={id}
+          //       onClick={handleClickSearchResultItem(latitude, longitude)}
+          //     >
+          //       {name}
+          //     </div>
+          //   ))
+        }
       </div>
     </div>
   );

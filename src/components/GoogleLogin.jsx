@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
-import googleLogo from '../image/google-logo.png';
-import googleBtnImg from '../image/btn-google.png';
+import googleLogo from '../images/google-logo.png';
+import googleBtnImg from '../images/btn-google.png';
 import '../styles/AuthModal.scss';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -15,16 +15,16 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const responseGoogle = (res) => {
     console.log('google res : ', res);
     console.log('google token : ', res.accessToken);
-    //console.log('google profileObj : ', res.profileObj.givenName);
+    console.log('google profileObj : ', res.profileObj.givenName);
 
     const token = res.accessToken;
+    const email = res.profileObj.email; // 로그인 처리 완료 된 후에야 응답 들어와서 여기서 쓰면 정보 없어서 에러뜸
+    const username = res.profileObj.givenName;
     handleLogin(token);
     localStorage.setItem('Google-accessToken', token);
-    //localStorage.setItem('usename', username);
-    //localStorage.setItem('email', email);
-    //handleUserInfo({ username: username, email: email });
-    //const email = res.profileObj.email; // 로그인 처리 완료 된 후에야 응답 들어와서 여기서 쓰면 정보 없어서 에러뜸
-    //const username = res.profileObj.givenName;
+    localStorage.setItem('usename', username);
+    localStorage.setItem('email', email);
+    handleUserInfo({ username: username, email: email });
     axios
       .post(
         `http://localhost:4000/auth/googlesignin`,

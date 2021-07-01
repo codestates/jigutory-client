@@ -18,6 +18,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
     fetchCafe();
   }, [fetchCafe]);
 
+  // map & search 연결
   useImperativeHandle(cafeToggleRef, () => ({
     toggle: (cafeId) => {
       setToggledCafeId(cafeId);
@@ -27,11 +28,12 @@ export const CafeInfo = ({ cafeToggleRef }) => {
   if (!toggledCafeId || !cafe) {
     return <></>;
   }
-  // console.log(cafe);
   return (
     <div id="cafe-toggle">
-      <div id="cafe-toggle-bar">
+      <div id="cafe-toggle-item">
         <div>{cafe.name}</div>
+        <hr />
+        <div>{cafe.keyword}</div>
       </div>
       {/* <div id="cafe-toggle-button" onClick></div> */}
     </div>

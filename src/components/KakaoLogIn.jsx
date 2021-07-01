@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import KaKaoLogin from 'react-kakao-login';
 import axios from 'axios';
-import kakaoLogo from '../image/kakao-logo.png';
+import kakaoLogo from '../images/kakao-logo.png';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 

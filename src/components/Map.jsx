@@ -19,7 +19,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   useEffect(() => {
     const latLng = center
       ? new window.kakao.maps.LatLng(center.lat, center.lng)
-      : new window.kakao.maps.LatLng(37.5909966, 127.2364496);
+      : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
     const options = {
       center: latLng,
       level: 3,
@@ -29,13 +29,26 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
 
   useEffect(() => {
     if (map) {
-      markers.forEach(({ lat, lng, cafeId }) => {
+      markers.forEach(({ lat, lng, cafeId, name }) => {
         const latLng = new window.kakao.maps.LatLng(lat, lng);
         const marker = new window.kakao.maps.Marker({
           position: latLng,
         });
+        const infoWindow = new window.kakao.maps.InfoWindow({
+          position: latLng,
+          content: name,
+        });
 
         marker.setMap(map);
+
+        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
+          infoWindow.open(map, marker);
+        });
+
+        window.kakao.maps.event.addListener(marker, 'mouseout', function () {
+          infoWindow.close();
+        });
+
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);
         });
@@ -50,8 +63,8 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
     },
   }));
   useImperativeHandle(markerManageRef, () => ({
-    addMarker: (lat, lng, cafeId) => {
-      setMarkers((prev) => [...prev, { lat, lng, cafeId }]);
+    addMarker: (lat, lng, cafeId, name) => {
+      setMarkers((prev) => [...prev, { lat, lng, cafeId, name }]);
     },
   }));
 

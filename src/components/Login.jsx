@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
 // import KaKaoLogin from './KakaoLogIn';
-import signUpLogo from '../image/signup-logo.png';
+import signUpLogo from '../images/signup-logo.png';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
@@ -85,20 +85,20 @@ const Login = ({
     handleOpenSignup();
   }
 
-  let nodeRef = useRef();
+  // let nodeRef = useRef();
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleCloseLogin);
-    return () => {
-      document.removeEventListener("mousedown", handleCloseLogin);
-    }
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleCloseLogin);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleCloseLogin);
+  //   }
+  // }, []);
 
 
 
   return (
     <div className="modal-container show-modal" onClick={handleOpenLogin}>
-      <div ref={nodeRef} className="modal" onClick={(e) => e.stopPropagation()}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={handleCloseLogin}>
           <i className="fas fa-times fa-lg"></i>
         </button>

@@ -29,6 +29,7 @@ function App() {
   const [level, setLevel] = useState('');
   const [badge, setBadge] = useState('');
 
+  console.log(userInfo)
   // 로그인 성공 => 로그인 상태 true & 유저정보 저장
   const handleLogin = (token) => {
     setAccessToken(token);

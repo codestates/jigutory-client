@@ -3,7 +3,7 @@ import { withRouter, useHistory } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
 import axios from 'axios';
-import logo from '../image/jigu-logo.png';
+import logo from '../images/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 

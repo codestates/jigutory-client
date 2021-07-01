@@ -14,7 +14,8 @@ const Login = ({
   handleOpenLogin,
   handleCloseLogin,
   handleUserInfo,
-  handleOpenSignup
+  handleOpenSignup,
+  isLoginOpen
 }) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -84,9 +85,20 @@ const Login = ({
     handleOpenSignup();
   }
 
+  let nodeRef = useRef();
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleCloseLogin);
+    return () => {
+      document.removeEventListener("mousedown", handleCloseLogin);
+    }
+  }, []);
+
+
+
   return (
-    <div div className="modal-container show-modal" onClick={handleOpenLogin}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-container show-modal" onClick={handleOpenLogin}>
+      <div ref={nodeRef} className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={handleCloseLogin}>
           <i className="fas fa-times fa-lg"></i>
         </button>

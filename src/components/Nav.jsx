@@ -94,6 +94,7 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo, accessToken }
               <button className="nav-login nav-btn" onClick={handleOpenLogin}>로그인</button>
               {isLoginOpen && (
                 <Login
+                  isLoginOpen={isLoginOpen}
                   handleOpenLogin={handleOpenLogin}
                   handleCloseLogin={handleCloseLogin}
                   handleUserInfo={handleUserInfo}

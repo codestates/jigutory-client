@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
-import KaKaoLogin from './KakaoLogIn';
+// import KaKaoLogin from './KakaoLogIn';
+import signUpLogo from '../image/signup-logo.png';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
@@ -10,9 +11,10 @@ axios.defaults.withCredentials = true;
 const Login = ({
   handleLogin,
   accessToken,
-  openModal,
-  closeModal,
+  handleOpenLogin,
+  handleCloseLogin,
   handleUserInfo,
+  handleOpenSignup
 }) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -20,23 +22,17 @@ const Login = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleEmail = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
-    // if (e.target.value !== email) {
-    //   setErrorMessage('이메일을 확인해 주세요.');
-    // }
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
     setPassword(e.target.value);
-    // if (e.target.value !== password) {
-    //   setErrorMessage('비밀번호를 확인해 주세요.');
-    // }
   };
 
   const onKeyPress = (e) => {
@@ -71,7 +67,6 @@ const Login = ({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
-          // handleUserInfo({})
           return res;
         })
         .then((res) => {
@@ -84,10 +79,15 @@ const Login = ({
     }
   };
 
+  const moveToSignUp = () => {
+    handleCloseLogin();
+    handleOpenSignup();
+  }
+
   return (
-    <div div className="modal-container show-modal" onClick={openModal}>
+    <div div className="modal-container show-modal" onClick={handleOpenLogin}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={closeModal}>
+        <button className="close" onClick={handleCloseLogin}>
           <i className="fas fa-times fa-lg"></i>
         </button>
         <h2 className="modal-header">로그인</h2>
@@ -98,14 +98,14 @@ const Login = ({
             placeholder="이메일"
             onChange={handleEmail}
             onKeyPress={onKeyPress}
-          //ref={emailRef}
+            ref={emailRef}
           />
           <input
             type="password"
             placeholder="비밀번호"
             onChange={handlePassword}
             onKeyPress={onKeyPress}
-          //ref={passwordRef}
+            ref={passwordRef}
           />
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
@@ -115,19 +115,16 @@ const Login = ({
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
             />
-            {/* <KaKaoLogin
-              handleLogin={handleLogin}
-              handleUserInfo={handleUserInfo}
-            /> */}
           </div>
-          {!errorMessage ? (
-            ''
-          ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {errorMessage}
-              </div>
-            )}
+
+          {!errorMessage ? ('') : (
+            <div className="alert-box">
+              <i className="fas fa-exclamation-circle"></i>{errorMessage}
+            </div>)}
+          <button className="move_signup-btn" onClick={moveToSignUp}>
+            <i className="fas fa-user-plus" ></i>
+            <span>회원가입</span>
+          </button>
         </div>
       </div>
     </div>
@@ -136,14 +133,8 @@ const Login = ({
 
 export default withRouter(Login);
 
-// const clickSignUp = () => {
-//   history.push('/signup')
-//   console.log('회원가입으로 이동')
-// }
 
-{
-  /* <div>
-  아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>
-  <button onClick={clickSignUp}>회원가입</button>
-</div> */
-}
+{/* <KaKaoLogin
+handleLogin={handleLogin}
+handleUserInfo={handleUserInfo}
+/> */}

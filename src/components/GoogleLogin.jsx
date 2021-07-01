@@ -15,20 +15,19 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const responseGoogle = (res) => {
     console.log('google res : ', res);
     console.log('google token : ', res.accessToken);
-    // console.log('google profileObj : ', res.profileObj.givenName);
+    //console.log('google profileObj : ', res.profileObj.givenName);
 
     const token = res.accessToken;
-    //const email = res.profileObj.email;
-    //const username = res.profileObj.givenName;
     handleLogin(token);
     localStorage.setItem('Google-accessToken', token);
     //localStorage.setItem('usename', username);
     //localStorage.setItem('email', email);
-    // handleUserInfo({ username: username, email: email });
-
+    //handleUserInfo({ username: username, email: email });
+    //const email = res.profileObj.email; // 로그인 처리 완료 된 후에야 응답 들어와서 여기서 쓰면 정보 없어서 에러뜸
+    //const username = res.profileObj.givenName;
     axios
       .post(
-        `https://localhost:4000/auth/googlesignin`,
+        `http://localhost:4000/auth/googlesignin`,
         { token },
         {
           headers: {
@@ -63,7 +62,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
           onFailure={responseGoogle}
         />
       }
-      {/* <img width="150px" src={googleBtnImg} alt="google-button" className="login-btn" /> */}
     </div>
   );
 };

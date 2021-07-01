@@ -1,3 +1,5 @@
+// 연결 안 된 컴포넌트
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Detail from '../components/Detail';
@@ -15,7 +17,6 @@ function Map() {
       // keyword: [],
       // address: '',
     })
-
 
   console.log('cafeinfo state :', cafeInfo);
   let cafes = [];

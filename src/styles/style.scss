@@ -5,6 +5,9 @@
 @import './Intro.scss';
 @import './Map.scss';
 @import './Footer.scss';
+@import './Mypage.scss';
+@import './Store.scss';
+@import './Search.scss';
 
 // 구글 폰트
 // font-family: 'Do Hyeon', sans-serif;
@@ -12,8 +15,13 @@
 // font-family: 'Nanum Gothic', sans-serif;
 // font-family: 'Noto Sans KR', sans-serif;
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
+  margin : 0;
 }
 
 body {
@@ -31,4 +39,8 @@ textarea,
 button {
   outline: none;
   border: none;
+}
+
+.app-container {
+  padding : 6rem 0 4rem 0;
 }

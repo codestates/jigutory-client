@@ -103,10 +103,14 @@ blockquote:after,
 q:before,
 q:after {
 <<<<<<< HEAD
+<<<<<<< HEAD
   content: "";
 =======
   content: '';
 >>>>>>> ad355a73c32fffb0017145450decec365ba0b67e
+=======
+  content: '';
+>>>>>>> 478a7d3c72ad6400ecaf6cea52229c7d3c30087d
   content: none;
 }
 table {

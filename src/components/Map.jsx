@@ -19,7 +19,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   useEffect(() => {
     const latLng = center
       ? new window.kakao.maps.LatLng(center.lat, center.lng)
-      : new window.kakao.maps.LatLng(37.5909966, 127.2364496);
+      : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
     const options = {
       center: latLng,
       level: 3,
@@ -68,5 +68,9 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
     },
   }));
 
-  return <div id="map" ref={containerRef}></div>;
+  return (
+    <div id="map-container">
+      <div id="map" ref={containerRef}></div>
+    </div>
+  )
 };

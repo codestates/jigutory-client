@@ -18,6 +18,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
     fetchCafe();
   }, [fetchCafe]);
 
+  // map & search 연결
   useImperativeHandle(cafeToggleRef, () => ({
     toggle: (cafeId) => {
       setToggledCafeId(cafeId);

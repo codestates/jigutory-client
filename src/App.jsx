@@ -9,8 +9,6 @@ import {
 } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
 import Mypage from './pages/Mypage';
@@ -31,10 +29,13 @@ function App() {
   const [level, setLevel] = useState('');
   const [badge, setBadge] = useState('');
 
+  console.log(userInfo)
   // 로그인 성공 => 로그인 상태 true & 유저정보 저장
   const handleLogin = (token) => {
-    setIsLogin(true);
     setAccessToken(token);
+    if (token) {
+      setIsLogin(true);
+    }
   };
 
   const handleLogout = (token) => {
@@ -69,14 +70,18 @@ function App() {
           accessToken={accessToken}
         />
       </header>
+
       <Switch>
-        <Route path="/" exact={true} component={Intro} />
-        <Route path="/intro" exact={true} component={Intro} />
-        <Route path="/main" exact={true} component={Main} />
-        <Route path="/mypage" exact={true} component={Mypage} />
-        <Route path="/cart" exact={true} component={Cart} />
-        <Route path="/store" exact={true} component={Store} />
+        <div className="app-container">
+          <Route path="/" exact={true} component={Intro} />
+          <Route path="/intro" exact={true} component={Intro} />
+          <Route path="/main" exact={true} component={Main} />
+          <Route path="/mypage" exact={true} component={Mypage} />
+          <Route path="/cart" exact={true} component={Cart} />
+          <Route path="/store" exact={true} component={Store} />
+        </div>
       </Switch>
+
       <footer>
         <Footer />
       </footer>

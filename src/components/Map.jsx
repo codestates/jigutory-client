@@ -1,31 +1,59 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 
-export const Map = () => {
-  const [map, setMap] = useState({});
-  const [latLng, setLatLng] = useState([37.51040624439627, 127.05862531328155]);
-  const [mapLevel, setMapLevel] = useState(3);
+export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
+  const [map, setMap] = useState();
+  const [center, setCenter] = useState();
+  const [markers, setMarkers] = useState([]);
 
-  const loadKakaoMap = useCallback(() => {
-    const mapContainer = document.getElementById('map');
-    const mapOption = {
-      center: new window.kakao.maps.LatLng(latLng[0], latLng[1]), //지도의 중심좌표
-      level: mapLevel, //지도의 레벨(확대, 축소 정도)
-    };
-    const map = new window.kakao.maps.Map(mapContainer, mapOption); //지도 생성 & 객체 리턴
-
-    const mapTypeControl = new window.kakao.maps.MapTypeControl(); // 일반 지도, 스카이뷰
-    map.addControl(mapTypeControl, window.kakao.maps.ControlPosition.TOPRIGHT);
-
-    const zoomControl = new window.kakao.maps.ZoomControl(); // 확대, 축소
-    map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
-
-    setMap(map);
-  }, [latLng, mapLevel]);
+  const containerRef = useRef();
 
   useEffect(() => {
-    window.kakao.maps.load(() => {
-      loadKakaoMap();
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      setCenter({
+        lat: coords.latitude,
+        lng: coords.longitude,
+      });
     });
-  }, [loadKakaoMap]);
-  return <></>;
+  }, []);
+
+  useEffect(() => {
+    const latLng = center
+      ? new window.kakao.maps.LatLng(center.lat, center.lng)
+      : new window.kakao.maps.LatLng(37.5909966, 127.2364496);
+    const options = {
+      center: latLng,
+      level: 3,
+    };
+    setMap(new window.kakao.maps.Map(containerRef.current, options));
+  }, [center]);
+
+  useEffect(() => {
+    if (map) {
+      markers.forEach(({ lat, lng, cafeId }) => {
+        const latLng = new window.kakao.maps.LatLng(lat, lng);
+        const marker = new window.kakao.maps.Marker({
+          position: latLng,
+        });
+
+        marker.setMap(map);
+        window.kakao.maps.event.addListener(marker, 'click', function () {
+          cafeToggleRef.current.toggle(cafeId);
+        });
+      });
+    }
+  }, [cafeToggleRef, map, markers]);
+
+  useImperativeHandle(mapMovementRef, () => ({
+    move: (lat, lng) => {
+      const latLng = new window.kakao.maps.LatLng(lat, lng);
+      map.panTo(latLng);
+    },
+  }));
+  useImperativeHandle(markerManageRef, () => ({
+    addMarker: (lat, lng, cafeId) => {
+      setMarkers((prev) => [...prev, { lat, lng, cafeId }]);
+    },
+  }));
+
+  return <div id="map" ref={containerRef}></div>;
 };

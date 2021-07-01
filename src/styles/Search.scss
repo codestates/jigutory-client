@@ -1,0 +1,32 @@
+#search {
+  position: absolute;
+  z-index: 100;
+  margin: 4px;
+  padding: 2px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+#search-bar {
+  display: flex;
+  flex-direction: row;
+
+  input {
+    font-size: 18px;
+  }
+
+  button {
+    padding: 4px 8px;
+  }
+}
+
+#search-result-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#search-result-item {
+  border-bottom: 1px solid black;
+  padding: 4px;
+  cursor: pointer;
+}

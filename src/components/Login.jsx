@@ -1,29 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
-// import KaKaoLogin from './KakaoLogIn';
-// import signUpLogo from '../images/signup-logo.png';
+import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
-
-let useClickOutside = (handler) => {
-  let domNode = useRef();
-
-  useEffect(() => {
-    let windowHandler = (e) => {
-      if (!domNode.current.contains(e.target)) {
-        handler();
-      }
-    };
-    document.addEventListener("mousedown", windowHandler);
-    return () => {
-      document.removeEventListener("mousedown", windowHandler);
-    };
-  });
-
-  return domNode;
-}
 
 function Login({
   handleLogin,
@@ -145,6 +126,10 @@ function Login({
             onKeyPress={onKeyPress}
             ref={passwordRef}
           />
+          {!errorMessage ? ('') : (
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>{errorMessage}
+            </div>)}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>
@@ -154,10 +139,7 @@ function Login({
               handleUserInfo={handleUserInfo}
             />
           </div>
-          {!errorMessage ? ('') : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>{errorMessage}
-            </div>)}
+
           <button className="move_signup-btn" onClick={moveToSignUp}>
             <i className="fas fa-user-plus" ></i>
             <span>회원가입</span>

@@ -1,27 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import useClickOutside from '../hooks/useClickOutside';
 // import Login from './Login';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
-
-let useClickOutside = (handler) => {
-  let domNode = useRef();
-
-  useEffect(() => {
-    let windowHandler = (e) => {
-      if (!domNode.current.contains(e.target)) {
-        handler();
-      }
-    };
-    document.addEventListener("mousedown", windowHandler);
-    return () => {
-      document.removeEventListener("mousedown", windowHandler);
-    };
-  });
-
-  return domNode;
-}
 
 function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   const history = useHistory();

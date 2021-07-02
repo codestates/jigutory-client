@@ -1,30 +1,13 @@
 import axios from 'axios';
 import { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import useClickOutside from '../hooks/useClickOutside';
 import '../styles/CafeInfo.scss';
 
-// 바깥쪽 클릭시 창 닫기 custom hooks
-// let useClickOutside = (handler) => {
-//   let domNode = useRef();
-
-//   useEffect(() => {
-//     let windowHandler = (e) => {
-//       if (!domNode.current.contains(e.target)) {
-//         handler();
-//       }
-//     };
-//     document.addEventListener("mousedown", windowHandler);
-//     return () => {
-//       document.removeEventListener("mousedown", windowHandler);
-//     };
-//   });
-
-//   return domNode;
-// }
 
 export const CafeInfo = ({ cafeToggleRef }) => {
   const [toggledCafeId, setToggledCafeId] = useState();
   const [cafe, setCafe] = useState('');
-  // const [isToggleOn, setIsToggleOn] = useState(false);
+  const [isToggleOn, setIsToggleOn] = useState(false);
 
   const fetchCafe = useCallback(async () => {
     const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');
@@ -50,6 +33,10 @@ export const CafeInfo = ({ cafeToggleRef }) => {
   if (!toggledCafeId || !cafe) {
     return <></>;
   }
+
+  // if (toggledCafeId || cafe) {
+  //   isToggleOn(true)
+  // }
 
   // let domNode = useClickOutside(() => {
   //   // 토글 닫는 함수 만들고, 그 함수를 여기서 실행시켜주면 토글 바깥쪽 클릭 시 닫기
@@ -83,13 +70,3 @@ export const CafeInfo = ({ cafeToggleRef }) => {
     </div >
   );
 };
-
-
-// <i class="far fa-thumbs-up"></i> // 빈 좋아요
-// <i class="fas fa-thumbs-up"></i> // 꽉찬 좋아요
-
-// <i class="far fa-bookmark"></i> // 빈 북마크
-// <i class="fas fa-bookmark"></i> // 꽉찬 북마크
-
-// <i class="far fa-heart"></i> // 빈 하트
-// <i class="fas fa-heart"></i> // 꽉찬 하트

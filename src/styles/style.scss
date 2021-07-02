@@ -25,11 +25,11 @@ html {
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  color: $blue2;
+  color: $button_blue;
 }
 
 h2, h3 {
-  color: $blue1;
+  color: $title_blue;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -50,7 +50,7 @@ a {
   cursor: pointer;
 }
 
-ul {
+ol, ul, li {
   list-style: none;
   padding-left: 0px;
 }

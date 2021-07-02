@@ -3,7 +3,6 @@
 @import './_mixins';
 @import './AuthModal.scss';
 @import './Intro.scss';
-@import './Map.scss';
 @import './Footer.scss';
 @import './Mypage.scss';
 @import './Store.scss';
@@ -43,4 +42,15 @@ button {
 
 .app-container {
   padding : 6rem 0 4rem 0;
+}
+
+a {
+  color : inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
 }

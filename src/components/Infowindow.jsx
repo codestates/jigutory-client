@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Detail from '../components/Detail';
-import '../styles/Map.scss';
+import '../styles/Main.scss';
 
 const { kakao } = window;
 

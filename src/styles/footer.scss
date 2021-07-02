@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes clickScale {
+@keyframes scaleController {
   from {
     transform : none;
   }
@@ -21,9 +21,7 @@ a {
   text-decoration: none;
   &:hover {
     color : rgb(22, 56, 156);
-    animation: clickScale .1s linear;
-  }
-  &:focus {
+    animation: scaleController .1s linear;
   }
 }
 

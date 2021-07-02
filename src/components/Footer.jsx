@@ -1,7 +1,6 @@
 import React from 'react';
 import github from '../images/github-logo.png';
 import jigustory from '../images/jigu-logo.png';
-import jiguhalf from '../images/jigu-half.png';
 import '../styles/Footer.scss';
 
 const Footer = () => {

@@ -59,18 +59,6 @@ function Login({
     }
   };
 
-  // const getUserInfo = () => {
-  //   axios.get('http://localhost:4000/user/userinfo', {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: accessToken,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       console.log('login get res :', res)
-  //     })
-  // }
-
   const handleLoginRequest = (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
@@ -121,9 +109,6 @@ function Login({
     }
   };
 
-
-
-
   const moveToSignUp = () => {
     handleCloseLogin();
     handleOpenSignup();
@@ -136,11 +121,12 @@ function Login({
   return (
     <div className="modal-container show-modal" onClick={handleOpenLogin}>
       <div ref={domNode} className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={handleCloseLogin}>
+        <button className="modal-close" onClick={handleCloseLogin}>
           <i className="fas fa-times fa-lg"></i>
         </button>
         <h2 className="modal-header">로그인</h2>
         <div className="modal-info">
+          <div className="modal-info-title">이메일</div>
           <input
             autoFocus
             type="email"
@@ -149,6 +135,9 @@ function Login({
             onKeyPress={onKeyPress}
             ref={emailRef}
           />
+
+          <div className="modal-info-title">비밀번호</div>
+
           <input
             type="password"
             placeholder="비밀번호"

@@ -34,7 +34,7 @@ button {
 
 .modal {
   position: absolute;
-  z-index: 999;
+  z-index: 100;
   background-color: rgb(255, 255, 255);
   max-width: 100%;
   padding: 50px 50px 80px 50px;
@@ -43,29 +43,52 @@ button {
   animation: fadeIn 0.2s ease-in-out;
 }
 
-.close {
+.modal-close {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
   padding-left: 300px;
+
   :hover {
     font-weight: 800;
     color: darkred;
   }
 }
 
+.modal-header {
+  padding-bottom: 20px;
+}
+
 .modal-info {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-  input,
-  button {
-    width : 17rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .modal-info-title {
+    width: 100%;
+    padding: 10px 0px 3px 24px;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(24, 97, 157, 0.897);
+  }
+
+  .modal-alert-box {
+    width: 100%;
+    padding: 3px 0px 10px 24px;
+    text-align: left;
+    font-size: 13px;
+    color: rgba(175, 46, 37, 0.879);
+  }
+
+  input {
+    font-size: 14px;
+    width: 270px;
     background-color: transparent;
     border: 0.5px solid rgba(0, 0, 0, 0.3);
     padding: 13px;
-    margin: 3px;
     border-radius: 5px;
   }
+
   input:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
@@ -74,9 +97,19 @@ button {
     border: 1px solid rgba(0, 0, 0, 0.3);
     transition: background-color 0.4s ease-in-out;
   }
+
+  button {
+    width: 270px;
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 13px 0px;
+    margin-top: 25px;
+    border-radius: 5px;
+  }
+
   button:hover {
     font-weight: 700;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(8, 70, 99, 0.7);
     color: white;
     border: none;
     transition: background-color 0.1s ease-in-out;
@@ -86,7 +119,6 @@ button {
     background-color: #cc3731;
     color: white;
   }
-
   // .kakao-btn:hover {
   //   background-color: #f2da00;
   //   color: #3a1a1c;
@@ -103,21 +135,10 @@ button {
   margin-right: 10px;
 }
 
-.alert-box {
-  font-size: 12px;
-  color: darkred;
-  padding-top: 10px;
-}
-
-
-.modal-header {
-  margin-bottom : 1.2rem;
-}
-
-.fa-user-plus{
-  color : $blue2;
-  font-size : 15px;
-  margin-right : 15px;
+.fa-user-plus {
+  color: $blue2;
+  font-size: 15px;
+  margin-right: 15px;
 }
 
 .move_signup-btn {

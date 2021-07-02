@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import Login from './Login';
 import axios from 'axios';
@@ -14,6 +14,7 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [passwordCheckError, setPasswordCheckError] = useState('');
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -38,10 +39,18 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   };
 
   const validateUsername = (username) => {
-    const regUsernaae = /^[0-9a-z]+$/;
+    const min = 3;
+    const regUsernaae = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
 
+    // 이름 길이 확인
+    if (username.length < min) {
+      setUsernameError('3자 이상 입력');
+      return false;
+    }
+
+    // 이름 정규식 확인
     if (!regUsernaae.test(username)) {
-      setUsernameError('유제네임 영문(소문자)/숫자만 허용');
+      setUsernameError('한글 / 영문 소문자 / 숫자만 허용');
       return false;
     } else {
       setUsernameError('');
@@ -52,8 +61,10 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   const validateEmail = (email) => {
     const regEmail = /^[0-9a-z-_.]+@[0-9a-z]+\.[0-9a-z]+$/;
 
-    if (!regEmail.test(email)) {
-      setEmailError('이메일 영문(소문자)/숫자/특수문자(-_.)만 허용');
+    if (email.length === 0) {
+      setEmailError('1자 이상 입력');
+    } else if (!regEmail.test(email)) {
+      setEmailError('영문 소문자 / 숫자 / 특수문자(-_.)만 허용');
       return false;
     } else {
       setEmailError('');
@@ -62,27 +73,26 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   };
 
   const validatePassword = (password, passwordCheck) => {
-    if (password !== passwordCheck) {
-      setPasswordError('동일한 비밀번호를 입력해 주세요.');
+    if (passwordCheck.length === 0) {
+      setPasswordCheckError('동일한 비밀번호를 입력해 주세요');
+    } else if (password !== passwordCheck) {
+      setPasswordCheckError('동일한 비밀번호를 입력해 주세요');
       return false;
     }
 
-    const min = 5;
+    const min = 8;
     const max = 20;
     const regPassword = /^[0-9a-z-_.!?*]+$/;
 
     // 비밀번호 길이 확인
-    if (password.length < min) {
-      setPasswordError('비밀번호는 5자 이상입니다.');
-      return false;
-    } else if (password.length > max) {
-      setPasswordError('비밀번호는 20자 이하입니다.');
+    if (password.length < min || password.length > max) {
+      setPasswordError('8~20자 입력');
       return false;
     }
 
     // 비밀번호 정규식 확인
     if (!regPassword.test(password)) {
-      setPasswordError('영문/숫자/특수문자(-_.!?*)만 허용');
+      setPasswordError('영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용');
       return false;
     } else {
       setPasswordError('');
@@ -112,12 +122,13 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
           handleUserInfo({
             usename: res.data.username,
             email: res.data.email,
-          })
+          });
+          alert('회원가입이 완료되었습니다.');
           history.push('/intro');
         })
         .catch((err) => {
           console.log(err);
-          // setEmailError('이미 존재하는 이메일입니다.');
+          setEmailError('이메일이 중복됩니다.');
         });
     }
   };
@@ -125,67 +136,79 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   return (
     <div className="modal-container show-modal" onClick={openModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={closeModal}>
+        <button className="modal-close" onClick={closeModal}>
           <i className="fas fa-times"></i>
         </button>
         <h2 className="modal-header">회원가입</h2>
         <div className="modal-info">
+          <div className="modal-info-title">이름</div>
           <input
             autoFocus
             type="text"
-            placeholder="이름"
+            placeholder="한글 / 영문 소문자 / 숫자만 허용"
             onChange={handleUsername}
             onKeyPress={onKeyPress}
             required
           />
+          {!usernameError ? (
+            ''
+          ) : (
+            <div className="modal-alert-box">
+              <i className="fas fa-times"></i>
+              &nbsp;{usernameError}
+            </div>
+          )}
+          <div className="modal-info-title">이메일</div>
           <input
             type="text"
-            placeholder="이메일"
+            placeholder="영문 소문자 / 숫자 / 특수문자(-_.)만 허용"
             onChange={handleEmail}
             onKeyPress={onKeyPress}
             required
           />
+          {!emailError ? (
+            ''
+          ) : (
+            <div className="modal-alert-box">
+              <i className="fas fa-times"></i>
+              &nbsp;{emailError}
+            </div>
+          )}
+          <div className="modal-info-title">비밀번호</div>
           <input
             type="password"
-            placeholder="비밀번호"
+            placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용"
             onChange={handlePassword}
             onKeyPress={onKeyPress}
             required
           />
+          {!passwordError ? (
+            ''
+          ) : (
+            <div className="modal-alert-box">
+              <i className="fas fa-times"></i>
+              &nbsp;{passwordError}
+            </div>
+          )}
+          <div className="modal-info-title">비밀번호 확인</div>
           <input
             type="password"
-            placeholder="비밀번호 확인"
+            placeholder="비밀번호를 한 번 더 입력해 주세요"
             onChange={handlePasswordCheck}
             onKeyPress={onKeyPress}
             required
           />
+          {!passwordCheckError ? (
+            ''
+          ) : (
+            <div className="modal-alert-box">
+              <i className="fas fa-times"></i>
+              &nbsp;{passwordError}
+            </div>
+          )}
           <button className="signup-btn" onClick={handleSignUpRequest}>
             회원가입
           </button>
-          {!usernameError ? (
-            ''
-          ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {usernameError}
-              </div>
-            )}
-          {!emailError ? (
-            ''
-          ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {emailError}
-              </div>
-            )}
-          {!passwordError ? (
-            ''
-          ) : (
-              <div className="alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {passwordError}
-              </div>
-            )}
         </div>
       </div>
     </div>

@@ -20,27 +20,32 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     setSearchInput(event.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearchOnName = () => {
     if (!searchInput) {
       setSearchResultList();
       return;
     }
-
     const findOnName = cafeList.filter(({ name }) =>
       name.includes(searchInput),
     );
-
-    // const findOnKeyword = cafeList.filter(({ keyword }) =>
-    //   keyword.includes(searchInput),
-    // );
-
     setSearchResultList([...findOnName]);
-    // setSearchResultList([...findOnName, ...findOnKeyword]);
+  };
+
+  const handleSearchOnKeyword = () => {
+    if (!searchInput) {
+      setSearchResultList();
+      return;
+    }
+    const findOnKeyword = cafeList.filter(({ keyword }) =>
+      keyword.includes(searchInput),
+    );
+    setSearchResultList([...findOnKeyword]);
   };
 
   const handleSearchEnter = (event) => {
     if (event.key === 'Enter') {
-      handleSearch();
+      handleSearchOnName();
+      handleSearchOnKeyword();
     }
   };
 
@@ -59,18 +64,23 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
 
   return (
     <div id="search">
+      <div id="search-category">
+        <button id="search-category-name">카페명</button>
+        <button id="search-category-keyword">키워드</button>
+        {/* <button>???</button> */}
+      </div>
       <div id="search-bar">
         <input
           value={searchInput}
-          placeholder="카페명을 입력하세요!"
+          placeholder="카테고리를 선택한 후 입력하세요!"
           onChange={handleChangeInput}
           onKeyPress={handleSearchEnter}
         />
-        <button onClick={handleSearch}>
+        <button onClick={handleSearchOnName}>
           <img
             alt="이미지 불러오기에 실패했습니다."
             src="https://img.icons8.com/material-outlined/24/000000/search--v1.png"
-          />{' '}
+          />
         </button>
       </div>
       <hr />

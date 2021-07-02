@@ -24,7 +24,7 @@ import '../styles/CafeInfo.scss';
 export const CafeInfo = ({ cafeToggleRef }) => {
   const [toggledCafeId, setToggledCafeId] = useState();
   const [cafe, setCafe] = useState('');
-  const [isToggleOn, setIsToggleOn] = useState(false);
+  // const [isToggleOn, setIsToggleOn] = useState(false);
 
   const fetchCafe = useCallback(async () => {
     const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');

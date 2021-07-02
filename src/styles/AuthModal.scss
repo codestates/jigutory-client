@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 button {
   cursor: pointer;
 }
@@ -12,6 +14,7 @@ button {
 }
 
 .modal-container {
+  // position:fixed;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   opacity: 0;
@@ -31,38 +34,68 @@ button {
 }
 
 .modal {
-  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
   max-width: 100%;
-  padding: 50px;
-  padding-top: 20px;
-  padding-bottom: 70px;
-  border-radius: 15px;
+  padding: 50px 45px 90px 45px;
+  border-radius: 10px;
   text-align: center;
   animation: fadeIn 0.2s ease-in-out;
 }
 
-.close {
+.modal-close {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
-  padding-left: 200px;
+  padding-left: 300px;
+
   :hover {
     font-weight: 800;
     color: darkred;
   }
 }
 
+.modal-header {
+  padding-bottom: 20px;
+}
+
 .modal-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  input,
-  button {
-    background-color: transparent;
-    border: 0.5px solid rgba(0, 0, 0, 0.3);
-    padding: 8px;
-    margin: 3px;
-    border-radius: 8px;
+  align-items: center;
+  
+input, button {
+  width: 270px;
+  background-color: transparent;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  padding: 13px;
+  border-radius: 5px;
+  margin : 2px;
+}
+button {
+  margin-top : 10px;
+}
+.login-btn {
+  margin-top : 25px;
+}
+
+  .modal-info-title {
+    width: 100%;
+    padding: 10px 0px 3px 24px;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(24, 97, 157, 0.897);
   }
+
+  .modal-alert-box {
+    width: 100%;
+    padding: 3px 0px 10px 24px;
+    text-align: left;
+    font-size: 13px;
+    color: rgba(175, 46, 37, 0.879);
+  }
+
   input:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
@@ -71,9 +104,10 @@ button {
     border: 1px solid rgba(0, 0, 0, 0.3);
     transition: background-color 0.4s ease-in-out;
   }
+
   button:hover {
     font-weight: 700;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(8, 70, 99, 0.7);
     color: white;
     border: none;
     transition: background-color 0.1s ease-in-out;
@@ -83,16 +117,12 @@ button {
     background-color: #cc3731;
     color: white;
   }
-
-  .kakao-btn:hover {
-    background-color: #f2da00;
-    color: #3a1a1c;
+  .signup-btn {
+    margin-top : 25px;
   }
 }
 
 .social-btn {
-  display: flex;
-  align-items: center;
   span {
     display: flex;
   }
@@ -102,12 +132,14 @@ button {
   margin-right: 10px;
 }
 
-.alert-box {
-  font-size: 12px;
-  color: darkred;
-  padding-top: 10px;
+.fa-user-plus {
+  color: $blue2;
+  font-size: 15px;
+  margin-right: 15px;
 }
 
-.social-container {
+.move_signup-btn {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }

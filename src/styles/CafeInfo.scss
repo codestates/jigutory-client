@@ -1,0 +1,107 @@
+@import './variables';
+
+$border-radius : 8px;
+
+@keyframes ShowToggle {
+  from {
+    transform: translateX(100px);
+    opacity:0;
+  }
+  to {
+    transform:none;
+    opacity:1;
+  }
+}
+
+@keyframes ScaleController {
+  from {
+    transform : none;
+  }
+  to {
+    transform : scale(0.98)
+  }
+}
+
+@keyframes HeartBeatAnimation {
+  0% {
+    transform: none;
+    color: white;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #d94e59;
+  }
+  100% {
+    transform: none;
+    color: white;
+  }
+}
+
+#cafe-toggle_container {
+  position: absolute;
+  z-index: 100;
+  top: 100px;
+  right: 0px;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: $border-radius;
+  animation : ShowToggle .7s linear;
+}
+
+#cafe-toggle_info {
+  display: flex;
+  flex-direction: column;
+  padding : 3.5rem;
+}
+
+#cafe-toggle_imgbox {
+  display: flex;
+  justify-content: center;
+  img {
+    border-radius: $border-radius;
+    width : 220px;
+    height: 150px;
+  }
+}
+
+#cafe-toggle_desc {
+  padding : 2rem 0 2rem 0;
+  div, a, ul {
+    margin : .8rem 0 .8rem 0;
+  }
+  div {
+    font-weight: 600;
+  }
+  .cafe-toggle_desc_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom : 17px;
+    div {
+      font-size : 20px;
+    }
+    .fa-heart, .fa-bookmark {
+      margin : 0 10px 0 10px;
+      cursor: pointer;
+    }
+    .fa-heart:hover {
+      color: #d94e59;
+      animation: HeartBeatAnimation 1s linear infinite;
+
+    }
+    .fa-bookmark:hover {
+      color : $main-color;
+    }
+  }
+  .cafe-toggle_desc_keyword {
+    display:flex;
+    .keywords_keyword {
+      background-color: $button_blue;
+      color : white;
+      padding : 6px;
+      margin : 2px;
+      border-radius: 12px;
+      font-size : 12px;
+    }
+  }
+}
+

@@ -1,8 +1,13 @@
 import axios from 'axios';
-import { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import useClickOutside from '../hooks/useClickOutside';
 import '../styles/CafeInfo.scss';
-
 
 export const CafeInfo = ({ cafeToggleRef }) => {
   const [toggledCafeId, setToggledCafeId] = useState();
@@ -48,7 +53,9 @@ export const CafeInfo = ({ cafeToggleRef }) => {
   return (
     <div id="cafe-toggle_container">
       <div id="cafe-toggle_info">
-        <div id="cafe-toggle_imgbox"><img src={cafe.image} alt="이미지" /></div>
+        <div id="cafe-toggle_imgbox">
+          <img src={cafe.image} alt="이미지" />
+        </div>
         <div id="cafe-toggle_desc">
           <div className="cafe-toggle_desc_title">
             <div>{cafe.name}</div>
@@ -59,14 +66,19 @@ export const CafeInfo = ({ cafeToggleRef }) => {
           </div>
           <ul className="cafe-toggle_desc_keyword">
             {cafeKeywords.map((keyword, idx) => (
-              <li key={idx} className="keywords_keyword">{keyword}</li>
-            ))}</ul>
-          <a href={cafe.link} target="_black">홈페이지로 이동</a>
+              <li key={idx} className="keywords_keyword">
+                {keyword}
+              </li>
+            ))}
+          </ul>
+          <a href={cafe.link} target="_black">
+            홈페이지로 이동
+          </a>
           <div>{cafe.review}</div>
           <div>{cafe.address}</div>
-          <div>{cafe.description}</div>
+          {/* <div>{cafe.description}</div> */}
         </div>
       </div>
-    </div >
+    </div>
   );
 };

@@ -2,13 +2,30 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
 // import KaKaoLogin from './KakaoLogIn';
-import signUpLogo from '../images/signup-logo.png';
+// import signUpLogo from '../images/signup-logo.png';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
-// nav 컴포넌트에서 props 가져올 것
-const Login = ({
+let useClickOutside = (handler) => {
+  let domNode = useRef();
+
+  useEffect(() => {
+    let windowHandler = (e) => {
+      if (!domNode.current.contains(e.target)) {
+        handler();
+      }
+    };
+    document.addEventListener("mousedown", windowHandler);
+    return () => {
+      document.removeEventListener("mousedown", windowHandler);
+    };
+  });
+
+  return domNode;
+}
+
+function Login({
   handleLogin,
   accessToken,
   handleOpenLogin,
@@ -16,12 +33,12 @@ const Login = ({
   handleUserInfo,
   handleOpenSignup,
   isLoginOpen
-}) => {
+}) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  //const [successMessage, setSuccessMessage] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -68,12 +85,24 @@ const Login = ({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
+          axios.get('http://localhost:4000/user/userinfo', {
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: res.data.data.accessToken,
+            },
+          }).then(res => {
+            handleUserInfo(res.data)
+            handleUserInfo({
+              username: res.data.username,
+              email: res.data.email
+            })
+          })
           return res;
         })
         .then((res) => {
           console.log('res.data :', res.data);
           localStorage.setItem('accessToken', res.data.data.accessToken);
-          setSuccessMessage('로그인에 성공하였습니다.');
+          //setSuccessMessage('로그인에 성공하였습니다.');
           history.push('/intro');
         })
         .catch((err) => console.log(err));
@@ -85,25 +114,19 @@ const Login = ({
     handleOpenSignup();
   }
 
-  // let nodeRef = useRef();
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", handleCloseLogin);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleCloseLogin);
-  //   }
-  // }, []);
-
-
+  let domNode = useClickOutside(() => {
+    handleCloseLogin();
+  })
 
   return (
     <div className="modal-container show-modal" onClick={handleOpenLogin}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={handleCloseLogin}>
+      <div ref={domNode} className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={handleCloseLogin}>
           <i className="fas fa-times fa-lg"></i>
         </button>
         <h2 className="modal-header">로그인</h2>
         <div className="modal-info">
+          <div className="modal-info-title">이메일</div>
           <input
             autoFocus
             type="email"
@@ -112,6 +135,9 @@ const Login = ({
             onKeyPress={onKeyPress}
             ref={emailRef}
           />
+
+          <div className="modal-info-title">비밀번호</div>
+
           <input
             type="password"
             placeholder="비밀번호"
@@ -128,7 +154,6 @@ const Login = ({
               handleUserInfo={handleUserInfo}
             />
           </div>
-
           {!errorMessage ? ('') : (
             <div className="alert-box">
               <i className="fas fa-exclamation-circle"></i>{errorMessage}

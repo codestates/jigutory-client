@@ -3,9 +3,6 @@ import { useHistory, withRouter } from 'react-router-dom';
 
 function Intro() {
   const history = useHistory();
-  const moveToIntro = () => {
-    history.push('/intro');
-  };
 
   return (
     <section className="intro-container">

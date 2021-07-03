@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/style.scss';
-import {
-  Route,
-  Switch,
-  Redirect,
-  withRouter,
-  useHistory,
-} from 'react-router-dom';
+import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Intro from './pages/Intro';
@@ -29,7 +23,9 @@ function App() {
   const [level, setLevel] = useState('');
   const [badge, setBadge] = useState('');
 
-  console.log(userInfo);
+  console.log('app.js 유저인포 상태 :', userInfo);
+  console.log('app.js 상태 토큰 :', accessToken);
+
   // 로그인 성공 => 로그인 상태 true & 유저정보 저장
   const handleLogin = (token) => {
     setAccessToken(token);

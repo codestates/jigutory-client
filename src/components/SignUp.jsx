@@ -1,9 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 // import Login from './Login';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
+
+let useClickOutside = (handler) => {
+  let domNode = useRef();
+
+  useEffect(() => {
+    let windowHandler = (e) => {
+      if (!domNode.current.contains(e.target)) {
+        handler();
+      }
+    };
+    document.addEventListener('mousedown', windowHandler);
+    return () => {
+      document.removeEventListener('mousedown', windowHandler);
+    };
+  });
+
+  return domNode;
+};
 
 function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
   const history = useHistory();
@@ -133,9 +151,13 @@ function SignUp({ accessToken, openModal, closeModal, handleUserInfo }) {
     }
   };
 
+  let domNode = useClickOutside(() => {
+    closeModal();
+  });
+
   return (
     <div className="modal-container show-modal" onClick={openModal}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div ref={domNode} className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={closeModal}>
           <i className="fas fa-times"></i>
         </button>

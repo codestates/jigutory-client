@@ -44,6 +44,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
   // })
 
   const cafeKeywords = cafe.keyword.split(',');
+  const cafeType = cafe.type.split(',');
 
   return (
     <div id="cafe-toggle_container">
@@ -61,10 +62,13 @@ export const CafeInfo = ({ cafeToggleRef }) => {
             {cafeKeywords.map((keyword, idx) => (
               <li key={idx} className="keywords_keyword">{keyword}</li>
             ))}</ul>
-          <a href={cafe.link} target="_black">홈페이지로 이동</a>
-          <div>{cafe.review}</div>
-          <div>{cafe.address}</div>
-          <div>{cafe.description}</div>
+          <ul className="cafe-toggle_desc_keyword">
+            {cafeType.map((keyword, idx) => (
+              <li key={idx} className="keywords_keyword_type">{keyword}</li>
+            ))}</ul>
+          <div>주소 : {cafe.address}</div>
+          <div>전화번호 : {cafe.telephone}</div>
+          <a className="link" href={cafe.link} target="_black">{cafe.name} 홈페이지로 이동</a>
         </div>
       </div>
     </div >

@@ -14,78 +14,59 @@
     transform : none;
   }
   to {
-    transform : scale(0.98)
+    transform : scale(0.95)
   }
 }
 
-a {
-  color : inherit;
-  text-decoration: none;
-  &:hover {
-    color : $title_blue;
-    animation: scaleController .1s linear;
-  }
-}
-
-h3 {
-  margin-bottom : 5px;
+#github-logo {
+  width : 15px;
+  height : 15px;
+  margin-left : 5px;
 }
 
 .footer-container {
-  position: relative;
-  z-index: 1040;
-  font-weight: 400;
-  margin : 1rem 0;
+  border-top : 1px solid rgba(0,0,0,.1);
   display: flex;
-  justify-content: space-around;
-  section {
-    display: flex;
-    flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  font-size : 12px;
+  padding: 15px;
+  div {
+    margin-top : 8px;
+  }
+  div:nth-child(1) {
     align-items: center;
   }
-  section > a {
-    margin-top : 6px;
-    font-size :13px;
+  div:nth-child(3) {
+    color : $light-blue;
+    margin : 17px 0 17px 0;
+    font-style: italic;
+    font-size: 10px;
   }
-
-  section:nth-child(1) {
-    display : flex;
-    flex-wrap: nowrap;
-    div {
-      font-size : 11px;
-      margin: 1.5px 0;
-    }
-    .jigutory-logo {
-      width : 70px; 
-      animation : rotateLogo 5s linear infinite;
-    }
-    .footer-address-wrapper {
-      display: flex;
-      align-items: center;
-        .pin-logo {
-          margin-right : 5px;
-        }
-      div {
-        font-size : 11px;
-      }
+  .footer-header {
+    font-weight: 600;
+    text-align: center;
+    font-size : 13px;
+    a {
+      background-color: wheat;
     }
   }
-  section:nth-child(2) {
-    display : flex;
-    flex-wrap: nowrap;
-  }
-  section:nth-child(3) {
-    display : flex;
-    flex-wrap: nowrap;
-    a{
-      display: flex;
-    }
-
+  .footer-team {
+    display: flex;
+    justify-content: center;
   }
 }
 
-.github-logo {
-  width : 17px;
-  height : 17px;
-  margin-right : 5px;
+.footer-info {
+  margin : 5px;
+  border-radius: 3px;
+  padding : 3px;
+  font-size : 9px;
+  &:hover {
+  animation: scaleController .1s linear;
+  background-color: rgba(90, 116, 163, 0.5);
+  color : white;
+  font-weight: 500;
+  }
+
 }

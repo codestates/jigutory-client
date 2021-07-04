@@ -39,10 +39,10 @@ function App() {
     }
   };
 
-  const handleLogout = (token) => {
+  const handleLogout = () => {
     setIsLogin(false);
     localStorage.clear();
-    history.push('/intro');
+    // history.push('/intro');
   };
 
   const handleUserInfo = (obj) => {

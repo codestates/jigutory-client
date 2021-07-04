@@ -86,7 +86,6 @@ $border-radius : 8px;
     .fa-heart:hover {
       color: #d94e59;
       animation: HeartBeatAnimation 1s linear infinite;
-
     }
     .fa-bookmark:hover {
       color : $main-color;
@@ -94,14 +93,30 @@ $border-radius : 8px;
   }
   .cafe-toggle_desc_keyword {
     display:flex;
-    .keywords_keyword {
-      background-color: $button_blue;
+    li {
       color : white;
       padding : 6px;
       margin : 2px;
       border-radius: 12px;
       font-size : 12px;
+      font-weight: 600;
     }
+    .keywords_keyword {
+      background-color: $medium_blue;
+    }
+    .keywords_keyword_type{
+      background-color: $title-blue;
+    }
+  }
+  a {
+    font-size : 12px;
+    color : rgba(0,0,0,.5);
+    font-style: italic;
+    background-color: transparent;
+    &:hover {
+      color : $title-blue;
+    }
+
   }
 }
 

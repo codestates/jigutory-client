@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
+// import GoogleSignup from './GoogleSignup'
 import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
@@ -144,6 +145,10 @@ function Login({
             <i className="fas fa-user-plus" ></i>
             <span>회원가입</span>
           </button>
+          {/* <GoogleSignup
+            handleLogin={handleLogin}
+            handleUserInfo={handleUserInfo}
+          /> */}
         </div>
       </div>
     </div>
@@ -152,8 +157,3 @@ function Login({
 
 export default withRouter(Login);
 
-
-{/* <KaKaoLogin
-handleLogin={handleLogin}
-handleUserInfo={handleUserInfo}
-/> */}

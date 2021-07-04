@@ -71,19 +71,21 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
       </div>
       <div id="search-bar">
         <input
+          className="search-bar-input"
           value={searchInput}
           placeholder="카테고리를 선택한 후 입력하세요!"
           onChange={handleChangeInput}
           onKeyPress={handleSearchEnter}
         />
         <button onClick={handleSearchOnName}>
-          <img
+          <i className="fas fa-search" ></i>
+          {/* <img
             alt="이미지 불러오기에 실패했습니다."
             src="https://img.icons8.com/material-outlined/24/000000/search--v1.png"
-          />
+          /> */}
         </button>
       </div>
-      <hr />
+      {/* <hr /> */}
       <div id="search-result-list">
         {searchResultList?.length === 0 && '검색 결과가 없습니다.'}
         {
@@ -98,8 +100,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
               </div>
             ))
           ) : (
-            <></>
-          )
+              <></>
+            )
           // cafeList.map(({ id, name, latitude, longitude }) => (
           //     <div
           //       id="search-result-item"

@@ -7,7 +7,13 @@ import logo from '../images/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo, accessToken }) {
+function Nav({
+  isLogin,
+  handleLogout,
+  handleLogin,
+  handleUserInfo,
+  accessToken,
+}) {
   const history = useHistory();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -60,62 +66,91 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo, accessToken }
       {isLogin ? (
         <>
           <a href="#">
-            <img className="nav-logo" onClick={clickIntroPage} src={logo} width="50px" />
+            <img
+              className="nav-logo"
+              onClick={clickIntroPage}
+              alt="지구토리 로고"
+              src={logo}
+              width="50px"
+            />
+            {/* <div className="nav-title">지구토리</div> */}
           </a>
 
           <div className="buttons">
             <a href="#">
-              <button className="nav-main nav-btn" onClick={clickMainPage}>지도</button>
+              <button className="nav-main nav-btn" onClick={clickMainPage}>
+                지도
+              </button>
             </a>
             <a href="#">
-              <button className="nav-store nav-btn" onClick={clickStorePage}>상점</button>
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
+                상점
+              </button>
             </a>
             <a href="#">
-              <button className="nav-mypage nav-btn" onClick={clickMyPage}>마이 페이지</button>
+              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
+                마이 페이지
+              </button>
             </a>
             <a href="/">
-              <button className="nav-logout nav-btn hide" onClick={handleLogout}>로그아웃</button>
+              <button
+                className="nav-logout nav-btn hide"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
             </a>
           </div>
         </>
       ) : (
-          <>
+        <>
+          <a href="#">
+            <img
+              className="nav-logo"
+              onClick={clickIntroPage}
+              src={logo}
+              alt="logo"
+            />
+            {/* <div className="nav-title">지구토리</div> */}
+          </a>
+          <div className="buttons">
             <a href="#">
-              <img className="nav-logo" onClick={clickIntroPage} src={logo} alt="logo" />
+              <button className="nav-main nav-btn" onClick={clickMainPage}>
+                지도
+              </button>
             </a>
-            <div className="buttons">
-              <a href="#">
-                <button className="nav-main nav-btn" onClick={clickMainPage}>지도</button>
-              </a>
-              <a href="#">
-                <button className="nav-store nav-btn" onClick={clickStorePage}>상점</button>
-              </a>
+            <a href="#">
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
+                상점
+              </button>
+            </a>
 
-              <button className="nav-login nav-btn" onClick={handleOpenLogin}>로그인</button>
-              {isLoginOpen && (
-                <Login
-                  isLoginOpen={isLoginOpen}
-                  handleOpenLogin={handleOpenLogin}
-                  handleCloseLogin={handleCloseLogin}
-                  handleUserInfo={handleUserInfo}
-                  handleLogin={handleLogin}
-                  handleOpenSignup={handleOpenSignUp}
-                  accessToken={accessToken}
-                />
-              )}
+            <button className="nav-login nav-btn" onClick={handleOpenLogin}>
+              로그인
+            </button>
+            {isLoginOpen && (
+              <Login
+                isLoginOpen={isLoginOpen}
+                handleOpenLogin={handleOpenLogin}
+                handleCloseLogin={handleCloseLogin}
+                handleUserInfo={handleUserInfo}
+                handleLogin={handleLogin}
+                handleOpenSignup={handleOpenSignUp}
+                accessToken={accessToken}
+              />
+            )}
 
-              {/* <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>회원가입</button> */}
-              {isSignUpOpen && (
-                <SignUp
-                  openModal={handleOpenSignUp}
-                  closeModal={handleCloseSignUp}
-                  handleUserInfo={handleUserInfo}
-                  handleOpenLogin={handleOpenLogin}
-                />
-              )}
-            </div>
-          </>
-        )}
+            {isSignUpOpen && (
+              <SignUp
+                isSignUpOpen={isSignUpOpen}
+                handleOpenSignUp={handleOpenSignUp}
+                handleCloseSignUp={handleCloseSignUp}
+                handleUserInfo={handleUserInfo}
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

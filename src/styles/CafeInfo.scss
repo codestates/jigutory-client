@@ -1,24 +1,24 @@
 @import './variables';
 
-$border-radius : 8px;
+$border-radius: 8px;
 
 @keyframes ShowToggle {
   from {
     transform: translateX(100px);
-    opacity:0;
+    opacity: 0;
   }
   to {
-    transform:none;
-    opacity:1;
+    transform: none;
+    opacity: 1;
   }
 }
 
 @keyframes ScaleController {
   from {
-    transform : none;
+    transform: none;
   }
   to {
-    transform : scale(0.98)
+    transform: scale(0.98);
   }
 }
 
@@ -42,15 +42,15 @@ $border-radius : 8px;
   z-index: 100;
   top: 100px;
   right: 0px;
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: $border-radius;
-  animation : ShowToggle .7s linear;
+  animation: ShowToggle 0.7s linear;
 }
 
 #cafe-toggle_info {
   display: flex;
   flex-direction: column;
-  padding : 3.5rem;
+  padding: 3.5rem;
 }
 
 #cafe-toggle_imgbox {
@@ -58,15 +58,17 @@ $border-radius : 8px;
   justify-content: center;
   img {
     border-radius: $border-radius;
-    width : 220px;
+    width: 220px;
     height: 150px;
   }
 }
 
 #cafe-toggle_desc {
-  padding : 2rem 0 2rem 0;
-  div, a, ul {
-    margin : .8rem 0 .8rem 0;
+  padding: 2rem 0 2rem 0;
+  div,
+  a,
+  ul {
+    margin: 0.8rem 0 0.8rem 0;
   }
   div {
     font-weight: 600;
@@ -75,12 +77,13 @@ $border-radius : 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom : 17px;
+    padding-bottom: 17px;
     div {
-      font-size : 20px;
+      font-size: 20px;
     }
-    .fa-heart, .fa-bookmark {
-      margin : 0 10px 0 10px;
+    .fa-heart,
+    .fa-bookmark {
+      margin: 0 10px 0 10px;
       cursor: pointer;
     }
     .fa-heart:hover {
@@ -88,7 +91,7 @@ $border-radius : 8px;
       animation: HeartBeatAnimation 1s linear infinite;
     }
     .fa-bookmark:hover {
-      color : $main-color;
+      color: $point-color;
     }
   }
   .cafe-toggle_desc_keyword {
@@ -119,4 +122,3 @@ $border-radius : 8px;
 
   }
 }
-

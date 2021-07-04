@@ -55,6 +55,12 @@ button {
   }
 }
 
+.modal-success {
+  font-size: 18px;
+  font-weight: 500;
+  color: $title_blue;
+}
+
 .modal-header {
   padding-bottom: 20px;
 }
@@ -63,20 +69,21 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-input, button {
-  width: 270px;
-  background-color: transparent;
-  border: 0.5px solid rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  border-radius: 5px;
-}
-button {
-  margin-top : 10px;
-}
-.login-btn {
-  margin-top : 25px;
-}
+
+  input,
+  button {
+    width: 270px;
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  button {
+    margin-top: 10px;
+  }
+  .login-btn {
+    margin-top: 25px;
+  }
 
   .modal-info-title {
     width: 100%;
@@ -117,7 +124,7 @@ button {
     color: white;
   }
   .signup-btn {
-    margin-top : 25px;
+    margin-top: 25px;
   }
 }
 

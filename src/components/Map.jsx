@@ -17,14 +17,16 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   }, []);
 
   useEffect(() => {
-    const latLng = center
-      ? new window.kakao.maps.LatLng(center.lat, center.lng)
-      : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
-    const options = {
-      center: latLng,
-      level: 3,
-    };
-    setMap(new window.kakao.maps.Map(containerRef.current, options));
+    if (center) {
+      const latLng = center
+        ? new window.kakao.maps.LatLng(center.lat, center.lng)
+        : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
+      const options = {
+        center: latLng,
+        level: 3,
+      };
+      setMap(new window.kakao.maps.Map(containerRef.current, options));
+    }
   }, [center]);
 
   useEffect(() => {
@@ -72,5 +74,5 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
     <div id="map-container">
       <div id="map" ref={containerRef}></div>
     </div>
-  )
+  );
 };

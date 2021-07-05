@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import '../styles/EditUser.scss';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 // 회원정보 수정 클릭하면 바로 비밀번호 확인부터 뜸
 
@@ -8,7 +9,7 @@ const EditUser = ({ accessToken, userInfo }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [imgFile, setImgFile] = useState('');
-  const [imgUrl, setImgUrl] = useState('');
+  const [imgUrl, setImgUrl] = useState('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); // 현재 비밀번호 확인할 때
   const [newPassword, setNewPassword] = useState('');
@@ -46,17 +47,35 @@ const EditUser = ({ accessToken, userInfo }) => {
     }
   }
 
-  // const usernameRequestHandler = () => {
+  const usernameRequestHandler = () => {
+    axios.patch('http://localhost:4000/user/useredit',
+      { username },
+      {
+        header: {
+          authorization: accessToken,
+          "Content-Type": "application/json",
+        },
+      }).then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 
-  // }
+  const newPasswordRequestHandler = () => {
+    axios.patch('http://localhost:4000/user/passwordedit',
+      { newPassword },
+      {
+        header: {
+          authorization: accessToken,
+          "Content-Type": "application/json",
+        },
+      }).then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 
-  // const passwordRequestHandler = () => {
+  const withdrawRequestHandler = () => {
+    axios.delete('http://localhost:4000/user/withdraw', {
 
-  // }
-
-  // const usernameRequestHandler = () => {
-
-  // }
+    })
+  }
 
   useEffect(() => {
     axios.get('http://localhost:4000/user/userinfo', {
@@ -64,7 +83,6 @@ const EditUser = ({ accessToken, userInfo }) => {
         authorization: accessToken,
         "Content-Type": "application/json",
       },
-      withCredentials: true,
     })
       .then((res) => {
         console.log('edituser :', res)

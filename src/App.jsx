@@ -13,6 +13,7 @@ import Main from './pages/Main';
 import Mypage from './pages/Mypage';
 import Store from './pages/Store';
 import Cart from './pages/Cart';
+import EditUser from './pages/EditUser';
 
 function App() {
   const history = useHistory();
@@ -78,7 +79,10 @@ function App() {
             <Route path="/" exact={true} component={Intro} />
             <Route path="/intro" exact={true} component={Intro} />
             <Route path="/main" exact={true} component={Main} />
-            <Route path="/mypage" exact={true} component={Mypage} />
+            <Route path="/mypage" exact={true} render={() => (
+              <Mypage accessToken={accessToken} userInfo={userInfo} level={level} badge={badge} />)} />
+            <Route path="/edituser" exact={true} render={() => (
+              <EditUser accessToken={accessToken} userInfo={userInfo} />)} />
             <Route path="/cart" exact={true} component={Cart} />
             <Route path="/store" exact={true} component={Store} />
           </div>

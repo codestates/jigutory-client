@@ -43,11 +43,11 @@ export const CafeInfo = ({ cafeToggleRef }) => {
 
   return (
     <div id="cafe-toggle_container" ref={domNode}>
+      <button className="cafe-toggle-close" onClick={handleCloseToggle}><i className="fas fa-times"></i></button>
       <div id="cafe-toggle_info">
         <div id="cafe-toggle_imgbox">
           <img src={cafe.image} alt="이미지" />
         </div>
-        <div onClick={handleCloseToggle}>close</div>
         <div id="cafe-toggle_desc">
           <div className="cafe-toggle_desc_title">
             <div>{cafe.name}</div>
@@ -56,17 +56,21 @@ export const CafeInfo = ({ cafeToggleRef }) => {
               <i className="fas fa-bookmark"></i>
             </div>
           </div>
-          <ul className="cafe-toggle_desc_keyword">
-            {cafeKeywords.map((keyword, idx) => (
-              <li key={idx} className="keywords_keyword">{keyword}</li>
-            ))}</ul>
-          <ul className="cafe-toggle_desc_keyword">
-            {cafeType.map((keyword, idx) => (
-              <li key={idx} className="keywords_keyword_type">{keyword}</li>
-            ))}</ul>
-          <div>주소 : {cafe.address}</div>
-          <div>전화번호 : {cafe.telephone}</div>
-          <a className="link" href={cafe.link} target="_black">{cafe.name} 홈페이지로 이동</a>
+          <div className="cafe-toggle_keywordbox">
+            <ul className="cafe-toggle_desc_keyword">
+              {cafeKeywords.map((keyword, idx) => (
+                <li key={idx} className="keywords_keyword">{keyword}</li>
+              ))}</ul>
+            <ul className="cafe-toggle_desc_keyword">
+              {cafeType.map((keyword, idx) => (
+                <li key={idx} className="keywords_keyword_type">{keyword}</li>
+              ))}</ul>
+          </div>
+          <div className="cafe-toggle_contactbox">
+            <div><i className="fas fa-map-marker-alt"></i> {cafe.address}</div>
+            <div><i className="fas fa-phone-alt"></i> {cafe.telephone}</div>
+          </div>
+          <a className="cafe-toggle_link" href={cafe.link} target="_black"><i className="fas fa-home"></i> {cafe.name} 홈페이지</a>
         </div>
       </div>
     </div>

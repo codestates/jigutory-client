@@ -14,7 +14,6 @@ button {
 }
 
 .modal-container {
-  // position:fixed;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   opacity: 0;
@@ -44,6 +43,12 @@ button {
   animation: fadeIn 0.2s ease-in-out;
 }
 
+.modal-success {
+  font-size: 18px;
+  font-weight: 500;
+  color: $title_blue;
+}
+
 .modal-close {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
@@ -55,12 +60,6 @@ button {
   }
 }
 
-.modal-success {
-  font-size: 18px;
-  font-weight: 500;
-  color: $title_blue;
-}
-
 .modal-header {
   padding-bottom: 20px;
 }
@@ -69,21 +68,6 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  input,
-  button {
-    width: 270px;
-    background-color: transparent;
-    border: 0.5px solid rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 5px;
-  }
-  button {
-    margin-top: 10px;
-  }
-  .login-btn {
-    margin-top: 25px;
-  }
 
   .modal-info-title {
     width: 100%;
@@ -102,6 +86,15 @@ button {
     color: $error_red;
   }
 
+  input,
+  button {
+    width: 270px;
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
   input:focus {
     background-color: rgba(255, 255, 255, 0.5);
     border: none;
@@ -111,18 +104,27 @@ button {
     transition: background-color 0.4s ease-in-out;
   }
 
-  button:hover {
-    font-weight: 700;
-    background-color: $button_blue;
-    color: white;
-    border: none;
-    transition: background-color 0.1s ease-in-out;
+  button {
+    margin-top: 10px;
+
+    &:hover {
+      font-weight: 700;
+      background-color: $button_blue;
+      color: white;
+      border: none;
+      transition: background-color 0.1s ease-in-out;
+    }
+  }
+
+  .login-btn {
+    margin-top: 25px;
   }
 
   .google-btn:hover {
     background-color: #cc3731;
     color: white;
   }
+
   .signup-btn {
     margin-top: 25px;
   }

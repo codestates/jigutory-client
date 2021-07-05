@@ -26,7 +26,7 @@
   height: 3rem;
   margin: 1rem;
   cursor: pointer;
-  animation : RotateLogo 5s linear infinite;
+  animation: RotateLogo 5s linear infinite;
 }
 
 .nav-title {
@@ -35,19 +35,19 @@
 }
 
 .nav-btn {
-  width: 80px;
+  width: 90px;
   height: 90px;
   font-size: 15px;
   font-weight: 700;
   background-color: white;
   cursor: pointer;
-}
 
-.nav-btn:hover {
-  background-color: $light_blue;
-  color: white;
-}
+  &:hover {
+    background-color: $light_blue;
+    color: white;
+  }
 
-.nav-btn:focus {
-  color: $point-color;
+  &:focus {
+    color: $point-color;
+  }
 }

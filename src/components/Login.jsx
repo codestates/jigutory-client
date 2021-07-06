@@ -41,7 +41,7 @@ function Login({
     }
   };
 
-  const handleLoginRequest = async (e) => {
+  const handleLoginRequest = (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
     if (!email) {
@@ -54,7 +54,7 @@ function Login({
 
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      await axios
+      axios
         .post(
           'http://localhost:4000/auth/signin',
           { email: email, password: password },
@@ -132,11 +132,11 @@ function Login({
           {!errorMessage ? (
             ''
           ) : (
-              <div className="modal-alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {errorMessage}
-              </div>
-            )}
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {errorMessage}
+            </div>
+          )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>

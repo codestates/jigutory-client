@@ -7,10 +7,14 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
   const [searchInput, setSearchInput] = useState('');
   const [searchResultList, setSearchResultList] = useState();
   const [category, setCategory] = useState();
-  const [categoryInput, setCategoryInput] = useState('카테고리를 선택한 후 검색어를 입력하세요!');
+  const [categoryInput, setCategoryInput] = useState(
+    '카테고리를 선택한 후 검색어를 입력하세요!',
+  );
 
   const fetchCafeList = async () => {
-    const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');
+    const cafeListResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}/cafe/list`,
+    );
     setCafeList(cafeListResponse.data);
   };
 
@@ -53,18 +57,16 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
       type.includes(searchInput),
     );
     setSearchResultList([...findOnType]);
-  }
+  };
 
   const handleSearchOnEtc = () => {
     if (!searchInput) {
       setSearchResultList();
       return;
     }
-    const findOnEtc = cafeList.filter(({ etc }) =>
-      etc.includes(searchInput),
-    );
+    const findOnEtc = cafeList.filter(({ etc }) => etc.includes(searchInput));
     setSearchResultList([...findOnEtc]);
-  }
+  };
 
   const handleSearch = () => {
     if (category === '카페명') {
@@ -73,11 +75,9 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     } else if (category === '할인금액') {
       console.log('category:', '할인금액');
       handleSearchOnKeyword();
-    }
-    else if (category === '가게분류') {
+    } else if (category === '가게분류') {
       handleSearchOnType();
-    }
-    else {
+    } else {
       handleSearchOnEtc();
     }
   };
@@ -136,7 +136,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
         <button
           id="search-category-name"
           style={{
-            backgroundColor: category === '카페명' && 'rgba(8, 70, 99, 0.6)', color: category === '카페명' && 'rgba(255, 255, 255)'
+            backgroundColor: category === '카페명' && 'rgba(8, 70, 99, 0.6)',
+            color: category === '카페명' && 'rgba(255, 255, 255)',
           }}
           onClick={handleClickNameCategory}
         >
@@ -145,7 +146,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
         <button
           id="search-category-keyword"
           style={{
-            backgroundColor: category === '할인금액' && 'rgba(8, 70, 99, 0.6)', color: category === '할인금액' && 'rgba(255, 255, 255)'
+            backgroundColor: category === '할인금액' && 'rgba(8, 70, 99, 0.6)',
+            color: category === '할인금액' && 'rgba(255, 255, 255)',
           }}
           onClick={handleClickKeywordCategory}
         >
@@ -154,7 +156,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
         <button
           id="search-category-keyword"
           style={{
-            backgroundColor: category === '가게분류' && 'rgba(8, 70, 99, 0.6)', color: category === '가게분류' && 'rgba(255, 255, 255)'
+            backgroundColor: category === '가게분류' && 'rgba(8, 70, 99, 0.6)',
+            color: category === '가게분류' && 'rgba(255, 255, 255)',
           }}
           onClick={handleClickTypeCategory}
         >
@@ -163,7 +166,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
         <button
           id="search-category-keyword"
           style={{
-            backgroundColor: category === '기타' && 'rgba(8, 70, 99, 0.6)', color: category === '기타' && 'rgba(255, 255, 255)'
+            backgroundColor: category === '기타' && 'rgba(8, 70, 99, 0.6)',
+            color: category === '기타' && 'rgba(255, 255, 255)',
           }}
           onClick={handleClickEtcCategory}
         >
@@ -179,7 +183,9 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
           onKeyPress={handleSearchEnter}
           disabled={!category}
         />
-        <button onClick={handleSearch}><i className="fas fa-search" ></i></button>
+        <button onClick={handleSearch}>
+          <i className="fas fa-search"></i>
+        </button>
       </div>
       <div id="search-result-list">
         {searchResultList?.length === 0 && '검색 결과가 없습니다.'}
@@ -194,8 +200,8 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
             </div>
           ))
         ) : (
-            <></>
-          )}
+          <></>
+        )}
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
 
   const cafeKeywords = cafe.keyword.split(',');
   const cafeType = cafe.type.split(',');
+  const cafeEtc = cafe.etc.split(',');
 
   return (
     <div id="cafe-toggle_container" ref={domNode}>
@@ -65,6 +66,10 @@ export const CafeInfo = ({ cafeToggleRef }) => {
               {cafeType.map((keyword, idx) => (
                 <li key={idx} className="keywords_keyword_type">{keyword}</li>
               ))}</ul>
+            {/* <ul className="cafe-toggle_desc_keyword">
+              {cafeEtc.map((keyword, idx) => (
+                <li key={idx} className="keywords_keyword_type">{keyword}</li>
+              ))}</ul> */}
           </div>
           <div className="cafe-toggle_contactbox">
             <div><i className="fas fa-map-marker-alt"></i> {cafe.address}</div>

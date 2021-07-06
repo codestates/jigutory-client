@@ -6,7 +6,7 @@
     justify-content: center;
   }
   #edituser_container {
-    width : 40rem;
+    width : 100%;
     margin : 3rem 0 3rem 0;
     padding : 1rem 0 1rem 0;
     display:flex;
@@ -14,8 +14,7 @@
     align-items: center;
     div {
       display: flex;
-      width : 60%;
-      justify-content: space-between;
+      // width : 60%;
       margin : 13px;
       input {
         background-color: rgba(0, 0, 0, .1);
@@ -31,6 +30,8 @@
       width : 150px;
       height : 150px;
       margin : 1.5rem 0 1.5rem 0;
+    }
+    #edituser_email {
     }
   }
 }
@@ -64,6 +65,5 @@
     background-color: $light-blue;
     transition : background-color .1s ease-in-out;
   }
-
 }
 

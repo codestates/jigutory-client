@@ -112,27 +112,33 @@ const EditUser = ({ accessToken, isLoggedOut, handleUserInfo }) => {
       .catch(err => console.log(err));
   }
 
+
   useEffect(async () => {
-    await axios.get('http://localhost:4000/user/userinfo', {
-      headers: {
-        authorization: accessToken,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log('edituser :', res)
-        setUsername(res.data.username);
-        setEmail(res.data.email);
-        setImgUrl(res.data.profileImage);
-        setPassword(res.data.password);
-        handleUserInfo({
-          username: res.data.username,
-          email: res.data.email,
-          imgUrl: res.data.profileImage
-        })
+    if (accessToken) {
+      axios.get('http://localhost:4000/user/userinfo', {
+        headers: {
+          authorization: accessToken,
+          "Content-Type": "application/json",
+        },
       })
-      .catch(err => console.log(err))
+        .then((res) => {
+          console.log('edituser :', res)
+          setUsername(res.data.username);
+          setEmail(res.data.email);
+          setImgUrl(res.data.profileImage);
+          setPassword(res.data.password);
+          handleUserInfo({
+            username: res.data.username,
+            email: res.data.email,
+            imgUrl: res.data.profileImage
+          })
+        })
+        .catch(err => console.log(err))
+    }
   }, [setUsername, setEmail, setImgUrl, setPassword])
+
+
+
 
   return (
     <div id="edituser_page">

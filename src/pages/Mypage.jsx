@@ -1,12 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import EditUser from './EditUser';
 
 import '../styles/Mypage.scss';
 
 function Mypage() {
+  const history = useHistory();
+
   return (
     <div className="mypage-container">
       <div className="mypage-container-top">
@@ -17,7 +17,8 @@ function Mypage() {
           <div className="mypage-userinfo-right">
             <div className="mypage-userinfo-name">Lv 10 지구토리</div>
             <div className="mypage-userinfo-point">포인트</div>
-            <button className="mypage-userinfo-edit">회원정보 수정</button>
+            <button className="mypage-userinfo-edit" onClick={() => { history.push('/edituser') }}>회원정보 수정</button>
+
             <button className="mypage-userinfo-withdraw">회원탈퇴</button>
           </div>
         </div>

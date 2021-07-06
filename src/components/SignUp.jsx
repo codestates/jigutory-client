@@ -104,13 +104,13 @@ function SignUp({
     }
   };
 
-  const handleSignUpRequest = () => {
+  const handleSignUpRequest = async () => {
     const validUsername = validateUsername(username);
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password, passwordCheck);
 
     if (validUsername & validEmail && validPassword) {
-      axios
+      await axios
         .post(
           'http://localhost:4000/auth/signup',
           { username: username, email: email, password: password },

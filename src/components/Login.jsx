@@ -41,7 +41,7 @@ function Login({
     }
   };
 
-  const handleLoginRequest = (e) => {
+  const handleLoginRequest = async (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
     if (!email) {
@@ -54,7 +54,7 @@ function Login({
 
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios
+      await axios
         .post(
           'http://localhost:4000/auth/signin',
           { email: email, password: password },
@@ -73,7 +73,7 @@ function Login({
               authorization: res.data.data.accessToken,
             },
           }).then(res => {
-            handleUserInfo(res.data)
+            // handleUserInfo(res.data)
             handleUserInfo({
               username: res.data.username,
               email: res.data.email

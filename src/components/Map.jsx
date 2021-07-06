@@ -73,22 +73,22 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
 
         window.kakao.maps.event.addListener(
           marker,
-          'mouseout',
-          (function () {
-            return function () {
-              infoWindow.close();
-            };
-          })(infoWindow),
-        );
-
-        window.kakao.maps.event.addListener(
-          marker,
           'click',
           (function () {
             return function () {
               infoWindow.open(map, marker);
             };
           })(map, marker, infoWindow),
+        );
+
+        window.kakao.maps.event.addListener(
+          marker,
+          'mouseout',
+          (function () {
+            return function () {
+              infoWindow.close();
+            };
+          })(infoWindow),
         );
 
         window.kakao.maps.event.addListener(marker, 'click', function () {

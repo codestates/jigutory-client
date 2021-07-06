@@ -1,39 +1,53 @@
 @import './_variables.scss';
 
-* {
-  margin: 0;
-  box-sizing: border-box;
+@keyframes RotateLogo {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
 }
 
 .nav {
-  width: 11.7rem;
-  height: 100%;
-  display: block;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 90px;
+  z-index: 1050;
+  background-color: rgb(255, 255, 255);
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  border-right: 1.5px solid rgb(0, 0, 0);
 }
 
 .nav-logo {
-  width: 4rem;
-  height: 4rem;
-  margin: 1.5rem 0 1rem 0;
+  width: 3rem;
+  height: 3rem;
+  margin: 1rem;
   cursor: pointer;
+  animation: RotateLogo 5s linear infinite;
+}
+
+.nav-title {
+  position: absolute;
+  font-size: 20px;
 }
 
 .nav-btn {
-  border: none;
-  width: 7.7rem;
-  height: 3rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(20, 20, 22, 0.11), 0 1px 2px rgba(11, 11, 11, 0.08);
+  width: 110px;
+  height: 90px;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: white;
   cursor: pointer;
-  margin: 1rem 2rem 1.5rem 2rem;
-}
 
-.nav-btn:hover {
+  &:hover {
+    background-color: $light_blue;
+    color: white;
+  }
+
+  &:focus {
+    color: $point-color;
+  }
 }

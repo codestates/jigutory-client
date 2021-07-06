@@ -1,0 +1,76 @@
+@import './_variables.scss';
+
+@keyframes rotateLogo {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes scaleController {
+  from {
+    transform : none;
+  }
+  to {
+    transform : scale(0.95)
+  }
+}
+
+.fa-github, 
+.fa-globe-asia {
+  width : 15px;
+  height : 15px;
+  margin-left : 5px;
+}
+
+.footer-container {
+  color : $medium-blue;
+  border-top : 1px solid rgba(0,0,0,.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size : 12px;
+  padding: 15px;
+  div {
+    margin-top : 8px;
+  }
+  div:nth-child(1) {
+    align-items: center;
+  }
+
+  div:nth-child(3) {
+    color : $light-blue;
+    margin : 17px 0 17px 0;
+    font-style: italic;
+    font-size: 10px;
+  }
+  .footer-header {
+    font-weight: 600;
+    text-align: center;
+    font-size : 13px;
+    color : $title-blue;
+    a {
+      background-color: wheat;
+    }
+  }
+  .footer-team {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.footer-info {
+  margin : 5px;
+  border-radius: 3px;
+  padding : 3px;
+  font-size : 9px;
+  &:hover {
+  animation: scaleController .1s linear;
+  background-color: rgba(90, 116, 163, 0.5);
+  color : white;
+  font-weight: 500;
+  }
+
+}

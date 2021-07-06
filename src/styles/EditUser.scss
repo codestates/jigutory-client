@@ -1,0 +1,69 @@
+@import './variables';
+
+#edituser_page {
+  div {
+    display: flex;
+    justify-content: center;
+  }
+  #edituser_container {
+    width : 100%;
+    margin : 3rem 0 3rem 0;
+    padding : 1rem 0 1rem 0;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    div {
+      display: flex;
+      // width : 60%;
+      margin : 13px;
+      input {
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+    #edituser_withdrawal {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .edituser_profile_preview {
+      border: 3px solid rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width : 150px;
+      height : 150px;
+      margin : 1.5rem 0 1.5rem 0;
+    }
+    #edituser_email {
+    }
+  }
+}
+
+#edituser_img {
+  .edit_user_fileupload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 1;
+    overflow: hidden;
+    position: absolute; 
+    z-index: -1;
+    cursor: pointer;
+  }
+  
+  .file_label {
+    display: flex;
+    margin-top : 5px;
+    font-size: .8rem;
+    color: white;
+    background-color: $medium-blue;
+    cursor: pointer;
+    padding : 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .file_label:hover {
+    background-color: $light-blue;
+    transition : background-color .1s ease-in-out;
+  }
+}
+

@@ -1,24 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
-// import KaKaoLogin from './KakaoLogIn';
+// import GoogleSignup from './GoogleSignup'
+import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
-// nav 컴포넌트에서 props 가져올 것
-const Login = ({
+function Login({
   handleLogin,
   accessToken,
-  openModal,
-  closeModal,
+  handleOpenLogin,
+  handleCloseLogin,
   handleUserInfo,
-}) => {
+  handleOpenSignup,
+  isLoginOpen,
+}) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  //const [successMessage, setSuccessMessage] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -26,17 +28,11 @@ const Login = ({
   const handleEmail = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
-    if (e.target.value !== email) {
-      setErrorMessage('이메일을 확인해 주세요.');
-    }
   };
 
   const handlePassword = (e) => {
     e.preventDefault();
     setPassword(e.target.value);
-    if (e.target.value !== password) {
-      setErrorMessage('비밀번호를 확인해 주세요.');
-    }
   };
 
   const onKeyPress = (e) => {
@@ -60,7 +56,7 @@ const Login = ({
     if (email && password) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/auth/login`,
+          `${process.env.REACT_APP_API_URL}/auth/signin`,
           { email: email, password: password },
           {
             headers: {
@@ -71,27 +67,50 @@ const Login = ({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
-          // handleUserInfo({})
+          axios
+            .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
+              headers: {
+                'Content-Type': 'application/json',
+                authorization: res.data.data.accessToken,
+              },
+            })
+            .then((res) => {
+              handleUserInfo(res.data);
+              handleUserInfo({
+                username: res.data.username,
+                email: res.data.email,
+              });
+            });
           return res;
         })
         .then((res) => {
           console.log('res.data :', res.data);
           localStorage.setItem('accessToken', res.data.data.accessToken);
-          setSuccessMessage('로그인에 성공하였습니다.');
+          //setSuccessMessage('로그인에 성공하였습니다.');
           history.push('/intro');
         })
         .catch((err) => console.log(err));
     }
   };
 
+  const moveToSignUp = () => {
+    handleCloseLogin();
+    handleOpenSignup();
+  };
+
+  let domNode = useClickOutside(() => {
+    handleCloseLogin();
+  });
+
   return (
-    <div div className="modal-container show-modal" onClick={openModal}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="close" onClick={closeModal}>
-          <i className="fas fa-times"></i>
+    <div className="modal-container show-modal" onClick={handleOpenLogin}>
+      <div ref={domNode} className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={handleCloseLogin}>
+          <i className="fas fa-times fa-lg"></i>
         </button>
         <h2 className="modal-header">로그인</h2>
         <div className="modal-info">
+          <div className="modal-info-title">이메일</div>
           <input
             autoFocus
             type="email"
@@ -100,6 +119,9 @@ const Login = ({
             onKeyPress={onKeyPress}
             ref={emailRef}
           />
+
+          <div className="modal-info-title">비밀번호</div>
+
           <input
             type="password"
             placeholder="비밀번호"
@@ -107,6 +129,14 @@ const Login = ({
             onKeyPress={onKeyPress}
             ref={passwordRef}
           />
+          {!errorMessage ? (
+            ''
+          ) : (
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {errorMessage}
+            </div>
+          )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>
@@ -115,35 +145,20 @@ const Login = ({
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}
             />
-            {/* <KaKaoLogin
-              handleLogin={handleLogin}
-              handleUserInfo={handleUserInfo}
-            /> */}
           </div>
-          {!errorMessage ? (
-            ''
-          ) : (
-            <div className="alert-box">
-              <i className="fas fa-exclamation-circle"></i>
-              {errorMessage}
-            </div>
-          )}
+
+          <button className="move_signup-btn" onClick={moveToSignUp}>
+            <i className="fas fa-user-plus"></i>
+            <span>회원가입</span>
+          </button>
+          {/* <GoogleSignup
+            handleLogin={handleLogin}
+            handleUserInfo={handleUserInfo}
+          /> */}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default withRouter(Login);
-
-// const clickSignUp = () => {
-//   history.push('/signup')
-//   console.log('회원가입으로 이동')
-// }
-
-{
-  /* <div>
-  아직 지구토리의 회원이 아니라면<i class="fas fa-globe-asia"></i>
-  <button onClick={clickSignUp}>회원가입</button>
-</div> */
-}

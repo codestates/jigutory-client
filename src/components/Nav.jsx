@@ -3,11 +3,17 @@ import { withRouter, useHistory } from 'react-router-dom';
 import Login from './Login';
 import SignUp from './SignUp';
 import axios from 'axios';
-import logo from '../image/jigu-logo.png';
+import logo from '../images/jigu-logo.png';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
-function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
+function Nav({
+  isLogin,
+  handleLogout,
+  handleLogin,
+  handleUserInfo,
+  accessToken,
+}) {
   const history = useHistory();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
@@ -25,7 +31,7 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
 
   const handleOpenSignUp = () => {
     setIsSignUpOpen(true);
-    setIsLoginOpen(false); // 수정함
+    setIsLoginOpen(false);
     console.log('회원가입 모달창 열기');
   };
 
@@ -63,27 +69,27 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
             <img
               className="nav-logo"
               onClick={clickIntroPage}
+              alt="지구토리 로고"
               src={logo}
               width="50px"
             />
+            {/* <div className="nav-title">지구토리</div> */}
           </a>
+
           <div className="buttons">
             <a href="#">
               <button className="nav-main nav-btn" onClick={clickMainPage}>
-                {' '}
-                메인{' '}
+                지도
               </button>
             </a>
             <a href="#">
               <button className="nav-store nav-btn" onClick={clickStorePage}>
-                {' '}
-                상점{' '}
+                상점
               </button>
             </a>
             <a href="#">
               <button className="nav-mypage nav-btn" onClick={clickMyPage}>
-                {' '}
-                마이{' '}
+                마이 페이지
               </button>
             </a>
             <a href="/">
@@ -105,48 +111,46 @@ function Nav({ isLogin, handleLogout, handleLogin, handleUserInfo }) {
               src={logo}
               alt="logo"
             />
+            {/* <div className="nav-title">지구토리</div> */}
           </a>
           <div className="buttons">
             <a href="#">
               <button className="nav-main nav-btn" onClick={clickMainPage}>
-                {' '}
-                메인{' '}
+                지도
               </button>
             </a>
             <a href="#">
               <button className="nav-store nav-btn" onClick={clickStorePage}>
-                {' '}
-                상점{' '}
+                상점
               </button>
             </a>
             <a href="#">
-              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
-                {' '}
-                마이{' '}
+              <button className="nav-store nav-btn" onClick={clickStorePage}>
+                상점
               </button>
             </a>
+
             <button className="nav-login nav-btn" onClick={handleOpenLogin}>
               로그인
             </button>
             {isLoginOpen && (
               <Login
-                openModal={handleOpenLogin}
-                closeModal={handleCloseLogin}
+                isLoginOpen={isLoginOpen}
+                handleOpenLogin={handleOpenLogin}
+                handleCloseLogin={handleCloseLogin}
                 handleUserInfo={handleUserInfo}
                 handleLogin={handleLogin}
                 handleOpenSignup={handleOpenSignUp}
+                accessToken={accessToken}
               />
             )}
 
-            <button className="nav-signup nav-btn" onClick={handleOpenSignUp}>
-              회원가입
-            </button>
             {isSignUpOpen && (
               <SignUp
-                openModal={handleOpenSignUp}
-                closeModal={handleCloseSignUp}
+                isSignUpOpen={isSignUpOpen}
+                handleOpenSignUp={handleOpenSignUp}
+                handleCloseSignUp={handleCloseSignUp}
                 handleUserInfo={handleUserInfo}
-                handleOpenLogin={handleOpenLogin}
               />
             )}
           </div>

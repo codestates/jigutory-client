@@ -1,0 +1,90 @@
+.mypage-container {
+  height: 100vh;
+  padding: 20px;
+}
+.mypage-container-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .mypage-userinfo {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    height: 300px;
+    margin: 25px;
+
+    .mypage-userinfo-left {
+      display: flex;
+      width: 200px;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mypage-userinfo-right {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+      border: 1px solid black;
+      justify-content: center;
+
+      div,
+      button {
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+      }
+    }
+  }
+
+  .mypage-eco {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 300px;
+    border: 1px solid black;
+    justify-content: center;
+    margin: 25px;
+
+    div,
+    button {
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+    }
+  }
+}
+
+.mypage-container-bottom {
+  display: flex;
+  justify-content: center;
+
+  .mypage-badge {
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 30px;
+
+    .mypage-badge-title {
+      display: flex;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 13px 0 13px 15px;
+    }
+
+    .mypage-badge-list {
+      display: flex;
+      height: 150px;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+
+      div {
+        padding: 50px;
+      }
+    }
+  }
+}

@@ -44,16 +44,16 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     setSearchResultList([...findOnKeyword]);
   };
 
-  const handleSearchOnType = () => {
-    if (!searchInput) {
-      setSearchResultList();
-      return;
-    }
-    const findOnType = cafeList.filter(({ type }) =>
-      type.includes(searchInput),
-    );
-    setSearchResultList([...findOnType]);
-  }
+  // const handleSearchOnType = () => {
+  //   if (!searchInput) {
+  //     setSearchResultList();
+  //     return;
+  //   }
+  //   const findOnType = cafeList.filter(({ type }) =>
+  //     type.includes(searchInput),
+  //   );
+  //   setSearchResultList([...findOnType]);
+  // }
 
   const handleSearch = () => {
     if (category === '카페명') {
@@ -62,9 +62,10 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     } else if (category === '할인금액') {
       console.log('category:', '할인금액');
       handleSearchOnKeyword();
-    } else if (category === '가게분류') {
-      handleSearchOnType();
     }
+    // else if (category === '가게분류') {
+    //   handleSearchOnType();
+    // }
   };
 
   const handleSearchEnter = (event) => {
@@ -83,10 +84,10 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     setCategoryInput('할인금액 입력하세요.');
   };
 
-  const handleClickTypeCategory = () => {
-    setCategory('가게분류');
-    setCategoryInput('가게분류 입력하세요.');
-  };
+  // const handleClickTypeCategory = () => {
+  //   setCategory('가게분류');
+  //   setCategoryInput('가게분류 입력하세요.');
+  // };
 
   useEffect(() => {
     fetchCafeList();
@@ -101,10 +102,10 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
     });
   }, [cafeList, markerManageRef]);
 
-  function handleChooseTag(e) {
-    e.preventDefault();
-    setCategoryInput(e.target.value);
-  }
+  // function handleChooseTag(e) {
+  //   e.preventDefault();
+  //   setCategoryInput(e.target.value);
+  // }
 
   // 인풋 초기화 함수
   // function handleReset() {
@@ -116,16 +117,16 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
   return (
     <div id="search">
       <div id="search-category">
-        <select onClick={handleChooseTag}>
-          <option value="">카테고리를 선택하세요</option>
+        {/* <select onClick={handleChooseTag}>
+          <option value="">전체</option>
           <option onChange={handleClickNameCategory} value={categoryInput}>카페명</option>
           <option onChange={handleClickKeywordCategory} value="1">할인금액</option>
           <option onChange={handleClickTypeCategory} value="2">가게분류</option>
-        </select>
-        {/* <button
+        </select> */}
+        <button
           id="search-category-name"
           style={{
-            backgroundColor: category === '카페명' && 'rgba(8, 70, 99, 0.7)',
+            backgroundColor: category === '카페명' && 'rgba(8, 70, 99, 0.7)', color: category === '카페명' && 'rgba(255, 255, 255)'
           }}
           onClick={handleClickNameCategory}
         >
@@ -134,12 +135,12 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
         <button
           id="search-category-keyword"
           style={{
-            backgroundColor: category === '키워드' && 'rgba(8, 70, 99, 0.7)',
+            backgroundColor: category === '할인금액' && 'rgba(8, 70, 99, 0.5)', color: category === '할인금액' && 'rgba(255, 255, 255)'
           }}
           onClick={handleClickKeywordCategory}
         >
-          키워드
-        </button> */}
+          할인금액
+        </button>
       </div>
       <div id="search-bar">
         <input

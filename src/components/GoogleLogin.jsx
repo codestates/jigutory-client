@@ -13,6 +13,8 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 
 
   const responseGoogle = (res) => {
+    console.log('google res : ', res)
+
     const token = res.accessToken;
     const email = res.profileObj.email;
     const username = res.profileObj.givenName;
@@ -22,21 +24,21 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     handleUserInfo({ username, email, imgUrl });
     localStorage.setItem('Google-accessToken', token);
 
-    // axios
-    //   .post(
-    //     `http://localhost:4000/auth/googlesignin`,
-    //     { token, email, username, imgUrl },
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         authorization: token,
-    //       },
-    //     },
-    //   )
-    //   .then((res) => {
-    //     console.log('google axios res : ', res);
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .post(
+        `http://localhost:4000/auth/googlesignin`,
+        { username, email, profileImage: imgUrl },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            authorization: token,
+          },
+        },
+      )
+      .then((res) => {
+        console.log('google axios res : ', res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -55,9 +57,9 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
               </span>
             </button>
           )}
+          responseType={"id_token"}
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
         />
       }
     </div>

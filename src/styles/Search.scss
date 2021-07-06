@@ -1,68 +1,90 @@
 @import './_variables.scss';
 
+@keyframes OpenList {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #search {
-  font-size : 13px;
+  font-size: 13px;
   position: absolute;
-  left : 450px;
+  left: 0;
   z-index: 900;
   padding: 5px;
-  border-radius: 15px;
-  background-color: white;
 }
 
 #search-category {
+  background-color: rgba(255, 255, 255, 0.9);
   button {
-    font-size: 12px;
+    font-size: 11px;
     padding: 4px;
-    margin : 3px;
-    border-radius: 15px;
+    margin: 3px 3px 2px 3px;
+    border-radius: 2px;
+    background-color: transparent;
+    font-weight: 600;
+    box-shadow: 2px 2px 2px $button-blue;
+    transition-duration: 0.2s;
+
+    &:active {
+      margin-left: 2px;
+      margin-top: 2px;
+      box-shadow: none;
+    }
   }
 }
 
 #search-bar {
   display: flex;
   flex-direction: row;
+
   input {
+    background-color: rgba(255, 255, 255, 0.9);
     width: 250px;
-    padding : 13px 8px 13px 8px;
-    font-size: 13px;
-    border-radius: 20px;
-    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2), 0 5px 2px rgba(11, 11, 11, 0.08);
+    padding: 11px 8px 11px 8px;
+    font-size: 14px;
+    border-radius: 2px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2), 0 5px 2px rgba(11, 11, 11, 0.08);
+
+    &::placeholder {
+      color: $medium-blue-text;
+      font-size: 13px;
+      padding-left: 3px;
+    }
   }
-  input::placeholder {
-    color : $medium-blue-text;
-    font-size : 12px;
-    padding-left : 3px;
-  }
-  //  input:focus, input:active {
-  //    border : 2px solid black;
-  //  }
 
   button {
-    position : absolute;
-    right : 11px;
-    top : 47px;
+    position: absolute;
+    right: 11px;
+    top: 47px;
     background-color: transparent;
-    color : rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
   }
 }
 
 #search-result-list {
   display: flex;
   flex-direction: column;
-
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 5px;
 }
 
 #search-result-item {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
   cursor: pointer;
+  animation: OpenList 0.1s linear;
+  &:hover {
+    font-weight: 600;
+    transform: scale(0.99);
+  }
 }
 
-
-
-// 검색창 클릭하면 검색창 길이 늘리고 테두리 날리고 키워드 사라지게 
-#search-bar input:focus-within .seach-category button{
+// 검색창 클릭하면 검색창 길이 늘리고 테두리 날리고 키워드 사라지게
+#search-bar input:focus-within .seach-category button {
   background-color: black;
 }
 

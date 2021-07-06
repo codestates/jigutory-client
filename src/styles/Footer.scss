@@ -18,13 +18,15 @@
   }
 }
 
-#github-logo {
+.fa-github, 
+.fa-globe-asia {
   width : 15px;
   height : 15px;
   margin-left : 5px;
 }
 
 .footer-container {
+  color : $medium-blue;
   border-top : 1px solid rgba(0,0,0,.1);
   display: flex;
   flex-direction: column;
@@ -37,6 +39,7 @@
   div:nth-child(1) {
     align-items: center;
   }
+
   div:nth-child(3) {
     color : $light-blue;
     margin : 17px 0 17px 0;
@@ -47,6 +50,7 @@
     font-weight: 600;
     text-align: center;
     font-size : 13px;
+    color : $title-blue;
     a {
       background-color: wheat;
     }

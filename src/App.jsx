@@ -60,7 +60,7 @@ function App() {
   }, [setAccessToken]);
 
   useEffect(() => {
-    localStorage.setItem('accessToken', JSON.stringify(accessToken));
+    localStorage.setItem('accessToken', accessToken);
   }, [accessToken]);
 
   useEffect(() => {

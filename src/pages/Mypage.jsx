@@ -17,7 +17,7 @@ function Mypage({ accessToken }) {
       },
     });
   };
-  console.log('levels :', levels);
+  // console.log('levels :', levels);
 
   const badges = async function () {
     await axios.get('http://localhost:4000/badge/read', {
@@ -27,7 +27,7 @@ function Mypage({ accessToken }) {
       },
     });
   };
-  console.log('badges :', badges);
+  // console.log('badges :', badges);
 
   return (
     <div className="mypage-container">

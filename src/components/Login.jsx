@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
+// import GoogleSignup from './GoogleSignup'
 import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
@@ -13,7 +14,7 @@ function Login({
   handleCloseLogin,
   handleUserInfo,
   handleOpenSignup,
-  isLoginOpen
+  isLoginOpen,
 }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -40,7 +41,7 @@ function Login({
     }
   };
 
-  const handleLoginRequest = (e) => {
+  const handleLoginRequest = async (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
     if (!email) {
@@ -53,7 +54,7 @@ function Login({
 
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios
+      await axios
         .post(
           'http://localhost:4000/auth/signin',
           { email: email, password: password },
@@ -66,18 +67,20 @@ function Login({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
-          axios.get('http://localhost:4000/user/userinfo', {
-            headers: {
-              'Content-Type': 'application/json',
-              authorization: res.data.data.accessToken,
-            },
-          }).then(res => {
-            handleUserInfo(res.data)
-            handleUserInfo({
-              username: res.data.username,
-              email: res.data.email
+          axios
+            .get('http://localhost:4000/user/userinfo', {
+              headers: {
+                'Content-Type': 'application/json',
+                authorization: res.data.data.accessToken,
+              },
             })
-          })
+            .then((res) => {
+              handleUserInfo(res.data);
+              handleUserInfo({
+                username: res.data.username,
+                email: res.data.email,
+              });
+            });
           return res;
         })
         .then((res) => {
@@ -93,11 +96,11 @@ function Login({
   const moveToSignUp = () => {
     handleCloseLogin();
     handleOpenSignup();
-  }
+  };
 
   let domNode = useClickOutside(() => {
     handleCloseLogin();
-  })
+  });
 
   return (
     <div className="modal-container show-modal" onClick={handleOpenLogin}>
@@ -126,10 +129,14 @@ function Login({
             onKeyPress={onKeyPress}
             ref={passwordRef}
           />
-          {!errorMessage ? ('') : (
-            <div className="modal-alert-box">
-              <i className="fas fa-exclamation-circle"></i>{errorMessage}
-            </div>)}
+          {!errorMessage ? (
+            ''
+          ) : (
+              <div className="modal-alert-box">
+                <i className="fas fa-exclamation-circle"></i>
+                {errorMessage}
+              </div>
+            )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>
@@ -141,19 +148,17 @@ function Login({
           </div>
 
           <button className="move_signup-btn" onClick={moveToSignUp}>
-            <i className="fas fa-user-plus" ></i>
+            <i className="fas fa-user-plus"></i>
             <span>회원가입</span>
           </button>
+          {/* <GoogleSignup
+            handleLogin={handleLogin}
+            handleUserInfo={handleUserInfo}
+          /> */}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default withRouter(Login);
-
-
-{/* <KaKaoLogin
-handleLogin={handleLogin}
-handleUserInfo={handleUserInfo}
-/> */}

@@ -7,6 +7,7 @@
 @import './Mypage.scss';
 @import './Store.scss';
 @import './Search.scss';
+@import './EditUser.scss';
 
 // 구글 폰트
 // font-family: 'Do Hyeon', sans-serif;
@@ -25,11 +26,11 @@ html {
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
-  color: $button_blue;
+  color : $title_blue;
 }
 
 h2, h3 {
-  color: $title_blue;
+  // color: $title_blue;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -41,7 +42,7 @@ button {
 }
 
 .app-container {
-  padding : 6rem 0 4rem 0;
+  padding-top : 6rem;
 }
 
 a {

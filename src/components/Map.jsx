@@ -1,4 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import mapMarker from '../images/main-marker.png';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
@@ -17,37 +18,78 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   }, []);
 
   useEffect(() => {
-    const latLng = center
-      ? new window.kakao.maps.LatLng(center.lat, center.lng)
-      : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
-    const options = {
-      center: latLng,
-      level: 3,
-    };
-    setMap(new window.kakao.maps.Map(containerRef.current, options));
+    if (center) {
+      const latLng = center
+        ? new window.kakao.maps.LatLng(center.lat, center.lng)
+        : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
+      const options = {
+        center: latLng,
+        level: 7,
+      };
+      setMap(new window.kakao.maps.Map(containerRef.current, options));
+    }
   }, [center]);
 
   useEffect(() => {
     if (map) {
       markers.forEach(({ lat, lng, cafeId, name }) => {
+        const markerImageUrl = mapMarker;
+        const markerImageSize = new window.kakao.maps.Size(40, 45);
+        const markerImageOptions = {
+          offset: new window.kakao.maps.Point(20, 42),
+        };
+
+        const markerImage = new window.kakao.maps.MarkerImage(
+          markerImageUrl,
+          markerImageSize,
+          markerImageOptions,
+        );
+
         const latLng = new window.kakao.maps.LatLng(lat, lng);
         const marker = new window.kakao.maps.Marker({
           position: latLng,
+          image: markerImage,
+          clickable: true,
         });
+
+        const iwRemoveable = true;
         const infoWindow = new window.kakao.maps.InfoWindow({
           position: latLng,
           content: name,
+          removable: iwRemoveable,
         });
 
         marker.setMap(map);
 
-        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
-          infoWindow.open(map, marker);
-        });
+        window.kakao.maps.event.addListener(
+          marker,
+          'mouseover',
+          (function () {
+            return function () {
+              infoWindow.open(map, marker);
+            };
+          })(map, marker, infoWindow),
+        );
 
-        window.kakao.maps.event.addListener(marker, 'mouseout', function () {
-          infoWindow.close();
-        });
+        window.kakao.maps.event.addListener(
+          marker,
+          'mouseout',
+          (function () {
+            return function () {
+              infoWindow.close();
+            };
+          })(infoWindow),
+        );
+
+        window.kakao.maps.event.addListener(
+          marker,
+          'click',
+          (function () {
+            return function () {
+              infoWindow.open(map, marker);
+            };
+          })(map, marker, infoWindow),
+        );
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);
@@ -72,5 +114,5 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
     <div id="map-container">
       <div id="map" ref={containerRef}></div>
     </div>
-  )
+  );
 };

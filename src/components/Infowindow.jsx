@@ -10,13 +10,7 @@ const { kakao } = window;
 function Map() {
   // DB에서 받은 cafe 정보들을 객체형태로 상태 저장
   const [cafeInfo, setCafeInfo] = useState(
-    {
-      // name: '',
-      // latlng: [],
-      // imgUrl: '',
-      // keyword: [],
-      // address: '',
-    })
+    {})
 
   console.log('cafeinfo state :', cafeInfo);
   let cafes = [];
@@ -30,16 +24,6 @@ function Map() {
       .then((res) => {
         console.log('res.data 정보 : ', res.data);
         setCafeInfo(res.data);
-        // for (let i = 0; i < res.data.length; i++) {
-        //   cafes.push(cafeInfo);
-        //   setCafeInfo({
-        //     name: res.data[i].name,
-        //     latlng: [res.data[i].latitude, res.data[i].longitude],
-        //     imgUrl: res.data[i].image,
-        //     keyword: res.data[i].keyword.split(','),
-        //     address: res.data[i].description,
-        //   })
-        // }
       })
   }, []);
 

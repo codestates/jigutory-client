@@ -1,0 +1,153 @@
+@import './variables';
+
+@keyframes ShowToggle {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes ScaleController {
+  from {
+    transform: none;
+  }
+  to {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes HeartBeatAnimation {
+  0% {
+    transform: none;
+    color: white;
+  }
+  50% {
+    transform: scale(1.1);
+    color: #d94e59;
+  }
+  100% {
+    transform: none;
+    color: white;
+  }
+}
+
+#cafe-toggle_container {
+  position: absolute;
+  z-index: 100;
+  top: 100px;
+  right: 0px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+  animation: ShowToggle 0.5s linear;
+}
+
+#cafe-toggle_info {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 4rem 2rem 4rem;
+}
+
+#cafe-toggle_imgbox {
+  display: flex;
+  justify-content: center;
+  img {
+    border-radius: 8px;
+    width: 230px;
+    height: 170px;
+  }
+}
+
+#cafe-toggle_desc {
+  padding: .5rem 0 .5rem 0;
+  div,
+  a,
+  ul {
+    margin: 0.8rem 0 0.8rem 0;
+  }
+
+  .cafe-toggle_desc_title {
+    margin : 0; 
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // border-bottom : 1px solid rgba(0, 0, 0, .1);
+    div {
+      font-size: 20px;
+    }
+    .fa-heart,
+    .fa-bookmark {
+      margin: 0 10px 0 10px;
+      cursor: pointer;
+      font-size : 17px;
+    }
+    .fa-heart:hover {
+      color: #d94e59;
+      animation: HeartBeatAnimation 1s linear infinite;
+    }
+    .fa-bookmark:hover {
+      color: $point-color;
+    }
+  }
+  .cafe-toggle_keywordbox {
+    margin : 0;
+    display: flex;
+    font-weight: 300;
+    border-bottom : 1px solid rgba(0, 0, 0, .1);
+
+  }
+  .cafe-toggle_desc_keyword {
+    margin-top : 5px;
+    display:flex;
+    li {
+      color : white;
+      padding : 3px 7px 3px 7px;
+      margin : 2px;
+      border-radius: 12px;
+      font-size : 10px;
+    }
+    .keywords_keyword {
+      background-color: $medium_blue;
+    }
+    .keywords_keyword_type{
+      background-color: rgba(188, 143, 143, .8);
+    }
+  }
+  .cafe-toggle_contactbox,
+  .cafe-toggle_link
+  {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .cafe-toggle_link {
+    background-color: transparent;
+    &:hover {
+      color : $medium_blue_text;
+    }
+  }
+}
+
+.cafe-toggle-close {
+  color : $medium_blue;
+  padding : 10px;
+  font-size : 25px;
+  background-color: transparent;
+  &:hover {
+    color : $error-red;
+    transform : scale(.92)
+  }
+}
+
+.fa-map-marker-alt,
+.fa-phone-alt,
+.fa-home
+{
+  color : $title-blue;
+  margin-right : 10px;
+  font-size : 13px;
+}
+

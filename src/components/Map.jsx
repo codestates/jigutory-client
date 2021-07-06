@@ -61,17 +61,35 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
 
         marker.setMap(map);
 
-        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
-          infoWindow.open(map, marker);
-        });
+        window.kakao.maps.event.addListener(
+          marker,
+          'mouseover',
+          (function () {
+            return function () {
+              infoWindow.open(map, marker);
+            };
+          })(map, marker, infoWindow),
+        );
 
-        window.kakao.maps.event.addListener(marker, 'mouseout', function () {
-          infoWindow.close();
-        });
+        window.kakao.maps.event.addListener(
+          marker,
+          'mouseout',
+          (function () {
+            return function () {
+              infoWindow.close();
+            };
+          })(infoWindow),
+        );
 
-        // window.kakao.maps.event.addListener(marker, 'click', function () {
-        //   infoWindow.open(map, marker);
-        // });
+        window.kakao.maps.event.addListener(
+          marker,
+          'click',
+          (function () {
+            return function () {
+              infoWindow.open(map, marker);
+            };
+          })(map, marker, infoWindow),
+        );
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);

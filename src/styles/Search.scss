@@ -10,7 +10,7 @@
 }
 
 #search {
-  font-size : 13px;
+  font-size: 13px;
   position: absolute;
   left : 0;
   z-index: 900;
@@ -51,11 +51,11 @@
     padding-left : 3px;
   }
   button {
-    position : absolute;
-    right : 11px;
-    top : 47px;
+    position: absolute;
+    right: 11px;
+    top: 47px;
     background-color: transparent;
-    color : rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -68,7 +68,7 @@
 }
 
 #search-result-item {
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 5px;
   cursor: pointer;
   animation : OpenList .1s linear;
@@ -78,10 +78,8 @@
   }
 }
 
-
-
-// 검색창 클릭하면 검색창 길이 늘리고 테두리 날리고 키워드 사라지게 
-#search-bar input:focus-within .seach-category button{
+// 검색창 클릭하면 검색창 길이 늘리고 테두리 날리고 키워드 사라지게
+#search-bar input:focus-within .seach-category button {
   background-color: black;
 }
 

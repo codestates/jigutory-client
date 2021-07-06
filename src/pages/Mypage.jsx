@@ -1,11 +1,33 @@
 import React, { useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
-
 import '../styles/Mypage.scss';
+axios.defaults.withCredentials = true;
 
-function Mypage() {
+function Mypage({ accessToken }) {
   const history = useHistory();
+  const [levelList, setLevelList] = useState([]);
+  const [badgeList, setBadgeList] = useState([]);
+
+  const levels = async function () {
+    await axios.get('http://localhost:4000/level/read', {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: accessToken,
+      },
+    });
+  };
+  console.log('levels :', levels);
+
+  const badges = async function () {
+    await axios.get('http://localhost:4000/badge/read', {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: accessToken,
+      },
+    });
+  };
+  console.log('badges :', badges);
 
   return (
     <div className="mypage-container">
@@ -16,10 +38,15 @@ function Mypage() {
           </div>
           <div className="mypage-userinfo-right">
             <div className="mypage-userinfo-name">Lv 10 지구토리</div>
-            <div className="mypage-userinfo-point">포인트</div>
-            <button className="mypage-userinfo-edit" onClick={() => { history.push('/edituser') }}>회원정보 수정</button>
-
-            <button className="mypage-userinfo-withdraw">회원탈퇴</button>
+            <button
+              className="mypage-userinfo-edit"
+              onClick={() => {
+                history.push('/edituser');
+              }}
+            >
+              회원정보 수정
+            </button>
+            {/* <button className="mypage-userinfo-withdraw">회원탈퇴</button> */}
           </div>
         </div>
         <div className="mypage-eco">

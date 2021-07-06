@@ -23,7 +23,7 @@ function App() {
 
   console.log('app.js 유저인포 상태 :', userInfo);
   console.log('app.js 상태 토큰 :', accessToken);
-  console.log('isLogin 상태: ', isLogin);
+  console.log('app.js 상태 isLogin :', isLogin);
 
   const handleLogin = (token) => {
     setAccessToken(token);
@@ -33,8 +33,8 @@ function App() {
   };
 
   const handleLogout = () => {
-    setIsLogin(false);
     localStorage.clear();
+    //setIsLogin(false);
   };
 
   const handleUserInfo = (obj) => {
@@ -51,6 +51,28 @@ function App() {
   useEffect(() => {
     localStorage.setItem('is-Login', JSON.stringify(isLogin));
   }, [isLogin]);
+
+  useEffect(() => {
+    const dataFormLocalStorage = localStorage.getItem('accessToken');
+    if (dataFormLocalStorage) {
+      setAccessToken(dataFormLocalStorage);
+    }
+  }, [setAccessToken]);
+
+  useEffect(() => {
+    localStorage.setItem('accessToken', JSON.stringify(accessToken));
+  }, [accessToken]);
+
+  useEffect(() => {
+    const dataFormLocalStorage = localStorage.getItem('userInfo');
+    if (dataFormLocalStorage) {
+      setUserInfo(JSON.parse(dataFormLocalStorage));
+    }
+  }, [setUserInfo]);
+
+  useEffect(() => {
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+  }, [userInfo]);
 
   return (
     <div>
@@ -74,19 +96,18 @@ function App() {
               path="/mypage"
               exact={true}
               render={() => (
-                <Mypage
-                  accessToken={accessToken}
-                  userInfo={userInfo}
-                  // level={level}
-                  // badge={badge}
-                />
+                <Mypage accessToken={accessToken} userInfo={userInfo} />
               )}
             />
             <Route
               path="/edituser"
               exact={true}
               render={() => (
-                <EditUser accessToken={accessToken} userInfo={userInfo} />
+                <EditUser
+                  handleUserInfo={handleUserInfo}
+                  accessToken={accessToken}
+                  handleLogout={handleLogout}
+                />
               )}
             />
             <Route path="/cart" exact={true} component={Cart} />

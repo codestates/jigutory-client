@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
@@ -10,6 +11,7 @@ function SignUp({
   handleCloseSignUp,
   handleUserInfo,
 }) {
+  const history = useHistory();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -128,6 +130,7 @@ function SignUp({
             email: res.data.email,
           });
           setIsSignUp(true);
+          setTimeout(moveToIntro, 2000);
         })
         .catch((err) => {
           console.log(err);
@@ -137,6 +140,10 @@ function SignUp({
     }
   };
 
+  const moveToIntro = () => {
+    history.push('/intro');
+  };
+
   const domNode = useClickOutside(() => {
     handleCloseSignUp();
   });
@@ -144,14 +151,7 @@ function SignUp({
   return (
     <div className="modal-container show-modal" onClick={handleOpenSignUp}>
       {isSignUp ? (
-        <div
-          ref={domNode}
-          className="modal"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button className="modal-close" onClick={handleCloseSignUp}>
-            <i className="fas fa-times"></i>
-          </button>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
           <h2 className="modal-success">회원가입에 성공했습니다!</h2>
         </div>
       ) : (
@@ -233,7 +233,6 @@ function SignUp({
               <button className="signup-btn" onClick={handleSignUpRequest}>
                 회원가입
             </button>
-
             </div>
           </div>
         )}

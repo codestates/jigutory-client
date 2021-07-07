@@ -1,43 +1,54 @@
-import React, { useState } from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../styles/Mypage.scss';
+// import { LevelInfo } from '../components/LevelInfo';
+import { BadgeInfo } from '../components/BadgeInfo';
+import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
   const history = useHistory();
-  const [levelList, setLevelList] = useState([]);
-  const [badgeList, setBadgeList] = useState([]);
+  const [username, setUsername] = useState('');
+  const [profileImage, setProfileImage] = useState('');
+  const [clickNum, setClickNum] = useState(0);
 
-  const levels = async function () {
-    await axios.get('http://localhost:4000/level/read', {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: accessToken,
-      },
-    });
-  };
-  console.log('levels :', levels);
+  if (!profileImage) {
+    setProfileImage(
+      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
+    );
+  }
 
-  const badges = async function () {
-    await axios.get('http://localhost:4000/badge/read', {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: accessToken,
-      },
-    });
-  };
-  console.log('badges :', badges);
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/user/userinfo', {
+        headers: {
+          authorization: accessToken,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        setUsername(res.data.username);
+        setProfileImage(res.data.profileImage);
+      })
+      .catch((err) => console.log(err));
+  }, [accessToken]);
 
   return (
     <div className="mypage-container">
       <div className="mypage-container-top">
         <div className="mypage-userinfo">
           <div className="mypage-userinfo-left">
-            <div>사진</div>
+            <img src={profileImage} alt="프로필이미지"></img>
           </div>
           <div className="mypage-userinfo-right">
-            <div className="mypage-userinfo-name">Lv 10 지구토리</div>
+            <div className="mypage-userinfo-level">
+              <div className="mypage-userinfo-title">레벨</div>
+              <div className="mypage-userinfo-content"></div>
+            </div>
+            <div className="mypage-userinfo-name">
+              <div className="mypage-userinfo-title">이름</div>
+              <div className="mypage-userinfo-content">{username}</div>
+            </div>
             <button
               className="mypage-userinfo-edit"
               onClick={() => {
@@ -46,11 +57,9 @@ function Mypage({ accessToken }) {
             >
               회원정보 수정
             </button>
-            {/* <button className="mypage-userinfo-withdraw">회원탈퇴</button> */}
           </div>
         </div>
         <div className="mypage-eco">
-          {/* <div className="mypage-eco-level">레벨</div> */}
           <button className="mypage-eco-me">나의 환경 지킨 횟수</button>
           <div className="mypage-eco-total">전체 환경 지킨 횟수</div>
           <div className="mypage-eco-carbon">나의 탄소 저감량</div>
@@ -62,6 +71,7 @@ function Mypage({ accessToken }) {
             <div>내 뱃지 리스트</div>
           </div>
           <div className="mypage-badge-list">
+            <BadgeInfo />
             <div>뱃지1</div>
             <div>뱃지2</div>
             <div>뱃지3</div>
@@ -74,4 +84,4 @@ function Mypage({ accessToken }) {
   );
 }
 
-export default withRouter(Mypage);
+export default Mypage;

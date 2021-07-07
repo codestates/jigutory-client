@@ -27,7 +27,6 @@ export const CafeInfo = ({ cafeToggleRef }) => {
     fetchCafe();
   }, [fetchCafe]);
 
-  // map & search 연결
   useImperativeHandle(cafeToggleRef, () => ({
     toggle: (cafeId) => {
       setToggledCafeId(cafeId);
@@ -40,42 +39,63 @@ export const CafeInfo = ({ cafeToggleRef }) => {
 
   const cafeKeywords = cafe.keyword.split(',');
   const cafeType = cafe.type.split(',');
-  const cafeEtc = cafe.etc.split(',');
+  // const cafeEtc = cafe.etc.split(',');
 
   return (
-    <div id="cafe-toggle_container" ref={domNode}>
-      <button className="cafe-toggle-close" onClick={handleCloseToggle}><i className="fas fa-times"></i></button>
-      <div id="cafe-toggle_info">
-        <div id="cafe-toggle_imgbox">
+    <div id="cafe-toggle-container" ref={domNode}>
+      <button className="cafe-toggle-close" onClick={handleCloseToggle}>
+        <i className="fas fa-times"></i>
+      </button>
+      <div id="cafe-toggle-info">
+        <div id="cafe-toggle-info-image">
           <img src={cafe.image} alt="이미지" />
         </div>
-        <div id="cafe-toggle_desc">
-          <div className="cafe-toggle_desc_title">
+        <div id="cafe-toggle-category">
+          <div className="cafe-toggle-category-title">
             <div>{cafe.name}</div>
-            <div className="cafe-toggle_desc_title_iconbox">
+            <div>
               <i className="fas fa-heart"></i>
               <i className="fas fa-bookmark"></i>
             </div>
           </div>
-          <div className="cafe-toggle_keywordbox">
-            <ul className="cafe-toggle_desc_keyword">
+          <div className="cafe-toggle-category-description">
+            <ul>
               {cafeKeywords.map((keyword, idx) => (
-                <li key={idx} className="keywords_keyword">{keyword}</li>
-              ))}</ul>
-            <ul className="cafe-toggle_desc_keyword">
+                <li
+                  key={idx}
+                  className="cafe-toggle-category-description-keyword"
+                >
+                  {keyword}
+                </li>
+              ))}
+            </ul>
+            <ul>
               {cafeType.map((keyword, idx) => (
-                <li key={idx} className="keywords_keyword_type">{keyword}</li>
-              ))}</ul>
-            {/* <ul className="cafe-toggle_desc_keyword">
+                <li key={idx} className="cafe-toggle-category-description-type">
+                  {keyword}
+                </li>
+              ))}
+            </ul>
+            {/* <ul>
               {cafeEtc.map((keyword, idx) => (
-                <li key={idx} className="keywords_keyword_type">{keyword}</li>
+                <li key={idx} className="cafe-toggle-category-description-etc">{keyword}</li>
               ))}</ul> */}
           </div>
-          <div className="cafe-toggle_contactbox">
-            <div><i className="fas fa-map-marker-alt"></i> {cafe.address}</div>
-            <div><i className="fas fa-phone-alt"></i> {cafe.telephone}</div>
+          <div className="cafe-toggle-category-contact">
+            <div>
+              <i className="fas fa-map-marker-alt"></i> {cafe.address}
+            </div>
+            <div>
+              <i className="fas fa-phone-alt"></i> {cafe.telephone}
+            </div>
           </div>
-          <a className="cafe-toggle_link" href={cafe.link} target="_black"><i className="fas fa-home"></i> {cafe.name} 홈페이지</a>
+          <a
+            className="cafe-toggle-category-link"
+            href={cafe.link}
+            target="_black"
+          >
+            <i className="fas fa-home"></i> {cafe.name} 홈페이지
+          </a>
         </div>
       </div>
     </div>

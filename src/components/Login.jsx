@@ -151,10 +151,6 @@ function Login({
             <i className="fas fa-user-plus"></i>
             <span>회원가입</span>
           </button>
-          {/* <GoogleSignup
-            handleLogin={handleLogin}
-            handleUserInfo={handleUserInfo}
-          /> */}
         </div>
       </div>
     </div>

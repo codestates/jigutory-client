@@ -25,6 +25,9 @@ function App() {
   console.log('app.js 상태 토큰 :', accessToken);
   console.log('app.js 상태 isLogin :', isLogin);
 
+  const isLogout = () => {
+    setIsLogin(false);
+  }
 
   const handleLogin = (token) => {
     setAccessToken(token);
@@ -35,7 +38,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.clear();
-    //setIsLogin(false);
+    // setIsLogin(false);
   };
 
   const handleUserInfo = (obj) => {
@@ -53,8 +56,6 @@ function App() {
     localStorage.setItem('is-Login', JSON.stringify(isLogin));
   }, [isLogin]);
 
-
-
   useEffect(() => {
     const dataFormLocalStorage = localStorage.getItem('accessToken');
     if (dataFormLocalStorage) {
@@ -63,10 +64,8 @@ function App() {
   }, [setAccessToken]);
 
   useEffect(() => {
-    localStorage.setItem('accessToken', JSON.stringify(accessToken));
+    localStorage.setItem('accessToken', accessToken);
   }, [accessToken]);
-
-
 
   useEffect(() => {
     const dataFormLocalStorage = localStorage.getItem('userInfo');
@@ -78,8 +77,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }, [userInfo]);
-
-
 
   return (
     <div>
@@ -99,10 +96,24 @@ function App() {
             <Route path="/" exact={true} component={Intro} />
             <Route path="/intro" exact={true} component={Intro} />
             <Route path="/main" exact={true} component={Main} />
-            <Route path="/mypage" exact={true} render={() => (
-              <Mypage accessToken={accessToken} userInfo={userInfo} />)} />
-            <Route path="/edituser" exact={true} render={() => (
-              <EditUser handleUserInfo={handleUserInfo} accessToken={accessToken} handleLogout={handleLogout} />)} />
+            <Route
+              path="/mypage"
+              exact={true}
+              render={() => (
+                <Mypage accessToken={accessToken} userInfo={userInfo} />
+              )}
+            />
+            <Route
+              path="/edituser"
+              exact={true}
+              render={() => (
+                <EditUser
+                  handleUserInfo={handleUserInfo}
+                  accessToken={accessToken}
+                  isLogout={isLogout}
+                />
+              )}
+            />
             <Route path="/cart" exact={true} component={Cart} />
             <Route path="/store" exact={true} component={Store} />
           </div>

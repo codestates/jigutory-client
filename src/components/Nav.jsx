@@ -65,7 +65,7 @@ function Nav({
     <div className="nav">
       {isLogin ? (
         <>
-          <a href="#!">
+          <a href="#">
             <img
               className="nav-logo"
               onClick={clickIntroPage}
@@ -77,17 +77,17 @@ function Nav({
           </a>
 
           <div className="buttons">
-            <a href="#!">
+            <a href="#">
               <button className="nav-main nav-btn" onClick={clickMainPage}>
                 지도
               </button>
             </a>
-            <a href="#!">
+            <a href="#">
               <button className="nav-store nav-btn" onClick={clickStorePage}>
                 상점
               </button>
             </a>
-            <a href="#!">
+            <a href="#">
               <button className="nav-mypage nav-btn" onClick={clickMyPage}>
                 마이 페이지
               </button>
@@ -104,7 +104,7 @@ function Nav({
         </>
       ) : (
           <>
-            <a href="#!">
+            <a href="#">
               <img
                 className="nav-logo"
                 onClick={clickIntroPage}
@@ -114,12 +114,12 @@ function Nav({
               {/* <div className="nav-title">지구토리</div> */}
             </a>
             <div className="buttons">
-              <a href="#!">
+              <a href="#">
                 <button className="nav-main nav-btn" onClick={clickMainPage}>
                   지도
               </button>
               </a>
-              <a href="#!">
+              <a href="#">
                 <button className="nav-store nav-btn" onClick={clickStorePage}>
                   상점
               </button>

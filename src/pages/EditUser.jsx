@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import '../styles/EditUser.scss';
 import axios from 'axios';
@@ -6,8 +6,8 @@ import DeleteUserModal from '../components/DeleteUserModal';
 axios.defaults.withCredentials = true;
 
 // 회원정보 수정 클릭하면 바로 비밀번호 확인부터 뜸
-// 탈퇴 확인 모달창 띄우고, 탈퇴하기 실행되면 인풋리셋시키고 인트로 페이지로 이동 
-const EditUser = ({ accessToken, isLoggedOut, handleUserInfo }) => {
+// 탈퇴 확인 모달창 띄우고, 탈퇴하기 실행되면 인풋리셋시키고 인트로 페이지로 이동
+const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const history = useHistory();
 
   const [username, setUsername] = useState('');
@@ -16,46 +16,87 @@ const EditUser = ({ accessToken, isLoggedOut, handleUserInfo }) => {
   const [imgUrl, setImgUrl] = useState('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [newPasswordCheck, setnewPasswordCheck] = useState('');
   const [isModalOn, setIsModalOn] = useState(false);
-  const [deleteUser, setDeleteUser] = useState(false);
   const [changeNicknameMessage, setChangeNicknameMessage] = useState('');
+  const [confirmMessage, setConfirmMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordCheckError, setPasswordCheckError] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/user/userinfo', {
+        headers: {
+          authorization: accessToken,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log('edituser :', res);
+        setUsername(res.data.username);
+        setEmail(res.data.email);
+        setImgUrl(res.data.profileImage);
+        setPassword(res.data.password);
+        handleUserInfo({
+          username: res.data.username,
+          email: res.data.email,
+          imgUrl: res.data.profileImage,
+        });
+      })
+      .catch((err) => console.log(err));
+
+  }, [accessToken]);
 
   if (imgUrl === null || imgUrl === undefined) {
-    setImgUrl('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png')
+    setImgUrl(
+      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
+    );
   }
+
+  const onKeyPressUsername = (e) => {
+    if (e.key === 'Enter') {
+      usernameRequestHandler();
+    }
+  };
+
+  const onKeyPressPassword = (e) => {
+    if (e.key === 'Enter') {
+      newPasswordRequestHandler();
+    }
+  };
 
   const handleOpenModal = () => {
     setIsModalOn(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setIsModalOn(false);
-  }
-
-  const handleDeleteUser = (boolean) => {
-    setDeleteUser(boolean);
-  }
+  };
 
   const handleUsername = (e) => {
     e.preventDefault();
     setUsername(e.target.value);
-  }
+  };
 
   const handlePassword = (e) => {
     e.preventDefault();
+    if (password !== e.target.value) {
+      setErrorMessage('비밀번호를 확인해 주세요')
+    }
     setPassword(e.target.value);
-  }
+  };
 
   const handleNewPassword = (e) => {
     e.preventDefault();
     setNewPassword(e.target.value);
-  }
+  };
 
-  const handleConfirmNewPassword = (e) => {
+  const handleNewPasswordCheck = (e) => {
     e.preventDefault();
-    setConfirmNewPassword(e.target.value);
-  }
+    setnewPasswordCheck(e.target.value);
+  };
 
   const handleUploadImg = (e) => {
     e.preventDefault();
@@ -68,138 +109,251 @@ const EditUser = ({ accessToken, isLoggedOut, handleUserInfo }) => {
     if (file) {
       reader.readAsDataURL(file);
     }
-  }
+  };
 
-  const handleSubmitImg = async (e) => {
+  const handleSubmitImg = (e) => {
     e.preventDefault();
-    await axios.patch('http://localhost:4000/user/useredit',
-      { profileImage: imgUrl }, {
-      headers: {
-        authorization: accessToken,
-        "Content-Type": "application/json",
-      }, withCredentials: true
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
-
-  const usernameRequestHandler = async () => {
-    if (imgUrl) {
-      await axios.patch('http://localhost:4000/user/useredit',
-        { username: username },
+    axios
+      .patch(
+        'http://localhost:4000/user/useredit',
+        { profileImage: imgUrl },
         {
           headers: {
             authorization: accessToken,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-        }).then(res => {
-          console.log(res)
-          setChangeNicknameMessage('닉네임이 변경되었습니다')
-        })
-        .catch(err => console.log(err));
+          withCredentials: true,
+        },
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  // const resetUsernameInput = () => {
+  //   setUsername('');
+  // }
+
+  // ------------------------------------------------------------
+  const validateUsername = (username) => {
+    const min = 3;
+    const regUsernaae = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
+
+    // 이름 길이 확인
+    if (username.length < min) {
+      setUsernameError('❌ 3자 이상 입력');
+      return false;
     }
-  }
 
-  const newPasswordRequestHandler = async () => {
-    await axios.patch('http://localhost:4000/user/passwordedit',
-      { rvsdpassword: confirmNewPassword },
-      {
-        headers: {
-          authorization: accessToken,
-          "Content-Type": "application/json",
-        },
-      }).then(res => console.log(res))
-      .catch(err => console.log(err));
-  }
+    // 이름 정규식 확인
+    if (!regUsernaae.test(username)) {
+      setUsernameError('❌ 한글 / 영문 소문자 / 숫자만 허용');
+      return false;
+    } else {
+      setUsernameError('');
+      return true;
+    }
+  };
 
+  const validatePassword = (newPassword, newPasswordCheck) => {
+    // if (newPasswordCheck.length === 0) {
+    //   setPasswordCheckError('❌ 동일한 비밀번호를 입력해 주세요');
+    // } 
+    if (newPassword !== newPasswordCheck) {
+      setPasswordCheckError('❌ 동일한 비밀번호를 입력해 주세요');
+      return false;
+    }
 
-  useEffect(async () => {
-    if (accessToken) {
-      axios.get('http://localhost:4000/user/userinfo', {
-        headers: {
-          authorization: accessToken,
-          "Content-Type": "application/json",
-        },
-      })
+    const min = 8;
+    const max = 20;
+    const regPassword = /^[0-9a-z-_.!?*]+$/;
+
+    // 비밀번호 길이 확인
+    if (newPassword.length < min || newPassword.length > max) {
+      setPasswordError('❌ 8~20자 입력');
+      return false;
+    }
+
+    // 비밀번호 정규식 확인
+    if (!regPassword.test(password)) {
+      setPasswordError('❌ 영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용');
+      return false;
+    } else {
+      setPasswordError('');
+      return true;
+    }
+  };
+
+  //---------------------------------------------------------------
+
+  const usernameRequestHandler = () => {
+    const validUsername = validateUsername(username);
+    if (validUsername) {
+      axios
+        .patch(
+          'http://localhost:4000/user/useredit',
+          { username: username },
+          {
+            headers: {
+              authorization: accessToken,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
         .then((res) => {
-          console.log('edituser :', res)
-          setUsername(res.data.username);
-          setEmail(res.data.email);
-          setImgUrl(res.data.profileImage);
-          setPassword(res.data.password);
-          handleUserInfo({
-            username: res.data.username,
-            email: res.data.email,
-            imgUrl: res.data.profileImage
-          })
+          console.log(res)
+          handleUserInfo({ username: username })
+          setChangeNicknameMessage('✅ 닉네임이 변경되었습니다')
         })
-        .catch(err => console.log(err))
+        .catch((err) => {
+          console.log(err)
+        });
     }
-  }, [setUsername, setEmail, setImgUrl, setPassword])
+  };
 
-
-
+  const newPasswordRequestHandler = () => {
+    const validPassword = validatePassword(newPassword, newPasswordCheck);
+    if (validPassword) {
+      axios
+        .patch(
+          'http://localhost:4000/user/passwordedit',
+          { rvsdpassword: newPasswordCheck },
+          {
+            headers: {
+              authorization: accessToken,
+              'Content-Type': 'application/json',
+            },
+          },
+        )
+        .then((res) => {
+          setConfirmMessage('✅ 비밀번호가 변경되었습니다');
+          console.log(res)
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <div id="edituser_page">
       <div>
         <div id="edituser_container">
           <h2> 회원정보 수정 </h2>
+
           <img className="edituser_profile_preview" src={imgUrl} />
-
           <div id="edituser_img">
-            <input id="file" className="edit_user_fileupload" type="file" accept="image/*" onChange={handleUploadImg}></input>
-            <label htmlFor="file" className="file_label">프로필 사진 등록</label>
-            <button onClick={handleSubmitImg}>확인</button>
+            <input
+              id="file"
+              className="edit_user_fileupload"
+              type="file"
+              accept="image/*"
+              onChange={handleUploadImg}
+            ></input>
+            <div>
+              <label htmlFor="file" className="file_label">
+                프로필 사진 등록
+            </label>
+              <button onClick={handleSubmitImg}>확인</button>
+            </div>
           </div>
 
-          <div id="edituser_email">
-            <label htmlFor="email">이메일은 변경할 수 없습니다</label>
-            <input id="email" type="text" value={email} alt="이메일은 변경할 수 없습니다" />
-          </div>
+          <section>
 
-          <div id="edituser_username">
-            <label htmlFor="username">닉네임</label>
-            <input id="username" type="text" placeholder={username} onChange={handleUsername} />
-          </div>
-          <div>
-            <label htmlFor=""></label>
-            <button onClick={usernameRequestHandler}>닉네임 변경</button>
-          </div>
-          <div>
-            {changeNicknameMessage}
-          </div>
+            <div id="edituser_email">
+              <div>이메일</div>
+              <div>{email}</div>
+            </div>
 
-          <div id="edituser_password">
-            <label htmlFor="current_password">현재 비밀번호</label>
-            <input id="current_password" type="password" onChange={handlePassword} />
-          </div>
+            <div id="edituser_username">
+              <div>닉네임</div>
+              <input
+                id="username"
+                type="text"
+                placeholder={username}
+                onChange={handleUsername}
+                onKeyPress={onKeyPressUsername}
+              />
+            </div>
+            {!usernameError ? ('') : (
+              <div className="edituser_confirm_msg">
+                <div className="edituser_failure">{usernameError}</div>
+              </div>
+            )}
+            <div>
+              <div></div>
+              <button onClick={usernameRequestHandler} >닉네임 변경</button>
+            </div>
 
-          <div id="edituser_password">
-            <label htmlFor="new_password">새 비밀번호</label>
-            <input id="new_password" type="password" onChange={handleNewPassword} />
-          </div>
+            <div className="edituser_confirm_msg">
+              <div>{changeNicknameMessage}</div>
+            </div>
 
-          <div id="edituser_password">
-            <label htmlFor="confirm_password">비밀번호 확인</label>
-            <input id="confirm_password" type="password" onChange={handleConfirmNewPassword} />
-          </div>
-          <div>
-            <label htmlFor=""></label>
-            <button onClick={newPasswordRequestHandler}>비밀번호 변경</button>
-          </div>
+            <div id="edituser_password">
+              <div>현재 비밀번호</div>
+              <input
+                id="current_password"
+                type="password"
+                onChange={handlePassword}
+                placeholder="사용 중인 비밀번호를 입력하세요"
+                value={password}
+              />
+            </div>
 
+            <div id="edituser_password">
+              <div>새 비밀번호</div>
+              <input
+                id="new_password"
+                type="password"
+                onChange={handleNewPassword}
+                placeholder="새로운 비밀번호를 입력하세요"
+              />
+            </div>
+            {!passwordError ? ('') : (
+              <div className="edituser_confirm_msg" >
+                <div className="edituser_failure">{passwordError}</div>
+              </div>
+            )}
+
+            <div id="edituser_password">
+              <div>새 비밀번호 확인</div>
+              <input
+                id="confirm_password"
+                type="password"
+                onChange={handleNewPasswordCheck}
+                onKeyPress={onKeyPressPassword}
+                placeholder="다시 한 번 입력하세요"
+              />
+            </div>
+            {!passwordCheckError ? ('') : (
+              <div className="edituser_confirm_msg">
+                <div className="edituser_failure">{passwordCheckError}</div>
+              </div>
+            )}
+
+            {<div>
+              <div></div>
+              <button onClick={newPasswordRequestHandler}>비밀번호 변경</button>
+            </div>}
+
+            <div className="edituser_confirm_msg">
+              <div>{confirmMessage}</div>
+            </div>
+
+          </section>
           <div id="edituser_withdrawal">
-            <button onClick={(handleOpenModal)} >회원 탈퇴</button>
-            <section>
-              {isModalOn && (<DeleteUserModal handleDeleteUser={handleDeleteUser} accessToken={accessToken} isLoggedOut={isLoggedOut} handleCloseModal={handleCloseModal} />)}
-
-            </section>
+            <div></div>
+            <button onClick={handleOpenModal}>회원 탈퇴</button>
           </div>
+
+          {isModalOn && (
+            <DeleteUserModal
+              accessToken={accessToken}
+              handleCloseModal={handleCloseModal}
+              isLogout={isLogout}
+            />
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(EditUser);

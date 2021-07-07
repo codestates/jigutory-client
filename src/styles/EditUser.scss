@@ -1,5 +1,63 @@
 @import './variables';
 
+.edituser-modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  opacity: 0;
+  pointer-events: auto;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edituser-show-modal {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.edituser-modal {
+  position: absolute;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  max-width: 60%;
+  padding : 20px 20px 15px 20px;
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in-out;
+  .edituser_withdrawal_choose > button{
+    margin : 10px;
+    padding : 5px 12px 5px 12px;
+    &:nth-child(1):hover {
+      background-color: $error-red;
+    }
+    &:nth-child(2):hover {
+      background-color: rgb(0, 149, 50);
+    }
+  }
+}
+
+.edituser-modal-info {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  font-size : 14px;
+  color : $error-red;
+  font-weight: 500;
+}
+
+button {
+  padding : 6px;
+  border-radius: 5px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    color : white;
+  }
+}
+
 #edituser_page {
   div {
     display: flex;
@@ -12,17 +70,55 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-weight: 500;
+    font-size : 14px;
+    
     div {
-      display: flex;
-      // width : 60%;
-      margin : 13px;
-      input {
-        background-color: rgba(0, 0, 0, .1);
-      }
+      margin : 10px;
     }
-    #edituser_withdrawal {
+
+    section {
+      width : 24rem;
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      div {
+        display: flex;
+        justify-content: space-between;
+        div:nth-child(1) {
+          width : 200px;
+          text-align: left;
+
+        }
+        input {
+          width : 90%;
+          height : 90%;
+          border-radius: 5px;
+          padding : 0 30px 0 10px;
+          // background-color: rgba(255, 255, 255, .7);
+          border : 1px solid rgba(0, 0, 0, 0.2);
+          background-color: transparent;
+
+        }
+      }
+      .edituser_confirm_msg {
+        display: flex;
+        justify-content: flex-end;
+        margin : 0;
+        .edituser_failure {
+          color : $error-red;
+        }
+        div {
+          margin : 7px;
+          font-size: 13px;
+          color : #009532;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          .fa-check-circle {
+            margin-right : 5px;
+          }
+        }
+      }
     }
     .edituser_profile_preview {
       border: 3px solid rgba(0,0,0,0.3);
@@ -31,39 +127,53 @@
       height : 150px;
       margin : 1.5rem 0 1.5rem 0;
     }
-    #edituser_email {
+    #edituser_img {
+      display: flex;
+      flex-direction: column;
+      div > button{
+        margin-left : 10px;
+      }
+      .edit_user_fileupload {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 1;
+        overflow: hidden;
+        position: absolute; 
+        z-index: -1;
+        cursor: pointer;
+      }
+      
+      .file_label, button {
+        display: flex;
+        margin-top : 5px;
+        font-size: .8rem;
+        color: white;
+        background-color: $medium-blue;
+        cursor: pointer;
+        padding : 5px 10px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+    
+      }
+      .file_label:hover,
+      button:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+        transition : background-color .1s ease-in-out;
+      }
     }
   }
 }
 
-#edituser_img {
-  .edit_user_fileupload {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 1;
-    overflow: hidden;
-    position: absolute; 
-    z-index: -1;
-    cursor: pointer;
-  }
-  
-  .file_label {
-    display: flex;
-    margin-top : 5px;
-    font-size: .8rem;
-    color: white;
-    background-color: $medium-blue;
-    cursor: pointer;
-    padding : 5px 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-
-  }
-  
-  .file_label:hover {
-    background-color: $light-blue;
-    transition : background-color .1s ease-in-out;
+#edituser_withdrawal > button{
+  background-color: $error-red;
+  color : white;
+  &:hover {
+    padding : 4px;
+    background-color: rgba(255, 255, 255, .5);
+    border : 2px solid $error-red;
+    color : $error-red;
+    font-weight: 700;
   }
 }
 

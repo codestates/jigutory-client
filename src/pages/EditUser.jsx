@@ -303,7 +303,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 id="new_password"
                 type="password"
                 onChange={handleNewPassword}
-                placeholder="새로운 비밀번호를 입력하세요"
+                placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*) 8~20자 "
               />
             </div>
             {!passwordError ? ('') : (

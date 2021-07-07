@@ -13,7 +13,9 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [imgFile, setImgFile] = useState('');
-  const [imgUrl, setImgUrl] = useState('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
+  const [imgUrl, setImgUrl] = useState(
+    'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
+  );
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setnewPasswordCheck] = useState('');

@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import '../styles/Main.scss';
 import { Map } from '../components/Map';
 import { Search } from '../components/Search';
 import { CafeInfo } from '../components/CafeInfo';

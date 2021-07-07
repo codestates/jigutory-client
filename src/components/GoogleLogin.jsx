@@ -124,7 +124,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
               </span>
             </button>
           )}
-          //  buttonText="Google 로그인"
           onSuccess={responseGoogle}
         // onFailure={responseGoogle}
         />

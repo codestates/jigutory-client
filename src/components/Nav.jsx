@@ -124,12 +124,6 @@ function Nav({
                 상점
               </button>
             </a>
-            <a href="#">
-              <button className="nav-store nav-btn" onClick={clickStorePage}>
-                상점
-              </button>
-            </a>
-
             <button className="nav-login nav-btn" onClick={handleOpenLogin}>
               로그인
             </button>

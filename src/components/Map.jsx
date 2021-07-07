@@ -1,5 +1,6 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import mapMarker from '../images/main-marker.png';
+import '../styles/Map.scss';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();

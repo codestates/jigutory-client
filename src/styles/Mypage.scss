@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 .mypage-container {
   height: 100vh;
   padding: 20px;
@@ -10,30 +12,60 @@
   .mypage-userinfo {
     display: flex;
     flex-direction: row;
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 260px;
     margin: 25px;
 
     .mypage-userinfo-left {
       display: flex;
-      width: 200px;
+      width: 260px;
       border: 1px solid black;
       justify-content: center;
       align-items: center;
+
+      img {
+        width: 100%;
+        padding: 10px;
+      }
     }
 
     .mypage-userinfo-right {
       display: flex;
       flex-direction: column;
-      width: 200px;
+      width: 220px;
       border: 1px solid black;
       justify-content: center;
 
-      div,
-      button {
-        padding: 10px;
+      .mypage-userinfo-level,
+      .mypage-userinfo-name {
+        display: flex;
+        flex-direction: row;
+        width: 190px;
+        padding: 2px;
         margin: 10px;
         text-align: center;
+        border: 1px solid black;
+
+        .mypage-userinfo-title {
+          width: 60px;
+          height: 30px;
+          float: none;
+          padding-right: 4px;
+          border-right: 1px solid black;
+        }
+
+        .mypage-userinfo-content {
+          padding-left: 10px;
+        }
+      }
+
+      button {
+        font-size: 14px;
+        width: 190px;
+        padding: 9px;
+        margin: 10px;
+        text-align: center;
+        border: 1px solid black;
       }
     }
   }
@@ -41,8 +73,8 @@
   .mypage-eco {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 300px;
+    width: 220px;
+    height: 260px;
     border: 1px solid black;
     justify-content: center;
     margin: 25px;
@@ -63,8 +95,8 @@
   .mypage-badge {
     display: flex;
     flex-direction: column;
-    width: 850px;
-    height: 200px;
+    width: 770px;
+    height: 240px;
     border: 1px solid black;
     margin: 30px;
 
@@ -73,12 +105,12 @@
       font-size: 20px;
       font-weight: 700;
       padding: 13px 0 13px 15px;
+      border-bottom: 1px solid black;
     }
 
     .mypage-badge-list {
       display: flex;
       height: 150px;
-      border: 1px solid black;
       justify-content: center;
       align-items: center;
 

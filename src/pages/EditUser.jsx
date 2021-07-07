@@ -113,20 +113,22 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
   const handleSubmitImg = (e) => {
     e.preventDefault();
-    axios
-      .patch(
-        'http://localhost:4000/user/useredit',
-        { profileImage: imgUrl },
-        {
-          headers: {
-            authorization: accessToken,
-            'Content-Type': 'application/json',
+    if (imgUrl) {
+      axios
+        .patch(
+          'http://localhost:4000/user/useredit',
+          { profileImage: imgUrl },
+          {
+            headers: {
+              authorization: accessToken,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        },
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+        )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
   };
 
   // const resetUsernameInput = () => {

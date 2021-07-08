@@ -1,58 +1,41 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import useClickOutside from '../hooks/useClickOutside';
-import axios from 'axios';
+// import badgeImg from '../images/mypage-badge.png';
+import '../styles/BadgeInfo.scss';
 
-export const BadgeInfo = ({ accessToken }) => {
-  const [clickedBadgeId, setClickedBadgeId] = useState();
-  const [badge, setBadge] = useState('');
-  const [email, setEmail] = useState('');
-
-  const fetchBadge = useCallback(async () => {
-    const badgeListResponse = await axios.post(
-      'http://localhost:4000/badge/read',
-      { email: email },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: accessToken,
-        },
-      },
-    );
-    // const findBadge = badgeListResponse.data.badgeAll.find(
-    //   ({ id }) => id === clickedBadgeId,
-    // );
-    setBadge(badgeListResponse);
-    console.log('badge: ', badgeListResponse.data.badgeAll);
-  }, [accessToken, email]);
-
-  const handleCloseModal = () => {
-    setClickedBadgeId();
+export const BadgeInfo = ({ badge, selectedBadgeId, setSelectedBadgeId }) => {
+  const handleCloseBadge = () => {
+    setSelectedBadgeId();
   };
 
   let domNode = useClickOutside(() => {
-    setClickedBadgeId();
+    setSelectedBadgeId();
   });
 
-  useEffect(() => {
-    fetchBadge();
-  }, [fetchBadge]);
-
-  if (!clickedBadgeId || !badge) {
-    return <></>;
+  if (!selectedBadgeId || !badge) {
+    <div>나중에 다시 시도해 주세요! 뱃지를 불러올 수 없어요.</div>;
   }
 
   return (
-    <div id="badge-modal-container" ref={domNode}>
-      <button className="badge-modal-close" onClick={handleCloseModal}>
-        <i className="fas fa-times"></i>
-      </button>
-      <div id="badge-modal-info">
-        <div id="badge-modal-info-name">{badge.name}</div>
-        <div id="badge-modal-info-description">{badge.description}</div>
-        <div id="badge-modal-info-image">
-          <img src={badge.image} alt="뱃지 모달 이미지" />
-        </div>
+    <div id="badge-container" ref={domNode}>
+      <div className="badge-info" onClick={() => setSelectedBadgeId(badge.id)}>
+        <img src="#" alt="뱃지 이미지"></img>
+        <div className="badge-info-name">뱃지 획득 조건</div>
       </div>
+      {selectedBadgeId === badge.id && (
+        <div id="badge-modal">
+          <div className="badge-modal-flex">
+            <button className="badge-modal-close" onClick={handleCloseBadge}>
+              <i className="fas fa-times"></i>
+            </button>
+            <div className="badge-modal-info-name">{badge.name}</div>
+            <div className="badge-modal-info-description">
+              {badge.description}
+            </div>
+            <img src={badge.image} alt="뱃지 모달 이미지" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

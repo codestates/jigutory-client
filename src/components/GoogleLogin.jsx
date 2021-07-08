@@ -78,16 +78,22 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
 
   const responseGoogle = (res) => {
-    console.log('google res : ', res.dt);
+    console.log('google res : ', res);
     console.log('google token : ', res.accessToken);
 
     const token = res.accessToken;
+    const email = res.profileObj.email;
+    const username = res.profileObj.givenName;
+    const profileImage = res.profileObj.imageUrl;
+    const password = res.googleId;
+
     handleLogin(token);
-    localStorage.setItem('Google-accessToken', res.accessToken);
+    localStorage.setItem('Google-accessToken', token);
+
     axios
       .post(
         `http://localhost:4000/auth/googlesignin`,
-        { email: res.dt.Nt, username: res.dt.uU },
+        { email: email, username: username, profileImage: profileImage, password: password },
         {
           headers: {
             'Content-Type': 'application/json',

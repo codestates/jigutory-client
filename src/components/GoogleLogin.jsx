@@ -164,7 +164,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
             </button>
           )}
           onSuccess={responseGoogle}
-        // onFailure={responseGoogle}
+        //onFailure={responseGoogle}
         />
       }
     </div>

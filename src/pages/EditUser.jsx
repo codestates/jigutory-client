@@ -251,10 +251,11 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               accept="image/*"
               onChange={handleUploadImg}
             ></input>
+            <div id="img_volume"><i className="fas fa-exclamation-circle"></i><span>100kb 미만 이미지만 업로드 가능합니다</span></div>
             <div>
               <label htmlFor="file" className="file_label">
-                프로필 사진 등록
-            </label>
+                사진 등록
+              </label>
               <button onClick={handleSubmitImg}>변경</button>
             </div>
           </div>

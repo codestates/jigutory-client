@@ -52,8 +52,6 @@ function Mypage({ accessToken }) {
       .then((res) => {
         // console 삭제하면 에러뜨는데 이유 못찾음
         console.log('handleClickNum res :', res)
-        console.log('handleClickNum res data.clickNum:', res.data.clickNum);
-        //console.log('handleClickNum res data.getUpdateInfo.clickNum:', res.data.getUpdateInfo.clickNum);
         if (res.data.getUpdateInfo) {
           setClickNum(res.data.getUpdateInfo.clickNum);
           setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
@@ -140,6 +138,7 @@ function Mypage({ accessToken }) {
   console.log('email : ', email);
   console.log('clickNum :', clickNum);
   console.log('level :', levelInfo.level);
+  //useEffect('http://localhost/user/useredit',)
 
   return (
     <div className="mypage-container">

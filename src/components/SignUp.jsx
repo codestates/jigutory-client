@@ -46,7 +46,7 @@ function SignUp({
 
   const validateUsername = (username) => {
     const min = 3;
-    const regUsernaae = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
+    const regUsername = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
 
     // 이름 길이 확인
     if (username.length < min) {
@@ -55,7 +55,7 @@ function SignUp({
     }
 
     // 이름 정규식 확인
-    if (!regUsernaae.test(username)) {
+    if (!regUsername.test(username)) {
       setUsernameError('한글 / 영문 소문자 / 숫자만 허용');
       return false;
     } else {
@@ -106,13 +106,13 @@ function SignUp({
     }
   };
 
-  const handleSignUpRequest = () => {
+  const handleSignUpRequest = async () => {
     const validUsername = validateUsername(username);
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password, passwordCheck);
 
     if (validUsername & validEmail && validPassword) {
-      axios
+      await axios
         .post(
           'http://localhost:4000/auth/signup',
           { username: username, email: email, password: password },
@@ -124,13 +124,11 @@ function SignUp({
           },
         )
         .then((res) => {
-          console.log('signup res.data :', res.data);
           handleUserInfo({
             usename: res.data.username,
             email: res.data.email,
           });
           setIsSignUp(true);
-          setTimeout(moveToIntro, 2000);
         })
         .catch((err) => {
           console.log(err);
@@ -138,10 +136,6 @@ function SignUp({
           setEmailError('이메일이 중복됩니다.');
         });
     }
-  };
-
-  const moveToIntro = () => {
-    history.push('/intro');
   };
 
   const domNode = useClickOutside(() => {
@@ -152,6 +146,9 @@ function SignUp({
     <div className="modal-container show-modal" onClick={handleOpenSignUp}>
       {isSignUp ? (
         <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <button className="modal-close" onClick={handleCloseSignUp}>
+            <i className="fas fa-times"></i>
+          </button>
           <h2 className="modal-success">회원가입에 성공했습니다!</h2>
         </div>
       ) : (

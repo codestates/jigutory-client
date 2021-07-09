@@ -41,7 +41,7 @@ function Login({
     }
   };
 
-  const handleLoginRequest = (e) => {
+  const handleLoginRequest = async (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
     if (!email) {
@@ -54,7 +54,7 @@ function Login({
 
     // email 과 password 가 모두 입력된 경우
     if (email && password) {
-      axios
+      await axios
         .post(
           'http://localhost:4000/auth/signin',
           { email: email, password: password },
@@ -151,10 +151,6 @@ function Login({
             <i className="fas fa-user-plus"></i>
             <span>회원가입</span>
           </button>
-          {/* <GoogleSignup
-            handleLogin={handleLogin}
-            handleUserInfo={handleUserInfo}
-          /> */}
         </div>
       </div>
     </div>

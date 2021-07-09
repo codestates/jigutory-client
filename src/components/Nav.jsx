@@ -103,53 +103,53 @@ function Nav({
           </div>
         </>
       ) : (
-        <>
-          <a href="#">
-            <img
-              className="nav-logo"
-              onClick={clickIntroPage}
-              src={logo}
-              alt="logo"
-            />
-            {/* <div className="nav-title">지구토리</div> */}
-          </a>
-          <div className="buttons">
+          <>
             <a href="#">
-              <button className="nav-main nav-btn" onClick={clickMainPage}>
-                지도
-              </button>
+              <img
+                className="nav-logo"
+                onClick={clickIntroPage}
+                src={logo}
+                alt="logo"
+              />
+              {/* <div className="nav-title">지구토리</div> */}
             </a>
-            <a href="#">
-              <button className="nav-store nav-btn" onClick={clickStorePage}>
-                상점
+            <div className="buttons">
+              <a href="#">
+                <button className="nav-main nav-btn" onClick={clickMainPage}>
+                  지도
               </button>
-            </a>
-            <button className="nav-login nav-btn" onClick={handleOpenLogin}>
-              로그인
+              </a>
+              <a href="#">
+                <button className="nav-store nav-btn" onClick={clickStorePage}>
+                  상점
+              </button>
+              </a>
+              <button className="nav-login nav-btn" onClick={handleOpenLogin}>
+                로그인
             </button>
-            {isLoginOpen && (
-              <Login
-                isLoginOpen={isLoginOpen}
-                handleOpenLogin={handleOpenLogin}
-                handleCloseLogin={handleCloseLogin}
-                handleUserInfo={handleUserInfo}
-                handleLogin={handleLogin}
-                handleOpenSignup={handleOpenSignUp}
-                accessToken={accessToken}
-              />
-            )}
+              {isLoginOpen && (
+                <Login
+                  isLoginOpen={isLoginOpen}
+                  handleOpenLogin={handleOpenLogin}
+                  handleCloseLogin={handleCloseLogin}
+                  handleUserInfo={handleUserInfo}
+                  handleLogin={handleLogin}
+                  handleOpenSignup={handleOpenSignUp}
+                  accessToken={accessToken}
+                />
+              )}
 
-            {isSignUpOpen && (
-              <SignUp
-                isSignUpOpen={isSignUpOpen}
-                handleOpenSignUp={handleOpenSignUp}
-                handleCloseSignUp={handleCloseSignUp}
-                handleUserInfo={handleUserInfo}
-              />
-            )}
-          </div>
-        </>
-      )}
+              {isSignUpOpen && (
+                <SignUp
+                  isSignUpOpen={isSignUpOpen}
+                  handleOpenSignUp={handleOpenSignUp}
+                  handleCloseSignUp={handleCloseSignUp}
+                  handleUserInfo={handleUserInfo}
+                />
+              )}
+            </div>
+          </>
+        )}
     </div>
   );
 }

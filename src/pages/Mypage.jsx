@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import '../styles/Mypage.scss';
 // import { LevelInfo } from '../components/LevelInfo';
-import { BadgeInfo } from '../components/BadgeInfo';
+import badgeImg from '../images/mypage-badge.png';
+import '../styles/Mypage.scss';
 import axios from 'axios';
 import LevelInfo from '../components/LevelInfo';
 import useClickOutside from '../hooks/useClickOutside';
@@ -16,8 +16,8 @@ function Mypage({ accessToken }) {
 
   // user/userinfo 에서 받음
   const [username, setUsername] = useState('');
-  const [profileImage, setProfileImage] = useState('');
   const [email, setEmail] = useState('');
+  const [profileImage, setProfileImage] = useState('');
 
   // badge/read에서 받음
   const [badgeList, setBadgeList] = useState([]);
@@ -42,6 +42,10 @@ function Mypage({ accessToken }) {
 
   const handleCloseModal = () => {
     setIsModalOn(false);
+  };
+
+  const handleCloseBadge = () => {
+    setSelectedBadgeId();
   };
 
   // 클릭 시, 서버에서 불러오는 기능만 하는 함수
@@ -71,6 +75,9 @@ function Mypage({ accessToken }) {
       })
       .catch(res => console.log(res))
   }
+
+
+
 
   if (!profileImage) {
     setProfileImage(
@@ -119,11 +126,9 @@ function Mypage({ accessToken }) {
     axios
       .post(
         'http://localhost:4000/badge/read',
-        { email: '' },
         {
           headers: {
             'Content-Type': 'application/json',
-            //authorization: accessToken,
           },
         },
       )
@@ -138,7 +143,30 @@ function Mypage({ accessToken }) {
   console.log('email : ', email);
   console.log('clickNum :', clickNum);
   console.log('level :', levelInfo.level);
-  //useEffect('http://localhost/user/useredit',)
+
+  useEffect(() => {
+    const badgeOne = document.querySelector('.mypage-badge-image-one');
+    const badgeTwo = document.querySelector('.mypage-badge-image-two');
+    const badgeThree = document.querySelector('.mypage-badge-image-three');
+    const badgeFour = document.querySelector('.mypage-badge-image-four');
+    const badgeFive = document.querySelector('.mypage-badge-image-five');
+
+    if (carbonReduction >= 500) {
+      badgeOne.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 900) {
+      badgeTwo.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 2000) {
+      badgeThree.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 3500) {
+      badgeFour.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 5000) {
+      badgeFive.classList.remove('badgeHide');
+    }
+  }, [carbonReduction]);
 
   return (
     <div className="mypage-container">
@@ -159,6 +187,9 @@ function Mypage({ accessToken }) {
             <div className="mypage-userinfo-name">
               <div className="mypage-userinfo-title">이름</div>
               <div className="mypage-userinfo-content">{username}</div>
+            </div>
+            <div className="mypage-userinfo-email">
+              <div className="mypage-userinfo-content">{email}</div>
             </div>
             <button
               className="mypage-userinfo-edit"
@@ -181,18 +212,71 @@ function Mypage({ accessToken }) {
           <div className="mypage-badge-title">
             <div>내 뱃지 리스트</div>
           </div>
-          {/* <div className="mypage-badge-list">
-            {badgeList.map((badge) => (
-              // <BadgeInfo
-              //   badge={badge}
-              //   selectedBadgeId={selectedBadgeId}
-              //   setSelectedBadgeId={setSelectedBadgeId}
-              // />
+          <div className="mypage-badge-list">
+            <div className="mypage-badge-standard">
+              <div>탄소저감량 500g 이상</div>
+              <div>탄소저감량 900g 이상</div>
+              <div>탄소저감량 2000g 이상</div>
+              <div>탄소저감량 3500g 이상</div>
+              <div>탄소저감량 5000g 이상</div>
+            </div>
+            <div className="mypage-badge-image">
+              <img
+                className="mypage-badge-image-one badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[0].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-two badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[1].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-three badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[2].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-four badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[3].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-five badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[4].id)}
+              ></img>
+            </div>
+          </div>
+          {badgeList
+            .filter((badge) => badge.id === selectedBadgeId)
+            .map((badge) => (
+              <div id="mypage-badge-modal">
+                <div className="mypage-badge-modal-flex">
+                  <button
+                    className="mypage-badge-modal-close"
+                    onClick={handleCloseBadge}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                  <div className="mypage-badge-modal-info-name">
+                    {badge.name}
+                  </div>
+                  <div className="mypage-badge-modal-info-description">
+                    {badge.description}
+                  </div>
+                  <img src={badge.image} alt="뱃지 모달 이미지" />
+                </div>
+              </div>
             ))}
-          </div> */}
         </div>
       </div>
-    </div>
+    </div >
 
   );
 }

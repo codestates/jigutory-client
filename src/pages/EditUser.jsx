@@ -344,6 +344,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
           </section>
           <div id="edituser_withdrawal">
+            <div></div>
             <button onClick={handleOpenModal}>회원 탈퇴</button>
             <button onClick={() => { history.push('/mypage') }}>마이페이지로 돌아가기</button>
           </div>

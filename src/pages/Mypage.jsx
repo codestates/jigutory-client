@@ -24,13 +24,13 @@ function Mypage({ accessToken }) {
   const [selectedBadgeId, setSelectedBadgeId] = useState();
 
   // level/read 에서 받음
-  const [clickNum, setClickNum] = useState('');
+  const [clickNum, setClickNum] = useState(0);
   const [carbonReduction, setCarbonReduction] = useState(0);
   const [levelInfo, setLevelInfo] = useState({
     name: '',
     image: '',
     description: '',
-    level: 1,
+    level: '',
   });
 
   // modal 핸들링 함수
@@ -52,16 +52,23 @@ function Mypage({ accessToken }) {
       .then((res) => {
         // console 삭제하면 에러뜨는데 이유 못찾음
         console.log('handleClickNum res :', res)
-        setClickNum(res.data.clickNum);
-        setCarbonReduction(res.data.carbonReduction);
-        if (res.data.level) {
-          // 여기서 안 담아주면 아래 post에서 name is undefined 에러뜸
-          setLevelInfo({
-            name: res.data.level.name,
-            image: res.data.level.image,
-            description: res.data.level.description,
-            level: res.data.level.id,
-          });
+        console.log('handleClickNum res data.clickNum:', res.data.clickNum);
+        //console.log('handleClickNum res data.getUpdateInfo.clickNum:', res.data.getUpdateInfo.clickNum);
+        if (res.data.getUpdateInfo) {
+          setClickNum(res.data.getUpdateInfo.clickNum);
+          setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
+
+          if (res.data.level) {
+            setLevelInfo({
+              name: res.data.level.name,
+              image: res.data.level.image,
+              description: res.data.level.description,
+              level: res.data.level.id,
+            });
+          }
+        }
+        else {
+          return false;
         }
       })
       .catch(res => console.log(res))
@@ -99,12 +106,13 @@ function Mypage({ accessToken }) {
             console.log('level : ', res)
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
-            setLevelInfo({
-              name: res.data.level.name,
-              image: res.data.level.image,
-              description: res.data.level.description,
-              level: res.data.level.id,
-            })
+            // //level res 에는 res.data.level 없음
+            // setLevelInfo({
+            //   name: res.data.level.name,
+            //   image: res.data.level.image,
+            //   description: res.data.level.description,
+            //   level: res.data.level.id,
+            // })
           })
       })
       .catch((err) => console.log(err));
@@ -132,16 +140,6 @@ function Mypage({ accessToken }) {
   console.log('email : ', email);
   console.log('clickNum :', clickNum);
   console.log('level :', levelInfo.level);
-
-  // useEffect(() => {
-  //   axios.post('http://localhost:4000', {
-  //     email, clickNum
-  //   }, {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     }
-  //   })
-  // })
 
   return (
     <div className="mypage-container">

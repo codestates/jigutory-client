@@ -1,16 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import '../styles/Mypage.scss';
 // import { LevelInfo } from '../components/LevelInfo';
-import { BadgeInfo } from '../components/BadgeInfo';
+import badgeImg from '../images/mypage-badge.png';
+import '../styles/Mypage.scss';
 import axios from 'axios';
+import LevelInfo from '../components/LevelInfo';
+import useClickOutside from '../hooks/useClickOutside';
 axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
   const history = useHistory();
+
+  // modal 상태
+  const [isModalOn, setIsModalOn] = useState(false);
+
+  // user/userinfo 에서 받음
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [profileImage, setProfileImage] = useState('');
+
+  // badge/read에서 받음
+  const [badgeList, setBadgeList] = useState([]);
+  const [selectedBadgeId, setSelectedBadgeId] = useState();
+
+  // level/read 에서 받음
   const [clickNum, setClickNum] = useState(0);
+  const [carbonReduction, setCarbonReduction] = useState(0);
+  const [levelInfo, setLevelInfo] = useState({
+    name: '',
+    image: '',
+    description: '',
+    level: '',
+  });
+
+  // modal 핸들링 함수
+  const handleOpenModal = () => {
+    if (levelInfo) {
+      setIsModalOn(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOn(false);
+  };
+
+  const handleCloseBadge = () => {
+    setSelectedBadgeId();
+  };
+
+  // 클릭 시, 서버에서 불러오는 기능만 하는 함수
+  const handleClickNum = () => {
+    axios.post('http://localhost:4000/level/read',
+      { clickNum, email },
+      { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        // console 삭제하면 에러뜨는데 이유 못찾음
+        console.log('handleClickNum res :', res)
+        if (res.data.getUpdateInfo) {
+          setClickNum(res.data.getUpdateInfo.clickNum);
+          setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
+
+          if (res.data.level) {
+            setLevelInfo({
+              name: res.data.level.name,
+              image: res.data.level.image,
+              description: res.data.level.description,
+              level: res.data.level.id,
+            });
+          }
+        }
+        else {
+          return false;
+        }
+      })
+      .catch(res => console.log(res))
+  }
+
+
+
 
   if (!profileImage) {
     setProfileImage(
@@ -29,9 +96,77 @@ function Mypage({ accessToken }) {
       .then((res) => {
         setUsername(res.data.username);
         setProfileImage(res.data.profileImage);
+        setEmail(res.data.email);
+        console.log('email :', res.data.email);
+        axios
+          .post('http://localhost:4000/level/read',
+            { clickNum: clickNum, email: res.data.email },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                //authorization: accessToken,
+              },
+            }
+          ).then((res) => {
+            console.log('level : ', res)
+            setClickNum(res.data.clickNum);
+            setCarbonReduction(res.data.carbonReduction);
+            // //level res 에는 res.data.level 없음
+            // setLevelInfo({
+            //   name: res.data.level.name,
+            //   image: res.data.level.image,
+            //   description: res.data.level.description,
+            //   level: res.data.level.id,
+            // })
+          })
       })
       .catch((err) => console.log(err));
-  }, [accessToken]);
+
+    // 서버에서 불러와서 상태에 저장하는 리퀘스트
+    axios
+      .post(
+        'http://localhost:4000/badge/read',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then(({ data }) => {
+        setBadgeList(data.badgeAll);
+        // 콘솔 지우면 에러뜸
+        console.log(data.badgeAll);
+      });
+
+  }, [accessToken, setEmail, setClickNum]);
+
+  console.log('email : ', email);
+  console.log('clickNum :', clickNum);
+  console.log('level :', levelInfo.level);
+
+  useEffect(() => {
+    const badgeOne = document.querySelector('.mypage-badge-image-one');
+    const badgeTwo = document.querySelector('.mypage-badge-image-two');
+    const badgeThree = document.querySelector('.mypage-badge-image-three');
+    const badgeFour = document.querySelector('.mypage-badge-image-four');
+    const badgeFive = document.querySelector('.mypage-badge-image-five');
+
+    if (carbonReduction >= 500) {
+      badgeOne.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 900) {
+      badgeTwo.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 2000) {
+      badgeThree.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 3500) {
+      badgeFour.classList.remove('badgeHide');
+    }
+    if (carbonReduction >= 5000) {
+      badgeFive.classList.remove('badgeHide');
+    }
+  }, [carbonReduction]);
 
   return (
     <div className="mypage-container">
@@ -41,13 +176,20 @@ function Mypage({ accessToken }) {
             <img src={profileImage} alt="프로필이미지"></img>
           </div>
           <div className="mypage-userinfo-right">
-            <div className="mypage-userinfo-level">
-              <div className="mypage-userinfo-title">레벨</div>
-              <div className="mypage-userinfo-content"></div>
+            <div className="mypage-userinfo-level" >
+              <div className="mypage-userinfo-title" >레벨</div>
+              <div className="mypage-userinfo-content">{levelInfo.level}</div>
+              <button className="mypage-show_level" onClick={handleOpenModal} >클릭! 레벨 정보를 확인하세요</button>
             </div>
+
+            {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
+
             <div className="mypage-userinfo-name">
               <div className="mypage-userinfo-title">이름</div>
               <div className="mypage-userinfo-content">{username}</div>
+            </div>
+            <div className="mypage-userinfo-email">
+              <div className="mypage-userinfo-content">{email}</div>
             </div>
             <button
               className="mypage-userinfo-edit"
@@ -60,9 +202,9 @@ function Mypage({ accessToken }) {
           </div>
         </div>
         <div className="mypage-eco">
-          <button className="mypage-eco-me">나의 환경 지킨 횟수</button>
+          <button onClick={handleClickNum} className="mypage-eco-me">나의 환경 지킨 횟수 : {clickNum} </button>
           <div className="mypage-eco-total">전체 환경 지킨 횟수</div>
-          <div className="mypage-eco-carbon">나의 탄소 저감량</div>
+          <div className="mypage-eco-carbon">나의 탄소 저감량 : {carbonReduction}</div>
         </div>
       </div>
       <div className="mypage-container-bottom">
@@ -71,16 +213,71 @@ function Mypage({ accessToken }) {
             <div>내 뱃지 리스트</div>
           </div>
           <div className="mypage-badge-list">
-            <BadgeInfo />
-            <div>뱃지1</div>
-            <div>뱃지2</div>
-            <div>뱃지3</div>
-            <div>뱃지4</div>
-            <div>뱃지5</div>
+            <div className="mypage-badge-standard">
+              <div>탄소저감량 500g 이상</div>
+              <div>탄소저감량 900g 이상</div>
+              <div>탄소저감량 2000g 이상</div>
+              <div>탄소저감량 3500g 이상</div>
+              <div>탄소저감량 5000g 이상</div>
+            </div>
+            <div className="mypage-badge-image">
+              <img
+                className="mypage-badge-image-one badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[0].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-two badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[1].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-three badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[2].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-four badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[3].id)}
+              ></img>
+              <img
+                className="mypage-badge-image-five badgeHide"
+                src={badgeImg}
+                alt="뱃지 이미지"
+                onClick={() => setSelectedBadgeId(badgeList[4].id)}
+              ></img>
+            </div>
           </div>
+          {badgeList
+            .filter((badge) => badge.id === selectedBadgeId)
+            .map((badge) => (
+              <div id="mypage-badge-modal">
+                <div className="mypage-badge-modal-flex">
+                  <button
+                    className="mypage-badge-modal-close"
+                    onClick={handleCloseBadge}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                  <div className="mypage-badge-modal-info-name">
+                    {badge.name}
+                  </div>
+                  <div className="mypage-badge-modal-info-description">
+                    {badge.description}
+                  </div>
+                  <img src={badge.image} alt="뱃지 모달 이미지" />
+                </div>
+              </div>
+            ))}
         </div>
       </div>
-    </div>
+    </div >
+
   );
 }
 

@@ -46,7 +46,7 @@ function SignUp({
 
   const validateUsername = (username) => {
     const min = 3;
-    const regUsernaae = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
+    const regUsername = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
 
     // 이름 길이 확인
     if (username.length < min) {
@@ -55,7 +55,7 @@ function SignUp({
     }
 
     // 이름 정규식 확인
-    if (!regUsernaae.test(username)) {
+    if (!regUsername.test(username)) {
       setUsernameError('한글 / 영문 소문자 / 숫자만 허용');
       return false;
     } else {
@@ -124,13 +124,11 @@ function SignUp({
           },
         )
         .then((res) => {
-          console.log('signup res.data :', res.data);
           handleUserInfo({
             usename: res.data.username,
             email: res.data.email,
           });
           setIsSignUp(true);
-          setTimeout(moveToIntro, 2000);
         })
         .catch((err) => {
           console.log(err);
@@ -138,10 +136,6 @@ function SignUp({
           setEmailError('이메일이 중복됩니다.');
         });
     }
-  };
-
-  const moveToIntro = () => {
-    history.push('/intro');
   };
 
   const domNode = useClickOutside(() => {
@@ -152,90 +146,93 @@ function SignUp({
     <div className="modal-container show-modal" onClick={handleOpenSignUp}>
       {isSignUp ? (
         <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <button className="modal-close" onClick={handleCloseSignUp}>
+            <i className="fas fa-times"></i>
+          </button>
           <h2 className="modal-success">회원가입에 성공했습니다!</h2>
         </div>
       ) : (
-          <div
-            ref={domNode}
-            className="modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button className="modal-close" onClick={handleCloseSignUp}>
-              <i className="fas fa-times"></i>
-            </button>
-            <h2 className="modal-header">회원가입</h2>
-            <div className="modal-info">
-              <div className="modal-info-title">이름</div>
-              <input
-                autoFocus
-                type="text"
-                placeholder="한글 / 영문 소문자 / 숫자만 허용"
-                onChange={handleUsername}
-                onKeyPress={onKeyPress}
-                required
-              />
-              {!usernameError ? (
-                ''
-              ) : (
-                  <div className="modal-alert-box">
-                    <i className="fas fa-times"></i>
+        <div
+          ref={domNode}
+          className="modal"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="modal-close" onClick={handleCloseSignUp}>
+            <i className="fas fa-times"></i>
+          </button>
+          <h2 className="modal-header">회원가입</h2>
+          <div className="modal-info">
+            <div className="modal-info-title">이름</div>
+            <input
+              autoFocus
+              type="text"
+              placeholder="한글 / 영문 소문자 / 숫자만 허용"
+              onChange={handleUsername}
+              onKeyPress={onKeyPress}
+              required
+            />
+            {!usernameError ? (
+              ''
+            ) : (
+              <div className="modal-alert-box">
+                <i className="fas fa-times"></i>
                 &nbsp;{usernameError}
-                  </div>
-                )}
-              <div className="modal-info-title">이메일</div>
-              <input
-                type="text"
-                placeholder="영문 소문자 / 숫자 / 특수문자(-_.)만 허용"
-                onChange={handleEmail}
-                onKeyPress={onKeyPress}
-                required
-              />
-              {!emailError ? (
-                ''
-              ) : (
-                  <div className="modal-alert-box">
-                    <i className="fas fa-times"></i>
+              </div>
+            )}
+            <div className="modal-info-title">이메일</div>
+            <input
+              type="text"
+              placeholder="영문 소문자 / 숫자 / 특수문자(-_.)만 허용"
+              onChange={handleEmail}
+              onKeyPress={onKeyPress}
+              required
+            />
+            {!emailError ? (
+              ''
+            ) : (
+              <div className="modal-alert-box">
+                <i className="fas fa-times"></i>
                 &nbsp;{emailError}
-                  </div>
-                )}
-              <div className="modal-info-title">비밀번호</div>
-              <input
-                type="password"
-                placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용"
-                onChange={handlePassword}
-                onKeyPress={onKeyPress}
-                required
-              />
-              {!passwordError ? (
-                ''
-              ) : (
-                  <div className="modal-alert-box">
-                    <i className="fas fa-times"></i>
+              </div>
+            )}
+            <div className="modal-info-title">비밀번호</div>
+            <input
+              type="password"
+              placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용"
+              onChange={handlePassword}
+              onKeyPress={onKeyPress}
+              required
+            />
+            {!passwordError ? (
+              ''
+            ) : (
+              <div className="modal-alert-box">
+                <i className="fas fa-times"></i>
                 &nbsp;{passwordError}
-                  </div>
-                )}
-              <div className="modal-info-title">비밀번호 확인</div>
-              <input
-                type="password"
-                placeholder="비밀번호를 한 번 더 입력해 주세요"
-                onChange={handlePasswordCheck}
-                onKeyPress={onKeyPress}
-                required
-              />
-              {!passwordCheckError ? (
-                ''
-              ) : (
-                  <div className="modal-alert-box">
-                    <i className="fas fa-times"></i>
+              </div>
+            )}
+            <div className="modal-info-title">비밀번호 확인</div>
+            <input
+              type="password"
+              placeholder="비밀번호를 한 번 더 입력해 주세요"
+              onChange={handlePasswordCheck}
+              onKeyPress={onKeyPress}
+              required
+            />
+            {!passwordCheckError ? (
+              ''
+            ) : (
+              <div className="modal-alert-box">
+                <i className="fas fa-times"></i>
                 &nbsp;{passwordError}
-                  </div>
-                )}
-              <button className="signup-btn" onClick={handleSignUpRequest}>
-                회원가입
+              </div>
+            )}
+            <button className="signup-btn" onClick={handleSignUpRequest}>
+              회원가입
             </button>
-            </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

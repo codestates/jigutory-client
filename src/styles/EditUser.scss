@@ -33,9 +33,11 @@
     padding : 5px 12px 5px 12px;
     &:nth-child(1):hover {
       background-color: $error-red;
+      transition : background-color .2s linear;
     }
     &:nth-child(2):hover {
       background-color: rgb(0, 149, 50);
+      transition : background-color .2s linear;
     }
   }
 }
@@ -55,6 +57,7 @@ button {
   &:hover {
     background-color: rgba(0, 0, 0, 0.3);
     color : white;
+    transition : background-color .2s linear;
   }
 }
 
@@ -130,9 +133,26 @@ button {
     #edituser_img {
       display: flex;
       flex-direction: column;
-      div > button{
-        margin-left : 10px;
+      div {
+        button {
+          margin-left : 10px;
+        }
       }
+      #img_volume {
+        display: flex;
+        align-items: center;
+        margin : 0;
+        padding : 0;
+        color :rgba(0, 0, 0, 0.5);
+        font-size : 10px;
+        font-weight: 300;
+
+        .fa-exclamation-circle{
+          margin-right : 5px;
+        }
+        
+      }
+
       .edit_user_fileupload {
         width: 0.1px;
         height: 0.1px;
@@ -154,26 +174,42 @@ button {
         border-radius: 5px;
         display: flex;
         align-items: center;
-    
       }
       .file_label:hover,
       button:hover {
         background-color: rgba(0, 0, 0, 0.3);
-        transition : background-color .1s ease-in-out;
+        transition : background-color .2s linear;
       }
     }
   }
 }
 
-#edituser_withdrawal > button{
-  background-color: $error-red;
-  color : white;
-  &:hover {
-    padding : 4px;
-    background-color: rgba(255, 255, 255, .5);
-    border : 2px solid $error-red;
-    color : $error-red;
-    font-weight: 700;
+#edituser_withdrawal{
+  button:nth-child(1) {
+    margin-right : 10px;
+    background-color: $error-red;
+    color : white;
+    &:hover {
+      padding : 4px;
+      background-color: rgba(255, 255, 255);
+      border : 2px solid $error-red;
+      color : $error-red;
+      font-weight: 700;
+      transition : background-color .2s linear;
+    }
+  }
+  button:nth-child(2) {
+    background-color: $medium-blue;
+    color: white;
+    &:hover {
+      padding : 4px;
+      background-color: rgba(255, 255, 255);
+      border : 2px solid $medium-blue;
+      color : $medium-blue;
+      font-weight: 700;
+      transition : background-color .2s linear;
+    }
   }
 }
+
 

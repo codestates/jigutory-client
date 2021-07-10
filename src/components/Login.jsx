@@ -75,10 +75,11 @@ function Login({
               },
             })
             .then((res) => {
-              handleUserInfo(res.data);
+              // handleUserInfo(res.data);
               handleUserInfo({
                 username: res.data.username,
                 email: res.data.email,
+                imgUrl: res.data.profileImage,
               });
             });
           return res;

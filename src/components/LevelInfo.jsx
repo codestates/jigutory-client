@@ -13,7 +13,7 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
   }
 
   const splitDescription = levelInfo.description.split('.');
-  const splited = splitDescription.slice(0, splitDescription.length - 1);
+  //const splited = splitDescription.slice(0, splitDescription.length - 1);
 
   return (
     <div className="level_container level_hide level_show-modal">
@@ -24,7 +24,7 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
             <div id="level_img"><img src={levelInfo.image} width="100px" /></div>
             <div id="level_level_name">Lv.{levelInfo.level} {levelInfo.name}</div>
             {/*<button>🔽 자세히 보기</button> */}
-            <div id="level_desc" className="hide">{splited.map((row, idx) => (<span id="level_desc_row" key={idx}>{row}.</span>))}</div>
+            <div id="level_desc" className="hide">{splitDescription.map((row, idx) => (<span id="level_desc_row" key={idx}>{row}.</span>))}</div>
           </section>
         </div>
       </div>

@@ -104,7 +104,8 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
         handleLogin(res.data.accessTokenGoogle)
         handleUserInfo({
           username: res.data.googleInfo.username,
-          email: res.data.googleInfo.email
+          email: res.data.googleInfo.email,
+          imgUrl: res.data.googleInfo.profileImage,
         })
         localStorage.setItem('accessToekn', res.data.accessTokenGoogle)
       })

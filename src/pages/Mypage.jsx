@@ -17,23 +17,27 @@ function Mypage({ accessToken }) {
   // user/userinfo 에서 받음
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
 
   // badge/read에서 받음
   const [badgeList, setBadgeList] = useState([]);
   const [selectedBadgeId, setSelectedBadgeId] = useState();
 
-  // level/read 에서 받음
   // 클릭넘이 0일때는 level 인포를 받아오지 못하기때문에
   // 초기값으로 레벨1에 해당하는 정보를 넣어줌
   const [clickNum, setClickNum] = useState(0);
   const [carbonReduction, setCarbonReduction] = useState(0);
   const [levelInfo, setLevelInfo] = useState({
-    name: '해파리 나무 (Jellyfish Tree)',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Jellyfishtreefruits.jpg',
-    description: '세이셸의 마에 섬에 자생하는 속씨식물로서 꽃의 암술이 해파리의 촉수를 닮아서 해파리나무로 불린다. 가뭄에 견디는 내한성을 지니며 바람을 통해 씨앗을 퍼뜨린다. 국제자연보전연맹( IUCN) 멸종위기 “위급” 단계로 분류된다. ',
+    name: '',
+    image: '',
+    description: '',
     level: 1,
   });
+
+  if (!imgUrl) {
+    setImgUrl(
+      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
+  }
 
   // modal 핸들링 함수
   const handleOpenModal = () => {
@@ -50,44 +54,7 @@ function Mypage({ accessToken }) {
     setSelectedBadgeId();
   };
 
-  // 클릭 시, db에서 받아옴 
-  const handleClickNum = () => {
-    axios.post('http://localhost:4000/level/read',
-      { clickNum, email },
-      { headers: { 'Content-Type': 'application/json' } })
-      .then((res) => {
-        // console 삭제하면 에러뜨는데 이유 못찾음
-        console.log('handleClickNum res :', res)
-        if (!res.data.getUpdateInfo) {
-          setClickNum(res.data.clickNum);
-          setCarbonReduction(res.data.carbonReduction);
-        }
-        else if (res.data.getUpdateInfo) {
-          setClickNum(res.data.getUpdateInfo.clickNum);
-          setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
-
-          if (res.data.level) {
-            setLevelInfo({
-              name: res.data.level.name,
-              image: res.data.level.image,
-              description: res.data.level.description,
-              level: res.data.level.id,
-            });
-          }
-        }
-        else {
-          return false;
-        }
-      })
-      .catch(res => console.log(res))
-  }
-
-  if (!profileImage) {
-    setProfileImage(
-      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
-    );
-  }
-
+  // user/userinfo 받기
   useEffect(() => {
     axios
       .get('http://localhost:4000/user/userinfo', {
@@ -97,42 +64,57 @@ function Mypage({ accessToken }) {
         },
       })
       .then((res) => {
+        console.log('userinfo res : ', res)
         setUsername(res.data.username);
-        setProfileImage(res.data.profileImage);
         setEmail(res.data.email);
-        console.log('email :', res.data.email);
-        // 아래 axios 역할 : db 에 저장된 정보를 받아와서 다음 로그인시 유저 레벨과 클릭수를 불러옴
-        // 지우면 db  badge 테이블의 유저정보를 불러올 수 없음
-        // 살려두면 clickNum이 0일경우 +1이 될 수 밖에 없음..
-        axios
-          .post('http://localhost:4000/level/read',
-            // 레벨 필드 생기면 보내줌
-            { clickNum: clickNum, email: res.data.email },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                //authorization: accessToken,
-              },
-            }
-          ).then((res) => {
-            console.log('level : ', res)
-            // 여기서는 현재 clickNum, carbonReduction, level 상태를 db로 보내줌
-            // 0을 보내주면 서버 35번째 줄에서 +1을 해서 보내줌 
-            // 핸들클릭을 하지 않아도 초기 한 번만 받아오기 때문에 0일때만 자동으로 1이 되어서 들어옴
-            setClickNum(res.data.clickNum);
-            setCarbonReduction(res.data.carbonReduction);
-            // //level badge 테이블에 필드 생기면 보내주고 받아오면됨
-            // setLevelInfo({
-            //   name: res.data.level.name,
-            //   image: res.data.level.image,
-            //   description: res.data.level.description,
-            //   level: res.data.level.id,
-            // })
-          })
+        setImgUrl(res.data.profileImage);
       })
-    //.catch((err) => console.log(err));
+  }, [accessToken]);
 
-    // 서버에서 불러와서 상태에 저장하는 리퀘스트
+  console.log('유저네임 상태 :', username);
+  console.log('이미지 상태', imgUrl);
+  console.log('이메일 상태', email);
+
+  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아옴 
+  useEffect(() => {
+    axios
+      .post('http://localhost:4000/level/info',
+        {
+          // clickNum: clickNum,
+          // carbonReduction: carbonReduction,
+          levelNum: levelInfo.level
+        },
+        { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        console.log('level : ', res)
+        setLevelInfo({
+          name: res.data.name,
+          image: res.data.image,
+          description: res.data.description,
+          level: res.data.id,
+        })
+      })
+      .catch((err) => console.log(err));
+  }, [])
+
+  // 클릭 시, db에서 받아옴 (클릭 수 증가시킴 => 탄소저감량 증가)
+  const handleClickNum = () => {
+    console.log('clickNum 클릭 중')
+
+    axios.post('http://localhost:4000/level/read',
+      { email: email },
+      { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        console.log('handleClickNum res :', res)
+        setClickNum(res.data.clickNum);
+        setCarbonReduction(res.data.carbonReduction);
+      })
+      .catch(res => console.log(res))
+  }
+
+
+  // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
+  useEffect(() => {
     axios
       .post(
         'http://localhost:4000/badge/read',
@@ -144,15 +126,10 @@ function Mypage({ accessToken }) {
       )
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
-        // 콘솔 지우면 에러뜸
         console.log(data.badgeAll);
       });
 
   }, []);
-
-  console.log('email : ', email);
-  console.log('clickNum :', clickNum);
-  console.log('level :', levelInfo.level);
 
   useEffect(() => {
     const badgeOne = document.querySelector('.mypage-badge-image-one');
@@ -185,7 +162,7 @@ function Mypage({ accessToken }) {
         <main id="mypage-wholebox">
 
           <section id="mypage-left-box">
-            <img src={profileImage} ></img>
+            <img src={imgUrl} ></img>
             <div className="mypage-userinfo-summary">
               <div className="mypage-userinfo-username">{username} 님 </div>
               <div className="mypage-userinfo-content">{email}</div>

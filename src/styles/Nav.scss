@@ -41,6 +41,7 @@
   font-weight: 700;
   background-color: white;
   cursor: pointer;
+  border-radius: 0;
 
   &:hover {
     background-color: $light_blue;
@@ -51,3 +52,4 @@
     color: $point-color;
   }
 }
+

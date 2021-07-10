@@ -25,6 +25,10 @@ function App() {
   console.log('app.js 상태 토큰 :', accessToken);
   console.log('app.js 상태 isLogin :', isLogin);
 
+  const isLogout = () => {
+    setIsLogin(false);
+  }
+
   const handleLogin = (token) => {
     setAccessToken(token);
     if (token) {
@@ -34,7 +38,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.clear();
-    //setIsLogin(false);
+    // setIsLogin(false);
   };
 
   const handleUserInfo = (obj) => {
@@ -106,7 +110,7 @@ function App() {
                 <EditUser
                   handleUserInfo={handleUserInfo}
                   accessToken={accessToken}
-                  handleLogout={handleLogout}
+                  isLogout={isLogout}
                 />
               )}
             />

@@ -14,30 +14,28 @@ function Mypage({ accessToken }) {
   // modal 상태
   const [isModalOn, setIsModalOn] = useState(false);
 
-  // user/userinfo 에서 받음
+  // user/userinfo에서 받음
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const [createdAt, setCreatedAt] = useState('');
+  const [updatedAt, setUpdatedAt] = useState('');
 
   // badge/read에서 받음
   const [badgeList, setBadgeList] = useState([]);
   const [selectedBadgeId, setSelectedBadgeId] = useState();
 
-  // 클릭넘이 0일때는 level 인포를 받아오지 못하기때문에
-  // 초기값으로 레벨1에 해당하는 정보를 넣어줌
-  const [clickNum, setClickNum] = useState(0);
-  const [carbonReduction, setCarbonReduction] = useState(0);
+  // level/read에서 받음
+  const [clickNum, setClickNum] = useState('');
+  const [carbonReduction, setCarbonReduction] = useState('');
+
+  // level/info에서 받음
   const [levelInfo, setLevelInfo] = useState({
     name: '',
     image: '',
     description: '',
     level: 1,
   });
-
-  if (!imgUrl) {
-    setImgUrl(
-      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
-  }
 
   // modal 핸들링 함수
   const handleOpenModal = () => {
@@ -54,7 +52,7 @@ function Mypage({ accessToken }) {
     setSelectedBadgeId();
   };
 
-  // user/userinfo 받기
+  // user/userinfo 받기 (토큰이 들어올 때 마다 업뎃 [accessToken] : 새로고침시 유저상태 유지 목적)
   useEffect(() => {
     axios
       .get('http://localhost:4000/user/userinfo', {
@@ -69,48 +67,82 @@ function Mypage({ accessToken }) {
         setEmail(res.data.email);
         setImgUrl(res.data.profileImage);
       })
-  }, [accessToken]);
+  }, [accessToken, setEmail, setUsername, setImgUrl, setClickNum]);
+
+  if (imgUrl === null || imgUrl === undefined) {
+    setImgUrl(
+      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
+    );
+  }
+
+  // 마이페이지 켰을 때 유저인포 들어오는 즉시, 초기화되지않게 db에 있는 정보들을 먼저 깔아줌 (근데 유저상태가 비워지면서 에러남 ㅠ)
+  // 이 때 clickNum을 보내줄 필요가 있는지?
+  // useEffect(() => {
+  //   axios.post('http://localhost:4000/level/read',
+  //     { email: 'hyu' },
+  //     { headers: { 'Content-Type': 'application/json' } })
+  //     .then((res) => {
+  //       console.log('level/read res :', res)
+  //       setClickNum(res.data.clickNum);
+  //       setCarbonReduction(res.data.carbonReduction);
+  //       setLevelInfo({ level: res.data.levelNum });
+  //     })
+  //     .catch(err => console.log(err))
+  // }, []);
+
 
   console.log('유저네임 상태 :', username);
   console.log('이미지 상태', imgUrl);
   console.log('이메일 상태', email);
 
-  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아옴 
+  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 (res에 없음)
   useEffect(() => {
     axios
       .post('http://localhost:4000/level/info',
         {
-          // clickNum: clickNum,
-          // carbonReduction: carbonReduction,
+          clickNum: clickNum,
+          carbonReduction: carbonReduction,
           levelNum: levelInfo.level
         },
         { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
-        console.log('level : ', res)
+        console.log('level/info : ', res)
         setLevelInfo({
           name: res.data.name,
           image: res.data.image,
           description: res.data.description,
-          level: res.data.id,
+          //level: res.data.id, // 여기 때문에 레벨은 새로고침이 되고 있음
         })
       })
       .catch((err) => console.log(err));
   }, [])
 
-  // 클릭 시, db에서 받아옴 (클릭 수 증가시킴 => 탄소저감량 증가)
+  // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가) 
+  // (일반로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
+  // (구글로그인 확인) 0이 아닐 때, 클릭 수 증가함, 레벨 증가하는데 초기레벨값이 1로 안 떠서 11이 되면 레벨1이 되고 16되면 레벨2가 됨 => 해결 : 109번째 줄 if에 1추가
+  // => 새로고침하면 초기값으로 돌아갔다가 클릭하면 들어옴 
+  // => level/read or info에서 (info에 있어야할 것 같음)clickNum, carbonReduction, levelNum을 저장해 주고 있지 않음 (res로 안 들어옴)
   const handleClickNum = () => {
     console.log('clickNum 클릭 중')
 
     axios.post('http://localhost:4000/level/read',
-      { email: email },
+      { email: email, clickNum: clickNum },
       { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
-        console.log('handleClickNum res :', res)
+        console.log('handleClickNum(level/read) res :', res)
         setClickNum(res.data.clickNum);
         setCarbonReduction(res.data.carbonReduction);
+        setLevelInfo({ level: res.data.levelNum });
       })
-      .catch(res => console.log(res))
+      .catch(err => console.log(err))
   }
+
+
+
+
+
+
+
 
 
   // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
@@ -126,7 +158,7 @@ function Mypage({ accessToken }) {
       )
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
-        console.log(data.badgeAll);
+        // console.log(data.badgeAll);
       });
 
   }, []);
@@ -198,11 +230,11 @@ function Mypage({ accessToken }) {
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">지구토리 유저 텀블러 사용 횟수</span>
-                  <span>100</span>
+                  <span>ex. 100</span>
                 </div>
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">지구토리 유저 탄소저감량</span>
-                  <span>50,000</span>
+                  <span>ex. 50,000</span>
                 </div>
               </div>
             </div>

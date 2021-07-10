@@ -1,103 +1,95 @@
 @import './_variables.scss';
 
-.mypage-container {
-  padding: 20px;
+
+#color-box {
+  background-color: $medium-blue;
+  height: 200px;
+  width : 100%;
+  position : absolute;
+  z-index: -1;
 }
-.mypage-container-top {
+#mypage-container {
+  color : black;
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  height : 100vh;
+}
 
-  .mypage-userinfo {
-    display: flex;
-    flex-direction: row;
-    width: 500px;
-    height: 260px;
-    margin: 25px;
+#mypage-wholebox {
+  display: flex;
+  justify-content: center;
+  width : 70%;
+}
 
-    .mypage-userinfo-left {
-      display: flex;
-      width: 260px;
-      border: 1px solid black;
-      justify-content: center;
-      align-items: center;
+#mypage-left-box, 
+#mypage-right-box {
+  padding : 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
 
-      img {
-        width: 100%;
-        padding: 10px;
-      }
-    }
-
-    .mypage-userinfo-right {
-      display: flex;
-      flex-direction: column;
-      width: 220px;
-      border: 1px solid black;
-      justify-content: center;
-
-      .mypage-userinfo-email {
-        display: flex;
-        flex-direction: row;
-        width: 190px;
-        padding: 0;
-        margin-left: 50px;
-        margin-bottom: 10px;
-        text-align: center;
-        color: gray;
-        font-size: 14px;
-      }
-
-      .mypage-userinfo-level,
-      .mypage-userinfo-name {
-        display: flex;
-        flex-direction: row;
-        width: 190px;
-        padding: 2px;
-        margin: 10px;
-        text-align: center;
-        border: 1px solid black;
-
-        .mypage-userinfo-title {
-          width: 60px;
-          height: 30px;
-          float: none;
-          padding-right: 4px;
-          border-right: 1px solid black;
-        }
-
-        .mypage-userinfo-content {
-          padding-left: 10px;
-        }
-      }
-
-      button {
-        font-size: 14px;
-        width: 190px;
-        padding: 9px;
-        margin: 10px;
-        text-align: center;
-        border: 1px solid black;
-      }
-    }
+#mypage-left-box {
+  margin-right : 13px;
+  img {
+    width : 8rem;
+    height: 8rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
   }
-
-  .mypage-eco {
+  .mypage-userinfo-summary {
     display: flex;
     flex-direction: column;
-    width: 220px;
-    height: 260px;
-    border: 1px solid black;
-    justify-content: center;
-    margin: 25px;
-
-    div,
-    button {
-      padding: 10px;
-      margin: 10px;
-      text-align: center;
+    align-items: center;
+    .mypage-userinfo-username {
+      font-weight: 600;
     }
   }
 }
+
+#mypage-right-box {
+  div {
+    // top-middle-bottom 사이 간격 띄울때 여기서 margin 으로 조절하기
+    margin : 5px;
+  }
+}
+
+// right-box 안에 컨테이너 늘어나면 여기 추가
+#mypage-container-top,
+#mypage-container-second  {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius : 5px;
+  padding : 8px;
+}
+
+.mypage-userinfo-mylevel, 
+.mypage-total-user {
+  // border : 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  padding : 5px;
+}
+
+.mypage-userinfo-mylevel-section,
+.mypage-total-user-section {
+  border : 1px solid pink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mypage-box-subtitle {
+  margin-bottom : 5px;
+  font-size : 14px;
+  font-weight: 500;
+  color : rgba(0, 0, 0, 0.5);
+  border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+}
+
+//-----------------------------------------------
 
 .mypage-container-bottom {
   display: flex;

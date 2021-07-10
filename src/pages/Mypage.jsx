@@ -24,13 +24,15 @@ function Mypage({ accessToken }) {
   const [selectedBadgeId, setSelectedBadgeId] = useState();
 
   // level/read 에서 받음
+  // 클릭넘이 0일때는 level 인포를 받아오지 못하기때문에
+  // 초기값으로 레벨1에 해당하는 정보를 넣어줌
   const [clickNum, setClickNum] = useState(0);
   const [carbonReduction, setCarbonReduction] = useState(0);
   const [levelInfo, setLevelInfo] = useState({
-    name: '',
-    image: '',
-    description: '',
-    level: '',
+    name: '해파리 나무 (Jellyfish Tree)',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Jellyfishtreefruits.jpg',
+    description: '세이셸의 마에 섬에 자생하는 속씨식물로서 꽃의 암술이 해파리의 촉수를 닮아서 해파리나무로 불린다. 가뭄에 견디는 내한성을 지니며 바람을 통해 씨앗을 퍼뜨린다. 국제자연보전연맹( IUCN) 멸종위기 “위급” 단계로 분류된다. ',
+    level: 1,
   });
 
   // modal 핸들링 함수
@@ -48,7 +50,7 @@ function Mypage({ accessToken }) {
     setSelectedBadgeId();
   };
 
-  // 클릭 시, 서버에서 불러오는 기능만 하는 함수
+  // 클릭 시, db에서 받아옴 
   const handleClickNum = () => {
     axios.post('http://localhost:4000/level/read',
       { clickNum, email },
@@ -56,7 +58,11 @@ function Mypage({ accessToken }) {
       .then((res) => {
         // console 삭제하면 에러뜨는데 이유 못찾음
         console.log('handleClickNum res :', res)
-        if (res.data.getUpdateInfo) {
+        if (!res.data.getUpdateInfo) {
+          setClickNum(res.data.clickNum);
+          setCarbonReduction(res.data.carbonReduction);
+        }
+        else if (res.data.getUpdateInfo) {
           setClickNum(res.data.getUpdateInfo.clickNum);
           setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
 
@@ -76,9 +82,6 @@ function Mypage({ accessToken }) {
       .catch(res => console.log(res))
   }
 
-
-
-
   if (!profileImage) {
     setProfileImage(
       'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
@@ -89,8 +92,8 @@ function Mypage({ accessToken }) {
     axios
       .get('http://localhost:4000/user/userinfo', {
         headers: {
-          authorization: accessToken,
           'Content-Type': 'application/json',
+          authorization: accessToken,
         },
       })
       .then((res) => {
@@ -98,8 +101,12 @@ function Mypage({ accessToken }) {
         setProfileImage(res.data.profileImage);
         setEmail(res.data.email);
         console.log('email :', res.data.email);
+        // 아래 axios 역할 : db 에 저장된 정보를 받아와서 다음 로그인시 유저 레벨과 클릭수를 불러옴
+        // 지우면 db  badge 테이블의 유저정보를 불러올 수 없음
+        // 살려두면 clickNum이 0일경우 +1이 될 수 밖에 없음..
         axios
           .post('http://localhost:4000/level/read',
+            // 레벨 필드 생기면 보내줌
             { clickNum: clickNum, email: res.data.email },
             {
               headers: {
@@ -109,9 +116,12 @@ function Mypage({ accessToken }) {
             }
           ).then((res) => {
             console.log('level : ', res)
+            // 여기서는 현재 clickNum, carbonReduction, level 상태를 db로 보내줌
+            // 0을 보내주면 서버 35번째 줄에서 +1을 해서 보내줌 
+            // 핸들클릭을 하지 않아도 초기 한 번만 받아오기 때문에 0일때만 자동으로 1이 되어서 들어옴
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
-            // //level res 에는 res.data.level 없음
+            // //level badge 테이블에 필드 생기면 보내주고 받아오면됨
             // setLevelInfo({
             //   name: res.data.level.name,
             //   image: res.data.level.image,
@@ -120,7 +130,7 @@ function Mypage({ accessToken }) {
             // })
           })
       })
-      .catch((err) => console.log(err));
+    //.catch((err) => console.log(err));
 
     // 서버에서 불러와서 상태에 저장하는 리퀘스트
     axios
@@ -138,7 +148,7 @@ function Mypage({ accessToken }) {
         console.log(data.badgeAll);
       });
 
-  }, [accessToken, setEmail, setClickNum]);
+  }, []);
 
   console.log('email : ', email);
   console.log('clickNum :', clickNum);
@@ -169,115 +179,136 @@ function Mypage({ accessToken }) {
   }, [carbonReduction]);
 
   return (
-    <div className="mypage-container">
-      <div className="mypage-container-top">
-        <div className="mypage-userinfo">
-          <div className="mypage-userinfo-left">
-            <img src={profileImage} alt="프로필이미지"></img>
-          </div>
-          <div className="mypage-userinfo-right">
-            <div className="mypage-userinfo-level" >
-              <div className="mypage-userinfo-title" >레벨</div>
-              <div className="mypage-userinfo-content">{levelInfo.level}</div>
-              <button className="mypage-show_level" onClick={handleOpenModal} >클릭! 레벨 정보를 확인하세요</button>
-            </div>
+    <>
+      <div id="color-box"></div>
+      <div id="mypage-container">
+        <main id="mypage-wholebox">
 
-            {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
-
-            <div className="mypage-userinfo-name">
-              <div className="mypage-userinfo-title">이름</div>
-              <div className="mypage-userinfo-content">{username}</div>
-            </div>
-            <div className="mypage-userinfo-email">
+          <section id="mypage-left-box">
+            <img src={profileImage} ></img>
+            <div className="mypage-userinfo-summary">
+              <div className="mypage-userinfo-username">{username} 님 </div>
               <div className="mypage-userinfo-content">{email}</div>
+              <button className="mypage-userinfo-edit" onClick={() => { history.push('/edituser') }}>회원정보 수정</button>
             </div>
-            <button
-              className="mypage-userinfo-edit"
-              onClick={() => {
-                history.push('/edituser');
-              }}
-            >
-              회원정보 수정
-            </button>
-          </div>
-        </div>
-        <div className="mypage-eco">
-          <button onClick={handleClickNum} className="mypage-eco-me">나의 환경 지킨 횟수 : {clickNum} </button>
-          <div className="mypage-eco-total">전체 환경 지킨 횟수</div>
-          <div className="mypage-eco-carbon">나의 탄소 저감량 : {carbonReduction}</div>
-        </div>
-      </div>
-      <div className="mypage-container-bottom">
-        <div className="mypage-badge">
-          <div className="mypage-badge-title">
-            <div>내 뱃지 리스트</div>
-          </div>
-          <div className="mypage-badge-list">
-            <div className="mypage-badge-standard">
-              <div>탄소저감량 500g 이상</div>
-              <div>탄소저감량 900g 이상</div>
-              <div>탄소저감량 2000g 이상</div>
-              <div>탄소저감량 3500g 이상</div>
-              <div>탄소저감량 5000g 이상</div>
-            </div>
-            <div className="mypage-badge-image">
-              <img
-                className="mypage-badge-image-one badgeHide"
-                src={badgeImg}
-                alt="뱃지 이미지"
-                onClick={() => setSelectedBadgeId(badgeList[0].id)}
-              ></img>
-              <img
-                className="mypage-badge-image-two badgeHide"
-                src={badgeImg}
-                alt="뱃지 이미지"
-                onClick={() => setSelectedBadgeId(badgeList[1].id)}
-              ></img>
-              <img
-                className="mypage-badge-image-three badgeHide"
-                src={badgeImg}
-                alt="뱃지 이미지"
-                onClick={() => setSelectedBadgeId(badgeList[2].id)}
-              ></img>
-              <img
-                className="mypage-badge-image-four badgeHide"
-                src={badgeImg}
-                alt="뱃지 이미지"
-                onClick={() => setSelectedBadgeId(badgeList[3].id)}
-              ></img>
-              <img
-                className="mypage-badge-image-five badgeHide"
-                src={badgeImg}
-                alt="뱃지 이미지"
-                onClick={() => setSelectedBadgeId(badgeList[4].id)}
-              ></img>
-            </div>
-          </div>
-          {badgeList
-            .filter((badge) => badge.id === selectedBadgeId)
-            .map((badge) => (
-              <div id="mypage-badge-modal">
-                <div className="mypage-badge-modal-flex">
-                  <button
-                    className="mypage-badge-modal-close"
-                    onClick={handleCloseBadge}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                  <div className="mypage-badge-modal-info-name">
-                    {badge.name}
-                  </div>
-                  <div className="mypage-badge-modal-info-description">
-                    {badge.description}
-                  </div>
-                  <img src={badge.image} alt="뱃지 모달 이미지" />
+          </section>
+
+
+          <section id="mypage-right-box">
+            <h3>나의 환경지킴 지수</h3>
+            <div id="mypage-container-top">
+              <div className="mypage-userinfo-mylevel">
+                <div className="mypage-userinfo-mylevel-section">
+                  <span className="mypage-box-subtitle">마이 레벨</span>
+                  <button className="mypage-show_level" onClick={handleOpenModal} >Lv. {levelInfo.level}</button>
+                  {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
+                </div>
+                <div className="mypage-userinfo-mylevel-section">
+                  <span className="mypage-box-subtitle">텀블러 사용 횟수</span>
+                  <button onClick={handleClickNum} className="mypage-eco-me">{clickNum} </button>
+                </div>
+                <div className="mypage-userinfo-mylevel-section">
+                  <span className="mypage-box-subtitle">탄소 저감량</span>
+                  <span className="mypage-eco-carbon">{carbonReduction}</span>
                 </div>
               </div>
-            ))}
-        </div>
-      </div>
-    </div >
+            </div>
 
+
+            <h3>지구토리 유저의 환경지킴 지수</h3>
+
+            <div id="mypage-container-second">
+              <div className="mypage-total-user">
+                <div className="mypage-total-user-section">
+                  <span className="mypage-box-subtitle">지구토리 유저 텀블러 사용 횟수</span>
+                  <span>100</span>
+                </div>
+                <div className="mypage-total-user-section">
+                  <span className="mypage-box-subtitle">지구토리 유저 탄소저감량</span>
+                  <span>50,000</span>
+                </div>
+              </div>
+            </div>
+
+
+            <h3>나의 환경 뱃지</h3>
+
+            <div className="mypage-container-bottom">
+              <div className="mypage-badge">
+                <div className="mypage-badge-title">
+                  <div>내 뱃지 리스트</div>
+                </div>
+                <div className="mypage-badge-list">
+                  <div className="mypage-badge-standard">
+                    <div>탄소저감량 500g 이상</div>
+                    <div>탄소저감량 900g 이상</div>
+                    <div>탄소저감량 2000g 이상</div>
+                    <div>탄소저감량 3500g 이상</div>
+                    <div>탄소저감량 5000g 이상</div>
+                  </div>
+                  <div className="mypage-badge-image">
+                    <img
+                      className="mypage-badge-image-one badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[0].id)}
+                    ></img>
+                    <img
+                      className="mypage-badge-image-two badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[1].id)}
+                    ></img>
+                    <img
+                      className="mypage-badge-image-three badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[2].id)}
+                    ></img>
+                    <img
+                      className="mypage-badge-image-four badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[3].id)}
+                    ></img>
+                    <img
+                      className="mypage-badge-image-five badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[4].id)}
+                    ></img>
+                  </div>
+                </div>
+                {badgeList
+                  .filter((badge) => badge.id === selectedBadgeId)
+                  .map((badge) => (
+                    <div id="mypage-badge-modal">
+                      <div className="mypage-badge-modal-flex">
+                        <button
+                          className="mypage-badge-modal-close"
+                          onClick={handleCloseBadge}
+                        >
+                          <i className="fas fa-times"></i>
+                        </button>
+                        <div className="mypage-badge-modal-info-name">
+                          {badge.name}
+                        </div>
+                        <div className="mypage-badge-modal-info-description">
+                          {badge.description}
+                        </div>
+                        <img src={badge.image} alt="뱃지 모달 이미지" />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+
+          </section>
+        </main>
+
+      </div >
+    </>
   );
 }
 

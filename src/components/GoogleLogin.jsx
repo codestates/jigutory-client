@@ -102,7 +102,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
           username: res.data.googleInfo.username,
           email: res.data.googleInfo.email,
         });
-        localStorage.setItem('accessToekn', res.data.accessTokenGoogle);
+        localStorage.setItem('accessToken', res.data.accessTokenGoogle);
       })
       .catch((err) => console.log(err));
   };

@@ -1,6 +1,5 @@
 @import './_variables.scss';
 
-
 #color-box {
   background-color: $medium-blue;
   height: 200px;
@@ -43,6 +42,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    * {
+      margin : 10px;
+    }
+    button {
+
+    }
     .mypage-userinfo-username {
       font-weight: 600;
     }

@@ -3,6 +3,7 @@ import useClickOutside from '../hooks/useClickOutside';
 import '../styles/LevelInfo.scss';
 
 const LevelInfo = ({ levelInfo, handleCloseModal }) => {
+  console.log('levelinfo component props ', levelInfo)
   // modal 상태
   const domNode = useClickOutside(() => {
     handleCloseModal();

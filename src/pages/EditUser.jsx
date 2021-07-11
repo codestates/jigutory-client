@@ -256,7 +256,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               <label htmlFor="file" className="file_label">
                 사진 등록
               </label>
-              <button onClick={handleSubmitImg}>변경</button>
+              <button className="file_label" onClick={handleSubmitImg}>변경</button>
             </div>
           </div>
 
@@ -284,7 +284,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
             )}
             <div>
               <div></div>
-              <button onClick={usernameRequestHandler} >닉네임 변경</button>
+              <button className="edituser_changebtn" onClick={usernameRequestHandler} >닉네임 변경</button>
             </div>
 
             <div className="edituser_confirm_msg">
@@ -335,7 +335,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
             {<div>
               <div></div>
-              <button onClick={newPasswordRequestHandler}>비밀번호 변경</button>
+              <button className="edituser_changebtn" onClick={newPasswordRequestHandler}>비밀번호 변경</button>
             </div>}
 
             <div className="edituser_confirm_msg">
@@ -363,3 +363,4 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 };
 
 export default withRouter(EditUser);
+

@@ -66,8 +66,22 @@ function Mypage({ accessToken }) {
         setUsername(res.data.username);
         setEmail(res.data.email);
         setImgUrl(res.data.profileImage);
+        axios
+          .post('http://localhost:4000/level/read',
+            { email: res.data.email }, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((res) => {
+            console.log('level/read res :', res);
+            setClickNum(res.data.clickNum);
+            setCarbonReduction(res.data.carbonReduction);
+            setLevelInfo({ level: res.data.levelNum });
+          })
       })
-  }, [accessToken, setEmail, setUsername, setImgUrl, setClickNum]);
+      .catch(err => console.log(err));
+  }, [accessToken]);
 
   if (imgUrl === null || imgUrl === undefined) {
     setImgUrl(
@@ -75,29 +89,14 @@ function Mypage({ accessToken }) {
     );
   }
 
-  // 마이페이지 켰을 때 유저인포 들어오는 즉시, 초기화되지않게 db에 있는 정보들을 먼저 깔아줌 (근데 유저상태가 비워지면서 에러남 ㅠ)
-  // 이 때 clickNum을 보내줄 필요가 있는지?
-  // useEffect(() => {
-  //   axios.post('http://localhost:4000/level/read',
-  //     { email: 'hyu' },
-  //     { headers: { 'Content-Type': 'application/json' } })
-  //     .then((res) => {
-  //       console.log('level/read res :', res)
-  //       setClickNum(res.data.clickNum);
-  //       setCarbonReduction(res.data.carbonReduction);
-  //       setLevelInfo({ level: res.data.levelNum });
-  //     })
-  //     .catch(err => console.log(err))
-  // }, []);
-
-
   console.log('유저네임 상태 :', username);
   console.log('이미지 상태', imgUrl);
   console.log('이메일 상태', email);
 
-  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 (res에 없음)
-  useEffect(() => {
-    axios
+  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 
+  // => userinfo 받아올때 then 안에서 level/read로 받아보기
+  useEffect(async () => {
+    await axios
       .post('http://localhost:4000/level/info',
         {
           clickNum: clickNum,
@@ -115,10 +114,10 @@ function Mypage({ accessToken }) {
         })
       })
       .catch((err) => console.log(err));
-  }, [])
+  }, [setClickNum])
 
   // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가) 
-  // (일반로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
+  // [] (일반로그인 & 구글로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
   // (구글로그인 확인) 0이 아닐 때, 클릭 수 증가함, 레벨 증가하는데 초기레벨값이 1로 안 떠서 11이 되면 레벨1이 되고 16되면 레벨2가 됨 => 해결 : 109번째 줄 if에 1추가
   // => 새로고침하면 초기값으로 돌아갔다가 클릭하면 들어옴 
   // => level/read or info에서 (info에 있어야할 것 같음)clickNum, carbonReduction, levelNum을 저장해 주고 있지 않음 (res로 안 들어옴)
@@ -198,7 +197,7 @@ function Mypage({ accessToken }) {
             <div className="mypage-userinfo-summary">
               <div className="mypage-userinfo-username">{username} 님 </div>
               <div className="mypage-userinfo-content">{email}</div>
-              <button className="mypage-userinfo-edit" onClick={() => { history.push('/edituser') }}>회원정보 수정</button>
+              <button className="mypage-userinfo-edit mypage-btn" onClick={() => { history.push('/edituser') }}>회원정보 수정</button>
             </div>
           </section>
 
@@ -209,12 +208,12 @@ function Mypage({ accessToken }) {
               <div className="mypage-userinfo-mylevel">
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">마이 레벨</span>
-                  <button className="mypage-show_level" onClick={handleOpenModal} >Lv. {levelInfo.level}</button>
+                  <button className="mypage-show_level  mypage-btn" onClick={handleOpenModal} >Lv. {levelInfo.level}</button>
                   {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">텀블러 사용 횟수</span>
-                  <button onClick={handleClickNum} className="mypage-eco-me">{clickNum} </button>
+                  <button onClick={handleClickNum} className="mypage-eco-me  mypage-btn">{clickNum} </button>
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">탄소 저감량</span>
@@ -234,7 +233,7 @@ function Mypage({ accessToken }) {
                 </div>
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">지구토리 유저 탄소저감량</span>
-                  <span>ex. 50,000</span>
+                  <span id="test">ex. 50,000</span>
                 </div>
               </div>
             </div>

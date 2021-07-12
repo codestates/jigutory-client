@@ -5,6 +5,8 @@ import LevelInfo from '../components/LevelInfo';
 // import useClickOutside from '../hooks/useClickOutside';
 import '../styles/Mypage.scss';
 import axios from 'axios';
+import LevelInfo from '../components/LevelInfo';
+import useClickOutside from '../hooks/useClickOutside';
 axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
@@ -24,6 +26,27 @@ function Mypage({ accessToken }) {
     level: '',
   });
 
+  const handleOpenModal = () => {
+    if (levelInfo) {
+      setIsModalOn(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOn(false);
+  };
+
+  // level/read 에서 받음
+  const [clickNum, setClickNum] = useState(0);
+  const [carbonReduction, setCarbonReduction] = useState(0);
+  const [levelInfo, setLevelInfo] = useState({
+    name: '',
+    image: '',
+    description: '',
+    level: '',
+  });
+
+  // modal 핸들링 함수
   const handleOpenModal = () => {
     if (levelInfo) {
       setIsModalOn(true);
@@ -105,6 +128,7 @@ function Mypage({ accessToken }) {
       })
       .catch((err) => console.log(err));
 
+    // 서버에서 불러와서 상태에 저장하는 리퀘스트
     axios
       .post('http://localhost:4000/badge/read', {
         headers: {
@@ -114,7 +138,6 @@ function Mypage({ accessToken }) {
       })
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
-        console.log('badge: ', data.badgeAll);
       });
   }, [accessToken, setEmail, setClickNum]);
 

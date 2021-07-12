@@ -95,7 +95,10 @@ function Nav({
               </button>
             </a>
             <a href="/">
-              <button className="nav-logout nav-btn" onClick={handleLogout}>
+              <button
+                className="nav-logout nav-btn"
+                onClick={handleLogout}
+              >
                 로그아웃
               </button>
             </a>

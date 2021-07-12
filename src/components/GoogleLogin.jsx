@@ -76,6 +76,39 @@ axios.defaults.withCredentials = true;
 const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
   const GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
 
+  // const responseGoogle = useCallback(async (res) => {
+  //   const token = res.accessToken;
+  //   const email = res.profileObj.email;
+  //   const username = res.profileObj.givenName;
+  //   const profileImage = res.profileObj.imageUrl;
+  //   const password = res.googleId;
+
+  //   handleLogin(token);
+  //   localStorage.setItem('Google-accessToken', token);
+
+  //   await axios
+  //     .post(
+  //       `http://localhost:4000/auth/googlesignin`,
+  //       { email: email, username: username, profileImage: profileImage, password: password },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           authorization: res.accessToken,
+  //         },
+  //       },
+  //     )
+  //     .then((res) => {
+  //       console.log(`thisisfirstgooglesigninres`, res);
+  //       handleLogin(res.data.accessTokenGoogle);
+  //       handleUserInfo({
+  //         username: res.data.googleInfo.username,
+  //         email: res.data.googleInfo.email,
+  //       });
+  //       localStorage.setItem('accessToekn', res.data.accessTokenGoogle);
+  //     })
+  //     .catch((err) => console.log(err));
+
+  // })
   const responseGoogle = async (res) => {
     console.log('google res : ', res);
     console.log('google token : ', res.accessToken);

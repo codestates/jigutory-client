@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { LevelInfo } from '../components/LevelInfo';
 import badgeImg from '../images/mypage-badge.png';
-import '../styles/Mypage.scss';
-import axios from 'axios';
 import LevelInfo from '../components/LevelInfo';
 import useClickOutside from '../hooks/useClickOutside';
+import '../styles/Mypage.scss';
+import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
@@ -24,16 +23,14 @@ function Mypage({ accessToken }) {
   const [badgeList, setBadgeList] = useState([]);
   const [selectedBadgeId, setSelectedBadgeId] = useState();
 
-  // level/read에서 받음
-  const [clickNum, setClickNum] = useState(10);
-  const [carbonReduction, setCarbonReduction] = useState(500);
-
-  // level/info에서 받음
+  // level/read 에서 받음
+  const [clickNum, setClickNum] = useState(0);
+  const [carbonReduction, setCarbonReduction] = useState(0);
   const [levelInfo, setLevelInfo] = useState({
     name: '',
     image: '',
     description: '',
-    level: 1,
+    level: '',
   });
 
   const date = createdAt.split('T').splice(0, 1);
@@ -184,6 +181,11 @@ function Mypage({ accessToken }) {
     }
   }, [carbonReduction]);
 
+
+  const domNode = useClickOutside(() => {
+    handleCloseBadge();
+  });
+
   return (
     <>
       <div id="color-box"></div>
@@ -263,7 +265,7 @@ function Mypage({ accessToken }) {
                     <div>탄소저감량 3500g 이상</div>
                     <div>탄소저감량 5000g 이상</div>
                   </div>
-                  <div className="mypage-badge-image">
+                  <div className="mypage-badge-image" >
                     <img
                       className="mypage-badge-image-one badgeHide"
                       src={badgeImg}
@@ -298,8 +300,8 @@ function Mypage({ accessToken }) {
                 </div>
                 {badgeList
                   .filter((badge) => badge.id === selectedBadgeId)
-                  .map((badge) => (
-                    <div id="mypage-badge-modal">
+                  .map((badge, idx) => (
+                    <div id="mypage-badge-modal" key={idx} ref={domNode}>
                       <div className="mypage-badge-modal-flex">
                         <button
                           className="mypage-badge-modal-close"

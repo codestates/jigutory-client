@@ -56,7 +56,7 @@ function Login({
     if (email && password) {
       await axios
         .post(
-          'http://localhost:4000/auth/signin',
+          'https://jigutory.com/auth/signin',
           { email: email, password: password },
           {
             headers: {
@@ -67,7 +67,7 @@ function Login({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
-          axios.get('http://localhost:4000/user/userinfo', {
+          axios.get('https://jigutory.com/user/userinfo', {
             headers: {
               'Content-Type': 'application/json',
               authorization: res.data.data.accessToken,

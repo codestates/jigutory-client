@@ -50,7 +50,7 @@ function Mypage({ accessToken }) {
 
   // 클릭 시, 서버에서 불러오는 기능만 하는 함수
   const handleClickNum = () => {
-    axios.post('http://localhost:4000/level/read',
+    axios.post('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/level/read',
       { clickNum, email },
       { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
@@ -87,7 +87,7 @@ function Mypage({ accessToken }) {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/userinfo', {
+      .get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/userinfo', {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function Mypage({ accessToken }) {
         setEmail(res.data.email);
         console.log('email :', res.data.email);
         axios
-          .post('http://localhost:4000/level/read',
+          .post('hhttps://ec2-100-26-225-39.compute-1.amazonaws.com:80/level/read',
             { clickNum: clickNum, email: res.data.email },
             {
               headers: {
@@ -125,7 +125,7 @@ function Mypage({ accessToken }) {
     // 서버에서 불러와서 상태에 저장하는 리퀘스트
     axios
       .post(
-        'http://localhost:4000/badge/read',
+        'https://ec2-100-26-225-39.compute-1.amazonaws.com:80/badge/read',
         {
           headers: {
             'Content-Type': 'application/json',

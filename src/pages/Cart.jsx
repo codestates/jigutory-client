@@ -18,7 +18,7 @@ function Cart(accessToken, userInfo) {
 
   useEffect(()=>{
     if(userinfo.email){
-      axios.post('http://localhost:4000/cart/read',{
+      axios.post('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/cart/read',{
         email:userinfo.email
       },
       {

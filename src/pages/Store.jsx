@@ -14,7 +14,7 @@ function Store({ accessToken, userInfo }) {
   
   useEffect (() =>{
     axios.post(
-      'http://localhost:4000/product/list',
+      'https://ec2-100-26-225-39.compute-1.amazonaws.com:/product/list',
       { email : userInfo.email },
       {
         headers : {
@@ -29,7 +29,7 @@ function Store({ accessToken, userInfo }) {
 
   const handleAdd = async (e) => {
     console.log(e)
-    await axios.post('http://localhost:4000/product/list', 
+    await axios.post('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/product/list', 
     { email : userInfo.email , productId:e},
     {
       headers : {

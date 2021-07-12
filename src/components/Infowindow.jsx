@@ -16,7 +16,7 @@ function Map() {
   let cafes = [];
 
   useEffect(() => {
-    axios.get('http://localhost:4000/cafe/list', {
+    axios.get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/cafe/list', {
       headers: {
         "Content-Type": "application/json",
       }

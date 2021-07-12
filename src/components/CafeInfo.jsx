@@ -8,7 +8,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
   const [cafe, setCafe] = useState('');
 
   const fetchCafe = useCallback(async () => {
-    const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');
+    const cafeListResponse = await axios.get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/cafe/list');
     const findCafe = cafeListResponse.data.find(
       ({ id }) => id === toggledCafeId,
     );

@@ -125,7 +125,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 
     await axios
       .post(
-        `http://localhost:4000/auth/googlesignin`,
+        `https://ec2-100-26-225-39.compute-1.amazonaws.com:80/auth/googlesignin`,
         { email: email, username: username, profileImage: profileImage, password: password },
         {
           headers: {

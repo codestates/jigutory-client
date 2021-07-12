@@ -10,7 +10,7 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
   const [categoryInput, setCategoryInput] = useState('카테고리를 선택한 후 검색어를 입력하세요!');
 
   const fetchCafeList = async () => {
-    const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');
+    const cafeListResponse = await axios.get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/cafe/list');
     setCafeList(cafeListResponse.data);
   };
 

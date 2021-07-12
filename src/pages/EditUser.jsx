@@ -242,7 +242,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     }
   };
 
-  console.log(imgConfirmMessage)
   return (
     <div id="edituser_page">
       <div>

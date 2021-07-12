@@ -32,7 +32,7 @@ function Mypage({ accessToken }) {
     name: '',
     image: '',
     description: '',
-    level: '',
+    level: 1,
   });
 
   const date = createdAt.split('T').splice(0, 1);
@@ -69,7 +69,7 @@ function Mypage({ accessToken }) {
         setCreatedAt(res.data.createdAt)
         axios
           .post('http://localhost:4000/level/read',
-            { email: res.data.email }, {
+            { email: res.data.email, clickNum: clickNum }, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -98,12 +98,12 @@ function Mypage({ accessToken }) {
 
   // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 
   // => userinfo 받아올때 then 안에서 level/read로 받아보기
-  useEffect(async () => {
-    await axios
+  useEffect(() => {
+    axios
       .post('http://localhost:4000/level/info',
         {
-          clickNum: clickNum,
-          carbonReduction: carbonReduction,
+          // clickNum: clickNum,
+          // carbonReduction: carbonReduction,
           levelNum: levelInfo.level
         },
         { headers: { 'Content-Type': 'application/json' } })
@@ -113,11 +113,11 @@ function Mypage({ accessToken }) {
           name: res.data.name,
           image: res.data.image,
           description: res.data.description,
-          //level: res.data.id, // 여기 때문에 레벨은 새로고침이 되고 있음
+          level: res.data.id, // 여기 때문에 레벨은 새로고침이 되고 있음
         })
       })
       .catch((err) => console.log(err));
-  }, [setClickNum])
+  }, [])
 
   // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가) 
   // [] (일반로그인 & 구글로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
@@ -183,9 +183,17 @@ function Mypage({ accessToken }) {
     }
   }, [carbonReduction]);
 
-  const handleFriends = () => {
-
+  const handleAddFriends = () => {
+    setAddFriends('🛠 개발 중인 기능입니다');
+    setTimeout(() => setAddFriends(''), 2000)
+    console.log('click');
   }
+
+  // useEffect(() => {
+  //   return () => {
+  //     clearTimeout(handleAddFriends)
+  //   }
+  // }, [setAddFriends])
 
   const domNode = useClickOutside(() => {
     handleCloseBadge();
@@ -268,7 +276,8 @@ function Mypage({ accessToken }) {
                 <div>
                   <h4>국내 플라스틱컵 사용량 연간 33억개</h4>
                   <p>플라스틱컵 한 개를 만들고 폐기하는데 약 25g의 이산화탄소가 배출됩니다. <br />오늘도 지구토리와 함께 탄소발자국을 줄여보세요 ! </p>
-                  <button> 친구초대</button>
+                  <button onClick={handleAddFriends}> 친구초대</button>
+                  {<div id="mypage-addfriends">{addFriends}</div>}
                 </div>
               </div>
 

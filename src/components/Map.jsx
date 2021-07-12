@@ -52,22 +52,33 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
           image: markerImage,
           clickable: true,
         });
-        marker.setMap(map);
+
+        const closeOverlay = function () {
+          overlay.setMap(null);
+        };
+
+        const content =
+          '<div className="map-container">' +
+          '    <div className="map-info">' +
+          '        <div className="map-info-name">' +
+          '            name' +
+          '            <div className="map-info-close" onclick={closeOverlay}>' +
+          '                <i className="fas fa-times"></i>' +
+          '            </div>' +
+          '        </div>' +
+          '    </div>' +
+          '</div>';
 
         const overlay = new window.kakao.maps.CustomOverlay({
-          content: name,
+          content: content,
           map: map,
           position: latLng,
           // position: marker.getPosition()
         });
 
-        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
+        window.kakao.maps.event.addListener(marker, 'click', function () {
           overlay.setMap(map);
         });
-
-        function closeOverlay() {
-          overlay.setMap(null);
-        }
 
         // const iwRemoveable = true;
         // const infoWindow = new window.kakao.maps.InfoWindow({
@@ -75,6 +86,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         //   content: name,
         //   removable: iwRemoveable,
         // });
+        // marker.setMap(map);
 
         // window.kakao.maps.event.addListener(
         //   marker,
@@ -122,13 +134,13 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         //   // 데이터에서 좌표 값을 가지고 마커를 표시합니다
         //   // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
         //   var markers = $(data.positions).map(function (i, position) {
-        //     return new kakao.maps.Marker({
-        //       position: new kakao.maps.LatLng(position.lat, position.lng),
+        //     return new window.kakao.maps.Marker({
+        //       position: new window.kakao.maps.LatLng(position.lat, position.lng),
         //     });
         //   });
 
-        // // 클러스터러에 마커들을 추가합니다
-        // clusterer.addMarkers(markers);
+        //   // 클러스터러에 마커들을 추가합니다
+        //   clusterer.addMarkers(markers);
         // });
       });
     }

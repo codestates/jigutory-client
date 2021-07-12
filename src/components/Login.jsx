@@ -78,7 +78,14 @@ function Login({
               username: res.data.username,
               email: res.data.email
             })
-          })
+            .then((res) => {
+              // handleUserInfo(res.data);
+              handleUserInfo({
+                username: res.data.username,
+                email: res.data.email,
+                imgUrl: res.data.profileImage,
+              });
+            });
           return res;
         })
         .then((res) => {

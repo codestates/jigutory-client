@@ -1,19 +1,27 @@
-$point-color: rgb(18, 143, 200); 
+$point-color: rgb(18, 143, 200);
 
-$title_blue: rgb(8, 70, 99); 
+$title_blue: rgb(8, 70, 99);
 
-$button_blue :  rgba(8, 70, 99, .7); 
+$button_blue: rgba(8, 70, 99, 0.7);
 
-$light_blue : rgb(132, 192, 215);
+$light_blue: rgb(132, 192, 215);
 
-$medium_blue : rgb(90, 116, 163);
+$medium_blue: rgb(90, 116, 163);
 
-$medium_blue-text : rgba(90, 116, 163, .7);
+$medium_blue-text: rgba(90, 116, 163, 0.7);
 
 $error_red: rgba(175, 46, 37, 0.879);
 
 $yellow: rgb(255, 227, 76);
 
+$green: rgb(0, 149, 50);
+
 $header-font: 'Do Hyeon', sans-serif;
+$title-font: 'ONE 모바일고딕 Title OTF', '배달의민족 도현 OTF', 'Do Hyeon',
+  sans-serif;
+
+$body-font: 'DX경필명조B', '카페24 아네모네에어', sans-serif;
+
+$button-font: '빙그레체Ⅱ', '빙그레체', sans-serif;
 
 $input-padding: 5px;

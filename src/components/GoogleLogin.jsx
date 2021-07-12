@@ -1,41 +1,39 @@
-// import React, { useEffect } from 'react';
+// import React from 'react';
 // import GoogleLogin from 'react-google-login';
 // import googleLogo from '../images/google-logo.png';
 // import '../styles/AuthModal.scss';
 // import axios from 'axios';
 // axios.defaults.withCredentials = true;
 
-// // 토큰은 로컬스토리지에 저장하고, 유저정보만 서버로 넘기기
-// // 서버에서 user table에 유저정보 저장
-
-// const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
+// const GoogleBtn = ({ handleLogin, handleUserInfo }) => { // 다희님이 보내주신 코드
 //   const GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
 
 //   const responseGoogle = (res) => {
-//     console.log('google res : ', res)
+//     console.log('google res : ', res.dt);
+//     console.log('google token : ', res.accessToken);
 
 //     const token = res.accessToken;
-//     const email = res.profileObj.email;
-//     const username = res.profileObj.givenName;
-//     const imgUrl = res.profileObj.imageUrl;
-
 //     handleLogin(token);
-//     handleUserInfo({ username, email, imgUrl });
-//     localStorage.setItem('Google-accessToken', token);
-
+//     localStorage.setItem('Google-accessToken', res.accessToken);
 //     axios
 //       .post(
 //         `http://localhost:4000/auth/googlesignin`,
-//         { username, email, profileImage: imgUrl },
+//         { email: res.dt.Nt, username: res.dt.uU },
 //         {
 //           headers: {
 //             'Content-Type': 'application/json',
-//             authorization: token,
+//             authorization: res.accessToken,
 //           },
 //         },
-//       )
-//       .then((res) => {
-//         console.log('google axios res : ', res);
+//       ).then(res => {
+//         console.log(`thisisfirstgooglesigninres`, res)
+//         handleLogin(res.data.accessTokenGoogle)
+//         handleUserInfo({
+//           username: res.data.googleInfo.username,
+//           email: res.data.googleInfo.email,
+//           imgUrl: res.data.googleInfo.profileImage,
+//         })
+//         localStorage.setItem('accessToekn', res.data.accessTokenGoogle)
 //       })
 //       .catch((err) => console.log(err));
 //   };
@@ -45,6 +43,7 @@
 //       {
 //         <GoogleLogin
 //           clientId={GOOGLE_API}
+//           responseType={"id_token"}
 //           render={(props) => (
 //             <button
 //               onClick={props.onClick}
@@ -56,9 +55,9 @@
 //               </span>
 //             </button>
 //           )}
-//           responseType={"id_token"}
+//           buttonText="Google 로그인"
 //           onSuccess={responseGoogle}
-//           onFailure={responseGoogle}
+//         // onFailure={responseGoogle}
 //         />
 //       }
 //     </div>
@@ -121,12 +120,16 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     const password = res.googleId;
 
     handleLogin(token);
-    localStorage.setItem('Google-accessToken', token);
+    localStorage.setItem('accessToken', token);
+    // handleUserInfo({
+    //   username: username, email: email, imgUrl: profileImage
+    // });
 
     await axios
       .post(
-        `https://ec2-100-26-225-39.compute-1.amazonaws.com:80/auth/googlesignin`,
-        { email: email, username: username, profileImage: profileImage, password: password },
+        `http://localhost:4000/auth/googlesignin`, {
+        username: username, email: email, imgUrl: profileImage, password: password
+      },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -140,6 +143,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
         handleUserInfo({
           username: res.data.googleInfo.username,
           email: res.data.googleInfo.email,
+          imgUrl: res.data.googleInfo.profileImage,
         });
         localStorage.setItem('accessToken', res.data.accessTokenGoogle);
       })
@@ -164,7 +168,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
             </button>
           )}
           onSuccess={responseGoogle}
-        //onFailure={responseGoogle}
+          onFailure={responseGoogle}
         />
       }
     </div>
@@ -172,60 +176,3 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 };
 
 export default GoogleBtn;
-
-
-// import React from 'react';
-// import GoogleLogin from 'react-google-login';
-// import googleLogo from '../images/google-logo.png';
-// import '../styles/AuthModal.scss';
-// import axios from 'axios';
-// axios.defaults.withCredentials = true;
-
-// const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
-//   const GOOGLE_API = process.env.REACT_APP_GOOGLE_API;
-
-//   const responseGoogle = (res) => {
-//     console.log('google res : ', res.dt);
-//     console.log('google token : ', res.accessToken);
-
-//     const token = res.accessToken;
-//     handleLogin(token);
-//     localStorage.setItem('Google-accessToken', res.accessToken);
-//     axios
-//       .post(
-//         `http://localhost:4000/auth/googlesignin`,
-//         { email:res.dt.Nt, username:res.dt.uU },
-//         {
-//           headers: {
-//             'Content-Type': 'application/json',
-//             authorization: res.accessToken,
-//           },
-//         },
-//       ).then(res=>{
-//         console.log(`thisisfirstgooglesigninres`, res)
-//           handleLogin(res.data.accessTokenGoogle)
-//           handleUserInfo({
-//             username:res.data.googleInfo.username,
-//             email:res.data.googleInfo.email
-//           })
-//           localStorage.setItem('accessToekn', res.data.accessTokenGoogle)
-//         })
-//       .catch((err) => console.log(err));
-//   };
-
-//   return (
-//     <div className="google-login" >
-//       {
-//         <GoogleLogin
-//           clientId={GOOGLE_API}
-//           responseType={"id_token"}
-//           buttonText="Google 로그인"
-//           onSuccess={responseGoogle}
-//           // onFailure={responseGoogle}
-//         />
-//       }
-//     </div>
-//   );
-// };
-
-// export default GoogleBtn;

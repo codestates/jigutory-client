@@ -100,7 +100,7 @@ function App() {
               path="/mypage"
               exact={true}
               render={() => (
-                <Mypage accessToken={accessToken} userInfo={userInfo} />
+                <Mypage accessToken={accessToken} userInfo={userInfo} handleUserInfo={handleUserInfo} setUserInfo={setUserInfo} />
               )}
             />
             <Route

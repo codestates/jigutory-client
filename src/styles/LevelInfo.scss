@@ -5,12 +5,14 @@
 }
 
 .level_container {
-  // background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
   opacity: 0;
   pointer-events: auto;
   top : 0;
   left: 0;
+  right : 0;
+  bottom : 0;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -27,9 +29,9 @@
   position: absolute;
   z-index: 100;
   background-color: rgba(255, 255, 255);
-  max-width: 50%;
+  max-width: 20%;
   border-radius: 10px;
-  // text-align: center;
+  text-align: center;
   animation: fadeIn 0.2s ease-in-out;
 }
 
@@ -37,21 +39,8 @@
   display: flex;
   section {
     margin : 10px;
-    //border: 1px solid black;
   }
-
-  // section:nth-child(1) {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   img {
-  //     width : 100px;
-  //     height: 80px;
-  //     border-radius: 10px;
-  //   }
-  // }
   section {
-    //border: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,14 +50,12 @@
       border-radius: 10px;
     }
     #level_level_name {
-      //border: 1px solid black;
       text-align: center;
       font-size : 13px;
       font-weight: 600;
       margin-bottom : 10px;
     }
     button {
-      //border: 1px solid black;
       margin : 0;
       padding : 0;
       width : 100%;
@@ -82,12 +69,7 @@
     }
   }
   #level_desc{
-    //border: 1px solid black;
     font-size : 10px;
     font-weight: 500;
   }
 }
-
-// .hide {
-//   opacity: 0;
-// }

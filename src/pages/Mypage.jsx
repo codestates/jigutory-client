@@ -15,6 +15,9 @@ function Mypage({ accessToken }) {
   // modal 상태
   const [isModalOn, setIsModalOn] = useState(false);
 
+  //total 
+  const [totalCnt, setTotalCnt] = useState({});
+
   // user/userinfo에서 받음
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -82,7 +85,7 @@ function Mypage({ accessToken }) {
           })
       })
       .catch(err => console.log(err));
-  }, [accessToken]);
+  }, [accessToken, setClickNum]);
 
   if (imgUrl === null || imgUrl === undefined) {
     setImgUrl(
@@ -95,29 +98,43 @@ function Mypage({ accessToken }) {
   console.log('이메일 상태', email);
   console.log('가입일 상태', createdAt);
 
+  useEffect(() => {
+    axios.get('http://localhost:4000/intropage', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        console.log('total count : ', res);
+        setTotalCnt(res.data);
+      })
+      .catch(err => console.log(err))
+  }, [clickNum, carbonReduction])
 
   // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 
   // => userinfo 받아올때 then 안에서 level/read로 받아보기
-  useEffect(() => {
-    axios
-      .post('http://localhost:4000/level/info',
-        {
-          // clickNum: clickNum,
-          // carbonReduction: carbonReduction,
-          levelNum: levelInfo.level
-        },
-        { headers: { 'Content-Type': 'application/json' } })
-      .then((res) => {
-        console.log('level/info : ', res)
-        setLevelInfo({
-          name: res.data.name,
-          image: res.data.image,
-          description: res.data.description,
-          level: res.data.id, // 여기 때문에 레벨은 새로고침이 되고 있음
-        })
-      })
-      .catch((err) => console.log(err));
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .post('http://localhost:4000/level/info',
+  //       {
+  //         // 여기서 이메일을 보내줘서 level info를 확인하고 받아올수는 없을까?
+
+  //         // clickNum: clickNum,
+  //         // carbonReduction: carbonReduction,
+  //         levelNum: levelInfo.level
+  //       },
+  //       { headers: { 'Content-Type': 'application/json' } })
+  //     .then((res) => {
+  //       console.log('level/info : ', res)
+  //       setLevelInfo({
+  //         name: res.data.name,
+  //         image: res.data.image,
+  //         description: res.data.description,
+  //         level: res.data.id
+  //       })
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [levelInfo.level, clickNum]) // 여기서 clickNum을 넣으면 level이 초기화됨. 근데 안넣으면 레벨 정보가 마지막에 달랑 레벨만 들어옴
 
   // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가) 
   // [] (일반로그인 & 구글로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
@@ -135,11 +152,30 @@ function Mypage({ accessToken }) {
         setClickNum(res.data.clickNum);
         setCarbonReduction(res.data.carbonReduction);
         setLevelInfo({ level: res.data.levelNum });
+        return res;
       })
-      .catch(err => console.log(err))
+      .then((res) => {
+        console.log('제발', res);
+        axios
+          .post('http://localhost:4000/level/info',
+            {
+              // 여기서 이메일을 보내줘서 level info를 확인하고 받아올수는 없을까?
+              // clickNum: clickNum,
+              // carbonReduction: carbonReduction,
+              levelNum: levelInfo.level
+            },
+            { headers: { 'Content-Type': 'application/json' } })
+          .then((res) => {
+            console.log('level/info : ', res)
+            setLevelInfo({
+              name: res.data.name,
+              image: res.data.image,
+              description: res.data.description,
+              level: res.data.id
+            })
+          })
+      })
   }
-
-
 
   // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
   useEffect(() => {
@@ -154,9 +190,7 @@ function Mypage({ accessToken }) {
       )
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
-        // console.log(data.badgeAll);
       });
-
   }, []);
 
   useEffect(() => {
@@ -198,6 +232,8 @@ function Mypage({ accessToken }) {
   const domNode = useClickOutside(() => {
     handleCloseBadge();
   });
+
+  console.log('마이페이지 레벨인포 찍어보기 :', levelInfo)
 
   return (
     <>
@@ -255,11 +291,11 @@ function Mypage({ accessToken }) {
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">전체 텀블러 사용 횟수</span>
-                  <span className="mypage-box-contents">ex. 100</span>
+                  <span className="mypage-box-contents">{totalCnt.totalClicks}</span>
                 </div>
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">전체 탄소저감량</span>
-                  <span className="mypage-box-contents">ex. 50,000</span>
+                  <span className="mypage-box-contents">{totalCnt.totalCarbon}</span>
                 </div>
               </div>
             </div>

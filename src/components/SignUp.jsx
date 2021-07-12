@@ -129,6 +129,10 @@ function SignUp({
             email: res.data.email,
           });
           setIsSignUp(true);
+          setTimeout(() => {
+            history.push('/intro');
+            handleCloseSignUp();
+          }, 1000);
         })
         .catch((err) => {
           console.log(err);
@@ -146,9 +150,9 @@ function SignUp({
     <div className="modal-container show-modal" onClick={handleOpenSignUp}>
       {isSignUp ? (
         <div className="modal" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close" onClick={handleCloseSignUp}>
+          {/* <button className="modal-close" onClick={handleCloseSignUp}>
             <i className="fas fa-times"></i>
-          </button>
+          </button> */}
           <h2 className="modal-success">회원가입에 성공했습니다!</h2>
         </div>
       ) : (

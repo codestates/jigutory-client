@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { LevelInfo } from '../components/LevelInfo';
 import badgeImg from '../images/mypage-badge.png';
+import LevelInfo from '../components/LevelInfo';
+// import useClickOutside from '../hooks/useClickOutside';
 import '../styles/Mypage.scss';
 import axios from 'axios';
 import LevelInfo from '../components/LevelInfo';
@@ -10,18 +11,30 @@ axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
   const history = useHistory();
-
-  // modal 상태
   const [isModalOn, setIsModalOn] = useState(false);
-
-  // user/userinfo 에서 받음
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [profileImage, setProfileImage] = useState('');
-
-  // badge/read에서 받음
   const [badgeList, setBadgeList] = useState([]);
   const [selectedBadgeId, setSelectedBadgeId] = useState();
+  const [clickNum, setClickNum] = useState(0);
+  const [carbonReduction, setCarbonReduction] = useState(0);
+  const [levelInfo, setLevelInfo] = useState({
+    name: '',
+    image: '',
+    description: '',
+    level: '',
+  });
+
+  const handleOpenModal = () => {
+    if (levelInfo) {
+      setIsModalOn(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOn(false);
+  };
 
   // level/read 에서 받음
   const [clickNum, setClickNum] = useState(0);
@@ -48,7 +61,6 @@ function Mypage({ accessToken }) {
     setSelectedBadgeId();
   };
 
-  // 클릭 시, 서버에서 불러오는 기능만 하는 함수
   const handleClickNum = () => {
     axios
       .post(
@@ -112,13 +124,6 @@ function Mypage({ accessToken }) {
             console.log('level : ', res);
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
-            // //level res 에는 res.data.level 없음
-            // setLevelInfo({
-            //   name: res.data.level.name,
-            //   image: res.data.level.image,
-            //   description: res.data.level.description,
-            //   level: res.data.level.id,
-            // })
           });
       })
       .catch((err) => console.log(err));
@@ -128,42 +133,17 @@ function Mypage({ accessToken }) {
       .post('http://localhost:4000/badge/read', {
         headers: {
           'Content-Type': 'application/json',
+          //authorization: accessToken,
         },
       })
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
-        // 콘솔 지우면 에러뜸
-        console.log(data.badgeAll);
       });
   }, [accessToken, setEmail, setClickNum]);
 
   console.log('email : ', email);
   console.log('clickNum :', clickNum);
   console.log('level :', levelInfo.level);
-
-  useEffect(() => {
-    const badgeOne = document.querySelector('.mypage-badge-image-one');
-    const badgeTwo = document.querySelector('.mypage-badge-image-two');
-    const badgeThree = document.querySelector('.mypage-badge-image-three');
-    const badgeFour = document.querySelector('.mypage-badge-image-four');
-    const badgeFive = document.querySelector('.mypage-badge-image-five');
-
-    if (carbonReduction >= 500) {
-      badgeOne.classList.remove('badgeHide');
-    }
-    if (carbonReduction >= 900) {
-      badgeTwo.classList.remove('badgeHide');
-    }
-    if (carbonReduction >= 2000) {
-      badgeThree.classList.remove('badgeHide');
-    }
-    if (carbonReduction >= 3500) {
-      badgeFour.classList.remove('badgeHide');
-    }
-    if (carbonReduction >= 5000) {
-      badgeFive.classList.remove('badgeHide');
-    }
-  }, [carbonReduction]);
 
   useEffect(() => {
     const badgeOne = document.querySelector('.mypage-badge-image-one');
@@ -231,7 +211,7 @@ function Mypage({ accessToken }) {
         </div>
         <div className="mypage-eco">
           <button onClick={handleClickNum} className="mypage-eco-me">
-            나의 환경 지킨 횟수 : {clickNum}{' '}
+            나의 환경 지킨 횟수 : {clickNum}
           </button>
           <div className="mypage-eco-total">전체 환경 지킨 횟수</div>
           <div className="mypage-eco-carbon">

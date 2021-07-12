@@ -1,11 +1,16 @@
 import React from 'react';
 import '../styles/Store.scss';
+import Loading from '../components/Loading';
+
 
 function Store(props) {
   return (
-    <div className="store-container">
-      <div>store page</div>
+    <>
+      {<Loading />}
+      <div className="store-container">
+        store
     </div>
+    </>
   )
 }
 

@@ -13,9 +13,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [imgFile, setImgFile] = useState('');
-  const [imgUrl, setImgUrl] = useState(
-    'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
-  );
+  const [imgUrl, setImgUrl] = useState('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setnewPasswordCheck] = useState('');
@@ -26,6 +24,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordCheckError, setPasswordCheckError] = useState('');
+  const [imgConfirmMessage, setImgConfirmMessage] = useState('');
 
   useEffect(() => {
     axios
@@ -128,7 +127,14 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
             withCredentials: true,
           },
         )
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            setImgConfirmMessage('✅ 프로필사진이 변경되었습니다')
+            return true;
+          }
+        })
+
         .catch((err) => console.log(err));
     }
   };
@@ -236,6 +242,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     }
   };
 
+  console.log(imgConfirmMessage)
   return (
     <div id="edituser_page">
       <div>
@@ -258,6 +265,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               </label>
               <button className="file_label" onClick={handleSubmitImg}>변경</button>
             </div>
+            {!imgConfirmMessage ? ('') : (<div>{imgConfirmMessage}</div>)}
           </div>
 
           <section>
@@ -297,7 +305,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 id="current_password"
                 type="password"
                 onChange={handlePassword}
-                placeholder="사용 중인 비밀번호를 입력하세요"
+                placeholder="사용 중인 비밀번호를 입력하세요."
                 value={password}
               />
             </div>
@@ -308,7 +316,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 id="new_password"
                 type="password"
                 onChange={handleNewPassword}
-                placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*) 8~20자 "
+                placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*), 8~20자 "
               />
             </div>
             {!passwordError ? ('') : (
@@ -324,7 +332,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 type="password"
                 onChange={handleNewPasswordCheck}
                 onKeyPress={onKeyPressPassword}
-                placeholder="다시 한 번 입력하세요"
+                placeholder="다시 한 번 입력하세요."
               />
             </div>
             {!passwordCheckError ? ('') : (

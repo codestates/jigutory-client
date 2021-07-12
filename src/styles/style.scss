@@ -21,16 +21,15 @@ html {
 
 * {
   box-sizing: border-box;
-  margin : 0;
 }
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
   color : $title_blue;
+  margin : 0;
 }
 
 h2, h3 {
-  // color: $title_blue;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -42,7 +41,7 @@ button {
 }
 
 .app-container {
-  padding-top : 6rem;
+  padding-top : 5.6rem;
 }
 
 a {

@@ -1,8 +1,13 @@
 @import './_variables.scss';
 
+// 마이페이지 반응형 
+// mypage-left-box display : none
+// mypage-wholebox : flex-wrap : wrap, width :
+
+
 #color-box {
   background-color: $medium-blue;
-  height: 200px;
+  height: 18rem;
   width : 100%;
   position : absolute;
   z-index: -1;
@@ -12,26 +17,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height : 100vh;
 }
 
 #mypage-wholebox {
   display: flex;
   justify-content: center;
-  width : 70%;
 }
 
 #mypage-left-box, 
 #mypage-right-box {
-  padding : 20px;
+  margin : 6rem 0 6rem 0;
+  padding : 1rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  //border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: white;
 }
 
 #mypage-left-box {
-  margin-right : 13px;
+  margin-right : 2rem;
+  align-items: center;
   img {
     width : 8rem;
     height: 8rem;
@@ -45,54 +50,104 @@
     * {
       margin : 10px;
     }
-    button {
+    .mypage-userinfo-edit {
+      background: transparent;
+      border-radius: 30px;
+      padding : 10px 17px 10px 17px;
+      display: flex;
+      align-items: center;
+      border : 1px solid rgba(0, 0, 0, 0.3);
+      font-size : 15px;
+      font-weight: 700;
+      color : rgba(0, 0, 0, 0.6);
 
+      &:hover {
+        background-color: $medium-blue;
+        color : white;
+        border : none;
+        transition : background-color .5s linear;
+      }
     }
     .mypage-userinfo-username {
-      font-weight: 600;
+      span {
+        font-weight: 600;
+      }
+      div {
+        font-size : 11px;
+
+      }
+    }
+    .mypage-userinfo-email {
+      font-size : 14px;
     }
   }
 }
 
 #mypage-right-box {
+  border: 1px solid rgba(0, 0, 0, 0.1);
   div {
     // top-middle-bottom 사이 간격 띄울때 여기서 margin 으로 조절하기
     margin : 5px;
   }
-}
+  // right-box 안에 컨테이너 늘어나면 여기 추가
+  #mypage-container-top,
+  #mypage-container-second, 
+  .mypage-container-bottom {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius : 10px;
+    padding : 30px 15px 30px 15px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 5px 2px rgba(11, 11, 11, 0.08);
+  }
+  
+  .mypage-userinfo-mylevel, 
+  .mypage-total-user {
+    display: flex;
+    justify-content: space-around;
+    padding : 5px;
+    // border : 1px solid black;
+    // flex-wrap: wrap;
+  }
+  
+  .mypage-userinfo-mylevel-section,
+  .mypage-total-user-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //border : 1px solid pink;
+  }
+  
+  .mypage-level-click {
+    cursor: pointer;
+  }
+  
+  .mypage-box-subtitle {
+    margin-bottom : 5px;
+    font-size : 1rem;
+    font-weight: 700;
+    color : rgba(0, 0, 0, 0.7);
+    border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+    .mypage-handleclick {
+      background-color: transparent;
+    }
+    .fa-plus-circle {
+      color : rgba(0, 0, 0, 0.5);
+      font-size : 1.2rem;
+      &:hover {
+        color : $green;
+        transition: color .2s linear;
+      }
+    }
+  }
+  .mypage-box-subtitle-level {
+    cursor : pointer;
+  }
+  .mypage-box-contents {
+    font-size : 1.6rem;
+  }
 
-// right-box 안에 컨테이너 늘어나면 여기 추가
-#mypage-container-top,
-#mypage-container-second  {
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius : 5px;
-  padding : 8px;
 }
-
-.mypage-userinfo-mylevel, 
-.mypage-total-user {
-  // border : 1px solid black;
-  display: flex;
-  justify-content: space-around;
-  padding : 5px;
-}
-
-.mypage-userinfo-mylevel-section,
-.mypage-total-user-section {
-  border : 1px solid pink;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.mypage-box-subtitle {
-  margin-bottom : 5px;
-  font-size : 14px;
-  font-weight: 500;
-  color : rgba(0, 0, 0, 0.5);
-  border-bottom : 1px solid rgba(0, 0, 0, 0.1);
-}
+  
 
 //-----------------------------------------------
 

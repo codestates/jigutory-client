@@ -3,13 +3,15 @@ import { useHistory } from 'react-router-dom';
 import badgeImg from '../images/mypage-badge.png';
 import LevelInfo from '../components/LevelInfo';
 import useClickOutside from '../hooks/useClickOutside';
+import video from '../images/stoppollution.mp4';
+import marine from '../images/marine-pollution.png';
 import '../styles/Mypage.scss';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 function Mypage({ accessToken }) {
   const history = useHistory();
-
+  const [addFriends, setAddFriends] = useState('');
   // modal 상태
   const [isModalOn, setIsModalOn] = useState(false);
 
@@ -181,6 +183,9 @@ function Mypage({ accessToken }) {
     }
   }, [carbonReduction]);
 
+  const handleFriends = () => {
+
+  }
 
   const domNode = useClickOutside(() => {
     handleCloseBadge();
@@ -189,6 +194,9 @@ function Mypage({ accessToken }) {
   return (
     <>
       <div id="color-box"></div>
+      {/* <video className="video" autoPlay muted loop>
+          <source src={video} type="video/mp4" height="100px" />
+        </video> */}
       <div id="mypage-container">
         <main id="mypage-wholebox">
 
@@ -208,8 +216,9 @@ function Mypage({ accessToken }) {
 
 
           <section id="mypage-right-box">
+
             <h3>나의 환경지킴 지수</h3>
-            <div id="mypage-container-top">
+            <div id="mypage-container-level">
               <div className="mypage-userinfo-mylevel">
                 <div className="mypage-userinfo-mylevel-section">
                   <span title="클릭! 레벨정보 보기" className="mypage-box-subtitle mypage-box-subtitle-level" onClick={handleOpenModal}>레벨
@@ -234,8 +243,7 @@ function Mypage({ accessToken }) {
 
 
             <h3>지구토리 유저의 환경지킴 지수</h3>
-
-            <div id="mypage-container-second">
+            <div id="mypage-container-total">
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">전체 텀블러 사용 횟수</span>
@@ -248,79 +256,105 @@ function Mypage({ accessToken }) {
               </div>
             </div>
 
-
-
-            <h3>나의 환경 뱃지</h3>
-
-            <div className="mypage-container-bottom">
-              <div className="mypage-badge">
-                <div className="mypage-badge-title">
-                  <div>내 뱃지 리스트</div>
-                </div>
-                <div className="mypage-badge-list">
-                  <div className="mypage-badge-standard">
-                    <div>탄소저감량 500g 이상</div>
-                    <div>탄소저감량 900g 이상</div>
-                    <div>탄소저감량 2000g 이상</div>
-                    <div>탄소저감량 3500g 이상</div>
-                    <div>탄소저감량 5000g 이상</div>
-                  </div>
-                  <div className="mypage-badge-image" >
-                    <img
-                      className="mypage-badge-image-one badgeHide"
-                      src={badgeImg}
-                      alt="뱃지 이미지"
-                      onClick={() => setSelectedBadgeId(badgeList[0].id)}
-                    ></img>
-                    <img
-                      className="mypage-badge-image-two badgeHide"
-                      src={badgeImg}
-                      alt="뱃지 이미지"
-                      onClick={() => setSelectedBadgeId(badgeList[1].id)}
-                    ></img>
-                    <img
-                      className="mypage-badge-image-three badgeHide"
-                      src={badgeImg}
-                      alt="뱃지 이미지"
-                      onClick={() => setSelectedBadgeId(badgeList[2].id)}
-                    ></img>
-                    <img
-                      className="mypage-badge-image-four badgeHide"
-                      src={badgeImg}
-                      alt="뱃지 이미지"
-                      onClick={() => setSelectedBadgeId(badgeList[3].id)}
-                    ></img>
-                    <img
-                      className="mypage-badge-image-five badgeHide"
-                      src={badgeImg}
-                      alt="뱃지 이미지"
-                      onClick={() => setSelectedBadgeId(badgeList[4].id)}
-                    ></img>
-                  </div>
-                </div>
-                {badgeList
-                  .filter((badge) => badge.id === selectedBadgeId)
-                  .map((badge, idx) => (
-                    <div id="mypage-badge-modal" key={idx} ref={domNode}>
-                      <div className="mypage-badge-modal-flex">
-                        <button
-                          className="mypage-badge-modal-close"
-                          onClick={handleCloseBadge}
-                        >
-                          <i className="fas fa-times"></i>
-                        </button>
-                        <div className="mypage-badge-modal-info-name">
-                          {badge.name}
-                        </div>
-                        <div className="mypage-badge-modal-info-description">
-                          {badge.description}
-                        </div>
-                        <img src={badge.image} alt="뱃지 모달 이미지" />
-                      </div>
-                    </div>
-                  ))}
+            <div id="mypage-container-etc" >
+              <div id="mypage-container-etc-video">
+                <video className="video" autoPlay muted loop>
+                  <source src={video} type="video/mp4" width />
+                </video>
               </div>
+
+              <div id="mypage-container-etc-desc">
+                {/* <img src={marine} alt="icon_marin-pollution" /> */}
+                <div>
+                  <h4>국내 플라스틱컵 사용량 연간 33억개</h4>
+                  <p>플라스틱컵 한 개를 만들고 폐기하는데 약 25g의 이산화탄소가 배출됩니다. <br />오늘도 지구토리와 함께 탄소발자국을 줄여보세요 ! </p>
+                  <button> 친구초대</button>
+                </div>
+              </div>
+
             </div>
+
+            <div id="mypage-badge-header">
+              <h3>나의 환경 뱃지</h3>
+              <p><i className="fas fa-exclamation-circle"></i>뱃지는 누적 탄소저감량에 따라 획득할 수 있습니다. 마우스를 올려 뱃지 정보를 확인하세요 !</p>
+            </div>
+            <div id="mypage-container-badge">
+              <div className="mypage-badge-list">
+                <div className="mypage-badge-contentbox">
+                  <span className="mypage-box-subtitle"> 500g <i className="fas fa-arrow-circle-up"></i></span>
+                  <img
+                    className="mypage-badge-image-one badgeHide"
+                    src={badgeImg}
+                    alt="뱃지 이미지"
+                    onClick={() => setSelectedBadgeId(badgeList[0].id)}
+                  ></img>
+                </div>
+
+                <div className="mypage-badge-contentbox">
+                  <span className="mypage-box-subtitle"> 900g <i className="fas fa-arrow-circle-up"></i></span>
+                  <img
+                    className="mypage-badge-image-two badgeHide"
+                    src={badgeImg}
+                    alt="뱃지 이미지"
+                    onClick={() => setSelectedBadgeId(badgeList[1].id)}
+                  ></img>
+                </div>
+
+
+                <div className="mypage-badge-contentbox">
+                  <span className="mypage-box-subtitle"> 2000g <i className="fas fa-arrow-circle-up"></i></span>
+                  <img
+                    className="mypage-badge-image-three badgeHide"
+                    src={badgeImg}
+                    alt="뱃지 이미지"
+                    onClick={() => setSelectedBadgeId(badgeList[2].id)}
+                  ></img>
+                </div>
+
+                <div className="mypage-badge-contentbox">
+                  <span className="mypage-box-subtitle"> 3500g <i className="fas fa-arrow-circle-up"></i></span>
+                  <img
+                    className="mypage-badge-image-four badgeHide"
+                    src={badgeImg}
+                    alt="뱃지 이미지"
+                    onClick={() => setSelectedBadgeId(badgeList[3].id)}
+                  ></img>
+                </div>
+
+                <div className="mypage-badge-contentbox">
+                  <span className="mypage-box-subtitle"> 5000g <i className="fas fa-arrow-circle-up"></i></span>
+                  <img
+                    className="mypage-badge-image-five badgeHide"
+                    src={badgeImg}
+                    alt="뱃지 이미지"
+                    onClick={() => setSelectedBadgeId(badgeList[4].id)}
+                  ></img>
+                </div>
+              </div>
+
+              {badgeList
+                .filter((badge) => badge.id === selectedBadgeId)
+                .map((badge, idx) => (
+                  <div id="mypage-badge-modal" key={idx} ref={domNode}>
+                    <div className="mypage-badge-modal-flex">
+                      <button
+                        className="mypage-badge-modal-close"
+                        onClick={handleCloseBadge}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                      <div className="mypage-badge-modal-info-name">
+                        {badge.name}
+                      </div>
+                      <div className="mypage-badge-modal-info-description">
+                        {badge.description}
+                      </div>
+                      <img src={badge.image} alt="뱃지 모달 이미지" />
+                    </div>
+                  </div>
+                ))}
+            </div>
+            {/* </div> */}
 
 
           </section>

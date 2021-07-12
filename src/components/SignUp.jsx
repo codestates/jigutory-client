@@ -162,7 +162,7 @@ function SignUp({
             onClick={(e) => e.stopPropagation()}
           >
             <button className="modal-close" onClick={handleCloseSignUp}>
-              <i className="fas fa-times"></i>
+              <i className="fas fa-times fa-lg"></i>
             </button>
             <h2 className="modal-header">회원가입</h2>
             <div className="modal-info">

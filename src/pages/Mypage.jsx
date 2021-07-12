@@ -60,26 +60,29 @@ function Mypage({ accessToken }) {
         },
       })
       .then((res) => {
-        console.log('userinfo res : ', res)
+        console.log('userinfo res : ', res);
         setUsername(res.data.username);
         setEmail(res.data.email);
         setImgUrl(res.data.profileImage);
-        setCreatedAt(res.data.createdAt)
+        setCreatedAt(res.data.createdAt);
         axios
-          .post('http://localhost:4000/level/read',
-            { email: res.data.email }, {
-            headers: {
-              'Content-Type': 'application/json',
+          .post(
+            'http://localhost:4000/level/read',
+            { email: res.data.email },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
             },
-          })
+          )
           .then((res) => {
             console.log('level/read res :', res);
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
             setLevelInfo({ level: res.data.levelNum });
-          })
+          });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [accessToken]);
 
   if (imgUrl === null || imgUrl === undefined) {
@@ -93,68 +96,66 @@ function Mypage({ accessToken }) {
   console.log('이메일 상태', email);
   console.log('가입일 상태', createdAt);
 
-
-  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함 
+  // level/info 받아오고, db에 저장된 유저의 클릭, 탄소, 레벨도 받아와야함
   // => userinfo 받아올때 then 안에서 level/read로 받아보기
   useEffect(async () => {
     await axios
-      .post('http://localhost:4000/level/info',
+      .post(
+        'http://localhost:4000/level/info',
         {
           clickNum: clickNum,
           carbonReduction: carbonReduction,
-          levelNum: levelInfo.level
+          levelNum: levelInfo.level,
         },
-        { headers: { 'Content-Type': 'application/json' } })
+        { headers: { 'Content-Type': 'application/json' } },
+      )
       .then((res) => {
-        console.log('level/info : ', res)
+        console.log('level/info : ', res);
         setLevelInfo({
           name: res.data.name,
           image: res.data.image,
           description: res.data.description,
           //level: res.data.id, // 여기 때문에 레벨은 새로고침이 되고 있음
-        })
+        });
       })
       .catch((err) => console.log(err));
-  }, [setClickNum])
+  }, [setClickNum]);
 
-  // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가) 
+  // 클릭 시, db에서 받아옴 (클릭 수 & 탄소저감량 증가)
   // [] (일반로그인 & 구글로그인 확인) 0일 때, 클릭 수 증가 안 함 => 새로고침 유지되는지 확인 불가
   // (구글로그인 확인) 0이 아닐 때, 클릭 수 증가함, 레벨 증가하는데 초기레벨값이 1로 안 떠서 11이 되면 레벨1이 되고 16되면 레벨2가 됨 => 해결 : 109번째 줄 if에 1추가
-  // => 새로고침하면 초기값으로 돌아갔다가 클릭하면 들어옴 
+  // => 새로고침하면 초기값으로 돌아갔다가 클릭하면 들어옴
   // => level/read or info에서 (info에 있어야할 것 같음)clickNum, carbonReduction, levelNum을 저장해 주고 있지 않음 (res로 안 들어옴)
   const handleClickNum = () => {
-    console.log('clickNum 클릭 중')
+    console.log('clickNum 클릭 중');
 
-    axios.post('http://localhost:4000/level/read',
-      { email: email, clickNum: clickNum },
-      { headers: { 'Content-Type': 'application/json' } })
+    axios
+      .post(
+        'http://localhost:4000/level/read',
+        { email: email, clickNum: clickNum },
+        { headers: { 'Content-Type': 'application/json' } },
+      )
       .then((res) => {
-        console.log('handleClickNum(level/read) res :', res)
+        console.log('handleClickNum(level/read) res :', res);
         setClickNum(res.data.clickNum);
         setCarbonReduction(res.data.carbonReduction);
         setLevelInfo({ level: res.data.levelNum });
       })
-      .catch(err => console.log(err))
-  }
-
-
+      .catch((err) => console.log(err));
+  };
 
   // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
   useEffect(() => {
     axios
-      .post(
-        'http://localhost:4000/badge/read',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      .post('http://localhost:4000/badge/read', {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+      })
       .then(({ data }) => {
         setBadgeList(data.badgeAll);
         // console.log(data.badgeAll);
       });
-
   }, []);
 
   useEffect(() => {
@@ -181,7 +182,6 @@ function Mypage({ accessToken }) {
     }
   }, [carbonReduction]);
 
-
   const domNode = useClickOutside(() => {
     handleCloseBadge();
   });
@@ -191,54 +191,78 @@ function Mypage({ accessToken }) {
       <div id="color-box"></div>
       <div id="mypage-container">
         <main id="mypage-wholebox">
-
           <section id="mypage-left-box">
-            <img src={imgUrl} ></img>
+            <img src={imgUrl}></img>
             <div className="mypage-userinfo-summary">
               <div className="mypage-userinfo-username">
                 <span>🌏{username}</span>님
                 <div className="mypage-userinfo-createdat">From {date}</div>
               </div>
               <div className="mypage-userinfo-email">{email}</div>
-              <button className="mypage-userinfo-edit mypage-btn" onClick={() => { history.push('/edituser') }}>
+              <button
+                className="mypage-userinfo-edit mypage-btn"
+                onClick={() => {
+                  history.push('/edituser');
+                }}
+              >
                 회원정보 수정
               </button>
             </div>
           </section>
-
 
           <section id="mypage-right-box">
             <h3>나의 환경지킴 지수</h3>
             <div id="mypage-container-top">
               <div className="mypage-userinfo-mylevel">
                 <div className="mypage-userinfo-mylevel-section">
-                  <span title="클릭! 레벨정보 보기" className="mypage-box-subtitle mypage-box-subtitle-level" onClick={handleOpenModal}>레벨
-                    {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
+                  <span
+                    title="클릭! 레벨정보 보기"
+                    className="mypage-box-subtitle mypage-box-subtitle-level"
+                    onClick={handleOpenModal}
+                  >
+                    레벨
+                    {isModalOn && (
+                      <LevelInfo
+                        levelInfo={levelInfo}
+                        handleCloseModal={handleCloseModal}
+                      />
+                    )}
                   </span>
-                  <span className="mypage-box-contents mypage-mylevel">Lv. {levelInfo.level}</span>
+                  <span className="mypage-box-contents mypage-mylevel">
+                    Lv. {levelInfo.level}
+                  </span>
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
-                  <span className="mypage-box-subtitle">텀블러 사용 횟수
-                     <button onClick={handleClickNum} className="mypage-handleclick mypage-btn">
+                  <span className="mypage-box-subtitle">
+                    텀블러 사용 횟수
+                    <button
+                      onClick={handleClickNum}
+                      className="mypage-handleclick mypage-btn"
+                    >
                       <i className="fa fa-plus-circle mypage-btn"></i>
                     </button>
                   </span>
-                  <span className="mypage-box-contents mypage-clicknum">{clickNum} </span>
+                  <span className="mypage-box-contents mypage-clicknum">
+                    {clickNum}{' '}
+                  </span>
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">누적 탄소 저감량</span>
-                  <span className="mypage-box-contents mypage-carbon">{carbonReduction}</span>
+                  <span className="mypage-box-contents mypage-carbon">
+                    {carbonReduction}
+                  </span>
                 </div>
               </div>
             </div>
-
 
             <h3>지구토리 유저의 환경지킴 지수</h3>
 
             <div id="mypage-container-second">
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
-                  <span className="mypage-box-subtitle">전체 텀블러 사용 횟수</span>
+                  <span className="mypage-box-subtitle">
+                    전체 텀블러 사용 횟수
+                  </span>
                   <span className="mypage-box-contents">ex. 100</span>
                 </div>
                 <div className="mypage-total-user-section">
@@ -247,8 +271,6 @@ function Mypage({ accessToken }) {
                 </div>
               </div>
             </div>
-
-
 
             <h3>나의 환경 뱃지</h3>
 
@@ -265,7 +287,7 @@ function Mypage({ accessToken }) {
                     <div>탄소저감량 3500g 이상</div>
                     <div>탄소저감량 5000g 이상</div>
                   </div>
-                  <div className="mypage-badge-image" >
+                  <div className="mypage-badge-image">
                     <img
                       className="mypage-badge-image-one badgeHide"
                       src={badgeImg}
@@ -321,13 +343,9 @@ function Mypage({ accessToken }) {
                   ))}
               </div>
             </div>
-
-
           </section>
         </main>
-
-
-      </div >
+      </div>
     </>
   );
 }

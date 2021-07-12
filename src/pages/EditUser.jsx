@@ -13,7 +13,9 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [imgFile, setImgFile] = useState('');
-  const [imgUrl, setImgUrl] = useState('https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png');
+  const [imgUrl, setImgUrl] = useState(
+    'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
+  );
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setnewPasswordCheck] = useState('');
@@ -28,7 +30,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/userinfo', {
+      .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -47,7 +49,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
         });
       })
       .catch((err) => console.log(err));
-
   }, [accessToken]);
 
   if (imgUrl === null || imgUrl === undefined) {
@@ -84,7 +85,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const handlePassword = (e) => {
     e.preventDefault();
     if (password !== e.target.value) {
-      setErrorMessage('비밀번호를 확인해 주세요')
+      setErrorMessage('비밀번호를 확인해 주세요');
     }
     setPassword(e.target.value);
   };
@@ -117,7 +118,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (imgUrl) {
       axios
         .patch(
-          'http://localhost:4000/user/useredit',
+          `${process.env.REACT_APP_API_URL}/user/useredit`,
           { profileImage: imgUrl },
           {
             headers: {
@@ -128,9 +129,9 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
           },
         )
         .then((res) => {
-          console.log(res)
+          console.log(res);
           if (res.status === 200) {
-            setImgConfirmMessage('✅ 프로필사진이 변경되었습니다')
+            setImgConfirmMessage('✅ 프로필사진이 변경되었습니다');
             return true;
           }
         })
@@ -167,7 +168,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
   const validatePassword = (newPassword, newPasswordCheck) => {
     // if (newPasswordCheck.length === 0) {
     //   setPasswordCheckError('❌ 동일한 비밀번호를 입력해 주세요');
-    // } 
+    // }
     if (newPassword !== newPasswordCheck) {
       setPasswordCheckError('❌ 동일한 비밀번호를 입력해 주세요');
       return false;
@@ -200,7 +201,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validUsername) {
       axios
         .patch(
-          'http://localhost:4000/user/useredit',
+          `${process.env.REACT_APP_API_URL}/user/useredit`,
           { username: username },
           {
             headers: {
@@ -210,12 +211,12 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
           },
         )
         .then((res) => {
-          console.log(res)
-          handleUserInfo({ username: username })
-          setChangeNicknameMessage('✅ 닉네임이 변경되었습니다')
+          console.log(res);
+          handleUserInfo({ username: username });
+          setChangeNicknameMessage('✅ 닉네임이 변경되었습니다');
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
     }
   };
@@ -225,7 +226,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validPassword) {
       axios
         .patch(
-          'http://localhost:4000/user/passwordedit',
+          `${process.env.REACT_APP_API_URL}/user/passwordedit`,
           { rvsdpassword: newPasswordCheck },
           {
             headers: {
@@ -236,13 +237,13 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
         )
         .then((res) => {
           setConfirmMessage('✅ 비밀번호가 변경되었습니다');
-          console.log(res)
+          console.log(res);
         })
         .catch((err) => console.log(err));
     }
   };
 
-  console.log(imgConfirmMessage)
+  console.log(imgConfirmMessage);
   return (
     <div id="edituser_page">
       <div>
@@ -258,18 +259,22 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               accept="image/*"
               onChange={handleUploadImg}
             ></input>
-            <div id="img_volume"><i className="fas fa-exclamation-circle"></i><span>100kb 미만 이미지만 업로드 가능합니다</span></div>
+            <div id="img_volume">
+              <i className="fas fa-exclamation-circle"></i>
+              <span>100kb 미만 이미지만 업로드 가능합니다</span>
+            </div>
             <div>
               <label htmlFor="file" className="file_label">
                 사진 등록
               </label>
-              <button className="file_label" onClick={handleSubmitImg}>변경</button>
+              <button className="file_label" onClick={handleSubmitImg}>
+                변경
+              </button>
             </div>
-            {!imgConfirmMessage ? ('') : (<div>{imgConfirmMessage}</div>)}
+            {!imgConfirmMessage ? '' : <div>{imgConfirmMessage}</div>}
           </div>
 
           <section>
-
             <div id="edituser_email">
               <div>이메일</div>
               <div>{email}</div>
@@ -285,14 +290,21 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 onKeyPress={onKeyPressUsername}
               />
             </div>
-            {!usernameError ? ('') : (
+            {!usernameError ? (
+              ''
+            ) : (
               <div className="edituser_confirm_msg">
                 <div className="edituser_failure">{usernameError}</div>
               </div>
             )}
             <div>
               <div></div>
-              <button className="edituser_changebtn" onClick={usernameRequestHandler} >닉네임 변경</button>
+              <button
+                className="edituser_changebtn"
+                onClick={usernameRequestHandler}
+              >
+                닉네임 변경
+              </button>
             </div>
 
             <div className="edituser_confirm_msg">
@@ -319,8 +331,10 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 placeholder="영문 소문자 / 숫자 / 특수문자(-_.!?*), 8~20자 "
               />
             </div>
-            {!passwordError ? ('') : (
-              <div className="edituser_confirm_msg" >
+            {!passwordError ? (
+              ''
+            ) : (
+              <div className="edituser_confirm_msg">
                 <div className="edituser_failure">{passwordError}</div>
               </div>
             )}
@@ -335,26 +349,40 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 placeholder="다시 한 번 입력하세요."
               />
             </div>
-            {!passwordCheckError ? ('') : (
+            {!passwordCheckError ? (
+              ''
+            ) : (
               <div className="edituser_confirm_msg">
                 <div className="edituser_failure">{passwordCheckError}</div>
               </div>
             )}
 
-            {<div>
-              <div></div>
-              <button className="edituser_changebtn" onClick={newPasswordRequestHandler}>비밀번호 변경</button>
-            </div>}
+            {
+              <div>
+                <div></div>
+                <button
+                  className="edituser_changebtn"
+                  onClick={newPasswordRequestHandler}
+                >
+                  비밀번호 변경
+                </button>
+              </div>
+            }
 
             <div className="edituser_confirm_msg">
               <div>{confirmMessage}</div>
             </div>
-
           </section>
           <div id="edituser_withdrawal">
             <div></div>
             <button onClick={handleOpenModal}>회원 탈퇴</button>
-            <button onClick={() => { history.push('/mypage') }}>마이페이지로 돌아가기</button>
+            <button
+              onClick={() => {
+                history.push('/mypage');
+              }}
+            >
+              마이페이지로 돌아가기
+            </button>
           </div>
 
           {isModalOn && (
@@ -371,4 +399,3 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 };
 
 export default withRouter(EditUser);
-

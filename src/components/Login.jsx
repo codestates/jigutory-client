@@ -56,7 +56,7 @@ function Login({
     if (email && password) {
       await axios
         .post(
-          'http://localhost:4000/auth/signin',
+          `${process.env.REACT_APP_API_URL}/auth/signin`,
           { email: email, password: password },
           {
             headers: {
@@ -68,7 +68,7 @@ function Login({
         .then((res) => {
           handleLogin(res.data.data.accessToken);
           axios
-            .get('http://localhost:4000/user/userinfo', {
+            .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
               headers: {
                 'Content-Type': 'application/json',
                 authorization: res.data.data.accessToken,
@@ -133,11 +133,11 @@ function Login({
           {!errorMessage ? (
             ''
           ) : (
-              <div className="modal-alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {errorMessage}
-              </div>
-            )}
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {errorMessage}
+            </div>
+          )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>

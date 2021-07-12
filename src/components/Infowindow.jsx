@@ -9,47 +9,51 @@ const { kakao } = window;
 
 function Map() {
   // DB에서 받은 cafe 정보들을 객체형태로 상태 저장
-  const [cafeInfo, setCafeInfo] = useState(
-    {})
+  const [cafeInfo, setCafeInfo] = useState({});
 
   console.log('cafeinfo state :', cafeInfo);
   let cafes = [];
 
   useEffect(() => {
-    axios.get('http://localhost:4000/cafe/list', {
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/cafe/list`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         console.log('res.data 정보 : ', res.data);
         setCafeInfo(res.data);
-      })
+      });
   }, []);
 
-  console.log('cafes : ', cafes)
+  console.log('cafes : ', cafes);
 
   useEffect(() => {
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(37.474675616877455, 126.90353931151591), // 지도의 중심좌표 (데일리 로스팅)
         level: 7, // 지도의 확대 레벨
-        mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+        mapTypeId: kakao.maps.MapTypeId.ROADMAP, // 지도종류
       };
 
-    // 지도를 생성한다 
+    // 지도를 생성한다
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
     // 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
     kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
-      console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
+      console.log(
+        '지도에서 클릭한 위치의 좌표는 ' +
+          mouseEvent.latLng.toString() +
+          ' 입니다.',
+      );
     });
 
     // 마커 클러스터러 생성 (필수기능 아님)
     var clusterer = new kakao.maps.MarkerClusterer({
-      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-      minLevel: 10 // 클러스터 할 최소 지도 레벨 
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 10, // 클러스터 할 최소 지도 레벨
     });
 
     // DB에서 받아오기 전 임시 데이터
@@ -96,35 +100,51 @@ function Map() {
 
     for (let i = 0; i < cafeInfo.length; i++) {
       // 마커 이미지의 주소 (커스텀 마커 생성)
-      var markerImageUrl = 'https://cdn.iconscout.com/icon/premium/png-512-thumb/location-pin-162-626841.png',
+      var markerImageUrl =
+          'https://cdn.iconscout.com/icon/premium/png-512-thumb/location-pin-162-626841.png',
         markerImageSize = new kakao.maps.Size(30, 32), // 마커 이미지의 크기
         markerImageOptions = {
-          offset: new kakao.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+          offset: new kakao.maps.Point(20, 42), // 마커 좌표에 일치시킬 이미지 안의 좌표
         };
 
       // 마커 이미지 생성
-      var markerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);
+      var markerImage = new kakao.maps.MarkerImage(
+        markerImageUrl,
+        markerImageSize,
+        markerImageOptions,
+      );
 
       // 지도에 마커 생성 + 표시
       var marker = new kakao.maps.Marker({
-        position: new kakao.maps.LatLng(cafeInfo[i].latitude, cafeInfo[i].longitude), // 마커의 좌표
+        position: new kakao.maps.LatLng(
+          cafeInfo[i].latitude,
+          cafeInfo[i].longitude,
+        ), // 마커의 좌표
         image: markerImage, // 마커의 이미지
-        map: map // 마커를 표시할 지도 객체
+        map: map, // 마커를 표시할 지도 객체
       });
 
       var iwContent = `<div style="padding:5px;">${cafeInfo[i].name}</div>`; // 인포윈도우에 표출될 내용 (HTML 문자열이나 document element 가능)
 
       // 인포윈도우 생성
       var infowindow = new kakao.maps.InfoWindow({
-        content: iwContent
+        content: iwContent,
       });
 
-      // 반복문으로 생성된 마커들을 배열에 담아줌 
+      // 반복문으로 생성된 마커들을 배열에 담아줌
       markers.push(marker);
 
       // 마커 마우스오버 이벤트
-      kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-      kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow, marker));
+      kakao.maps.event.addListener(
+        marker,
+        'mouseover',
+        makeOverListener(map, marker, infowindow),
+      );
+      kakao.maps.event.addListener(
+        marker,
+        'mouseout',
+        makeOutListener(infowindow, marker),
+      );
     }
 
     // 클러스터러에 마커스 추가 (지도 축소했을 때 마커 갯수 파악)
@@ -144,12 +164,9 @@ function Map() {
         infowindow.close();
       };
     }
-  })
+  });
 
-  return (
-    <div id="map" style={{ width: '95%', height: '80vh' }}></div>
-  )
+  return <div id="map" style={{ width: '95%', height: '80vh' }}></div>;
 }
 
 export default Map;
-

@@ -127,9 +127,13 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 
     await axios
       .post(
-        `http://localhost:4000/auth/googlesignin`, {
-        username: username, email: email, imgUrl: profileImage, password: password
-      },
+        `${process.env.REACT_APP_API_URL}/auth/googlesignin`,
+        {
+          username: username,
+          email: email,
+          imgUrl: profileImage,
+          password: password,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -162,7 +166,12 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
               className="modal-info google-btn social-btn"
             >
               <span>
-                <img width="17" src={googleLogo} alt="google login" className="social-logo" />
+                <img
+                  width="17"
+                  src={googleLogo}
+                  alt="google login"
+                  className="social-logo"
+                />
                 <span>구글 로그인</span>
               </span>
             </button>

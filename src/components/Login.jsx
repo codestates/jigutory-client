@@ -75,11 +75,10 @@ function Login({
               },
             })
             .then((res) => {
-              // handleUserInfo(res.data);
+              handleUserInfo(res.data);
               handleUserInfo({
                 username: res.data.username,
                 email: res.data.email,
-                imgUrl: res.data.profileImage,
               });
             });
           return res;
@@ -133,11 +132,11 @@ function Login({
           {!errorMessage ? (
             ''
           ) : (
-              <div className="modal-alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {errorMessage}
-              </div>
-            )}
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {errorMessage}
+            </div>
+          )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>

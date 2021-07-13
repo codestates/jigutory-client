@@ -1,9 +1,9 @@
 import React from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
+import { ScrollButton } from '../components/ScrollButton';
+import EarthSpinner from '../components/EarthSpinner';
+import DotSpinner from '../components/DotSpinner';
 
 function Intro() {
-  const history = useHistory();
-
   return (
     <section className="intro-container">
       <div className="intro-functions">
@@ -18,8 +18,9 @@ function Intro() {
       <div className="intro-review">
         <h2>사용자 리뷰</h2>
       </div>
+      <ScrollButton />
     </section>
   );
 }
 
-export default withRouter(Intro);
+export default Intro;

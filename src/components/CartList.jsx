@@ -14,11 +14,19 @@ export default function CartList({
   },[setuserInfo])
 
   const handleTotal = (quantitiy, itemid) =>{
-    handleQuantityChange(itemid,quantitiy)
-    
-    console.log(`thisistotal`, itemid)
+   console.log(`thisisquantitiy`, quantitiy)
+   console.log(`thisisitemid`, itemid)
+   axios.post('http://localhost:4000/cart/update',{
+     email:userinfo.email, quantitiy:quantitiy, id:itemid
+  },{
+    headers:{
+      'Content-Type': 'application/json'
+    }
+   }).then((res)=>
+   console.log(`thisis patch res`, res.data))
   }
 
+  //아이템 삭제 기능
   const deleteItem = (id) =>{
   axios.delete('http://localhost:4000/cart/delete',{
     email:userinfo.email, id:id
@@ -42,20 +50,19 @@ export default function CartList({
       <div className="cartitem-thumbnail">
       <img className="cartitem-img" src={item.image} alt={item.name}></img>
       </div>
-
       <div className="cartitem-info">
       <div className="cartitem-price">{item.name}</div>
       <div className="cartitem-price">{item.price}원</div>
       <input type="number"  className="cartitem-quantity" min ={1} placeholder={'수량선택'}
       onChange={(e) => {
-        handleTotal(Number(e.target.value), item.id,)
+        console.log(e.target.value)
+        handleTotal((e.target.value), item.id,)
       }}>
         </input>
       <button onClick={()=> { deleteItem(item.id)}}
       className="cartitem-delete">Delete</button>
       </div>
     </div>
-    
     </div>
   )
 }

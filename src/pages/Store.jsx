@@ -2,13 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import '../styles/EditUser.scss';
 import axios from 'axios';
-import ProductList from '../components/ProductList'
+import ProductList from '../components/ProductList';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
 function Store({ accessToken, userInfo }) {
   const history = useHistory();
-  const [productList, setList] = useState([])
+  const [productList, setList] = useState([]);
   const [isModalOn, setIsModalOn] = useState(false);
   const [message, setMessage] = useState('')
   console.log(`store.js product list 상태 :`, productList)

@@ -84,21 +84,21 @@ function Mypage({ accessToken }) {
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
             setLevelInfo({ level: res.data.levelNum });
-            // axios.post('http://localhost:4000/level/info',
-            //   { level: res.data.levelNum }, {
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //   },
-            // })
-            //   .then((res) => {
-            //     console.log(res)
-            //     setLevelInfo({
-            //       name: res.data.name,
-            //       image: res.data.image,
-            //       description: res.data.description,
-            //       level: res.data.id
-            //     })
-            //   })
+            axios.post('http://localhost:4000/level/info',
+              { level: res.data.levelNum, click: res.data.clickNum }, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+              .then((res) => {
+                console.log(res)
+                setLevelInfo({
+                  name: res.data.name,
+                  image: res.data.image,
+                  description: res.data.description,
+                  level: res.data.id
+                })
+              })
           })
       })
       .catch(err => console.log(err));
@@ -354,82 +354,75 @@ function Mypage({ accessToken }) {
             </div>
             <div id="mypage-container-badge">
               <div className="mypage-badge-list">
-                <div className="mypage-badge-contentbox">
-                  <span className="mypage-box-subtitle"> 500g <i className="fas fa-arrow-circle-up"></i></span>
-                  <img
-                    className="mypage-badge-image-one badgeHide"
-                    src={badgeImg}
-                    alt="뱃지 이미지"
-                    onClick={() => setSelectedBadgeId(badgeList[0].id)}
-                  ></img>
+                <div id="mypage-badge-list-wrapper">
+                  <div className="mypage-badge-contentbox">
+                    <span className="mypage-box-subtitle"> 500g <i className="fas fa-arrow-circle-up"></i></span>
+                    <img
+                      className="mypage-badge-image-one badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[0].id)}
+                    ></img>
+                  </div>
+
+                  <div className="mypage-badge-contentbox">
+                    <span className="mypage-box-subtitle"> 900g <i className="fas fa-arrow-circle-up"></i></span>
+                    <img
+                      className="mypage-badge-image-two badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[1].id)}
+                    ></img>
+                  </div>
+
+
+                  <div className="mypage-badge-contentbox">
+                    <span className="mypage-box-subtitle"> 2000g <i className="fas fa-arrow-circle-up"></i></span>
+                    <img
+                      className="mypage-badge-image-three badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[2].id)}
+                    ></img>
+                  </div>
+
+                  <div className="mypage-badge-contentbox">
+                    <span className="mypage-box-subtitle"> 3500g <i className="fas fa-arrow-circle-up"></i></span>
+                    <img
+                      className="mypage-badge-image-four badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[3].id)}
+                    ></img>
+                  </div>
+
+                  <div className="mypage-badge-contentbox">
+                    <span className="mypage-box-subtitle"> 5000g <i className="fas fa-arrow-circle-up"></i></span>
+                    <img
+                      className="mypage-badge-image-five badgeHide"
+                      src={badgeImg}
+                      alt="뱃지 이미지"
+                      onClick={() => setSelectedBadgeId(badgeList[4].id)}
+                    ></img>
+                  </div>
                 </div>
 
-                <div className="mypage-badge-contentbox">
-                  <span className="mypage-box-subtitle"> 900g <i className="fas fa-arrow-circle-up"></i></span>
-                  <img
-                    className="mypage-badge-image-two badgeHide"
-                    src={badgeImg}
-                    alt="뱃지 이미지"
-                    onClick={() => setSelectedBadgeId(badgeList[1].id)}
-                  ></img>
-                </div>
-
-
-                <div className="mypage-badge-contentbox">
-                  <span className="mypage-box-subtitle"> 2000g <i className="fas fa-arrow-circle-up"></i></span>
-                  <img
-                    className="mypage-badge-image-three badgeHide"
-                    src={badgeImg}
-                    alt="뱃지 이미지"
-                    onClick={() => setSelectedBadgeId(badgeList[2].id)}
-                  ></img>
-                </div>
-
-                <div className="mypage-badge-contentbox">
-                  <span className="mypage-box-subtitle"> 3500g <i className="fas fa-arrow-circle-up"></i></span>
-                  <img
-                    className="mypage-badge-image-four badgeHide"
-                    src={badgeImg}
-                    alt="뱃지 이미지"
-                    onClick={() => setSelectedBadgeId(badgeList[3].id)}
-                  ></img>
-                </div>
-
-                <div className="mypage-badge-contentbox">
-                  <span className="mypage-box-subtitle"> 5000g <i className="fas fa-arrow-circle-up"></i></span>
-                  <img
-                    className="mypage-badge-image-five badgeHide"
-                    src={badgeImg}
-                    alt="뱃지 이미지"
-                    onClick={() => setSelectedBadgeId(badgeList[4].id)}
-                  ></img>
-                </div>
+                {badgeList
+                  .filter((badge) => badge.id === selectedBadgeId)
+                  .map((badge, idx) => (
+                    <div id="mypage-badgeinfo" key={idx} ref={domNode}>
+                      <div id="mypage-badgeinfo-box">
+                        <div><img src={badge.image} alt="멸종 위기 동물" /></div>
+                        <div>
+                          <span className="mypage-badgeinfo-name">👑 {badge.name}</span>
+                          <p className="mypage-badgeinfo-description">{badge.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
               </div>
 
-              {badgeList
-                .filter((badge) => badge.id === selectedBadgeId)
-                .map((badge, idx) => (
-                  <div id="mypage-badge-modal" key={idx} ref={domNode}>
-                    <div className="mypage-badge-modal-flex">
-                      <button
-                        className="mypage-badge-modal-close"
-                        onClick={handleCloseBadge}
-                      >
-                        <i className="fas fa-times"></i>
-                      </button>
-                      <div className="mypage-badge-modal-info-name">
-                        {badge.name}
-                      </div>
-                      <div className="mypage-badge-modal-info-description">
-                        {badge.description}
-                      </div>
-                      <img src={badge.image} alt="뱃지 모달 이미지" />
-                    </div>
-                  </div>
-                ))}
             </div>
-            {/* </div> */}
-
 
           </section>
         </main>

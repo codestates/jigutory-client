@@ -145,7 +145,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
           email: res.data.googleInfo.email,
           imgUrl: res.data.googleInfo.profileImage,
         });
-        localStorage.setItem('accessToekn', res.data.accessTokenGoogle);
+        localStorage.setItem('accessToken', res.data.accessTokenGoogle);
       })
       .catch((err) => console.log(err));
   };

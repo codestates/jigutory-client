@@ -120,7 +120,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     const password = res.googleId;
 
     handleLogin(token);
-    localStorage.setItem('Google-accessToken', token);
+    localStorage.setItem('accessToken', token);
     // handleUserInfo({
     //   username: username, email: email, imgUrl: profileImage
     // });

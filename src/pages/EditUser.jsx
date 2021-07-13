@@ -250,7 +250,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
         <div id="edituser_container">
           <h2> 회원정보 수정 </h2>
 
-          <img className="edituser_profile_preview" src={imgUrl} />
+          <img className="edituser_profile_preview" alt="유저이미지" src={imgUrl} />
           <div id="edituser_img">
             <input
               id="file"

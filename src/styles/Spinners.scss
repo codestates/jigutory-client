@@ -46,10 +46,12 @@
 }
 
 #small_alert_loading {
-  background-color: rgba(0, 0, 0, 0.05 );
+  // margin : 0;
+  // padding : 0;
+  background-color: transparent;
   width : 100%;
   height: 100%;
-  z-index:1001;
+  // z-index:1001;
   // position : absolute;
   display: flex;
   justify-content: center;

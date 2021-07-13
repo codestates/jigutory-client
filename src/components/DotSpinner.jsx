@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/Spinners.scss';
 
 const DotSpinner = () => {
   return (

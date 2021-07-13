@@ -124,10 +124,10 @@ function SignUp({
           },
         )
         .then((res) => {
-          handleUserInfo({
-            usename: res.data.username,
-            email: res.data.email,
-          });
+          // handleUserInfo({
+          //   usename: res.data.username,
+          //   email: res.data.email,
+          // });
           setIsSignUp(true);
           setTimeout(() => {
             history.push('/intro');

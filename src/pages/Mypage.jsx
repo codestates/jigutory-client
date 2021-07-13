@@ -70,6 +70,8 @@ function Mypage({ accessToken }) {
         setEmail(res.data.email);
         setImgUrl(res.data.profileImage);
         setCreatedAt(res.data.createdAt)
+        // 받아온 해당 유저의 이메일을 body로 보내서 => 유저의 클릭넘, 탄소저감량, 레벨을 불러옴 (처음 화면 들어왔을 때 & 새로고침시 아무런 이벤트핸들러 없이도 뜨는 화면)
+        // 근데 여기서 body에 클릭넘을 안보내면 레벨은 그대로 나오는데 클릭넘과 탄소저감량이 0이되서 나옴.. 
         axios
           .post('http://localhost:4000/level/read',
             { email: res.data.email, clickNum: clickNum }, {
@@ -82,6 +84,21 @@ function Mypage({ accessToken }) {
             setClickNum(res.data.clickNum);
             setCarbonReduction(res.data.carbonReduction);
             setLevelInfo({ level: res.data.levelNum });
+            // axios.post('http://localhost:4000/level/info',
+            //   { level: res.data.levelNum }, {
+            //   headers: {
+            //     'Content-Type': 'application/json',
+            //   },
+            // })
+            //   .then((res) => {
+            //     console.log(res)
+            //     setLevelInfo({
+            //       name: res.data.name,
+            //       image: res.data.image,
+            //       description: res.data.description,
+            //       level: res.data.id
+            //     })
+            //   })
           })
       })
       .catch(err => console.log(err));
@@ -98,6 +115,7 @@ function Mypage({ accessToken }) {
   console.log('이메일 상태', email);
   console.log('가입일 상태', createdAt);
 
+  // total count : 페이지 열었을 때, 혹은 새로고침했을 경우 전체 클릭넘 & 탄소저감량을 불러옴
   useEffect(() => {
     axios.get('http://localhost:4000/intropage', {
       headers: {
@@ -117,7 +135,8 @@ function Mypage({ accessToken }) {
   //   axios
   //     .post('http://localhost:4000/level/info',
   //       {
-  //         // 여기서 이메일을 보내줘서 level info를 확인하고 받아올수는 없을까?
+  //         // 여기서 이메일을 보내줘서 level info를 확인하고 받아와야함. 그렇지 않으면 새로고침하고 클릭하기 전에 레벨 정보를 lv1밖에 받아 올 수가 없음
+  //         // 왜냐하면 상태에 있는 levelNum은 초기값인 1이기 때문. email을 body로 보내고, 서버에서 해당 유저의 레벨정보를 보내줘야되지 않을까?
 
   //         // clickNum: clickNum,
   //         // carbonReduction: carbonReduction,
@@ -141,11 +160,14 @@ function Mypage({ accessToken }) {
   // (구글로그인 확인) 0이 아닐 때, 클릭 수 증가함, 레벨 증가하는데 초기레벨값이 1로 안 떠서 11이 되면 레벨1이 되고 16되면 레벨2가 됨 => 해결 : 109번째 줄 if에 1추가
   // => 새로고침하면 초기값으로 돌아갔다가 클릭하면 들어옴 
   // => level/read or info에서 (info에 있어야할 것 같음)clickNum, carbonReduction, levelNum을 저장해 주고 있지 않음 (res로 안 들어옴)
+
+  // 클릭 시, 유저 이메일과 현재 클릭넘의 상태를 보내고 (현재 클릭넘 상태를 보내지 않으면 0이됨)
+  // 유저의 클릭넘, 탄소저감량, 레벨을 불러옴
   const handleClickNum = () => {
     console.log('clickNum 클릭 중')
 
     axios.post('http://localhost:4000/level/read',
-      { email: email, clickNum: clickNum },
+      { email: email, clickNum: clickNum }, // clickNum 을 안보내주면 0이됨
       { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
         console.log('handleClickNum(level/read) res :', res)
@@ -155,14 +177,14 @@ function Mypage({ accessToken }) {
         return res;
       })
       .then((res) => {
-        console.log('제발', res);
+        console.log('handleClickNum(level/red)', res);
         axios
           .post('http://localhost:4000/level/info',
             {
-              // 여기서 이메일을 보내줘서 level info를 확인하고 받아올수는 없을까?
+              // 여기서 이메일을 보내줘서 level확인 후 level info를 확인하고 받아올수는 없을까?
               // clickNum: clickNum,
               // carbonReduction: carbonReduction,
-              levelNum: levelInfo.level
+              levelNum: res.data.levelNum
             },
             { headers: { 'Content-Type': 'application/json' } })
           .then((res) => {
@@ -176,6 +198,13 @@ function Mypage({ accessToken }) {
           })
       })
   }
+
+
+
+
+
+
+
 
   // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
   useEffect(() => {
@@ -321,7 +350,7 @@ function Mypage({ accessToken }) {
 
             <div id="mypage-badge-header">
               <h3>나의 환경 뱃지</h3>
-              <p><i className="fas fa-exclamation-circle"></i>뱃지는 누적 탄소저감량에 따라 획득할 수 있습니다. 마우스를 올려 뱃지 정보를 확인하세요 !</p>
+              <p><i className="fas fa-exclamation-circle"></i>뱃지는 누적 탄소저감량에 따라 획득할 수 있습니다. 뱃지를 클릭하여 정보를 확인하세요 !</p>
             </div>
             <div id="mypage-container-badge">
               <div className="mypage-badge-list">

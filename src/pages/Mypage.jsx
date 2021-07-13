@@ -52,46 +52,10 @@ function Mypage({ accessToken }) {
     setSelectedBadgeId();
   };
 
-  // 클릭 시, 서버에서 불러오는 기능만 하는 함수
-  const handleClickNum = () => {
-    axios.post('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/level/read',
-      { clickNum, email },
-      { headers: { 'Content-Type': 'application/json' } })
-      .then((res) => {
-        // console 삭제하면 에러뜨는데 이유 못찾음
-        console.log('handleClickNum res :', res)
-        if (res.data.getUpdateInfo) {
-          setClickNum(res.data.getUpdateInfo.clickNum);
-          setCarbonReduction(res.data.getUpdateInfo.carbonReduction);
-
-          if (res.data.level) {
-            setLevelInfo({
-              name: res.data.level.name,
-              image: res.data.level.image,
-              description: res.data.level.description,
-              level: res.data.level.id,
-            });
-          }
-        }
-        else {
-          return false;
-        }
-      })
-      .catch(res => console.log(res))
-  }
-
-
-
-
-  if (!profileImage) {
-    setProfileImage(
-      'https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png',
-    );
-  }
-
+  // user/userinfo 받기 (토큰이 들어올 때 마다 업뎃 [accessToken] : 새로고침시 유저상태 유지 목적)
   useEffect(() => {
     axios
-      .get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/userinfo', {
+      .get('http://localhost:4000/user/userinfo', {
         headers: {
           'Content-Type': 'application/json',
           authorization: accessToken,
@@ -181,7 +145,7 @@ function Mypage({ accessToken }) {
   useEffect(() => {
     axios
       .post(
-        'https://ec2-100-26-225-39.compute-1.amazonaws.com:80/badge/read',
+        'http://localhost:4000/badge/read',
         {
           headers: {
             'Content-Type': 'application/json',

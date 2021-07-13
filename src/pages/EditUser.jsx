@@ -28,7 +28,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
   useEffect(() => {
     axios
-      .get('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/userinfo', {
+      .get('http://localhost:4000/user/userinfo', {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (imgUrl) {
       axios
         .patch(
-          'https://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/useredit',
+          'http://localhost:4000/user/useredit',
           { profileImage: imgUrl },
           {
             headers: {
@@ -200,7 +200,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validUsername) {
       axios
         .patch(
-          'hhttps://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/useredit',
+          'http://localhost:4000/user/useredit',
           { username: username },
           {
             headers: {
@@ -225,7 +225,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validPassword) {
       axios
         .patch(
-          'https://ec2-100-26-225-39.compute-1.amazonaws.com:80/user/passwordedit',
+          'http://localhost:4000/user/passwordedit',
           { rvsdpassword: newPasswordCheck },
           {
             headers: {

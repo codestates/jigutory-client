@@ -1,7 +1,9 @@
 import React from 'react'
 import '../styles/ProductList.scss'
 import AddCart from './AddCart';
-export default function Item({ userInfo, item , handleClick, isModalOn , closeModal }) {
+import Login from './Login'
+import SignUp from './SignUp'
+export default function Item({ productList, accessToken, message, quantitiy, userInfo, item , handleClick, isModalOn , closeModal }) {
 
   return (
     <div className="Store-item">
@@ -14,7 +16,7 @@ export default function Item({ userInfo, item , handleClick, isModalOn , closeMo
       <button className="item-button" onClick={(e) => handleClick(e, item.id)}> 장바구니 담기</button>
       <section>
         {isModalOn &&(
-          <AddCart userInfo={userInfo} closeModal={closeModal}/>
+          <AddCart quantity={1} productList={productList} accessToken={accessToken} message={message} userInfo={userInfo} closeModal={closeModal}/>
         )}
       </section>
       </figcaption>

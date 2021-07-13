@@ -117,7 +117,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     const email = res.profileObj.email;
     const username = res.profileObj.givenName;
     const profileImage = res.profileObj.imageUrl;
-    const password = res.googleId;
+    // const password = res.googleId;
 
     handleLogin(token);
     localStorage.setItem('accessToken', token);
@@ -128,7 +128,8 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     await axios
       .post(
         `http://localhost:4000/auth/googlesignin`, {
-        username: username, email: email, imgUrl: profileImage, password: password
+        username: username, email: email, imgUrl: profileImage, 
+        // password: password
       },
         {
           headers: {

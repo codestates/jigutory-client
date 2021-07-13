@@ -10,11 +10,12 @@ function Store({ accessToken, userInfo }) {
   const history = useHistory();
   const [productList, setList] = useState([])
   const [isModalOn, setIsModalOn] = useState(false);
+  const [message, setMessage] = useState('')
   console.log(`store.js product list 상태 :`, productList)
   
   useEffect (() =>{
     axios.post(
-      'https://ec2-100-26-225-39.compute-1.amazonaws.com:/product/list',
+      'http://localhost:4000/product/list',
       { email : userInfo.email },
       {
         headers : {
@@ -29,7 +30,7 @@ function Store({ accessToken, userInfo }) {
 
   const handleAdd = async (e) => {
     console.log(e)
-    await axios.post('https://ec2-100-26-225-39.compute-1.amazonaws.com:80/product/list', 
+    await axios.post('http://localhost:4000/product/list', 
     { email : userInfo.email , productId:e},
     {
       headers : {
@@ -38,10 +39,10 @@ function Store({ accessToken, userInfo }) {
     }).then(res => {
       console.log(`thisisStore.js res data`, res)
       setIsModalOn(true)
+      setMessage(res.data.message)
     })
     .catch((err)=> console.log(err))
   }
-
   const closeModal = () => {
     setIsModalOn(false)
   }
@@ -49,7 +50,7 @@ function Store({ accessToken, userInfo }) {
   return (
     <div className="store-container">
       {productList.map((item,idx)=>
-      <ProductList closeModal={closeModal} userInfo={userInfo} isModalOn={isModalOn} item={item} key={idx} handleClick={() => handleAdd(item.id)} />
+      <ProductList productList={productList} accessToken={accessToken} message={message} closeModal={closeModal} userInfo={userInfo} isModalOn={isModalOn} item={item} key={idx} handleClick={() => handleAdd(item.id)} />
       )}
     </div>
   )

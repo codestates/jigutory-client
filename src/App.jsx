@@ -115,7 +115,7 @@ function App() {
               )}
             />
             <Route path="/cart" exact={true} render={() => (
-                <Cart accessToken={accessToken} userInfo={userInfo} />
+                <Cart handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
             )} />
             <Route path="/store" exact={true} render={() => (
                 <Store accessToken={accessToken} userInfo={userInfo} />

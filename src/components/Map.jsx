@@ -53,32 +53,31 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
           image: markerImage,
           clickable: true,
         });
+        marker.setMap(map);
 
-        const closeOverlay = function () {
+        const container = document.createElement('div');
+        const content = document.createElement('div');
+        const contentName = document.createElement('div');
+        const closeButton = document.createElement('button');
+
+        container.append(content);
+        content.append(contentName);
+        contentName.append(closeButton);
+
+        container.className = 'map-info-container';
+        content.className = 'map-info';
+        contentName.className = 'map-info-name';
+        contentName.textContent = 'hello';
+        closeButton.className = 'map-info-close';
+        closeButton.innerHTML = '닫기';
+        closeButton.onclick = function () {
           overlay.setMap(null);
         };
 
-        const div = document.createElement('div');
-
-        div.classList.add('wrap');
-
-        const content =
-          '<div className="map-container">' +
-          '    <div className="map-info">' +
-          '        <div className="map-info-name">' +
-          '            name' +
-          '            <div className="map-info-close" onclick={closeOverlay}>' +
-          '                <i className="fas fa-times"></i>' +
-          '            </div>' +
-          '        </div>' +
-          '    </div>' +
-          '</div>';
-
         const overlay = new window.kakao.maps.CustomOverlay({
-          content: content,
+          content: container,
           map: map,
           position: latLng,
-          // position: marker.getPosition()
         });
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
@@ -91,7 +90,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         //   content: name,
         //   removable: iwRemoveable,
         // });
-        // marker.setMap(map);
 
         // window.kakao.maps.event.addListener(
         //   marker,
@@ -127,11 +125,11 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
           cafeToggleRef.current.toggle(cafeId);
         });
 
-        const clusterer = new window.kakao.maps.MarkerClusterer({
-          map: map,
-          averageCenter: true,
-          minLevel: 10, // 클러스터 할 최소 지도 레벨
-        });
+        // const clusterer = new window.kakao.maps.MarkerClusterer({
+        //   map: map,
+        //   averageCenter: true,
+        //   minLevel: 10, // 클러스터 할 최소 지도 레벨
+        // });
 
         // axios.get('/download/web/data/chicken.json', function (data) {
         //   var markers = data.positions.map(function (i, position) {

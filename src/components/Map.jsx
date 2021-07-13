@@ -65,7 +65,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         container.className = 'map-info-container';
         content.className = 'map-info';
         contentName.className = 'map-info-name';
-        contentName.textContent = 'hello';
+        contentName.textContent = name;
         closeButton.className = 'map-info-close';
         closeButton.textContent = '닫기';
         closeButton.onclick = function () {
@@ -74,7 +74,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
 
         const overlay = new window.kakao.maps.CustomOverlay({
           content: container,
-          // map: map,
           position: latLng,
         });
 

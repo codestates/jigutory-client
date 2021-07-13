@@ -13,8 +13,8 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
     console.log('자세히보기 클릭');
   };
 
-  const splitDescription = levelInfo.description.split('.');
-  const splited = splitDescription.slice(0, splitDescription.length - 1);
+  // const splitDescription = levelInfo.description.split('.');
+  // const splited = splitDescription.slice(0, splitDescription.length - 1);
 
   return (
     <div className="level_container level_hide level_show-modal">
@@ -30,11 +30,7 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
             </div>
             {/*<button>🔽 자세히 보기</button> */}
             <div id="level_desc" className="hide">
-              {splited.map((row, idx) => (
-                <span id="level_desc_row" key={idx}>
-                  {row}.
-                </span>
-              ))}
+              {levelInfo.description}
             </div>
           </section>
         </div>
@@ -44,3 +40,5 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
 };
 
 export default LevelInfo;
+
+// <div id="level_desc" className="hide">{splited.map((row, idx) => (<span id="level_desc_row" key={idx}>{row}.</span>))}</div>

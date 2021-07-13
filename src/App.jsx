@@ -114,8 +114,12 @@ function App() {
                 />
               )}
             />
-            <Route path="/cart" exact={true} component={Cart} />
-            <Route path="/store" exact={true} component={Store} />
+            <Route path="/cart" exact={true} render={() => (
+                <Cart accessToken={accessToken} userInfo={userInfo} />
+            )} />
+            <Route path="/store" exact={true} render={() => (
+                <Store accessToken={accessToken} userInfo={userInfo} />
+              )} />
           </div>
         </>
       </Switch>

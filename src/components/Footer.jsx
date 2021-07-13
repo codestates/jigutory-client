@@ -5,9 +5,7 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <div>
-        <div className="footer-header footer-story">
-          JIGU-STORY<i className="fas fa-globe-asia"></i>
-        </div>
+        <div className="footer-header footer-story">JIGU-STORY<i className="fas fa-globe-asia"></i></div>
         <a
           className="footer-info"
           href="http://github.com/codestates/jigutory-client/wiki"
@@ -25,10 +23,9 @@ const Footer = () => {
           Jigutory Notion
         </a>
       </div>
+
       <div>
-        <div className="footer-header footer-team">
-          JIGU-TEAM<i className="fab fa-github"></i>
-        </div>
+        <div className="footer-header footer-team">JIGU-TEAM<i className="fab fa-github"></i></div>
         <a
           className="footer-info"
           href="http://github.com/Hyunsoosiesta"
@@ -61,12 +58,12 @@ const Footer = () => {
         >
           정다희
         </a>
-        <div className="footer-info-dev">
+        {/* <div className="footer-info-dev">
           <div>Front</div>
           <div>Front</div>
           <div>Back</div>
           <div>Back</div>
-        </div>
+        </div> */}
       </div>
       <div className="footer-container-copyright">
         Copyright &copy; 2021 Jigutory All rights reserved

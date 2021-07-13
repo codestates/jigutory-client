@@ -1,11 +1,13 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import mapMarker from '../images/main-marker.png';
 import '../styles/Map.scss';
+//import EarthSpinner from './EarthSpinner';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
   const [center, setCenter] = useState();
   const [markers, setMarkers] = useState([]);
+  //const [isLoading, setIsLoading] = useState(true);
 
   const containerRef = useRef();
 
@@ -29,6 +31,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
       };
       setMap(new window.kakao.maps.Map(containerRef.current, options));
     }
+
   }, [center]);
 
   useEffect(() => {
@@ -147,8 +150,10 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   }));
 
   return (
-    <div id="map-container">
-      <div id="map" ref={containerRef}></div>
-    </div>
+    <>
+      <div id="map-container">
+        <div id="map" ref={containerRef}></div>
+      </div>
+    </>
   );
 };

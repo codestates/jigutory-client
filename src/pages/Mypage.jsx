@@ -4,7 +4,7 @@ import badgeImg from '../images/mypage-badge.png';
 import LevelInfo from '../components/LevelInfo';
 import useClickOutside from '../hooks/useClickOutside';
 import video from '../images/stoppollution.mp4';
-import marine from '../images/marine-pollution.png';
+import DotSpinner from '../components/DotSpinner';
 import '../styles/Mypage.scss';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -12,6 +12,8 @@ axios.defaults.withCredentials = true;
 function Mypage({ accessToken }) {
   const history = useHistory();
   const [addFriends, setAddFriends] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
   // modal 상태
   const [isModalOn, setIsModalOn] = useState(false);
 
@@ -199,13 +201,6 @@ function Mypage({ accessToken }) {
       })
   }
 
-
-
-
-
-
-
-
   // 뱃지 받아오기 (처음 한 번만 뱃지정보 전체 받아옴)
   useEffect(() => {
     axios
@@ -266,6 +261,8 @@ function Mypage({ accessToken }) {
 
   return (
     <>
+      {<DotSpinner />}
+
       <div id="color-box"></div>
       {/* <video className="video" autoPlay muted loop>
           <source src={video} type="video/mp4" height="100px" />
@@ -305,6 +302,7 @@ function Mypage({ accessToken }) {
                       <i className="fa fa-plus-circle mypage-btn"></i>
                     </button>
                   </span>
+                  {/* {isLoading ? </>:} */}
                   <span className="mypage-box-contents mypage-clicknum">{clickNum} </span>
                 </div>
                 <div className="mypage-userinfo-mylevel-section">

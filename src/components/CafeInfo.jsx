@@ -39,8 +39,6 @@ export const CafeInfo = ({ cafeToggleRef }) => {
 
   const cafeKeywords = cafe.keyword.split(',');
   const cafeType = cafe.type.split(',');
-  const cafeEtc = cafe.etc.split(',');
-  console.log(cafeEtc);
 
   return (
     <div id="cafe-toggle-container" ref={domNode}>
@@ -77,11 +75,6 @@ export const CafeInfo = ({ cafeToggleRef }) => {
                 </li>
               ))}
             </ul>
-            {cafeEtc.length === 0 ? ('') : (
-              <ul>
-                {cafeEtc.map((keyword, idx) => (
-                  <li key={idx} className="cafe-toggle-category-description-etc">{keyword}</li>
-                ))}</ul>)}
           </div>
           <div className="cafe-toggle-category-contact">
             <div>

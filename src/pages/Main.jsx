@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Map } from '../components/Map';
 import { Search } from '../components/Search';
 import { CafeInfo } from '../components/CafeInfo';
+import { ScrollButton } from '../components/ScrollButton';
 
 function Main() {
   const mapMovementRef = useRef();
@@ -20,6 +21,7 @@ function Main() {
         cafeToggleRef={cafeToggleRef}
       />
       <CafeInfo cafeToggleRef={cafeToggleRef} />
+      <ScrollButton />
     </div>
   );
 }

@@ -14,7 +14,7 @@ function Login({
   handleCloseLogin,
   handleUserInfo,
   handleOpenSignup,
-  isLoginOpen
+  isLoginOpen,
 }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -67,18 +67,20 @@ function Login({
         )
         .then((res) => {
           handleLogin(res.data.data.accessToken);
-          axios.get('http://localhost:4000/user/userinfo', {
-            headers: {
-              'Content-Type': 'application/json',
-              authorization: res.data.data.accessToken,
-            },
-          }).then(res => {
-            handleUserInfo(res.data)
-            handleUserInfo({
-              username: res.data.username,
-              email: res.data.email
+          axios
+            .get('http://localhost:4000/user/userinfo', {
+              headers: {
+                'Content-Type': 'application/json',
+                authorization: res.data.data.accessToken,
+              },
             })
-          })
+            .then((res) => {
+              handleUserInfo(res.data);
+              handleUserInfo({
+                username: res.data.username,
+                email: res.data.email,
+              });
+            });
           return res;
         })
         .then((res) => {
@@ -94,11 +96,11 @@ function Login({
   const moveToSignUp = () => {
     handleCloseLogin();
     handleOpenSignup();
-  }
+  };
 
   let domNode = useClickOutside(() => {
     handleCloseLogin();
-  })
+  });
 
   return (
     <div className="modal-container show-modal" onClick={handleOpenLogin}>
@@ -130,11 +132,11 @@ function Login({
           {!errorMessage ? (
             ''
           ) : (
-              <div className="modal-alert-box">
-                <i className="fas fa-exclamation-circle"></i>
-                {errorMessage}
-              </div>
-            )}
+            <div className="modal-alert-box">
+              <i className="fas fa-exclamation-circle"></i>
+              {errorMessage}
+            </div>
+          )}
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>
@@ -146,14 +148,13 @@ function Login({
           </div>
 
           <button className="move_signup-btn" onClick={moveToSignUp}>
-            <i className="fas fa-user-plus" ></i>
+            <i className="fas fa-user-plus"></i>
             <span>회원가입</span>
           </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default withRouter(Login);
-

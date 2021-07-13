@@ -1,103 +1,155 @@
 @import './_variables.scss';
 
-.mypage-container {
-  padding: 20px;
+// 마이페이지 반응형 
+// mypage-left-box display : none
+// mypage-wholebox : flex-wrap : wrap, width :
+
+
+#color-box {
+  background-color: $medium-blue;
+  height: 18rem;
+  width : 100%;
+  position : absolute;
+  z-index: -1;
 }
-.mypage-container-top {
+#mypage-container {
+  color : black;
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
 
-  .mypage-userinfo {
-    display: flex;
-    flex-direction: row;
-    width: 500px;
-    height: 260px;
-    margin: 25px;
+#mypage-wholebox {
+  display: flex;
+  justify-content: center;
+}
 
-    .mypage-userinfo-left {
-      display: flex;
-      width: 260px;
-      border: 1px solid black;
-      justify-content: center;
-      align-items: center;
+#mypage-left-box, 
+#mypage-right-box {
+  margin : 6rem 0 6rem 0;
+  padding : 1rem;
+  display: flex;
+  flex-direction: column;
+  //border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
 
-      img {
-        width: 100%;
-        padding: 10px;
-      }
-    }
-
-    .mypage-userinfo-right {
-      display: flex;
-      flex-direction: column;
-      width: 220px;
-      border: 1px solid black;
-      justify-content: center;
-
-      .mypage-userinfo-email {
-        display: flex;
-        flex-direction: row;
-        width: 190px;
-        padding: 0;
-        margin-left: 50px;
-        margin-bottom: 10px;
-        text-align: center;
-        color: gray;
-        font-size: 14px;
-      }
-
-      .mypage-userinfo-level,
-      .mypage-userinfo-name {
-        display: flex;
-        flex-direction: row;
-        width: 190px;
-        padding: 2px;
-        margin: 10px;
-        text-align: center;
-        border: 1px solid black;
-
-        .mypage-userinfo-title {
-          width: 60px;
-          height: 30px;
-          float: none;
-          padding-right: 4px;
-          border-right: 1px solid black;
-        }
-
-        .mypage-userinfo-content {
-          padding-left: 10px;
-        }
-      }
-
-      button {
-        font-size: 14px;
-        width: 190px;
-        padding: 9px;
-        margin: 10px;
-        text-align: center;
-        border: 1px solid black;
-      }
-    }
+#mypage-left-box {
+  margin-right : 2rem;
+  align-items: center;
+  img {
+    width : 8rem;
+    height: 8rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
   }
-
-  .mypage-eco {
+  .mypage-userinfo-summary {
     display: flex;
     flex-direction: column;
-    width: 220px;
-    height: 260px;
-    border: 1px solid black;
-    justify-content: center;
-    margin: 25px;
+    align-items: center;
+    * {
+      margin : 10px;
+    }
+    .mypage-userinfo-edit {
+      background: transparent;
+      border-radius: 30px;
+      padding : 10px 17px 10px 17px;
+      display: flex;
+      align-items: center;
+      border : 1px solid rgba(0, 0, 0, 0.3);
+      font-size : 15px;
+      font-weight: 700;
+      color : rgba(0, 0, 0, 0.6);
 
-    div,
-    button {
-      padding: 10px;
-      margin: 10px;
-      text-align: center;
+      &:hover {
+        background-color: $medium-blue;
+        color : white;
+        border : none;
+        transition : background-color .5s linear;
+      }
+    }
+    .mypage-userinfo-username {
+      span {
+        font-weight: 600;
+      }
+      div {
+        font-size : 11px;
+
+      }
+    }
+    .mypage-userinfo-email {
+      font-size : 14px;
     }
   }
 }
+
+#mypage-right-box {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  div {
+    // top-middle-bottom 사이 간격 띄울때 여기서 margin 으로 조절하기
+    margin : 5px;
+  }
+  // right-box 안에 컨테이너 늘어나면 여기 추가
+  #mypage-container-top,
+  #mypage-container-second, 
+  .mypage-container-bottom {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius : 10px;
+    padding : 30px 15px 30px 15px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 5px 2px rgba(11, 11, 11, 0.08);
+  }
+  
+  .mypage-userinfo-mylevel, 
+  .mypage-total-user {
+    display: flex;
+    justify-content: space-around;
+    padding : 5px;
+    // border : 1px solid black;
+    // flex-wrap: wrap;
+  }
+  
+  .mypage-userinfo-mylevel-section,
+  .mypage-total-user-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //border : 1px solid pink;
+  }
+  
+  .mypage-level-click {
+    cursor: pointer;
+  }
+  
+  .mypage-box-subtitle {
+    margin-bottom : 5px;
+    font-size : 1rem;
+    font-weight: 700;
+    color : rgba(0, 0, 0, 0.7);
+    border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+    .mypage-handleclick {
+      background-color: transparent;
+    }
+    .fa-plus-circle {
+      color : rgba(0, 0, 0, 0.5);
+      font-size : 1.2rem;
+      &:hover {
+        color : $green;
+        transition: color .2s linear;
+      }
+    }
+  }
+  .mypage-box-subtitle-level {
+    cursor : pointer;
+  }
+  .mypage-box-contents {
+    font-size : 1.6rem;
+  }
+
+}
+  
+
+//-----------------------------------------------
 
 .mypage-container-bottom {
   display: flex;

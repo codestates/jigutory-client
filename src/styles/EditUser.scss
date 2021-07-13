@@ -31,12 +31,15 @@
   .edituser_withdrawal_choose > button{
     margin : 10px;
     padding : 5px 12px 5px 12px;
+    border-radius: 5px;
     &:nth-child(1):hover {
       background-color: $error-red;
+      color : white;
       transition : background-color .2s linear;
     }
     &:nth-child(2):hover {
       background-color: rgb(0, 149, 50);
+      color : white;
       transition : background-color .2s linear;
     }
   }
@@ -51,7 +54,7 @@
   font-weight: 500;
 }
 
-button {
+.edituser_changebtn {
   padding : 6px;
   border-radius: 5px;
   &:hover {
@@ -81,7 +84,7 @@ button {
     }
 
     section {
-      width : 27rem;
+      width : 28rem;
       display: flex;
       flex-direction: column;
       div {
@@ -163,7 +166,7 @@ button {
         cursor: pointer;
       }
       
-      .file_label, button {
+      .file_label{
         display: flex;
         margin-top : 5px;
         font-size: .8rem;
@@ -175,8 +178,7 @@ button {
         display: flex;
         align-items: center;
       }
-      .file_label:hover,
-      button:hover {
+      .file_label:hover{
         background-color: rgba(0, 0, 0, 0.3);
         transition : background-color .2s linear;
       }
@@ -185,7 +187,11 @@ button {
 }
 
 #edituser_withdrawal{
-  button:nth-child(1) {
+  button {
+    padding : 6px;
+    border-radius: 5px;
+  }
+  button:nth-child(2) {
     margin-right : 10px;
     background-color: $error-red;
     color : white;
@@ -198,7 +204,7 @@ button {
       transition : background-color .2s linear;
     }
   }
-  button:nth-child(2) {
+  button:nth-child(3) {
     background-color: $medium-blue;
     color: white;
     &:hover {

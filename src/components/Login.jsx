@@ -56,7 +56,7 @@ function Login({
     if (email && password) {
       await axios
         .post(
-          `${process.env.REACT_APP_API_URL}/auth/signin`,
+          `http://ec2-13-125-238-239.ap-northeast-2.compute.amazonaws.com:4000/auth/signin`,
           { email: email, password: password },
           {
             headers: {

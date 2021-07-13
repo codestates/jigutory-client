@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import mapMarker from '../images/main-marker.png';
 import '../styles/Map.scss';
@@ -40,7 +39,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         const markerImageOptions = {
           offset: new window.kakao.maps.Point(20, 42),
         };
-
         const markerImage = new window.kakao.maps.MarkerImage(
           markerImageUrl,
           markerImageSize,
@@ -58,7 +56,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         const container = document.createElement('div');
         const content = document.createElement('div');
         const contentName = document.createElement('div');
-        const closeButton = document.createElement('button');
+        const closeButton = document.createElement('div');
 
         container.append(content);
         content.append(contentName);
@@ -69,57 +67,28 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         contentName.className = 'map-info-name';
         contentName.textContent = 'hello';
         closeButton.className = 'map-info-close';
-        closeButton.innerHTML = '닫기';
+        closeButton.textContent = '닫기';
         closeButton.onclick = function () {
           overlay.setMap(null);
         };
 
         const overlay = new window.kakao.maps.CustomOverlay({
           content: container,
-          map: map,
+          // map: map,
           position: latLng,
         });
+
+        // window.kakao.maps.event.addListener(marker, 'mouseover', function () {
+        //   overlay.setMap(map);
+        // });
+
+        // window.kakao.maps.event.addListener(marker, 'mouseout', function () {
+        //   overlay.setMap(null);
+        // });
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
           overlay.setMap(map);
         });
-
-        // const iwRemoveable = true;
-        // const infoWindow = new window.kakao.maps.InfoWindow({
-        //   position: latLng,
-        //   content: name,
-        //   removable: iwRemoveable,
-        // });
-
-        // window.kakao.maps.event.addListener(
-        //   marker,
-        //   'mouseover',
-        //   (function () {
-        //     return function () {
-        //       infoWindow.open(map, marker);
-        //     };
-        //   })(map, marker, infoWindow),
-        // );
-
-        // window.kakao.maps.event.addListener(
-        //   marker,
-        //   'mouseout',
-        //   (function () {
-        //     return function () {
-        //       infoWindow.close();
-        //     };
-        //   })(infoWindow),
-        // );
-
-        // window.kakao.maps.event.addListener(
-        //   marker,
-        //   'click',
-        //   (function () {
-        //     return function () {
-        //       infoWindow.open(map, marker);
-        //     };
-        //   })(map, marker, infoWindow),
-        // );
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);
@@ -128,21 +97,10 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         // const clusterer = new window.kakao.maps.MarkerClusterer({
         //   map: map,
         //   averageCenter: true,
-        //   minLevel: 10, // 클러스터 할 최소 지도 레벨
+        //   minLevel: 10,
         // });
 
-        // axios.get('/download/web/data/chicken.json', function (data) {
-        //   var markers = data.positions.map(function (i, position) {
-        //     return new window.kakao.maps.Marker({
-        //       position: new window.kakao.maps.LatLng(
-        //         position.lat,
-        //         position.lng,
-        //       ),
-        //     });
-        //   });
-
-        //   clusterer.addMarkers(markers);
-        // });
+        // clusterer.addMarkers(markers);
       });
     }
   }, [cafeToggleRef, map, markers]);

@@ -35,26 +35,11 @@
     }
 
     .map-info-close {
-      color: $medium_blue;
-      padding: 10px;
-      font-size: 25px;
-      background-color: transparent;
-      &:hover {
-        color: $error-red;
-        transform: scale(0.92);
-        background-color: transparent;
-      }
+      border: 1px solid black;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      z-index: 10000;
     }
-
-    // .map-info:after {
-    //   content: '';
-    //   position: absolute;
-    //   margin-left: -12px;
-    //   left: 50%;
-    //   bottom: 0;
-    //   width: 22px;
-    //   height: 12px;
-    //   background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
-    // }
   }
 }

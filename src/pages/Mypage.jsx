@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import badgeImg from '../images/mypage-badge.png';
 import LevelInfo from '../components/LevelInfo';
 import useClickOutside from '../hooks/useClickOutside';
+import { ScrollButton } from '../components/ScrollButton';
 import '../styles/Mypage.scss';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -343,6 +344,7 @@ function Mypage({ accessToken }) {
                   ))}
               </div>
             </div>
+            <ScrollButton />
           </section>
         </main>
       </div>

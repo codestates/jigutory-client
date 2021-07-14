@@ -118,7 +118,7 @@ function App() {
                 <Cart handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
             )} />
             <Route path="/store" exact={true} render={() => (
-                <Store accessToken={accessToken} userInfo={userInfo} />
+                <Store handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
               )} />
           </div>
         </>

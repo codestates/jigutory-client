@@ -3,7 +3,7 @@ import '../styles/ProductList.scss'
 import AddCart from './AddCart';
 import Login from './Login'
 import SignUp from './SignUp'
-export default function Item({ productList, accessToken, message, quantitiy, userInfo, item , handleClick, isModalOn , closeModal }) {
+export default function Item({ handleLogin, productList, accessToken, message, quantitiy, userInfo, item , handleClick, isModalOn , closeModal }) {
 
   return (
     <div className="Store-item">
@@ -16,7 +16,7 @@ export default function Item({ productList, accessToken, message, quantitiy, use
       <button className="item-button" onClick={(e) => handleClick(e, item.id)}> 장바구니 담기</button>
       <section>
         {isModalOn &&(
-          <AddCart quantity={1} productList={productList} accessToken={accessToken} message={message} userInfo={userInfo} closeModal={closeModal}/>
+          <AddCart handleLogin={handleLogin} quantity={1} productList={productList} accessToken={accessToken} message={message} userInfo={userInfo} closeModal={closeModal}/>
         )}
       </section>
       </figcaption>

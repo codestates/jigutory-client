@@ -60,7 +60,7 @@ const AddCart = ({
           <button onClick={handleOpenLogin}>로그인 하기</button>
           {isSignUpOpen && (<SignUp handleCloseSignUp={handleCloseSignUp} handleLogin={handleLogin}/>)}
           <button onClick={handleOpenSignUp}>회원가입 하기</button>
-          {isLoginOpen && (<Login handleCloseLogin={handleCloseLogin}/>)}
+          {isLoginOpen && (<Login handleLogin={handleLogin} handleCloseLogin={handleCloseLogin}/>)}
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import ProductList from '../components/ProductList';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
-function Store({ accessToken, userInfo }) {
+function Store({ handleLogin,accessToken, userInfo }) {
   const history = useHistory();
   const [productList, setList] = useState([]);
   const [isModalOn, setIsModalOn] = useState(false);
@@ -50,7 +50,7 @@ function Store({ accessToken, userInfo }) {
   return (
     <div className="store-container">
       {productList.map((item,idx)=>
-      <ProductList productList={productList} accessToken={accessToken} message={message} closeModal={closeModal} userInfo={userInfo} isModalOn={isModalOn} item={item} key={idx} handleClick={() => handleAdd(item.id)} />
+      <ProductList handleLogin={handleLogin} productList={productList} accessToken={accessToken} message={message} closeModal={closeModal} userInfo={userInfo} isModalOn={isModalOn} item={item} key={idx} handleClick={() => handleAdd(item.id)} />
       )}
     </div>
   )

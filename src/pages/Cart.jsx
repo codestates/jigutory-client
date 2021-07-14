@@ -34,63 +34,63 @@ function Cart(accessToken, userInfo, handleLogin) {
   })
 }})
 
-const handleCheckChange = (checked, id) => {
-  if (checked) {
-    setCheckedItems([{...checkedItems, id}]);
-  }
-  else {
-    setCheckedItems(checkedItems.filter((el) => el !== id));
-  }
-};
+// const handleCheckChange = (checked, id) => {
+//   if (checked) {
+//     setCheckedItems([{...checkedItems, id}]);
+//   }
+//   else {
+//     setCheckedItems(checkedItems.filter((el) => el !== id));
+//   }
+// };
 
-const handleAllCheck = (checked) => {
-  if (checked) {
-    setCheckedItems(cartList.map((el) => el.itemId))
-  }
-  else {
-    setCheckedItems([]);
-  }
-};
-  const sum = {}
-  const onQuantityChange = (itemId, quantity) => {
-    console.log(`thisiscartList`, cartList)
-    const found = cartList.filter((el) => el.id == itemId)
-    const idx = cartList.indexOf(found)
-    console.log(sum)
-    const cartItem = {
-      itemId,
-      quantity
-    }
+// const handleAllCheck = (checked) => {
+//   if (checked) {
+//     setCheckedItems(cartList.map((el) => el.itemId))
+//   }
+//   else {
+//     setCheckedItems([]);
+//   }
+// };
+//   const sum = {}
+//   const onQuantityChange = (itemId, quantity) => {
+//     console.log(`thisiscartList`, cartList)
+//     const found = cartList.filter((el) => el.id == itemId)
+//     const idx = cartList.indexOf(found)
+//     console.log(sum)
+//     const cartItem = {
+//       itemId,
+//       quantity
+//     }
 
-    setCartList([
-      ...cartList.slice(0, idx),
-      cartItem,
-      ...cartList.slice(idx + 1)
-    ])
-  }
-const handleQuantityChange = (quantity, itemId) => {
-  onQuantityChange(itemId, quantity)
-}
+//     setCartList([
+//       ...cartList.slice(0, idx),
+//       cartItem,
+//       ...cartList.slice(idx + 1)
+//     ])
+//   }
+// const handleQuantityChange = (quantity, itemId) => {
+//   onQuantityChange(itemId, quantity)
+// }
 
-const getTotal = () => {
-  let cartIdArr = cartList.map((el) => el.itemId)
-  let total = {
-    price: 0,
-    quantity: 0,
-  }
-  for (let i = 0; i < cartIdArr.length; i++) {
-    if (checkedItems.indexOf(cartIdArr[i]) > -1) {
-      let quantity = cartList[i]
-      let price = cartList.filter((el) => el.id === cartList[i].itemId)[0].price
+// const getTotal = () => {
+//   let cartIdArr = cartList.map((el) => el.itemId)
+//   let total = {
+//     price: 0,
+//     quantity: 0,
+//   }
+//   for (let i = 0; i < cartIdArr.length; i++) {
+//     if (checkedItems.indexOf(cartIdArr[i]) > -1) {
+//       let quantity = cartList[i]
+//       let price = cartList.filter((el) => el.id === cartList[i].itemId)[0].price
 
-      total.price = total.price + quantity * price
-      total.quantity = total.quantity + quantity
-    }
-  }
-  return total
-}
+//       total.price = total.price + quantity * price
+//       total.quantity = total.quantity + quantity
+//     }
+//   }
+//   return total
+// }
 
-const sumtotal = getTotal()
+// const sumtotal = getTotal()
 
 const removeFromCart = (itemId) => {
   setCartList(cartList.filter((el) => el.itemId !== itemId))
@@ -110,9 +110,9 @@ const removeFromCart = (itemId) => {
     {cartList.map((item,idx)=>{
       const quantity = 1
       // console.log(`thisiscartList`, cartList)
-      return <CartList total={total} setTotal={setTotal} removeFromCart={removeFromCart} handleQuantityChange={handleQuantityChange} quantity={quantity} checkedItems={checkedItems} handleCheckChange={handleCheckChange} handleLogin={handleLogin} item={item} key ={idx} />
+      return <CartList total={total} quantity={quantity} checkedItems={checkedItems} handleLogin={handleLogin} item={item} key ={idx} />
     })}
-    <OrderSummary total={total} />
+    <OrderSummary userinfo={userinfo} total={total} />
     </div>)
 }
 

@@ -73,8 +73,6 @@ function Mypage({ accessToken }) {
         setEmail(res.data.email);
         setImgUrl(res.data.profileImage);
         setCreatedAt(res.data.createdAt);
-        // 받아온 해당 유저의 이메일을 body로 보내서 => 유저의 클릭넘, 탄소저감량, 레벨을 불러옴 (처음 화면 들어왔을 때 & 새로고침시 아무런 이벤트핸들러 없이도 뜨는 화면)
-        // 근데 여기서 body에 클릭넘을 안보내면 레벨은 그대로 나오는데 클릭넘과 탄소저감량이 0이되서 나옴..
         axios
           .post(
             'http://localhost:4000/level/read',
@@ -226,16 +224,9 @@ function Mypage({ accessToken }) {
     handleCloseBadge();
   });
 
-  console.log('마이페이지 레벨인포 찍어보기 :', levelInfo);
-
   return (
     <>
-      {<DotSpinner />}
-
       <div id="color-box"></div>
-      {/* <video className="video" autoPlay muted loop>
-          <source src={video} type="video/mp4" height="100px" />
-        </video> */}
       <div id="mypage-container">
         <main id="mypage-wholebox">
           <section id="mypage-left-box">
@@ -256,7 +247,6 @@ function Mypage({ accessToken }) {
               </button>
             </div>
           </section>
-
           <section id="mypage-right-box">
             <div id="mypage-badge-header">
               <h3>나의 환경지킴 지수</h3>
@@ -354,7 +344,7 @@ function Mypage({ accessToken }) {
                   <p>
                     플라스틱컵 한 개를 만들고 폐기하는데 약 25g의 이산화탄소가
                     배출됩니다. <br />
-                    오늘도 지구토리와 함께 탄소발자국을 줄여보세요 !
+                    오늘도 지구토리와 함께 탄소발자국을 줄여보세요 !{' '}
                   </p>
                   <button onClick={handleAddFriends}> 친구초대</button>
                   {<div id="mypage-addfriends">{addFriends}</div>}
@@ -416,8 +406,10 @@ function Mypage({ accessToken }) {
                       onClick={() => setSelectedBadgeId(badgeList[3].id)}
                     ></img>
                   </div>
+
                   <div className="mypage-badge-contentbox">
                     <span className="mypage-box-subtitle">
+                      {' '}
                       5000g <i className="fas fa-arrow-circle-up"></i>
                     </span>
                     <img
@@ -428,7 +420,6 @@ function Mypage({ accessToken }) {
                     ></img>
                   </div>
                 </div>
-
                 {badgeList
                   .filter((badge) => badge.id === selectedBadgeId)
                   .map((badge, idx) => (

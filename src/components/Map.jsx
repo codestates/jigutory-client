@@ -1,13 +1,14 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import mapMarker from '../images/main-marker.png';
+import EarthSpinner from './EarthSpinner';
 import '../styles/Map.scss';
-//import EarthSpinner from './EarthSpinner';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
   const [center, setCenter] = useState();
   const [markers, setMarkers] = useState([]);
-  //const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  let isClicked = false;
 
   const containerRef = useRef();
 
@@ -31,7 +32,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
       };
       setMap(new window.kakao.maps.Map(containerRef.current, options));
     }
-
   }, [center]);
 
   useEffect(() => {
@@ -59,20 +59,19 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         const container = document.createElement('div');
         const content = document.createElement('div');
         const contentName = document.createElement('div');
-        const closeButton = document.createElement('div');
+        const closeButton = document.createElement('button');
 
         container.append(content);
         content.append(contentName);
-        contentName.append(closeButton);
+        content.append(closeButton);
 
         container.className = 'map-info-container';
         content.className = 'map-info';
         contentName.className = 'map-info-name';
         contentName.textContent = name;
         closeButton.className = 'map-info-close';
-        closeButton.textContent = '닫기';
         closeButton.onclick = function () {
-          overlay.setMap(null);
+          closeOverlay();
         };
 
         const overlay = new window.kakao.maps.CustomOverlay({
@@ -80,16 +79,29 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
           position: latLng,
         });
 
-        // window.kakao.maps.event.addListener(marker, 'mouseover', function () {
-        //   overlay.setMap(map);
-        // });
-
-        // window.kakao.maps.event.addListener(marker, 'mouseout', function () {
-        //   overlay.setMap(null);
-        // });
-
+        function closeOverlay() {
+          isClicked = false;
+          overlay.setMap(null);
+        }
         window.kakao.maps.event.addListener(marker, 'click', function () {
+          if (!isClicked) {
+            isClicked = true;
+          }
           overlay.setMap(map);
+        });
+
+        window.kakao.maps.event.addListener(marker, 'mouseover', function () {
+          if (isClicked) {
+            return;
+          }
+          overlay.setMap(map);
+        });
+
+        window.kakao.maps.event.addListener(marker, 'mouseout', function () {
+          if (isClicked) {
+            return;
+          }
+          overlay.setMap(null);
         });
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
@@ -105,7 +117,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         // clusterer.addMarkers(markers);
       });
     }
-  }, [cafeToggleRef, map, markers]);
+  }, [cafeToggleRef, isClicked, map, markers]);
 
   useImperativeHandle(mapMovementRef, () => ({
     move: (lat, lng) => {
@@ -122,6 +134,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   return (
     <>
       <div id="map-container">
+        {/* <EarthSpinner /> */}
         <div id="map" ref={containerRef}></div>
       </div>
     </>

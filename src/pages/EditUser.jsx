@@ -271,7 +271,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 변경
               </button>
             </div>
-            {!imgConfirmMessage ? '' : <div>{imgConfirmMessage}</div>}
+            {!imgConfirmMessage ? '' : <div id="edituser_confirm-image">{imgConfirmMessage}</div>}
           </div>
 
           <section>

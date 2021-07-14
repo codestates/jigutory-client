@@ -25,6 +25,10 @@ function App() {
   console.log('app.js 상태 토큰 :', accessToken);
   console.log('app.js 상태 isLogin :', isLogin);
 
+  const isLogout = () => {
+    setIsLogin(false);
+  }
+
   const handleLogin = (token) => {
     setAccessToken(token);
     if (token) {
@@ -34,7 +38,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.clear();
-    //setIsLogin(false);
+    // setIsLogin(false);
   };
 
   const handleUserInfo = (obj) => {
@@ -96,7 +100,7 @@ function App() {
               path="/mypage"
               exact={true}
               render={() => (
-                <Mypage accessToken={accessToken} userInfo={userInfo} />
+                <Mypage accessToken={accessToken} userInfo={userInfo} handleUserInfo={handleUserInfo} setUserInfo={setUserInfo} />
               )}
             />
             <Route
@@ -106,15 +110,15 @@ function App() {
                 <EditUser
                   handleUserInfo={handleUserInfo}
                   accessToken={accessToken}
-                  handleLogout={handleLogout}
+                  isLogout={isLogout}
                 />
               )}
             />
             <Route path="/cart" exact={true} render={() => (
-                <Cart accessToken={accessToken} userInfo={userInfo} />
+                <Cart handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
             )} />
             <Route path="/store" exact={true} render={() => (
-                <Store accessToken={accessToken} userInfo={userInfo} />
+                <Store handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
               )} />
           </div>
         </>

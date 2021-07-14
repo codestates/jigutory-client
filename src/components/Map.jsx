@@ -1,10 +1,13 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import mapMarker from '../images/main-marker.png';
+import '../styles/Map.scss';
+//import EarthSpinner from './EarthSpinner';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
   const [center, setCenter] = useState();
   const [markers, setMarkers] = useState([]);
+  //const [isLoading, setIsLoading] = useState(true);
 
   const containerRef = useRef();
 
@@ -28,6 +31,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
       };
       setMap(new window.kakao.maps.Map(containerRef.current, options));
     }
+
   }, [center]);
 
   useEffect(() => {
@@ -38,7 +42,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         const markerImageOptions = {
           offset: new window.kakao.maps.Point(20, 42),
         };
-
         const markerImage = new window.kakao.maps.MarkerImage(
           markerImageUrl,
           markerImageSize,
@@ -51,49 +54,55 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
           image: markerImage,
           clickable: true,
         });
-
-        const iwRemoveable = true;
-        const infoWindow = new window.kakao.maps.InfoWindow({
-          position: latLng,
-          content: name,
-          removable: iwRemoveable,
-        });
-
         marker.setMap(map);
 
-        window.kakao.maps.event.addListener(
-          marker,
-          'mouseover',
-          (function () {
-            return function () {
-              infoWindow.open(map, marker);
-            };
-          })(map, marker, infoWindow),
-        );
+        const container = document.createElement('div');
+        const content = document.createElement('div');
+        const contentName = document.createElement('div');
+        const closeButton = document.createElement('div');
 
-        window.kakao.maps.event.addListener(
-          marker,
-          'mouseout',
-          (function () {
-            return function () {
-              infoWindow.close();
-            };
-          })(infoWindow),
-        );
+        container.append(content);
+        content.append(contentName);
+        contentName.append(closeButton);
 
-        window.kakao.maps.event.addListener(
-          marker,
-          'click',
-          (function () {
-            return function () {
-              infoWindow.open(map, marker);
-            };
-          })(map, marker, infoWindow),
-        );
+        container.className = 'map-info-container';
+        content.className = 'map-info';
+        contentName.className = 'map-info-name';
+        contentName.textContent = name;
+        closeButton.className = 'map-info-close';
+        closeButton.textContent = '닫기';
+        closeButton.onclick = function () {
+          overlay.setMap(null);
+        };
+
+        const overlay = new window.kakao.maps.CustomOverlay({
+          content: container,
+          position: latLng,
+        });
+
+        // window.kakao.maps.event.addListener(marker, 'mouseover', function () {
+        //   overlay.setMap(map);
+        // });
+
+        // window.kakao.maps.event.addListener(marker, 'mouseout', function () {
+        //   overlay.setMap(null);
+        // });
+
+        window.kakao.maps.event.addListener(marker, 'click', function () {
+          overlay.setMap(map);
+        });
 
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);
         });
+
+        // const clusterer = new window.kakao.maps.MarkerClusterer({
+        //   map: map,
+        //   averageCenter: true,
+        //   minLevel: 10,
+        // });
+
+        // clusterer.addMarkers(markers);
       });
     }
   }, [cafeToggleRef, map, markers]);
@@ -111,8 +120,10 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   }));
 
   return (
-    <div id="map-container">
-      <div id="map" ref={containerRef}></div>
-    </div>
+    <>
+      <div id="map-container">
+        <div id="map" ref={containerRef}></div>
+      </div>
+    </>
   );
 };

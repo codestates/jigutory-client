@@ -1,9 +1,5 @@
 @import './_variables.scss';
 
-// 마이페이지 반응형
-// mypage-left-box display : none
-// mypage-wholebox : flex-wrap : wrap, width :
-
 @keyframes SlideFromTop {
   from  {
     transform : translateY(-5px);
@@ -26,10 +22,10 @@
     display: flex;
     video {
       width : 270px;
+      margin-right : 1rem;
     }
   }
   #mypage-container-etc-desc{
-    width : 55%;
     div {
       h4 {
         color : $title-blue;
@@ -151,7 +147,7 @@
   #mypage-container-badge {
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius : 10px;
-    padding : 18px 10px 18px 10px;
+    padding : 18px 0 18px 0;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 5px 2px rgba(11, 11, 11, 0.08);
   }
 
@@ -160,8 +156,6 @@
     display: flex;
     justify-content: space-around;
     padding : 5px;
-    // border : 1px solid black;
-    // flex-wrap: wrap;
   }
 
   .mypage-userinfo-mylevel-section,
@@ -170,7 +164,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    //border : 1px solid pink;
   }
 
   .mypage-level-click {
@@ -201,9 +194,10 @@
   .mypage-box-contents {
     font-size : 1.6rem;
   }
-
+ .mypage-mylevel {
+   cursor: pointer;
+ }
 }
-
 
 // badge -----------------------------------------------
 
@@ -260,7 +254,6 @@
   animation : SlideFromTop 1s ease-in-out;
   #mypage-badgeinfo-box {
     display: flex;
-    // flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding : .7rem;
@@ -279,7 +272,6 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      // border : 1px solid pink;
       margin-left : 10px;
       .mypage-badgeinfo-name {
         color : $title-blue;
@@ -287,7 +279,7 @@
       }
       .mypage-badgeinfo-description {
          max-width: 100%;
-         font-size: 14px;
+         font-size: 12px;
          font-weight: 600;
          color : rgba(0, 0, 0, 0.6);
          line-height: 160%;
@@ -301,4 +293,50 @@
   cursor: pointer;
 }
 
+// 반응형 768px only
 
+@media screen and (max-width : 768px) {
+  #color-box {
+    background-color: $light-blue;
+  }
+  #mypage-left-box {
+    display: none;
+  }
+  #mypage-right-box {
+    max-width : 90%;
+  }
+  #mypage-badgeinfo {
+  }
+  #mypage-badgeinfo-box {
+    display: flex;
+    // flex-direction: column;
+  }
+  #mypage-container-level,
+  #mypage-container-total,
+  #mypage-container-badge {
+    width : 80%;
+  }
+  .mypage-badgeinfo-description {
+    width: 70%;
+
+  }
+  #mypage-container-etc {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mypage-userinfo-mylevel,
+  .mypage-total-user {
+    flex-direction: column;
+  }
+  .mypage-badge-list {
+    flex-direction: column;
+  }
+
+  #mypage-right-box {
+    display: flex;
+    align-items : center;
+  }
+  #mypage-container-etc-desc {
+  }
+}

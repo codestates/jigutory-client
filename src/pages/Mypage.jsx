@@ -237,7 +237,7 @@ function Mypage({ accessToken }) {
 
             <div id="mypage-badge-header">
               <h3>나의 환경지킴 지수</h3>
-              <p><i className="fas fa-exclamation-circle"></i>텀블러 사용 횟수에 따라 레벨이 달라집니다. 지금 레벨을 클릭하여 위기에 놓인 식물 정보를 확인하세요 !</p>
+              <p><i className="fas fa-exclamation-circle"></i>텀블러 사용 횟수에 따라 레벨이 달라집니다. 레벨을 클릭하여 멸종위기에 놓인 식물을 확인하세요 !</p>
             </div>
             <div id="mypage-container-level">
               <div className="mypage-userinfo-mylevel">
@@ -245,7 +245,7 @@ function Mypage({ accessToken }) {
                   <span title="클릭! 레벨정보 보기" className="mypage-box-subtitle mypage-box-subtitle-level" onClick={handleOpenModal}>레벨
                     {isModalOn && (<LevelInfo levelInfo={levelInfo} handleCloseModal={handleCloseModal} />)}
                   </span>
-                  <span className="mypage-box-contents mypage-mylevel">Lv. {levelInfo.level}</span>
+                  <span className="mypage-box-contents mypage-mylevel" onClick={handleOpenModal}>Lv. {levelInfo.level}</span>
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">텀블러 사용 횟수
@@ -263,8 +263,10 @@ function Mypage({ accessToken }) {
               </div>
             </div>
 
-
-            <h3>지구토리 유저의 환경지킴 지수</h3>
+            <div id="mypage-badge-header">
+              <h3>지구토리 유저의 환경지킴 지수</h3>
+              <p><i className="fas fa-exclamation-circle"></i>지구토리 모든 유저의 환경지킴 지수입니다. 오늘도 지구토리와 함께 일회용 컵 사용을 줄여봐요 !</p>
+            </div>
             <div id="mypage-container-total">
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
@@ -298,7 +300,7 @@ function Mypage({ accessToken }) {
 
             <div id="mypage-badge-header">
               <h3>나의 환경 뱃지</h3>
-              <p><i className="fas fa-exclamation-circle"></i>뱃지는 누적 탄소저감량에 따라 획득할 수 있습니다. 뱃지를 클릭하여 멸종위기에 놓인 동물을 확인하세요 !</p>
+              <p><i className="fas fa-exclamation-circle"></i>뱃지는 누적 탄소저감량에 따라 획득할 수 있습니다. 클릭하여 멸종위기에 놓인 동물을 확인하세요 !</p>
             </div>
             <div id="mypage-container-badge">
               <div className="mypage-badge-list">

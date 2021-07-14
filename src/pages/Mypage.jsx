@@ -256,7 +256,6 @@ function Mypage({ accessToken }) {
               </button>
             </div>
           </section>
-
           <section id="mypage-right-box">
             <div id="mypage-badge-header">
               <h3>나의 환경지킴 지수</h3>
@@ -354,7 +353,7 @@ function Mypage({ accessToken }) {
                   <p>
                     플라스틱컵 한 개를 만들고 폐기하는데 약 25g의 이산화탄소가
                     배출됩니다. <br />
-                    오늘도 지구토리와 함께 탄소발자국을 줄여보세요 !
+                    오늘도 지구토리와 함께 탄소발자국을 줄여보세요 !{' '}
                   </p>
                   <button onClick={handleAddFriends}> 친구초대</button>
                   {<div id="mypage-addfriends">{addFriends}</div>}
@@ -416,8 +415,10 @@ function Mypage({ accessToken }) {
                       onClick={() => setSelectedBadgeId(badgeList[3].id)}
                     ></img>
                   </div>
+
                   <div className="mypage-badge-contentbox">
                     <span className="mypage-box-subtitle">
+                      {' '}
                       5000g <i className="fas fa-arrow-circle-up"></i>
                     </span>
                     <img

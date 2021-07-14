@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import GoogleLogin from './GoogleLogin';
-// import GoogleSignup from './GoogleSignup'
 import useClickOutside from '../hooks/useClickOutside';
 import axios from 'axios';
 import '../styles/AuthModal.scss';
@@ -67,10 +66,10 @@ function Login({
         .then((res) => {
           handleLogin(res.data.data.accessToken);
           localStorage.setItem('accessToken', res.data.data.accessToken);
-          // setTimeout(() => {
-          //   history.push('/intro');
-          //   handleCloseLogin();
-          // }, 1000);
+          setTimeout(() => {
+            history.push('/intro');
+            handleCloseLogin();
+          }, 1000);
 
           axios
             .get('http://localhost:4000/user/userinfo', {

@@ -16,7 +16,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     const email = res.profileObj.email;
     const username = res.profileObj.givenName;
     const profileImage = res.profileObj.imageUrl;
-    const password = res.googleId;
+    // const password = res.googleId;
 
     handleLogin(token);
     localStorage.setItem('accessToken', token);
@@ -27,12 +27,13 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 
     await axios
       .post(
-        `http://localhost:4000/auth/googlesignin`, {
-        email: email,
-        username: username,
-        imgUrl: profileImage,
-        password: password
-      },
+        `http://localhost:4000/auth/googlesignin`,
+        {
+          email: email,
+          username: username,
+          imgUrl: profileImage,
+          // password: password,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -69,7 +70,12 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
               className="modal-info google-btn social-btn"
             >
               <span>
-                <img width="17" src={googleLogo} alt="google login" className="social-logo" />
+                <img
+                  width="17"
+                  src={googleLogo}
+                  alt="google login"
+                  className="social-logo"
+                />
                 <span>구글 로그인</span>
               </span>
             </button>

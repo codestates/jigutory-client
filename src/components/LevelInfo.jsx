@@ -20,7 +20,9 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
               Lv.{levelInfo.level} {levelInfo.name}
             </div>
             {/*<button>🔽 자세히 보기</button> */}
-            <div id="level_desc" className="hide">{levelInfo.description}</div>
+            <div id="level_desc" className="hide">
+              {levelInfo.description}
+            </div>
           </section>
         </div>
       </div>
@@ -29,4 +31,3 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
 };
 
 export default LevelInfo;
-

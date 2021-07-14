@@ -1,7 +1,5 @@
 import React from 'react';
 import { ScrollButton } from '../components/ScrollButton';
-//import EarthSpinner from '../components/EarthSpinner';
-//import DotSpinner from '../components/DotSpinner';
 
 function Intro() {
   return (

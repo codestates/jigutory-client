@@ -10,13 +10,13 @@
 // }
 
 .common_alert_loading {
-  background-color: rgba(0, 0, 0, 0.05 );
-  opacity : .9;
-  width : 100%;
+  background-color: rgba(0, 0, 0, 0.05);
+  opacity: 0.9;
+  width: 100%;
   height: 100%;
-  z-index:1001;
+  z-index: 1001;
   // position:relative;
-  position : absolute;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@
   // font-size: 15px;
 }
 .loading_earth {
-  background-size: 10rem ;
+  background-size: 10rem;
   background-image: url('../images/globe-loading.gif');
   width: 10rem;
   height: 10rem;
@@ -49,7 +49,7 @@
   // margin : 0;
   // padding : 0;
   background-color: transparent;
-  width : 100%;
+  width: 100%;
   height: 100%;
   // z-index:1001;
   // position : absolute;

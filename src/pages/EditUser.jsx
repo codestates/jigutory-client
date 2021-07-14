@@ -244,13 +244,17 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     }
   };
 
+  console.log(imgConfirmMessage);
   return (
     <div id="edituser_page">
       <div>
         <div id="edituser_container">
           <h2> 회원정보 수정 </h2>
-
-          <img className="edituser_profile_preview" alt="유저이미지" src={imgUrl} />
+          <img
+            className="edituser_profile_preview"
+            alt="유저이미지"
+            src={imgUrl}
+          />
           <div id="edituser_img">
             <input
               id="file"
@@ -271,15 +275,17 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 변경
               </button>
             </div>
-            {!imgConfirmMessage ? '' : <div id="edituser_confirm-image">{imgConfirmMessage}</div>}
+            {!imgConfirmMessage ? (
+              ''
+            ) : (
+              <div id="edituser_confirm-image">{imgConfirmMessage}</div>
+            )}
           </div>
-
           <section>
             <div id="edituser_email">
               <div>이메일</div>
               <div>{email}</div>
             </div>
-
             <div id="edituser_username">
               <div>닉네임</div>
               <input
@@ -293,10 +299,10 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
             {!usernameError ? (
               ''
             ) : (
-                <div className="edituser_confirm_msg">
-                  <div className="edituser_failure">{usernameError}</div>
-                </div>
-              )}
+              <div className="edituser_confirm_msg">
+                <div className="edituser_failure">{usernameError}</div>
+              </div>
+            )}
             <div>
               <div></div>
               <button
@@ -306,11 +312,9 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 닉네임 변경
               </button>
             </div>
-
             <div className="edituser_confirm_msg">
               <div>{changeNicknameMessage}</div>
             </div>
-
             <div id="edituser_password">
               <div>현재 비밀번호</div>
               <input
@@ -321,7 +325,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 value={password}
               />
             </div>
-
             <div id="edituser_password">
               <div>새 비밀번호</div>
               <input
@@ -334,11 +337,10 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
             {!passwordError ? (
               ''
             ) : (
-                <div className="edituser_confirm_msg">
-                  <div className="edituser_failure">{passwordError}</div>
-                </div>
-              )}
-
+              <div className="edituser_confirm_msg">
+                <div className="edituser_failure">{passwordError}</div>
+              </div>
+            )}
             <div id="edituser_password">
               <div>새 비밀번호 확인</div>
               <input
@@ -352,11 +354,10 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
             {!passwordCheckError ? (
               ''
             ) : (
-                <div className="edituser_confirm_msg">
-                  <div className="edituser_failure">{passwordCheckError}</div>
-                </div>
-              )}
-
+              <div className="edituser_confirm_msg">
+                <div className="edituser_failure">{passwordCheckError}</div>
+              </div>
+            )}
             {
               <div>
                 <div></div>
@@ -368,7 +369,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 </button>
               </div>
             }
-
             <div className="edituser_confirm_msg">
               <div>{confirmMessage}</div>
             </div>
@@ -384,7 +384,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               마이페이지로 돌아가기
             </button>
           </div>
-
           {isModalOn && (
             <DeleteUserModal
               accessToken={accessToken}

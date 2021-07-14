@@ -31,3 +31,5 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
 };
 
 export default LevelInfo;
+
+// <div id="level_desc" className="hide">{splited.map((row, idx) => (<span id="level_desc_row" key={idx}>{row}.</span>))}</div>

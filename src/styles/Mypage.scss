@@ -197,6 +197,10 @@
  .mypage-mylevel {
    cursor: pointer;
  }
+ #mypage-smalltext {
+  font-size : 15px;
+  color : rgba(0, 0, 0, 0.6);
+ }
 }
 
 // badge -----------------------------------------------
@@ -228,6 +232,7 @@
     #mypage-badge-list-wrapper {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       .mypage-badge-contentbox {
         display: flex;
         flex-direction: column;
@@ -304,39 +309,27 @@
   }
   #mypage-right-box {
     max-width : 90%;
-  }
-  #mypage-badgeinfo {
-  }
-  #mypage-badgeinfo-box {
     display: flex;
-    // flex-direction: column;
+    align-items : center;
+    width : 77%;
   }
   #mypage-container-level,
   #mypage-container-total,
   #mypage-container-badge {
     width : 80%;
   }
-  .mypage-badgeinfo-description {
-    width: 70%;
-
+  .mypage-userinfo-mylevel,
+  .mypage-total-user {
+    flex-direction: column;
   }
   #mypage-container-etc {
     display: flex;
     flex-direction: column;
   }
-
-  .mypage-userinfo-mylevel,
-  .mypage-total-user {
-    flex-direction: column;
-  }
-  .mypage-badge-list {
-    flex-direction: column;
-  }
-
-  #mypage-right-box {
+  #mypage-badgeinfo-box {
     display: flex;
-    align-items : center;
+    flex-direction: column;
+    width: 60%;
   }
-  #mypage-container-etc-desc {
-  }
+
 }

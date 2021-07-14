@@ -254,28 +254,28 @@ function Mypage({ accessToken }) {
                     </button>
                   </span>
                   {/* <span className="mypage-box-contents mypage-clicknum">{clickNum} </span> */}
-                  {isLoading ? <DotSpinner /> : <span className="mypage-box-contents mypage-clicknum">{clickNum} </span>}
+                  {isLoading ? <DotSpinner /> : <span className="mypage-box-contents mypage-clicknum">{clickNum}  <span id="mypage-smalltext">회</span></span>}
                 </div>
                 <div className="mypage-userinfo-mylevel-section">
                   <span className="mypage-box-subtitle">누적 탄소 저감량</span>
-                  <span className="mypage-box-contents mypage-carbon">{carbonReduction}</span>
+                  <span className="mypage-box-contents mypage-carbon">{carbonReduction} <span id="mypage-smalltext">g</span></span>
                 </div>
               </div>
             </div>
 
             <div id="mypage-badge-header">
               <h3>지구토리 유저의 환경지킴 지수</h3>
-              <p><i className="fas fa-exclamation-circle"></i>지구토리 모든 유저의 환경지킴 지수입니다. 오늘도 지구토리와 함께 일회용 컵 사용을 줄여봐요 !</p>
+              <p><i className="fas fa-exclamation-circle"></i>지구토리 모든 유저의 환경지킴 지수입니다. '{totalCnt.totalCarbon}g' 만큼의 탄소배출이 줄어들었어요 !</p>
             </div>
             <div id="mypage-container-total">
               <div className="mypage-total-user">
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">전체 텀블러 사용 횟수</span>
-                  <span className="mypage-box-contents">{totalCnt.totalClicks}</span>
+                  <span className="mypage-box-contents">{totalCnt.totalClicks} <span id="mypage-smalltext">회</span></span>
                 </div>
                 <div className="mypage-total-user-section">
                   <span className="mypage-box-subtitle">전체 탄소저감량</span>
-                  <span className="mypage-box-contents">{totalCnt.totalCarbon}</span>
+                  <span className="mypage-box-contents">{totalCnt.totalCarbon} <span id="mypage-smalltext">g</span></span>
                 </div>
               </div>
             </div>

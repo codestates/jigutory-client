@@ -26,7 +26,7 @@ const KakaoBtn = ({ handleLogin, handleUserInfo }) => {
     const token = res.response.access_token; // should be updated after checking real response from kakao
     axios
       .post(
-        'https://localhost:4000/auth/kakaosignin',
+        `${process.env.REACT_APP_API_URL}/auth/kakaosignin`,
         { token },
         {
           headers: {

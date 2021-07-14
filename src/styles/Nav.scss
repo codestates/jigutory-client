@@ -31,16 +31,21 @@
 
 .nav-title {
   position: absolute;
-  font-size: 20px;
+  top: 30px;
+  left: 70px;
+  font-size: 25px;
+  font-family: $title-font;
 }
 
 .nav-btn {
   width: 110px;
   height: 90px;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: $button-font;
   background-color: white;
   cursor: pointer;
+  border-radius: 0;
 
   &:hover {
     background-color: $light_blue;
@@ -51,3 +56,4 @@
     color: $point-color;
   }
 }
+

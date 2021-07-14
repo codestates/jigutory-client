@@ -1,0 +1,33 @@
+@import './_variables.scss';
+
+.cart-item {
+  display: block;
+  margin: 8px;
+  margin-left: 20px;
+  padding: 10px;
+  max-width: 400px;
+  height: 120px;
+  box-shadow: 0px 0px 1rem rgb(206, 203, 203);
+}
+.cartitem-List {
+  display: inline-flex;
+}
+.cartitem-img {
+  margin: 10px;
+  height: 80px;
+  width: 60px;
+}
+
+.cartitem-quantity {
+  width: 50px;
+  background-color: rgb(218, 220, 230);
+}
+
+.cartitem-info {
+  margin-left: 20px;
+}
+
+.cartitem-quantity {
+  width: 100px;
+  height: 20px;
+}

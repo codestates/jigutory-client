@@ -1,0 +1,155 @@
+@import './_variables.scss';
+
+button {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+button.forbutton {
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  background-color: white;
+  padding: 10px;
+
+  width: 400px;
+  border-radius: 10px;
+}
+.show-modal-store {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-store {
+  position: absolute;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  max-width: 100%;
+  padding: 50px 45px 90px 45px;
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-success {
+  font-size: 18px;
+  font-weight: 500;
+  color: $title_blue;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.modal-close-store {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  padding-left: 520px;
+  padding-bottom: 30px;
+
+  :hover {
+    font-weight: 800;
+    color: darkred;
+    background-color: transparent;
+  }
+}
+
+.modal-header {
+  padding-bottom: 20px;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    border-radius: 20px solid black;
+  }
+
+  .modal-info-title {
+    width: 100%;
+    padding: 10px 0px 3px 30px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: $button_blue;
+  }
+
+  .modal-alert-box {
+    width: 100%;
+    padding: 3px 0px 10px 24px;
+    text-align: left;
+    font-size: 13px;
+    color: $error_red;
+  }
+
+  input,
+  button {
+    width: 270px;
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: $button_blue;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: background-color 0.4s ease-in-out;
+  }
+
+  button {
+    margin-top: 10px;
+
+    &:hover {
+      font-weight: 700;
+      background-color: $button_blue;
+      color: white;
+      border: none;
+      transition: background-color 0.1s ease-in-out;
+    }
+  }
+
+  .login-btn {
+    margin-top: 25px;
+  }
+
+  .google-btn:hover {
+    background-color: #cc3731;
+    color: white;
+  }
+
+  .signup-btn {
+    margin-top: 25px;
+  }
+}
+
+.social-btn {
+  span {
+    display: flex;
+  }
+}
+
+.social-logo {
+  margin-right: 10px;
+}
+
+.fa-user-plus {
+  color: $button_blue;
+  font-size: 15px;
+  margin-right: 15px;
+}
+
+.move_signup-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

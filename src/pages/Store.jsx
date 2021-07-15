@@ -3,6 +3,7 @@ import { useHistory, withRouter } from 'react-router-dom';
 import '../styles/EditUser.scss';
 import axios from 'axios';
 import ProductList from '../components/ProductList';
+import { ScrollButton } from '../components/ScrollButton';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
@@ -51,7 +52,9 @@ function Store({ handleLogin,accessToken, userInfo }) {
     <div className="store-container">
       {productList.map((item,idx)=>
       <ProductList handleLogin={handleLogin} productList={productList} accessToken={accessToken} message={message} closeModal={closeModal} userInfo={userInfo} isModalOn={isModalOn} item={item} key={idx} handleClick={() => handleAdd(item.id)} />
+
       )}
+      <ScrollButton/>
     </div>
   )
 }

@@ -140,7 +140,7 @@ function Login({
           <button className="login-btn" onClick={handleLoginRequest}>
             로그인
           </button>
-          <div className="social-container">
+          <div>
             <GoogleLogin
               handleLogin={handleLogin}
               handleUserInfo={handleUserInfo}

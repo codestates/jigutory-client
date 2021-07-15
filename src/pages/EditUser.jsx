@@ -31,7 +31,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/user/userinfo', {
+      .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (imgUrl) {
       axios
         .patch(
-          'http://localhost:4000/user/useredit',
+          `${process.env.REACT_APP_API_URL}/user/useredit`,
           { profileImage: imgUrl },
           {
             headers: {
@@ -202,7 +202,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validUsername) {
       axios
         .patch(
-          'http://localhost:4000/user/useredit',
+          `${process.env.REACT_APP_API_URL}/user/useredit`,
           { username: username },
           {
             headers: {
@@ -227,7 +227,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validPassword) {
       axios
         .patch(
-          'http://localhost:4000/user/passwordedit',
+          `${process.env.REACT_APP_API_URL}/user/passwordedit`,
           { rvsdpassword: newPasswordCheck },
           {
             headers: {
@@ -250,8 +250,11 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
       <div>
         <div id="edituser_container">
           <h2> 회원정보 수정 </h2>
-
-          <img className="edituser_profile_preview" src={imgUrl} />
+          <img
+            className="edituser_profile_preview"
+            alt="유저이미지"
+            src={imgUrl}
+          />
           <div id="edituser_img">
             <input
               id="file"
@@ -272,15 +275,17 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 변경
               </button>
             </div>
-            {!imgConfirmMessage ? '' : <div>{imgConfirmMessage}</div>}
+            {!imgConfirmMessage ? (
+              ''
+            ) : (
+              <div id="edituser_confirm-image">{imgConfirmMessage}</div>
+            )}
           </div>
-
           <section>
             <div id="edituser_email">
               <div>이메일</div>
               <div>{email}</div>
             </div>
-
             <div id="edituser_username">
               <div>닉네임</div>
               <input
@@ -307,11 +312,9 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 닉네임 변경
               </button>
             </div>
-
             <div className="edituser_confirm_msg">
               <div>{changeNicknameMessage}</div>
             </div>
-
             <div id="edituser_password">
               <div>현재 비밀번호</div>
               <input
@@ -322,7 +325,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 value={password}
               />
             </div>
-
             <div id="edituser_password">
               <div>새 비밀번호</div>
               <input
@@ -339,7 +341,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 <div className="edituser_failure">{passwordError}</div>
               </div>
             )}
-
             <div id="edituser_password">
               <div>새 비밀번호 확인</div>
               <input
@@ -357,7 +358,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 <div className="edituser_failure">{passwordCheckError}</div>
               </div>
             )}
-
             {
               <div>
                 <div></div>
@@ -369,7 +369,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
                 </button>
               </div>
             }
-
             <div className="edituser_confirm_msg">
               <div>{confirmMessage}</div>
             </div>
@@ -385,7 +384,6 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
               마이페이지로 돌아가기
             </button>
           </div>
-
           {isModalOn && (
             <DeleteUserModal
               accessToken={accessToken}

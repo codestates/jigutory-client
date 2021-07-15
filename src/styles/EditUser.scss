@@ -38,7 +38,7 @@
       transition : background-color .2s linear;
     }
     &:nth-child(2):hover {
-      background-color: rgb(0, 149, 50);
+      background-color: $green;
       color : white;
       transition : background-color .2s linear;
     }
@@ -115,8 +115,8 @@
         }
         div {
           margin : 7px;
-          font-size: 13px;
-          color : #009532;
+          font-size: 12px;
+          color : $green;
           display: flex;
           align-items: center;
           justify-content: flex-end;
@@ -139,6 +139,7 @@
       div {
         button {
           margin-left : 10px;
+          font-size: 12.5px;
         }
       }
       #img_volume {
@@ -188,8 +189,9 @@
 
 #edituser_withdrawal{
   button {
-    padding : 6px;
+    padding : 8px;
     border-radius: 5px;
+    font-size: 12.5px;;
   }
   button:nth-child(2) {
     margin-right : 10px;
@@ -219,3 +221,7 @@
 }
 
 
+#edituser_confirm-image {
+  font-size : 12px;
+  color : $green;
+}

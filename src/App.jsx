@@ -27,7 +27,7 @@ function App() {
 
   const isLogout = () => {
     setIsLogin(false);
-  }
+  };
 
   const handleLogin = (token) => {
     setAccessToken(token);
@@ -100,7 +100,12 @@ function App() {
               path="/mypage"
               exact={true}
               render={() => (
-                <Mypage accessToken={accessToken} userInfo={userInfo} handleUserInfo={handleUserInfo} setUserInfo={setUserInfo} />
+                <Mypage
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                  handleUserInfo={handleUserInfo}
+                  setUserInfo={setUserInfo}
+                />
               )}
             />
             <Route
@@ -114,12 +119,28 @@ function App() {
                 />
               )}
             />
-            <Route path="/cart" exact={true} render={() => (
-                <Cart handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
-            )} />
-            <Route path="/store" exact={true} render={() => (
-                <Store handleLogin={handleLogin} accessToken={accessToken} userInfo={userInfo} />
-              )} />
+            <Route
+              path="/cart"
+              exact={true}
+              render={() => (
+                <Cart
+                  handleLogin={handleLogin}
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                />
+              )}
+            />
+            <Route
+              path="/store"
+              exact={true}
+              render={() => (
+                <Store
+                  handleLogin={handleLogin}
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                />
+              )}
+            />
           </div>
         </>
       </Switch>

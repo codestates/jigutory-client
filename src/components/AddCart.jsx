@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import useClickOutside from '../hooks/useClickOutside';
 import '../styles/AddCart.scss';
@@ -8,10 +8,19 @@ import Login from './Login'
 import SignUp from './SignUp'
 
 const AddCart = ({
-  closeModal, message, accessToken, productList, handleLogin
+  closeModal, message, accessToken, productList, handleLogin, 
 }) => {
   const history = useHistory();
   const [isDelete, setIsDelete] = useState(false);
+  const [userinfo, setuserInfo] = useState('');
+
+
+  useEffect(() => {
+    const dataLocalStorage = localStorage.getItem('userInfo');
+    if (dataLocalStorage) {
+      setuserInfo(JSON.parse(dataLocalStorage));
+    }
+  }, [setuserInfo]);
   
   const keepShopping = () => {
     closeModal()
@@ -50,7 +59,7 @@ const AddCart = ({
 
   return (
 <div>
-    {!accessToken ? (
+    {!userinfo ? (
     <div className="modal-container show-modal-store">
       
     <div className="modal-store">

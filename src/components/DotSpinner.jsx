@@ -6,6 +6,6 @@ const DotSpinner = () => {
       <div id="loading_dot"></div>
     </div>
   );
-}
+};
 
 export default DotSpinner;

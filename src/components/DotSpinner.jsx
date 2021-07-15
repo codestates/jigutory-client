@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Spinners.scss';
 
 const DotSpinner = () => {
   return (
@@ -7,6 +6,6 @@ const DotSpinner = () => {
       <div id="loading_dot"></div>
     </div>
   );
-}
+};
 
 export default DotSpinner;

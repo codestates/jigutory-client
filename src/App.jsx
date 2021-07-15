@@ -27,7 +27,7 @@ function App() {
 
   const isLogout = () => {
     setIsLogin(false);
-  }
+  };
 
   const handleLogin = (token) => {
     setAccessToken(token);
@@ -94,13 +94,18 @@ function App() {
         <>
           <div className="app-container">
             <Route path="/" exact={true} component={Intro} />
-            <Route path="/intro" exact={true} component={Intro} />
+            <Route path="/intro" exact={true} render={() => <Intro />} />
             <Route path="/main" exact={true} component={Main} />
             <Route
               path="/mypage"
               exact={true}
               render={() => (
-                <Mypage accessToken={accessToken} userInfo={userInfo} handleUserInfo={handleUserInfo} setUserInfo={setUserInfo} />
+                <Mypage
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                  handleUserInfo={handleUserInfo}
+                  setUserInfo={setUserInfo}
+                />
               )}
             />
             <Route
@@ -114,12 +119,28 @@ function App() {
                 />
               )}
             />
-            <Route path="/cart" exact={true} render={() => (
-              <Cart accessToken={accessToken} userInfo={userInfo} />
-            )} />
-            <Route path="/store" exact={true} render={() => (
-              <Store accessToken={accessToken} userInfo={userInfo} />
-            )} />
+            <Route
+              path="/cart"
+              exact={true}
+              render={() => (
+                <Cart
+                  handleLogin={handleLogin}
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                />
+              )}
+            />
+            <Route
+              path="/store"
+              exact={true}
+              render={() => (
+                <Store
+                  handleLogin={handleLogin}
+                  accessToken={accessToken}
+                  userInfo={userInfo}
+                />
+              )}
+            />
           </div>
         </>
       </Switch>

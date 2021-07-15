@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import { ScrollButton } from '../components/ScrollButton';
 import axios from 'axios';
+import IntroEnding from '../components/IntroEnding';
+import IntroMypage from '../components/IntroMypage';
 
 function Intro() {
   const history = useHistory();
@@ -45,20 +47,8 @@ function Intro() {
         <div className="intro-review">
           <h2>사용자 리뷰</h2>
         </div>
-
-        <section className="intro_end">
-          <div className="intro_end_desc">
-            <p>지구토리는 <br />
-            총 <span>{totalCnt.totalClicks}</span> 개의 일회용 컵 사용을 줄였고, <br />
-            총 <span>{totalCnt.totalCarbon}</span> g의 탄소배출을 저감했습니다.
-            </p>
-
-            <button onClick={() => history.push('/login')}>로그인 / 회원가입</button>
-            <button onClick={() => history.push('/main')}>텀블러 혜택 카페 찾아보기</button>
-            <button onClick={() => history.push('/store')}>텀블러 구매하기</button>
-
-          </div>
-        </section>
+        <IntroMypage />
+        <IntroEnding />
         <ScrollButton />
 
       </section>

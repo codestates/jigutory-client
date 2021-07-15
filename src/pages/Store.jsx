@@ -6,7 +6,7 @@ import ProductList from '../components/ProductList';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
-function Store({ accessToken, userInfo }) {
+function Store({ handleLogin, accessToken, userInfo }) {
   const history = useHistory();
   const [productList, setList] = useState([]);
   const [isModalOn, setIsModalOn] = useState(false);

@@ -9,51 +9,119 @@
   }
 }
 
-.nav {
+#nav {
   position: fixed;
   display: flex;
   width: 100%;
-  height: 90px;
+  // height: 90px;
   z-index: 1050;
   background-color: rgb(255, 255, 255);
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  // border-bottom : 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-logo {
+  padding-left : 0;
   width: 3rem;
   height: 3rem;
-  margin: 1rem;
+  margin-right: 1rem;
   cursor: pointer;
   animation: RotateLogo 5s linear infinite;
+  // border : 1px solid red;
 }
 
+
+#nav_header > a {
+  // border : 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding : 1rem;
+}
 .nav-title {
-  position: absolute;
-  top: 30px;
-  left: 70px;
-  font-size: 25px;
+  // position: absolute;
+  // top: 30px;
+  // left: 70px;
+  font-size: 2rem;
   font-family: $title-font;
+  // border : 1px solid red;
+
+}
+
+.nav_buttons {
+  // border : 1px solid red;
+  // padding : 1rem;
 }
 
 .nav-btn {
   width: 110px;
   height: 90px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: $button-font;
   background-color: white;
   cursor: pointer;
   border-radius: 0;
+  // border : 1px solid red;
+  // padding : .5rem;
+  // margin : .3rem;
 
   &:hover {
-    background-color: $light_blue;
+    font-weight: 600;
+    background-color: $light-blue;
+    // border-radius: 30px;
     color: white;
+    // color : $medium-blue;
+    // border-bottom : 1px solid $medium-blue;
   }
 
   &:focus {
     color: $point-color;
+  }
+}
+
+.nav_buttons_moblie {
+  border : 2px solid rgba(90, 116, 163, 0.3);
+  border-radius: 2.5rem;
+  position: fixed;
+  bottom : 1rem;
+  right : 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding : .3rem;
+  // width: 65%;
+}
+
+.nav-btn-mobile {
+  padding : .3rem .5rem;
+  margin : .2rem .4rem;
+  background-color: transparent;
+  // border : 1px solid pink;
+  &:hover {
+    color : pink;
+  }
+}
+
+.nav_mobile-hide {
+  display: none;
+  div {
+    width : 100%;
+  }
+}
+
+@media screen and (max-width : 768px) {
+  #nav {
+    border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .nav_web-hide {
+    display: none;
+  }
+  .nav_mobile-hide {
+    display: block;
   }
 }
 

@@ -3,6 +3,7 @@ import { useHistory, withRouter } from 'react-router-dom';
 import Login from './Login';
 import axios from 'axios';
 import holdingcup from '../images/cup.png';
+import '../styles/IntroEnding.scss';
 
 const IntroEnding = () => {
   const history = useHistory();
@@ -47,6 +48,7 @@ const IntroEnding = () => {
       </div>
 
     </section>
+
 
   );
 }

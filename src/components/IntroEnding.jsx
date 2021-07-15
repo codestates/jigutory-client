@@ -37,7 +37,7 @@ const IntroEnding = () => {
           <span>{totalCnt.totalClicks}</span>개의 일회용 컵 사용을 줄였고, <br />
           <span>{totalCnt.totalCarbon}</span>g의 탄소배출을 저감했습니다.
         </p>
-        <div>작은 행동 하나가 모여 지구를 살립니다. <br /> 지금 지구토리와 함께하세요 !</div>
+        <div>작은 행동 하나가 모여 지구를 살립니다. <br /> 지금 지구토리와 함께하세요.</div>
       </div>
 
       <div className="intro_end-btns">

@@ -7,23 +7,19 @@
   color : white;
   display: flex;
   flex-direction: column;
-  padding : 80px;
+  padding : 80px; // 각 섹션의 패딩값
   img {
     width : 300px;
     position: absolute;
     right : 0;
   }
-  div {
-   
-  }
-  .intro_end-desc{
 
+  .intro_end-desc{
     p{
       line-height: 170%;
       font-weight: 600;
       font-size : 28px;
         span {
-          // background-color: rgba(90, 116, 163, 0.5);
           background-color: rgba(255, 255, 255, .1);
           color : white;
           font-size : 37px;
@@ -37,7 +33,7 @@
   }
 
   .intro_end-btns {
-    margin-top : 50px;
+    margin-top : 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,5 +55,91 @@
         transition : .1s linear;
       }
     }
+  }
+}
+
+// intro mypage
+.intro_mypage {
+  color : $title-blue;
+  display : flex;
+  justify-content: space-between;
+  padding :  120px 80px; 
+  width : 100%;
+  background-color: rgba(8, 70, 99, .09);
+
+  div {
+    margin : 5px;
+    p {
+      line-height: 170%;
+    }
+  }
+  .intro_mypage-img {
+    width : 35%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width : 100%;
+      height: auto;
+      border : 13px solid rgba(255, 255, 255, .3);
+      border-radius: 5px;
+    }
+  }
+  
+  .intro_mypage-desc-box {
+    // border : 1px solid $title-blue;
+    width : 60%;
+
+    #intro_mypage-turtle {
+      position : absolute;
+      right : 0;
+      z-index : -1;
+      width : 450px;
+    }
+    .intro_mypage-desc1 {
+      // border : 1px solid $title-blue;
+      font-size : 22px;
+      font-weight: 600;
+      
+      span{
+        line-height: 180%;
+        font-weight: 600;
+        font-size : 29px;
+        
+        background-color: rgba(255, 255, 255, .6);
+        padding : 4px 7px;
+      }
+
+    }
+    .intro_mypage-desc2 {
+      margin-top : 80px;
+      // border : 1px solid $title-blue;
+      font-size : 20px;
+      font-weight: 600;
+
+      p:nth-child(1){
+        width : 80%;
+        border-bottom : 1px solid $medium-blue-text;
+      }
+      p:nth-child(2) {
+        width : 65%;
+        border-bottom : 1px solid $medium-blue-text;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .intro_end {
+    img {
+      display : none;
+    }
+  }
+
+  .intro_mypage {
+    display : block;
+    align-items: center;
   }
 }

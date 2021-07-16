@@ -1,63 +1,155 @@
-@import './variables';
+@import './_variables.scss';
 
-.addcart_modal-container {
-  background-color: rgba(0, 0, 0, 0.1);
-  position: fixed;
-  opacity: 0;
-  pointer-events: auto;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+button {
+  cursor: pointer;
 }
 
-.addcart_show-modal {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+button.forbutton {
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
+  background-color: white;
+  padding: 10px;
+
+  width: 400px;
+  border-radius: 10px;
+}
+.show-modal-store {
   opacity: 1;
   pointer-events: auto;
 }
 
-.addcart_modal {
+.modal-store {
   position: absolute;
   z-index: 100;
   background-color: rgb(255, 255, 255);
   max-width: 100%;
-  padding : 3rem;
+  padding: 3rem;
   border-radius: 10px;
   text-align: center;
   animation: fadeIn 0.2s ease-in-out;
 }
 
-.addcart_modal-info {
+.modal-success {
+  font-size: 18px;
+  font-weight: 500;
+  color: $title_blue;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.modal-close-store {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  padding-left: 520px;
+  padding-bottom: 30px;
+
+  :hover {
+    font-weight: 800;
+    color: darkred;
+    background-color: transparent;
+  }
+}
+
+.modal-header {
+  padding-bottom: 20px;
+}
+
+.modal-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  div {
-    margin : 1rem;
+
+  button {
+    border-radius: 20px solid black;
   }
-  div:nth-child(1) {
-    font-size : 15px;
-    line-height: 140%;
-    font-weight: 500;
-    color : $title-blue;
-    margin-bottom : 1.5rem;
+
+  .modal-info-title {
+    width: 100%;
+    padding: 10px 0px 3px 30px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: $button_blue;
   }
-  div:nth-child(2) {
-    margin : 0;
-    padding : 0;
-    button {
-      padding : 8px;
-      margin : 5px;
-      border-radius: 5px;
-      font-size : 12.5px;
-      &:hover {
-        background-color: $medium-blue;
-        color : white;
-        font-weight: 600;
-      }
+
+  .modal-alert-box {
+    width: 100%;
+    padding: 3px 0px 10px 24px;
+    text-align: left;
+    font-size: 13px;
+    color: $error_red;
+  }
+
+  input,
+  button {
+    width: 270px;
+    background-color: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: $button_blue;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: background-color 0.4s ease-in-out;
+  }
+
+  button {
+    margin-top: 10px;
+
+    &:hover {
+      font-weight: 700;
+      background-color: $button_blue;
+      color: white;
+      border: none;
+      transition: background-color 0.1s ease-in-out;
     }
   }
+
+  .login-btn {
+    margin-top: 25px;
+  }
+
+  .google-btn:hover {
+    background-color: #cc3731;
+    color: white;
+  }
+
+  .signup-btn {
+    margin-top: 25px;
+  }
+}
+
+.social-btn {
+  span {
+    display: flex;
+  }
+}
+
+.social-logo {
+  margin-right: 10px;
+}
+
+.fa-user-plus {
+  color: $button_blue;
+  font-size: 15px;
+  margin-right: 15px;
+}
+
+.move_signup-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

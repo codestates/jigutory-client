@@ -43,25 +43,31 @@ function Cart(accessToken, isLogin, userInfo, handleLogin) {
 
   return (
     <div className="cart-container">
-      <div className="cart-component">
-        {cartList.map((item, idx) => {
-          const quantity = 1;
-          return (
-            <CartList
-              isLogin={isLogin}
-              cartList={cartList}
-              total={total}
-              quantity={quantity}
-              handleLogin={handleLogin}
-              item={item}
-              key={idx}
-            />
-          );
-        })}
-      </div>
-      <div className="cart-summary">
-        <OrderSummary userinfo={userinfo} total={total} />
-      </div>
+      <div id="cart-header">장바구니 </div>
+
+      <section>
+        <div className="cart-component">
+          {cartList.map((item, idx) => {
+            const quantity = 1;
+            return (
+              <CartList
+                isLogin={isLogin}
+                cartList={cartList}
+                total={total}
+                quantity={quantity}
+                handleLogin={handleLogin}
+                item={item}
+                key={idx}
+              />
+            );
+          })}
+        </div>
+
+        <div className="cart-summary">
+          <OrderSummary userinfo={userinfo} total={total} />
+        </div>
+
+      </section>
     </div>
   );
 }

@@ -85,7 +85,3 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 };
 
 export default GoogleBtn;
-<<<<<<< HEAD
-
-=======
->>>>>>> 38ca52a7b0e6c531de375256b4b66051a2caa2e0

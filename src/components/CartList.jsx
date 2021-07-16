@@ -103,43 +103,46 @@ export default function CartList({
   };
 
   return (
-    <div className="cart-item">
-      <div key={item.id} className="cartitem-List">
-        <div className="cartitem-thumbnail">
-          <img className="cartitem-img" src={item.image} alt={item.name}></img>
-        </div>
-        <div className="cart-content">
-          <div className="cartitem-name">{item.name}</div>
-          <div className="cartitem-info">
-            <div className="cartitem-price">{item.price}원</div>
-            <select
-              onChange={(e) => {
-                handleTotal(e.target.value, item.id, item.price);
-              }}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-            <div id="result"></div>
-            <button
-              onClick={() => {
-                deleteItem(item.id);
-              }}
-              className="cartitem-delete"
-            >
-              Delete
-            </button>
-          </div>
+    // <div className="cart-item">
+    <div key={item.id} className="cartitem-List">
+
+      <div className="cartitem-thumbnail">
+        <img className="cartitem-img" src={item.image} alt={item.name}></img>
+      </div>
+
+      <div className="cart-content">
+
+        <span className="cartitem-name">{item.name}</span>
+
+        <div className="cartitem-info">
+          <span className="cartitem-price">{item.price}원</span>
+          <select
+            onChange={(e) => {
+              handleTotal(e.target.value, item.id, item.price);
+            }}
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          {/* <div id="result"></div> */}
+          <button
+            onClick={() => { deleteItem(item.id) }}
+            id="cartitem-delete"
+          >
+            Delete
+          </button>
         </div>
       </div>
+
+      {/* </div> */}
       <ScrollButton />
     </div>
   );

@@ -83,6 +83,9 @@ export default function OrderSummary({ message }) {
         <div id="order-summary-total">
           합계 : <span className="order-summary-text">{totalSum} 원</span>
         </div>
+        <div>
+        구매하기
+        </div>
       </div>
     </div>
   );

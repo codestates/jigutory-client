@@ -40,6 +40,7 @@ function Login({
     }
   };
 
+
   const handleLoginRequest = async (e) => {
     console.log('로그인 리퀘스트');
     // email 혹은 password 빈 칸인 경우
@@ -69,7 +70,7 @@ function Login({
           localStorage.setItem('accessToken', res.data.data.accessToken);
           // setTimeout(() => {
           //   history.push('/intro');
-          //   handleCloseLogin();
+            // handleCloseLogin();
           // }, 1000);
 
           axios

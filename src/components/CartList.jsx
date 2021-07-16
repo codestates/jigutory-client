@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-
+import '../styles/CartList.scss';
+import { ScrollButton } from '../components/ScrollButton';
 export default function CartList({
+  cartList,
+  isLogin,
+  productList,
+  setList,
   total,
   setTotal,
   handleQuantityChange,
@@ -14,10 +19,10 @@ export default function CartList({
   isModalOn,
   closeModal,
 }) {
-  // console.log(checkedItems)
   const [userinfo, setuserInfo] = useState('');
   const [change, setChange] = useState(0);
   const [quantitiy, setQuantitiy] = useState('');
+
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('userInfo');
     if (dataLocalStorage) {
@@ -61,48 +66,47 @@ export default function CartList({
           },
         )
         .then((res) => {
-          console.log(`thisisres.data`, res.data.findCount.rows);
-          // setQuantitiy(res)
-        });
-    }
-  });
-
-  //아이템 삭제 기능
-  const deleteItem = (id) => {
-    axios
-      .delete(
-        `${process.env.REACT_APP_API_URL}/cart/delete`,
-        {
-          email: userinfo.email,
-          id: id,
-        },
+          axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/product/list`,
+        { email: userinfo.email },
         {
           headers: {
             'Content-Type': 'application/json',
           },
         },
       )
-      .then((res) => console.log('삭제 응답', res));
+      .then((res) => {
+       console.log(res)
+      });
+        });
+    }
+  },[]);
+
+  //아이템 삭제 기능
+  const deleteItem = (id) => {
+    axios.delete(
+      `${process.env.REACT_APP_API_URL}/cart/delete`,
+      { data:{
+        email:userinfo.email, productid:id }},{
+        headers:{
+          'Content-Type': 'application/json',
+          withCredentials:true,
+        }
+      }
+    )
   };
 
   return (
     <div className="cart-item">
       <div key={item.id} className="cartitem-List">
-        {/* <input type="checkbox" onChange={(e)=>{
-      handleCheckChange(e.target.checked, item.id)
-    }}
-    checked={checkedItems.includes(item.id) ? true : false}></input> */}
         <div className="cartitem-thumbnail">
           <img className="cartitem-img" src={item.image} alt={item.name}></img>
         </div>
-        <div className="cartitem-info">
-          <div className="cartitem-price">{item.name}</div>
+        <div className="cart-content">
+          <div className="cartitem-name">{item.name}</div>
+          <div className="cartitem-info">
           <div className="cartitem-price">{item.price}원</div>
-          {/* <input type="text"  className="cartitem-quantity" min ={1} placeholder={'수량입력'} 
-      onChange={(e) => {
-        handleTotal((e.target.value), item.id, item.price)
-      }}> */}
-          {/* </input> */}
           <select
             onChange={(e) => {
               handleTotal(e.target.value, item.id, item.price);
@@ -128,8 +132,10 @@ export default function CartList({
           >
             Delete
           </button>
+          </div>
         </div>
       </div>
+      <ScrollButton/>
     </div>
   );
 }

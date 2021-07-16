@@ -21,7 +21,9 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     handleLogin(token);
     localStorage.setItem('accessToken', token);
     handleUserInfo({
-      username: username, email: email, imgUrl: profileImage
+      username: username,
+      email: email,
+      imgUrl: profileImage,
     });
 
     await axios
@@ -42,12 +44,12 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
       )
       .then((res) => {
         console.log(`thisisfirstgooglesigninres`, res);
-        handleLogin(res.data.data.accessToken);
+        handleLogin(res.data.accessToken);
         handleUserInfo({
-          username: res.data.data.findGoogleUser.username,
-          email: res.data.data.findGoogleUser.email,
+          username: res.data.googleInfo.username,
+          email: res.data.googleInfo.email,
         });
-        localStorage.setItem('accessToken', res.data.data.accessToken);
+        localStorage.setItem('accessToken', res.data.accessToken);
       })
       .catch((err) => console.log(err));
   };
@@ -83,4 +85,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 };
 
 export default GoogleBtn;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38ca52a7b0e6c531de375256b4b66051a2caa2e0

@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-
+import '../styles/CartList.scss';
+import { ScrollButton } from '../components/ScrollButton';
 export default function CartList({
+  cartList,
+  isLogin,
+  productList,
+  setList,
   total,
   setTotal,
   handleQuantityChange,
@@ -14,10 +19,10 @@ export default function CartList({
   isModalOn,
   closeModal,
 }) {
-  // console.log(checkedItems)
   const [userinfo, setuserInfo] = useState('');
   const [change, setChange] = useState(0);
   const [quantitiy, setQuantitiy] = useState('');
+
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('userInfo');
     if (dataLocalStorage) {
@@ -30,7 +35,7 @@ export default function CartList({
     console.log(`thisisitemid`, itemid);
     axios
       .post(
-        'http://localhost:4000/cart/update',
+        `http://localhost:4000/cart/update`,
         {
           email: userinfo.email,
           quantitiy: quantitiy,
@@ -50,7 +55,7 @@ export default function CartList({
     if (userinfo.email) {
       axios
         .post(
-          'http://localhost:4000/cart/count',
+          `http://localhost:4000/cart/count`,
           {
             email: userinfo.email,
           },
@@ -61,75 +66,81 @@ export default function CartList({
           },
         )
         .then((res) => {
-          console.log(`thisisres.data`, res.data.findCount.rows);
-          // setQuantitiy(res)
+          axios
+            .post(
+              `http://localhost:4000/product/list`,
+              { email: userinfo.email },
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+            .then((res) => {
+              console.log(res);
+            });
         });
     }
-  });
+  }, []);
 
   //아이템 삭제 기능
   const deleteItem = (id) => {
-    axios
-      .delete(
-        'http://localhost:4000/cart/delete',
-        {
+    axios.delete(
+      `http://localhost:4000/cart/delete`,
+      {
+        data: {
           email: userinfo.email,
-          id: id,
+          productid: id,
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          withCredentials: true,
         },
-      )
-      .then((res) => console.log('삭제 응답', res));
+      },
+    );
   };
 
   return (
     <div className="cart-item">
       <div key={item.id} className="cartitem-List">
-        {/* <input type="checkbox" onChange={(e)=>{
-      handleCheckChange(e.target.checked, item.id)
-    }}
-    checked={checkedItems.includes(item.id) ? true : false}></input> */}
         <div className="cartitem-thumbnail">
           <img className="cartitem-img" src={item.image} alt={item.name}></img>
         </div>
-        <div className="cartitem-info">
-          <div className="cartitem-price">{item.name}</div>
-          <div className="cartitem-price">{item.price}원</div>
-          {/* <input type="text"  className="cartitem-quantity" min ={1} placeholder={'수량입력'} 
-      onChange={(e) => {
-        handleTotal((e.target.value), item.id, item.price)
-      }}> */}
-          {/* </input> */}
-          <select
-            onChange={(e) => {
-              handleTotal(e.target.value, item.id, item.price);
-            }}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-          <div id="result"></div>
-          <button
-            onClick={() => {
-              deleteItem(item.id);
-            }}
-            className="cartitem-delete"
-          >
-            Delete
-          </button>
+        <div className="cart-content">
+          <div className="cartitem-name">{item.name}</div>
+          <div className="cartitem-info">
+            <div className="cartitem-price">{item.price}원</div>
+            <select
+              onChange={(e) => {
+                handleTotal(e.target.value, item.id, item.price);
+              }}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <div id="result"></div>
+            <button
+              onClick={() => {
+                deleteItem(item.id);
+              }}
+              className="cartitem-delete"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
+      <ScrollButton />
     </div>
   );
 }

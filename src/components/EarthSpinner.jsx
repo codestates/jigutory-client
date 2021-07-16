@@ -8,6 +8,6 @@ const EarthSpinner = () => {
       <div className="loading_earth"></div>
     </div>
   );
-}
+};
 
 export default EarthSpinner;

@@ -50,7 +50,7 @@
 팀원 | 강현수 | FRONT-END | [<img width="120" alt="스크린샷 2021-07-15 오후 11 54 19" src="https://user-images.githubusercontent.com/78786605/125809436-9939fc87-7220-4126-b3ed-82fe5cb29f32.png">](https://www.github.com/Hyunsoosiesta)
 팀원 | 강희수 | FRONT-END | [<img width="120" alt="스크린샷 2021-07-15 오후 11 54 25" src="https://user-images.githubusercontent.com/78786605/125810034-e8b0b193-837b-4f1f-80fa-8b85b2fdfd82.png">](https://www.github.com/kang-heesue)
 팀원 | 김정호 | BACK-END | [<img width="90" alt="스크린샷 2021-07-15 오후 11 54 32" src="https://user-images.githubusercontent.com/78786605/125810139-db7b34fc-b57b-4b1d-92eb-9e88e6daf30e.png">](https://www.github.com/j21chon)
-팀장 | 정다희 | BACK-END | [<img width="85" alt="스크린샷 2021-07-15 오후 11 54 40" src="https://user-images.githubusercontent.com/78786605/125810187-a9ddc60f-eb3d-4ca3-97de-03a8f23d761e.png">](https://www.github.com/i2sign)
+팀장 | 정다희 | Full-Stack | [<img width="85" alt="스크린샷 2021-07-15 오후 11 54 40" src="https://user-images.githubusercontent.com/78786605/125810187-a9ddc60f-eb3d-4ca3-97de-03a8f23d761e.png">](https://www.github.com/i2sign)
 
 ## ✍🏻 For More Details
 ### [Wiki 링크로 이동](https://github.com/codestates/jigutory-client/wiki)

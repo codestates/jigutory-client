@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
+import ProductList from '../components/ProductList';
+import { ScrollButton } from '../components/ScrollButton';
 import '../styles/EditUser.scss';
 import axios from 'axios';
-import ProductList from '../components/ProductList';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
@@ -63,6 +64,7 @@ function Store({ handleLogin, accessToken, userInfo }) {
           handleClick={() => handleAdd(item.id)}
         />
       ))}
+      <ScrollButton />
     </div>
   );
 }

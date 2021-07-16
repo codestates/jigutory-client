@@ -30,8 +30,8 @@ function Intro() {
 
   return (
     <>
-      <section className="intro-container">
-
+      <main className="intro-container">
+        {/* 
         <div className="intro-functions">
           <h2>지구토리 서비스 사용법</h2>
         </div>
@@ -46,12 +46,14 @@ function Intro() {
 
         <div className="intro-review">
           <h2>사용자 리뷰</h2>
-        </div>
+        </div> */}
+
+
         <IntroMypage />
         <IntroEnding />
         <ScrollButton />
 
-      </section>
+      </main>
     </>
   );
 }

@@ -82,13 +82,18 @@
   }
 }
 
+
+// mobile ------------------------------------------------
 .nav_buttons_moblie {
   border : 2px solid rgba(90, 116, 163, 0.3);
   border-radius: 2.5rem;
   position: fixed;
   bottom : 1rem;
   right : 12rem;
+  //left : 1rem;
+  //bottom : 1rem;
   display: flex;
+  //flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: white;
@@ -107,7 +112,7 @@
 }
 
 .nav_mobile-hide {
-  display: none;
+ display: none;
   div {
     width : 100%;
   }

@@ -78,11 +78,11 @@
     max-width: 100%;
     // width : 35%;
     display: flex;
-    justify-content: center;
     align-items: center;
     img {
       width : 440px;
-      height: auto;
+      // height: auto;
+
       border : 13px solid rgba(255, 255, 255, .3);
       border-radius: 5px;
     }
@@ -135,25 +135,17 @@
     }
   }
 
-  // .intro_mypage {
-  //   display : block;
-  //   align-items: center;
-  //   .intro_mypage-desc-box {
-  //     width : 100%;
-  //     img {
-  //       display: none;
-  //     }
-  //   }
-  // }
+
 }
 
-@media screen and (max-width : 1200px) {
+@media screen and (max-width : 1023px) {
   .intro_mypage {
     display : block;
     .intro_mypage-gif {
       width : 100%;
     }
     .intro_mypage-desc-box {
+    width : 100%;
       img {
         display: none;
       }

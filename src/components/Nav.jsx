@@ -4,6 +4,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import axios from 'axios';
 import logo from '../images/jigu-logo.png';
+import MobileNav from '../components/MobileNav';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
@@ -62,59 +63,35 @@ function Nav({
   };
 
   return (
-    <div className="nav">
-      {isLogin ? (
-        <>
-          <a href="#!">
-            <img
-              className="nav-logo"
-              onClick={clickIntroPage}
-              alt="지구토리 로고"
-              src={logo}
-              width="50px"
-            />
-            <div className="nav-title" onClick={clickIntroPage}>
-              지구토리
-            </div>
-          </a>
+    <>
+      <div className="nav_mobile-hide">
 
-          <div className="buttons">
-            <a href="#!">
-              <button className="nav-main nav-btn" onClick={clickMainPage}>
-                지도
-              </button>
-            </a>
-            <a href="#!">
-              <button className="nav-store nav-btn" onClick={clickStorePage}>
-                상점
-              </button>
-            </a>
-            <a href="#!">
-              <button className="nav-mypage nav-btn" onClick={clickMyPage}>
-                마이 페이지
-              </button>
-            </a>
-            <a href="/">
-              <button className="nav-logout nav-btn" onClick={handleLogout}>
-                로그아웃
-              </button>
-            </a>
-          </div>
-        </>
-      ) : (
+        <MobileNav
+          isLogin={isLogin}
+          handleLogout={handleLogout}
+          handleLogin={handleLogin}
+          handleUserInfo={handleUserInfo}
+          accessToken={accessToken} />
+
+      </div>
+
+      <nav id="nav">
+        {isLogin ? (
           <>
-            <a href="#!">
-              <img
-                className="nav-logo"
-                onClick={clickIntroPage}
-                src={logo}
-                alt="logo"
-              />
-              <div className="nav-title" onClick={clickIntroPage}>
-                지구토리
-            </div>
-            </a>
-            <div className="buttons">
+            <section id="nav_header">
+              <a href="#!">
+                <img
+                  className="nav-logo"
+                  onClick={clickIntroPage}
+                  alt="지구토리 로고"
+                  src={logo}
+                  width="50px"
+                />
+                <span className="nav-title" onClick={clickIntroPage}>지구토리</span>
+              </a>
+            </section>
+
+            <section className="nav_buttons nav_web-hide">
               <a href="#!">
                 <button className="nav-main nav-btn" onClick={clickMainPage}>
                   지도
@@ -126,39 +103,78 @@ function Nav({
               </button>
               </a>
               <a href="#!">
-                <button className="nav-mypage nav-btn" onClick={handleOpenLogin}>
+                <button className="nav-mypage nav-btn" onClick={clickMyPage}>
                   마이 페이지
               </button>
               </a>
-              <button className="nav-login nav-btn" onClick={handleOpenLogin}>
-                로그인
-            </button>
-              {isLoginOpen && (
-                <Login
-                  isLoginOpen={isLoginOpen}
-                  handleOpenLogin={handleOpenLogin}
-                  handleCloseLogin={handleCloseLogin}
-                  handleUserInfo={handleUserInfo}
-                  handleLogin={handleLogin}
-                  handleOpenSignup={handleOpenSignUp}
-                  accessToken={accessToken}
-                  isLogin={isLogin}
-                />
-              )}
-
-              {isSignUpOpen && (
-                <SignUp
-                  isSignUpOpen={isSignUpOpen}
-                  handleOpenSignUp={handleOpenSignUp}
-                  handleCloseSignUp={handleCloseSignUp}
-                  handleUserInfo={handleUserInfo}
-                />
-              )}
-            </div>
+              <a href="/">
+                <button className="nav-logout nav-btn" onClick={handleLogout}>
+                  로그아웃
+              </button>
+              </a>
+            </section>
           </>
-        )}
-    </div>
+        ) : (
+            <>
+              <section id="nav_header">
+                <a href="#!">
+                  <img
+                    className="nav-logo"
+                    onClick={clickIntroPage}
+                    src={logo}
+                    alt="logo"
+                  />
+                  <span className="nav-title" onClick={clickIntroPage}>지구토리</span>
+                </a>
+              </section>
+              <section className="nav_buttons nav_web-hide">
+                <a href="#!">
+                  <button className="nav-main nav-btn" onClick={clickMainPage}>
+                    지도
+              </button>
+                </a>
+                <a href="#!">
+                  <button className="nav-store nav-btn" onClick={clickStorePage}>
+                    상점
+              </button>
+                </a>
+                <a href="#!">
+                  <button className="nav-mypage nav-btn" onClick={handleOpenLogin}>
+                    마이 페이지
+              </button>
+                </a>
+                <button className="nav-login nav-btn" onClick={handleOpenLogin}>
+                  로그인
+              </button>
+                {isLoginOpen && (
+                  <Login
+                    isLoginOpen={isLoginOpen}
+                    handleOpenLogin={handleOpenLogin}
+                    handleCloseLogin={handleCloseLogin}
+                    handleUserInfo={handleUserInfo}
+                    handleLogin={handleLogin}
+                    handleOpenSignup={handleOpenSignUp}
+                    accessToken={accessToken}
+                    isLogin={isLogin}
+                  />
+                )}
+
+                {isSignUpOpen && (
+                  <SignUp
+                    isSignUpOpen={isSignUpOpen}
+                    handleOpenSignUp={handleOpenSignUp}
+                    handleCloseSignUp={handleCloseSignUp}
+                    handleUserInfo={handleUserInfo}
+                  />
+                )}
+              </section>
+            </>
+          )}
+      </nav>
+    </>
   );
 }
 
 export default withRouter(Nav);
+
+

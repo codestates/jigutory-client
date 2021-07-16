@@ -8,6 +8,7 @@ import IntroStore from '../components/IntroStore';
 import axios from 'axios';
 
 function Intro() {
+
   return (
     <>
       <main className="intro-container">

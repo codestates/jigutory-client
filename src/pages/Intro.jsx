@@ -1,16 +1,24 @@
 import React from 'react';
-import { IntroMap } from '../components/IntroMap';
+import { useHistory, withRouter } from 'react-router-dom';
 import { ScrollButton } from '../components/ScrollButton';
+import IntroMap from '../components/IntroMap';
+import IntroEnding from '../components/IntroEnding';
+import IntroMypage from '../components/IntroMypage';
+import IntroStore from '../components/IntroStore';
+import axios from 'axios';
 
 function Intro() {
   return (
     <>
-      <section className="intro-container">
+      <main className="intro-container">
         <IntroMap />
+        <IntroMypage />
+        <IntroStore />
+        <IntroEnding />
         <ScrollButton />
-      </section>
+      </main>
     </>
   );
 }
 
-export default Intro;
+export default withRouter(Intro);

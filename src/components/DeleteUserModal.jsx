@@ -9,7 +9,7 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
 
   const withdrawRequestHandler = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/user/withdraw`, {
+      .delete(`http://localhost:4000/user/withdraw`, {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -20,7 +20,9 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
         isLogout();
         setIsDelete(true);
         //handleDeleteUser(true);
-        setTimeout(() => { history.push('/intro') }, 1000);
+        setTimeout(() => {
+          history.push('/intro');
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };
@@ -41,23 +43,21 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
             <div>정상적으로 계정이 삭제되었습니다.</div>
           </div>
         </div>
-
       ) : (
-          <div ref={domNode} className="edituser-modal">
-
-            <div className="edituser-modal-info">
-              <div>
-                탈퇴하시면 회원정보 복구가 불가능합니다. <br />
+        <div ref={domNode} className="edituser-modal">
+          <div className="edituser-modal-info">
+            <div>
+              탈퇴하시면 회원정보 복구가 불가능합니다. <br />
               정말 탈퇴하시겠습니까?
             </div>
-              <div className="edituser_withdrawal_choose" >
-                <button onClick={withdrawRequestHandler}>회원탈퇴</button>
-                <button onClick={handleNo}>회원유지</button>
-              </div>
+            <div className="edituser_withdrawal_choose">
+              <button onClick={withdrawRequestHandler}>회원탈퇴</button>
+              <button onClick={handleNo}>회원유지</button>
             </div>
           </div>
-        )}
-    </div >
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -31,7 +31,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
+      .get(`http://localhost:4000/user/userinfo`, {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (imgUrl) {
       axios
         .patch(
-          `${process.env.REACT_APP_API_URL}/user/useredit`,
+          `http://localhost:4000/user/useredit`,
           { profileImage: imgUrl },
           {
             headers: {
@@ -202,7 +202,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validUsername) {
       axios
         .patch(
-          `${process.env.REACT_APP_API_URL}/user/useredit`,
+          `http://localhost:4000/user/useredit`,
           { username: username },
           {
             headers: {
@@ -227,7 +227,7 @@ const EditUser = ({ accessToken, handleUserInfo, isLogout }) => {
     if (validPassword) {
       axios
         .patch(
-          `${process.env.REACT_APP_API_URL}/user/passwordedit`,
+          `http://localhost:4000/user/passwordedit`,
           { rvsdpassword: newPasswordCheck },
           {
             headers: {

@@ -18,7 +18,7 @@ export default function OrderSummary({ message }) {
     if (userinfo.email) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/cart/update`,
+          `http://localhost:4000/cart/update`,
           {
             email: userinfo.email,
             quantitiy: 1,
@@ -37,7 +37,7 @@ export default function OrderSummary({ message }) {
     if (userinfo.email) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/cart/count`,
+          `http://localhost:4000/cart/count`,
           {
             email: userinfo.email,
           },
@@ -83,9 +83,7 @@ export default function OrderSummary({ message }) {
         <div id="order-summary-total">
           합계 : <span className="order-summary-text">{totalSum} 원</span>
         </div>
-        <div>
-        구매하기
-        </div>
+        <div>구매하기</div>
       </div>
     </div>
   );

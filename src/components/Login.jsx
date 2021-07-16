@@ -54,7 +54,7 @@ function Login({
     if (email && password) {
       await axios
         .post(
-          `${process.env.REACT_APP_API_URL}/auth/signin`,
+          `http://localhost:4000/auth/signin`,
           { email: email, password: password },
           {
             headers: {
@@ -72,7 +72,7 @@ function Login({
           // }, 1000);
 
           axios
-            .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
+            .get(`http://localhost:4000/user/userinfo`, {
               headers: {
                 'Content-Type': 'application/json',
                 authorization: res.data.data.accessToken,

@@ -2,7 +2,7 @@ import React from 'react';
 import mapGif from '../images/intro-function-map.gif';
 import '../styles/IntroMap.scss';
 
-export const IntroMap = () => {
+const IntroMap = () => {
   return (
     <div className="intro_main">
       <div className="intro_main-image">
@@ -29,3 +29,5 @@ export const IntroMap = () => {
     </div>
   );
 };
+
+export default IntroMap;

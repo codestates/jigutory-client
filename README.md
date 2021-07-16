@@ -25,15 +25,15 @@
 <img src="https://user-images.githubusercontent.com/78947950/125779977-ca66bbdb-dd2d-400f-9621-ae2420df518a.png" width="500" height="400"/><br/>
 
 
-# 🌳 Stack
+## 🔨 Stack
 <img width="950" alt="stack" src="https://user-images.githubusercontent.com/78786605/125805315-d158be9d-4e19-4829-818b-f95bf3a66071.png">
 
 
-## 🔥 DB Schema
+## 🌳 DB Schema
 <img width="950" alt="스크린샷 2021-07-16 오전 9 54 54" src="https://user-images.githubusercontent.com/78786605/125875822-4a9f5eb2-70f8-438f-98ec-09bd85c8150a.png">
 
 
-## 💦 Web View
+## 👀 Web View
 각 기능별 gif 파일 정리
 
 

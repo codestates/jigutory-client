@@ -75,7 +75,7 @@ export default function OrderSummary({ message }) {
 
   return (
     <div id="order-summary-container">
-      <h4>주문 합계</h4>
+      <span>주문 합계</span>
       <div id="order-summary">총 수량 : {totalQuantitiy} 개</div>
       <div id="order-summary-total">합계 : {totalSum} 원</div>
       <button >구매하기</button>

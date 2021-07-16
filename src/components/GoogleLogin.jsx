@@ -44,12 +44,12 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
       )
       .then((res) => {
         console.log(`thisisfirstgooglesigninres`, res);
-        handleLogin(res.data.data.accessToken);
+        handleLogin(res.data.accessToken);
         handleUserInfo({
-          username: res.data.data.findGoogleUser.username,
-          email: res.data.data.findGoogleUser.email,
+          username: res.data.googleInfo.username,
+          email: res.data.googleInfo.email,
         });
-        localStorage.setItem('accessToken', res.data.data.accessToken);
+        localStorage.setItem('accessToken', res.data.accessToken);
       })
       .catch((err) => console.log(err));
   };

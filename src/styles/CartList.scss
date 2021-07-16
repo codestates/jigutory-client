@@ -5,17 +5,25 @@
   margin: 8px;
   margin-left: 20px;
   padding: 10px;
-  max-width: 400px;
-  height: 120px;
+  width: 500px;
+  height: 140px;
   box-shadow: 0px 0px 1rem rgb(206, 203, 203);
+  margin-left: 100px;
 }
 .cartitem-List {
   display: inline-flex;
 }
 .cartitem-img {
-  margin: 10px;
-  height: 80px;
-  width: 60px;
+  margin: 5px;
+  padding: 5px;
+  height: 110px;
+  width: 100px;
+}
+.cart-summary {
+  margin-left: 50px;
+}
+.cartitem-info {
+  display: inline-flex;
 }
 
 .cartitem-quantity {
@@ -30,4 +38,14 @@
 .cartitem-quantity {
   width: 100px;
   height: 20px;
+}
+
+.cart-container {
+  display: flex;
+  position: relative;
+  max-width: 1800px;
+}
+
+.cartitem-name {
+  font-weight: 700;
 }

@@ -4,29 +4,9 @@ import { ScrollButton } from '../components/ScrollButton';
 import axios from 'axios';
 import IntroEnding from '../components/IntroEnding';
 import IntroMypage from '../components/IntroMypage';
+import IntroStore from '../components/IntroStore';
 
 function Intro() {
-  const history = useHistory();
-  const [totalCnt, setTotalCnt] = useState({
-    totalCarbon: '',
-    totalClicks: '',
-  })
-
-  useEffect(() => {
-    axios.get('http://localhost:4000/intropage', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => {
-        // console.log('total count : ', res);
-        setTotalCnt({
-          totalCarbon: res.data.totalCarbon,
-          totalClicks: res.data.totalClicks
-        });
-      })
-      .catch(err => console.log(err))
-  }, [])
 
   return (
     <>
@@ -48,8 +28,8 @@ function Intro() {
           <h2>사용자 리뷰</h2>
         </div> */}
 
-
         <IntroMypage />
+        <IntroStore />
         <IntroEnding />
         <ScrollButton />
 

@@ -94,7 +94,7 @@ function App() {
         <>
           <div className="app-container">
             <Route path="/" exact={true} component={Intro} />
-            <Route path="/intro" exact={true} render={() => <Intro />} />
+            <Route path="/intro" exact={true} component={Intro} />
             <Route path="/main" exact={true} component={Main} />
             <Route
               path="/mypage"

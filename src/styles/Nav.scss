@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+  // border-bottom : 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav-logo {
@@ -56,8 +56,8 @@
 }
 
 .nav-btn {
-  width: 110px;
-  height: 90px;
+  // width: 110px;
+  // height: 90px;
   font-size: 16px;
   font-weight: 600;
   font-family: $button-font;
@@ -65,16 +65,21 @@
   cursor: pointer;
   border-radius: 0;
   // border : 1px solid red;
-  // padding : .5rem;
-  // margin : .3rem;
+  padding : .5rem .7rem;
+  margin-right : .7rem;
 
   &:hover {
-    font-weight: 600;
-    background-color: $light-blue;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 5px 2px rgba(11, 11, 11, 0.08);
+    border-radius : 15px;
+    // background-color: $button-blue;
     // border-radius: 30px;
-    color: white;
-    // color : $medium-blue;
+    color: $button-blue;
+    // color : $button-blue;
+    font-weight: 800;
+    transform : scale(.98);
+    transition : .2s ease-in-out;
     // border-bottom : 1px solid $medium-blue;
+    // transition : border-bottom 1s linear;
   }
 
   &:focus {
@@ -112,21 +117,25 @@
 }
 
 .nav_mobile-hide {
- display: none;
+  display: none;
   div {
     width : 100%;
   }
 }
 
 @media screen and (max-width : 768px) {
+
   #nav {
     border-bottom : 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
   }
   .nav_web-hide {
-    display: none;
+    //display: none;
+
   }
   .nav_mobile-hide {
-    display: block;
+    //display: block;
   }
 }
 

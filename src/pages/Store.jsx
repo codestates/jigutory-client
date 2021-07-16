@@ -7,16 +7,17 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 //props App.jsx 설정하기
-function Store({ handleLogin, accessToken, userInfo }) {
+function Store({ handleLogin, accessToken, handleUserInfo, userInfo }) {
   const history = useHistory();
   const [productList, setList] = useState([]);
   const [isModalOn, setIsModalOn] = useState(false);
+  const [message, setMessage] = useState('');
   console.log(`store.js product list 상태 :`, productList);
 
   useEffect(() => {
     axios
       .post(
-        'http://localhost:4000/product/list',
+        `${process.env.REACT_APP_API_URL}/product/list`,
         { email: userInfo.email },
         {
           headers: {
@@ -29,11 +30,11 @@ function Store({ handleLogin, accessToken, userInfo }) {
       });
   }, []);
 
+  //장바구니에 아이템 추가
   const handleAdd = async (e) => {
-    console.log(e);
     await axios
       .post(
-        'http://localhost:4000/product/list',
+        `${process.env.REACT_APP_API_URL}/product/list`,
         { email: userInfo.email, productId: e },
         {
           headers: {
@@ -42,8 +43,9 @@ function Store({ handleLogin, accessToken, userInfo }) {
         },
       )
       .then((res) => {
-        console.log(`thisisStore.js res data`, res);
+        console.log(`thisisStore.js res data`, res.data.message);
         setIsModalOn(true);
+        setMessage(res.data.message);
       })
       .catch((err) => console.log(err));
   };
@@ -56,8 +58,13 @@ function Store({ handleLogin, accessToken, userInfo }) {
     <div className="store-container">
       {productList.map((item, idx) => (
         <ProductList
+          handleLogin={handleLogin}
+          handleUserInfo={handleUserInfo}
+          setList={setList}
+          productList={productList}
           closeModal={closeModal}
           userInfo={userInfo}
+          message={message}
           isModalOn={isModalOn}
           item={item}
           key={idx}

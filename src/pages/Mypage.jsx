@@ -61,7 +61,7 @@ function Mypage({ accessToken }) {
   // 새로고침시 유저상태 유지
   useLayoutEffect(() => {
     axios
-      .get('http://localhost:4000/user/userinfo', {
+      .get(`${process.env.REACT_APP_API_URL}/user/userinfo`, {
         headers: {
           'Content-Type': 'application/json',
           authorization: accessToken,
@@ -75,7 +75,7 @@ function Mypage({ accessToken }) {
         setCreatedAt(res.data.createdAt);
         axios
           .post(
-            'http://localhost:4000/level/read',
+            `${process.env.REACT_APP_API_URL}/level/read`,
             { email: res.data.email, clickNum: clickNum },
             {
               headers: {
@@ -90,7 +90,7 @@ function Mypage({ accessToken }) {
             setLevelInfo({ level: res.data.levelNum });
             axios
               .post(
-                'http://localhost:4000/level/info',
+                `${process.env.REACT_APP_API_URL}/level/info`,
                 { levelNum: res.data.levelNum },
                 {
                   headers: {
@@ -126,7 +126,7 @@ function Mypage({ accessToken }) {
   // 새로고침시, 전체 클릭넘 & 탄소저감량을 불러옴
   useLayoutEffect(() => {
     axios
-      .get('http://localhost:4000/intropage', {
+      .get(`${process.env.REACT_APP_API_URL}/intropage`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -145,7 +145,7 @@ function Mypage({ accessToken }) {
 
     axios
       .post(
-        'http://localhost:4000/level/read',
+        `${process.env.REACT_APP_API_URL}/level/read`,
         { email: email, clickNum: clickNum }, // clickNum 을 안보내주면 0이됨
         { headers: { 'Content-Type': 'application/json' } },
       )
@@ -161,7 +161,7 @@ function Mypage({ accessToken }) {
         console.log('handleClickNum(level/red)', res);
         axios
           .post(
-            'http://localhost:4000/level/info',
+            `${process.env.REACT_APP_API_URL}/level/info`,
             { levelNum: res.data.levelNum },
             { headers: { 'Content-Type': 'application/json' } },
           )
@@ -180,7 +180,7 @@ function Mypage({ accessToken }) {
   // 뱃지 받아오기
   useEffect(() => {
     axios
-      .post('http://localhost:4000/badge/read', {
+      .post(`${process.env.REACT_APP_API_URL}/badge/read`, {
         headers: {
           'Content-Type': 'application/json',
         },

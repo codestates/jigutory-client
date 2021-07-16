@@ -35,7 +35,7 @@ export default function CartList({
     console.log(`thisisitemid`, itemid);
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/cart/update`,
+        `http://localhost:4000/cart/update`,
         {
           email: userinfo.email,
           quantitiy: quantitiy,
@@ -55,7 +55,7 @@ export default function CartList({
     if (userinfo.email) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/cart/count`,
+          `http://localhost:4000/cart/count`,
           {
             email: userinfo.email,
           },
@@ -67,34 +67,39 @@ export default function CartList({
         )
         .then((res) => {
           axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/product/list`,
-        { email: userinfo.email },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .then((res) => {
-       console.log(res)
-      });
+            .post(
+              `http://localhost:4000/product/list`,
+              { email: userinfo.email },
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              },
+            )
+            .then((res) => {
+              console.log(res);
+            });
         });
     }
-  },[]);
+  }, []);
 
   //아이템 삭제 기능
   const deleteItem = (id) => {
     axios.delete(
-      `${process.env.REACT_APP_API_URL}/cart/delete`,
-      { data:{
-        email:userinfo.email, productid:id }},{
-        headers:{
+      `http://localhost:4000/cart/delete`,
+      {
+        data: {
+          email: userinfo.email,
+          productid: id,
+        },
+      },
+      {
+        headers: {
           'Content-Type': 'application/json',
-          withCredentials:true,
-        }
-      }
-    )
+          withCredentials: true,
+        },
+      },
+    );
   };
 
   return (
@@ -106,36 +111,36 @@ export default function CartList({
         <div className="cart-content">
           <div className="cartitem-name">{item.name}</div>
           <div className="cartitem-info">
-          <div className="cartitem-price">{item.price}원</div>
-          <select
-            onChange={(e) => {
-              handleTotal(e.target.value, item.id, item.price);
-            }}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-          <div id="result"></div>
-          <button
-            onClick={() => {
-              deleteItem(item.id);
-            }}
-            className="cartitem-delete"
-          >
-            Delete
-          </button>
+            <div className="cartitem-price">{item.price}원</div>
+            <select
+              onChange={(e) => {
+                handleTotal(e.target.value, item.id, item.price);
+              }}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <div id="result"></div>
+            <button
+              onClick={() => {
+                deleteItem(item.id);
+              }}
+              className="cartitem-delete"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
-      <ScrollButton/>
+      <ScrollButton />
     </div>
   );
 }

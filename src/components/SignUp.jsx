@@ -114,7 +114,7 @@ function SignUp({
     if (validUsername & validEmail && validPassword) {
       await axios
         .post(
-          `${process.env.REACT_APP_API_URL}/auth/signup`,
+          `http://localhost:4000/auth/signup`,
           { username: username, email: email, password: password },
           {
             headers: {

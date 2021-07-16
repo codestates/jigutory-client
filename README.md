@@ -23,8 +23,8 @@
 <img width="720" alt="로고3" src="https://user-images.githubusercontent.com/78786605/125804458-67d79652-f712-4ccf-8980-8effee463fd4.png">
 
 ### 🚀 **[지구토리로 출발!!!](http://www.jigutory.com)**
-### 🚀 **[지구토리 Client](http://www.github.com/jigutory-client)**
-### 🚀 **[지구토리 Server](http://www.github.com/jigutory-server)**
+### 🚀 **[지구토리 Client](https://github.com/jigutory-client)**
+### 🚀 **[지구토리 Server](https://github.com/jigutory-server)**
 
 
 

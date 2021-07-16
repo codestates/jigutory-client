@@ -22,7 +22,9 @@
 
 <img width="720" alt="로고3" src="https://user-images.githubusercontent.com/78786605/125804458-67d79652-f712-4ccf-8980-8effee463fd4.png">
 
-### 🚀 **[지구토리와 함께 출발!!!](http://www.jigutory.com)**
+### 🚀 **[지구토리로 출발!!!](http://www.jigutory.com)**
+### 🚀 **[지구토리 Client](http://www.github.com/jigutory-client)**
+### 🚀 **[지구토리 Server](http://www.github.com/jigutory-server)**
 
 
 
@@ -30,7 +32,7 @@
 <img width="950" alt="stack" src="https://user-images.githubusercontent.com/78786605/125805315-d158be9d-4e19-4829-818b-f95bf3a66071.png">
 
 
-# 🌳 DB Schema
+# 🔥 DB Schema
 <img width="950" alt="스크린샷 2021-07-16 오전 9 54 54" src="https://user-images.githubusercontent.com/78786605/125875822-4a9f5eb2-70f8-438f-98ec-09bd85c8150a.png">
 
 

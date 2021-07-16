@@ -124,7 +124,9 @@ function App() {
               exact={true}
               render={() => (
                 <Cart
+                isLogin={isLogin}
                   handleLogin={handleLogin}
+                  handleUserInfo={handleUserInfo}
                   accessToken={accessToken}
                   userInfo={userInfo}
                 />
@@ -136,6 +138,7 @@ function App() {
               render={() => (
                 <Store
                   handleLogin={handleLogin}
+                  handleUserInfo={handleUserInfo}
                   accessToken={accessToken}
                   userInfo={userInfo}
                 />

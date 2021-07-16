@@ -12,7 +12,9 @@ export const Search = ({ mapMovementRef, markerManageRef }) => {
   );
 
   const fetchCafeList = async () => {
-    const cafeListResponse = await axios.get('http://localhost:4000/cafe/list');
+    const cafeListResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}/cafe/list`,
+    );
     setCafeList(cafeListResponse.data);
   };
 

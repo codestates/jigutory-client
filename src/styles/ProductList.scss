@@ -2,16 +2,18 @@
 
 .Store-item {
   display: inline-flex;
+  align-content: center;
+  text-align: center;
   margin: 8px;
-  padding: 50px;
-  max-width: 400px;
+  padding: 30px;
+  width: 600px;
   height: 600px;
   box-shadow: 0px 0px 1rem rgb(206, 203, 203);
 }
 
 .item-img {
-  height: 270px;
-  width: 450px;
+  height: 330px;
+  width: 370px;
 }
 
 .item-List {
@@ -23,12 +25,12 @@
   overflow: hidden;
   margin: 10px;
   min-width: 280px;
-  max-width: 355px;
+  max-width: 455px;
   width: 100%;
   color: #141414;
   text-align: left;
   line-height: 1.4em;
-  font-size: 16px;
+  font-size: 17px;
 }
 .Store-item * {
   -webkit-box-sizing: border-box;
@@ -42,7 +44,7 @@
 }
 .Store-item figcaption {
   position: absolute;
-  top: calc(100%);
+  top: calc(130%);
 }
 .Store-item figcaption:before {
   position: absolute;
@@ -73,6 +75,9 @@
 .Store-item:hover figcaption,
 .Store-item.hover figcaption {
   top: 420px;
+  margin: 5px;
+  margin-left: 10px;
+  align-items: center;
 }
 
 .item-button {
@@ -81,5 +86,15 @@
 }
 
 .item-button:hover {
-  background-color: #a4aada;
+  background-color: #aeb4df;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.item-name {
+  text-align: center;
+  font-weight: 700;
+  padding-bottom: 10px;
 }

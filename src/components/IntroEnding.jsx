@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
-import Login from './Login';
 import axios from 'axios';
 import holdingcup from '../images/cup.png';
 import '../styles/IntroEnding.scss'
@@ -40,9 +39,8 @@ const IntroEnding = () => {
       </div>
 
       <div className="intro_end-btns">
-        {/* <button onClick={() => history.push('/')}>로그인 / 회원가입</button> */}
-        <button onClick={() => history.push('/main')}>텀블러 혜택 카페 찾아보기</button>
-        <button onClick={() => history.push('/store')}>텀블러 구매하기</button>
+        <button id="intro_end-movetomap" onClick={() => history.push('/main')}>텀블러 혜택 카페 찾아보기</button>
+        <button id="intro_end-movetoshop" onClick={() => history.push('/store')}>텀블러 구매하기</button>
       </div>
 
     </section>

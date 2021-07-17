@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory, withRouter, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/CartList.scss';
+
 import { ScrollButton } from '../components/ScrollButton';
+
 export default function CartList({
   cartList,
   isLogin,
@@ -22,7 +25,8 @@ export default function CartList({
   const [userinfo, setuserInfo] = useState('');
   const [change, setChange] = useState(0);
   const [quantitiy, setQuantitiy] = useState('');
-
+  const history = useHistory();
+  console.log(`thisiscartlist`, cartList)
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('userInfo');
     if (dataLocalStorage) {
@@ -99,50 +103,53 @@ export default function CartList({
           withCredentials: true,
         },
       },
-    );
+    ).then((res) => {
+      alert('장바구니에서 삭제 되었습니다.')
+      window.location.replace("/cart")
+    })
+
   };
 
   return (
     // <div className="cart-item">
     <div key={item.id} className="cartitem-List">
-
-      <div className="cartitem-thumbnail">
-        <img className="cartitem-img" src={item.image} alt={item.name}></img>
-      </div>
-
-      <div className="cart-content">
-
-        <span className="cartitem-name">{item.name}</span>
-
-        <div className="cartitem-info">
-          <span className="cartitem-price">{item.price}원</span>
-          <select
-            onChange={(e) => {
-              handleTotal(e.target.value, item.id, item.price);
-            }}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-          {/* <div id="result"></div> */}
-          <button
-            onClick={() => { deleteItem(item.id) }}
-            id="cartitem-delete"
-          >
-            Delete
+      {cartList.length === 0 ? (
+        <div>장바구니에 아이템이 없습니다.</div>
+      ) : (
+          <>
+            <div className="cartitem-thumbnail">
+              <img className="cartitem-img" src={item.image} alt={item.name}></img>
+            </div>
+            <div className="cart-content">
+              <span className="cartitem-name">{item.name}</span>
+              <div className="cartitem-info">
+                <span className="cartitem-price">{item.price}원</span>
+                <select
+                  onChange={(e) => {
+                    handleTotal(e.target.value, item.id, item.price);
+                  }}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+                <button
+                  onClick={() => { deleteItem(item.id) }}
+                  id="cartitem-delete"
+                >
+                  Delete
           </button>
-        </div>
-      </div>
-
-      {/* </div> */}
+              </div>
+            </div>
+          </>
+        )}
       <ScrollButton />
     </div>
   );

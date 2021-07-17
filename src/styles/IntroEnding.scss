@@ -2,74 +2,76 @@
 // intro_ending & intro_mypage 같이 있음
 
 // intro_ending
-.intro_end{
-  background-color: rgba(8, 70, 99, .9);
-  width : 100%;
-  color : white;
+.intro_end {
+  background-color: rgba(8, 70, 99, 0.9);
+  width: 100%;
+  color: white;
   display: flex;
   flex-direction: column;
-  padding : 80px; // 각 섹션의 패딩값
+  padding: 80px; // 각 섹션의 패딩값
   img {
-    width : 300px;
+    width: 300px;
     position: absolute;
-    right : 0;
+    right: 0;
   }
 
-  .intro_end-desc{
-    p{
+  .intro_end-desc {
+    p {
       line-height: 170%;
       font-weight: 600;
-      font-size : 28px;
-        span {
-          background-color: rgba(255, 255, 255, .1);
-          color : white;
-          font-size : 37px;
-          padding : 0 5px;
-        }
+      font-size: 28px;
+      span {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 37px;
+        padding: 0 5px;
+      }
     }
     div {
-      font-size : 17px;
+      font-size: 17px;
       font-weight: 500;
     }
   }
 
   .intro_end-btns {
-    margin-top : 80px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    button {
-      width : 12rem;
-      margin : 7px;
-      border-radius: 15px;
-      padding : 9px;
-      border : none;
-      font-weight: 500;
-      background-color: $button-blue;
-      border : 1.5px solid rgba(255, 255, 255, 0.7);
-      color : white;
-      &:hover {
-        background-color: rgba(255, 255, 255, .9);
-        color : $button-blue;
-        font-weight: 700;
-        transition : .1s linear;
-      }
-    }
+  }
+}
+#intro_end-movetomap, 
+#intro_end-movetoshop {
+  width : 12rem;
+  margin : 7px;
+  border-radius: 15px;
+  padding : 10px;
+  border : none;
+  font-weight: 500;
+  background-color: $button-blue;
+  border : 1px solid rgba(255, 255, 255, 0.7);
+  color : white;
+  &:hover {
+    background-color: rgba(255, 255, 255, .9);
+    color : $button-blue;
+    font-weight: 700;
+    transition : .1s linear;
+    border : $button-blue;
   }
 }
 
 // intro_mypage
 .intro_mypage {
-  color : $title-blue;
-  display : flex;
+  color: $title-blue;
+  display: flex;
   justify-content: space-between;
-  padding :  120px 80px; 
-  width : 100%;
-  background-color: rgba(8, 70, 99, .09);
+  padding: 120px 80px;
+  width: 100%;
+  background-color: rgba(8, 70, 99, 0.09);
 
   div {
-    margin : 5px;
+    margin: 5px;
     p {
       line-height: 170%;
     }
@@ -80,77 +82,79 @@
     display: flex;
     align-items: center;
     img {
-      width : 440px;
+      width: 440px;
       // height: auto;
 
-      border : 13px solid rgba(255, 255, 255, .3);
+      border: 13px solid rgba(255, 255, 255, 0.3);
       border-radius: 5px;
     }
   }
-  
+
   .intro_mypage-desc-box {
-    width : 60%;
+    width: 60%;
 
     img {
       position : absolute;
       right : 0;
       z-index : -1;
-      width : 420px;
+      width : 350px;
     }
     .intro_mypage-desc1 {
-      font-size : 22px;
+      font-size : 21px;
       font-weight: 600;
-      
-      span{
+
+      span {
         line-height: 180%;
         font-weight: 600;
-        font-size : 29px;
+        font-size : 27px;
         background-color: rgba(255, 255, 255, .6);
         padding : 4px 7px;
       }
-
     }
     .intro_mypage-desc2 {
       margin-top : 80px;
-      font-size : 20px;
-      font-weight: 600;
+      font-size : 16px;
+      font-weight: 500;
+      color : rgba(0, 0, 0, .6);
 
       p:nth-child(1){
-        width : 77%;
-        border-bottom : 1px solid $medium-blue-text;
+        margin : 0;
+        // width : 77%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
       p:nth-child(2) {
-        width : 64%;
-        border-bottom : 1px solid $medium-blue-text;
+        margin : 0;
+        // width : 64%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
     }
   }
-
 }
 
 @media screen and (max-width: 768px) {
   .intro_end {
     img {
-      display : none;
+      display: none;
     }
   }
 }
 
-@media screen and (max-width : 1023px) {
+@media screen and (max-width: 1023px) {
   .intro_mypage {
-    display : block;
+    display: block;
+    padding: 120px 33px;
     .intro_mypage-gif {
-      width : 100%;
+      width: 100%;
     }
     .intro_mypage-desc-box {
-    width : 100%;
+      width: 100%;
+      padding-left: 25px;
       img {
         display: none;
       }
     }
   }
 }
-
 
 // intro_store
 
@@ -159,41 +163,67 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding : 80px;
+  padding: 80px;
 
-  .intro_store-tumblers  {
+  .intro_store-tumblers {
     img {
       width : 200px;
-      // animation : 
+      // animation : MovingTumblers 1s infinite;
     }
   }
   .intro_store-desc1 {
-    font-size : 24px;
+    font-size: 24px;
     font-weight: 600;
   }
 
   .intro_store-forest {
-    margin-top : 30px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(8, 70, 99, 0.3);
     border-radius : 50%;
+    // animation : RotateForest 5s infinite;
   }
 
   .intro_store-desc2 {
-    margin-top : 10px;
-    font-size : 16px;
+    margin-top: 10px;
+    font-size: 16px;
     font-weight: 600;
-    color : rgba(8, 70, 99, .8);
+    color: rgba(8, 70, 99, 0.8);
   }
   .intro_store-desc3 {
-    color : rgba(0, 0, 0, .5);
-    font-size : 12px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
   }
-
 }
 
 @keyframes MovingTumblers {
 
+  0% {
+    transform: none;
+  }
+
+  50% {
+    transform: translateY(-8px) 
+  }
+
+  100% {
+    transform: none;
+  }
+  
+}
+
+@keyframes RotateForest {
+  0% {
+    transform: none;
+  }
+
+  50% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    transform: none;
+  }
 }

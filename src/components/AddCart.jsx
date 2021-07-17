@@ -61,43 +61,43 @@ const AddCart = ({
   // });
 
   return (
-<div>
-    {!userinfo.username ? (
-    <div className="modal-container show-modal-store">
-      
-    <div className="modal-store">
-    <button className="modal-close-store" onClick={handleCloseLogin}>
-          <i className="fas fa-times fa-lg"></i>
-        </button>
-      <div className="modal-info-store">
-        로그인 후 이용 가능합니다.   
+    <div>
+      {!userinfo.username ? (
+        <div className="modal-container show-modal-store">
+
+          <div className="modal-store">
+            <button className="modal-close-store" onClick={handleCloseLogin}>
+              <i className="fas fa-times fa-lg"></i>
+            </button>
+            <div className="modal-info-store">
+              로그인 후 이용 가능합니다.
       </div>
-        {/* <div >
+            {/* <div >
           <button className="forbutton" onClick={handleOpenLogin}>로그인 하기</button>
           {isLoginOpen && (<Login accessToken={accessToken} handleCloseLogin={handleCloseLogin} handleUserInfo={handleUserInfo} handleLogin={handleLogin}/>)}
           <button className="forbutton" onClick={handleOpenSignUp}>회원가입 하기</button>
           {isSignUpOpen&& (<SignUp handleCloseSignUp={handleCloseSignUp} handleUserInfo={handleUserInfo} />)}
         </div> */}
-    </div>
-</div>
-) : (
-    <div className="modal-container show-modal-store">
-        <div className="modal-store">
-          <div className="modal-info-store">
-            <div>
-            {message} <br />
-              장바구니로 이동하시겠습니까?
-            </div>
-            <div>
-              <button className="forbutton" onClick={moveToCart}>장바구니로 이동</button>
-              <button className="forbutton" onClick={keepShopping}>계속 쇼핑하기</button>
-            </div>
           </div>
         </div>
+      ) : (
+          <div className="addcart_modal-container addcart_show-modal">
+            <div className="addcart_modal">
+              <div className="addcart_modal-info ">
+                <div>
+                  {message} <br />
+              장바구니로 이동하시겠습니까?
+            </div>
+                <div>
+                  <button className="forbutton" onClick={moveToCart}>장바구니 이동</button>
+                  <button className="forbutton" onClick={keepShopping}>계속 쇼핑하기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
-)
-}
-</div>
   )
 }
 

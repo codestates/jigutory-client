@@ -4,7 +4,6 @@ import Login from './Login';
 import SignUp from './SignUp';
 import axios from 'axios';
 import logo from '../images/jigu-logo.png';
-import MobileNav from '../components/MobileNav';
 import '../styles/Nav.scss';
 axios.defaults.withCredentials = true;
 
@@ -64,17 +63,6 @@ function Nav({
 
   return (
     <>
-      <div className="nav_mobile-hide">
-
-        <MobileNav
-          isLogin={isLogin}
-          handleLogout={handleLogout}
-          handleLogin={handleLogin}
-          handleUserInfo={handleUserInfo}
-          accessToken={accessToken} />
-
-      </div>
-
       <nav id="nav">
         {isLogin ? (
           <>

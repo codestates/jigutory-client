@@ -149,3 +149,30 @@
   margin-right: 10px;
   font-size: 13px;
 }
+
+@media screen and (max-width: 768px) {
+  #cafe-toggle-container {
+    margin-top: 470px;
+    margin-right: 10px;
+
+    img {
+      display: none;
+    }
+
+    .fa-heart {
+      display: none;
+    }
+
+    .fa-bookmark {
+      display: none;
+    }
+
+    .cafe-toggle-close {
+      display: none;
+    }
+
+    #cafe-toggle-info {
+      padding: 25px 55px;
+    }
+  }
+}

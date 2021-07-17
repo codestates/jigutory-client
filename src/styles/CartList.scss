@@ -38,19 +38,18 @@
         .cartitem-img {
           width: 120px;
           height: 130px;
-        box-shadow: 0px 0px 7px rgb(206, 203, 203);
+          box-shadow: 0px 0px 7px rgb(206, 203, 203);
 
         }
   
       }
       .cart-content {
-
         display: flex;
         flex-direction: column;
         padding : 10px;
         .cartitem-name {
           font-weight: 700;
-          text-align: center;
+          // text-align: center;
           padding : 10px 0;
           margin : 10px 0;
         }
@@ -62,7 +61,7 @@
           display: inline-flex;
           border-radius : 3px;
           background-color: rgba(8, 70, 99, .04);
-          padding : 10px;
+          padding : 10px 15px;
           select {
             padding : 0 5px;
             margin : 0 10px;
@@ -83,10 +82,44 @@
 
   .cart-summary {
     width : 25%;
-    border : 1px solid purple;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: rgba(8, 70, 99, .04);
+    border-radius : 3px;
+    padding: 0 10px 50px 10px;
     #order-summary-container {
       width : 100%;
-      border : 1px solid red;
+      span {
+        font-size : 18px;
+        font-weight: 600;
+        display : block;
+        margin-bottom : 20px;
+      }
+      div {
+        margin-bottom : 3px;
+      }
+      button {
+        margin-top : 20px;
+        border : 1.5px solid $medium-blue;
+        background-color: transparent;
+        border-radius: 3px;
+        padding : 7px 10px;
+        font-weight: 600;
+        color : $medium-blue;
+        width : 100%;
+        &:hover {
+          background-color: $medium-blue;
+          color : white;
+          transition : background-color .2s linear;
+        }
+      }
+
+      .order-summary-buying {
+        font-size: 11px;
+        padding : 2px;
+        text-align: center;
+      }
     }
   }
 
@@ -98,24 +131,22 @@
     section {
       flex-direction: column;
     }
+    .cart-component {
+      width : 100%;
+    }
+
+    .cart-summary {
+      width : 100%;
+      #order-summary-container {
+        padding : 20px;
+        span, 
+        div {
+          text-align: center;
+        }
+      }
+    }
   }
 }
-
-
-// .cart-item {
-//   box-shadow: 0px 0px 1rem rgb(206, 203, 203);
-//   border : 1px solid blue;
-// }
-// .cartitem-quantity {
-//   width: 50px;
-//   background-color: rgb(218, 220, 230);
-//   border : 1px solid black;
-// }
-// .cartitem-quantity {
-//   width: 100px;
-//   border : 1px solid red;
-//   height: 20px;
-// }
 
 
 

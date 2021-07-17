@@ -1,15 +1,21 @@
 import React from 'react';
-import img1 from '../images/텀블러.png';
-import img2 from '../images/텀블러2.png';
-import img3 from '../images/텀블러3.png';
+import tumbler1 from '../images/텀블러.png';
+import tumblers2 from '../images/텀블러2.png';
+import tumbler3 from '../images/텀블러3.png';
 import forest from '../images/forest_onhands.png';
 import tumblers from '../images/tumblers.png';
+import { useHistory, withRouter } from 'react-router-dom';
 import '../styles/IntroEnding.scss';
 
 const IntroStore = () => {
+  const history = useHistory();
   return (
     <section className="intro_store">
       <div className="intro_store-tumblers">
+        {/* <img src={tumbler1} alt="item3" />
+        <img src={tumblers2} alt="item3" />
+        <img src={tumbler3} alt="item3" /> */}
+
         <img src={tumblers} alt="item3" />
       </div>
 
@@ -25,7 +31,7 @@ const IntroStore = () => {
 
       <div className="intro_store-desc2">
         <p>
-          일회용 컵 대신 텀블러를 사용하여 지구를 지키는데 한 걸음 나아가세요 !{' '}
+          일회용 컵 대신 텀블러를 사용하여 지구를 지키는데 한 걸음 나아가세요 !
         </p>
       </div>
 
@@ -35,8 +41,10 @@ const IntroStore = () => {
           쓰입니다.
         </p>
       </div>
+      <button id="intro_end-movetoshop" onClick={() => history.push('/store')}>상점 바로가기</button>
+
     </section>
   );
 };
 
-export default IntroStore;
+export default withRouter(IntroStore);

@@ -39,23 +39,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    button {
-      width: 12rem;
-      margin: 7px;
-      border-radius: 15px;
-      padding: 9px;
-      border: none;
-      font-weight: 500;
-      background-color: $button-blue;
-      border: 1.5px solid rgba(255, 255, 255, 0.7);
-      color: white;
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.9);
-        color: $button-blue;
-        font-weight: 700;
-        transition: 0.1s linear;
-      }
-    }
+  }
+}
+#intro_end-movetomap,
+#intro_end-movetoshop {
+  width: 12rem;
+  margin: 7px;
+  border-radius: 15px;
+  padding: 10px;
+  border: none;
+  font-weight: 500;
+  background-color: $button-blue;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: white;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: $button-blue;
+    font-weight: 700;
+    transition: 0.1s linear;
+    border: $button-blue;
   }
 }
 
@@ -95,32 +97,35 @@
       position: absolute;
       right: 0;
       z-index: -1;
-      width: 420px;
+      width: 350px;
     }
     .intro_mypage-desc1 {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 600;
 
       span {
         line-height: 180%;
         font-weight: 600;
-        font-size: 29px;
+        font-size: 27px;
         background-color: rgba(255, 255, 255, 0.6);
         padding: 4px 7px;
       }
     }
     .intro_mypage-desc2 {
       margin-top: 80px;
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.6);
 
       p:nth-child(1) {
-        width: 77%;
-        border-bottom: 1px solid $medium-blue-text;
+        margin: 0;
+        // width : 77%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
       p:nth-child(2) {
-        width: 64%;
-        border-bottom: 1px solid $medium-blue-text;
+        margin: 0;
+        // width : 64%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
     }
   }
@@ -163,7 +168,7 @@
   .intro_store-tumblers {
     img {
       width: 200px;
-      // animation :
+      // animation : MovingTumblers 1s infinite;
     }
   }
   .intro_store-desc1 {
@@ -178,6 +183,7 @@
     align-items: center;
     background-color: rgba(8, 70, 99, 0.3);
     border-radius: 50%;
+    // animation : RotateForest 5s infinite;
   }
 
   .intro_store-desc2 {
@@ -193,4 +199,29 @@
 }
 
 @keyframes MovingTumblers {
+  0% {
+    transform: none;
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes RotateForest {
+  0% {
+    transform: none;
+  }
+
+  50% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    transform: none;
+  }
 }

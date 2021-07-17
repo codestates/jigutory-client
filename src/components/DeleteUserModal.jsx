@@ -19,7 +19,6 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
         console.log('탈퇴 응답 : ', res);
         isLogout();
         setIsDelete(true);
-        //handleDeleteUser(true);
         setTimeout(() => {
           history.push('/intro');
         }, 1000);
@@ -44,19 +43,19 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
           </div>
         </div>
       ) : (
-        <div ref={domNode} className="edituser-modal">
-          <div className="edituser-modal-info">
-            <div>
-              탈퇴하시면 회원정보 복구가 불가능합니다. <br />
+          <div ref={domNode} className="edituser-modal">
+            <div className="edituser-modal-info">
+              <div>
+                탈퇴하시면 회원정보 복구가 불가능합니다. <br />
               정말 탈퇴하시겠습니까?
             </div>
-            <div className="edituser_withdrawal_choose">
-              <button onClick={withdrawRequestHandler}>회원탈퇴</button>
-              <button onClick={handleNo}>회원유지</button>
+              <div className="edituser_withdrawal_choose">
+                <button onClick={withdrawRequestHandler}>회원탈퇴</button>
+                <button onClick={handleNo}>회원유지</button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };

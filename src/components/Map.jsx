@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
-import mapMarker from '../images/main-marker.png';
+import mapMarker from '../images/map-marker.png';
 import EarthSpinner from './EarthSpinner';
 import '../styles/Map.scss';
 
@@ -59,6 +59,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         contentName.className = 'map-info-name';
         contentName.textContent = name;
         closeButton.className = 'map-info-close';
+        closeButton.textContent = '✕';
         closeButton.onclick = function () {
           closeOverlay();
         };

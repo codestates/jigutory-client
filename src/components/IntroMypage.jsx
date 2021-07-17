@@ -5,7 +5,6 @@ import turtle from '../images/turtle.png';
 
 
 const IntroMypage = () => {
-
   return (
     <section className="intro_mypage">
 
@@ -19,7 +18,7 @@ const IntroMypage = () => {
           <p>
             지금 바로 지구토리 유저가 되어 <br />
             <span>나의 환경지킴 지수</span>를 확인하세요 ! <br />
-            텀블러 사용 횟수를 클릭하면 <span>나의 탄소 저감량</span>이 올라갑니다. <br />
+            텀블러 사용 횟수를 기록하면 <span>나의 탄소 저감량</span>이 올라갑니다. <br />
           </p>
         </div>
 

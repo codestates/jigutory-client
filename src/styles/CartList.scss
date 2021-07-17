@@ -85,7 +85,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    // border : 1px solid purple;
     background-color: rgba(8, 70, 99, .04);
     border-radius : 3px;
     padding: 0 10px 50px 10px;
@@ -114,6 +113,12 @@
           color : white;
           transition : background-color .2s linear;
         }
+      }
+
+      .order-summary-buying {
+        font-size: 11px;
+        padding : 2px;
+        text-align: center;
       }
     }
   }

@@ -66,10 +66,10 @@ function Login({
         .then((res) => {
           handleLogin(res.data.data.accessToken);
           localStorage.setItem('accessToken', res.data.data.accessToken);
-          setTimeout(() => {
-            history.push('/intro');
-            handleCloseLogin();
-          }, 1000);
+          // setTimeout(() => {
+          //   history.push('/intro');
+          // handleCloseLogin();
+          // }, 1000);
 
           axios
             .get(`http://localhost:4000/user/userinfo`, {

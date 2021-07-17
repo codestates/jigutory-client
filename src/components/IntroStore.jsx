@@ -16,24 +16,24 @@ const IntroStore = () => {
         {/* <img src={tumbler1} alt="item3" />
         <img src={tumblers2} alt="item3" />
         <img src={tumbler3} alt="item3" /> */}
-        <img src={tumblers} alt="tumblers" />
 
         {/* <img src={shopping} alt="shopping" /> */}
       </div>
 
       <div className="intro_store-desc1">
         <p>
-          다양한 텀블러가 있는 지구토리 상점에서 나만의 텀블러를 골라보세요 !
+          지구토리 상점에서 나만의 텀블러를 골라보세요 !
         </p>
       </div>
 
+      {/* <img src={tumblers} alt="tumblers" width="150px" /> */}
       <div className="intro_store-forest">
         <img src={forest} alt="forest" width="100px" />
       </div>
 
       <div className="intro_store-desc2">
         <p>
-          일회용 컵 대신 텀블러를 사용하여 지구를 지키는데 한 걸음 나아가세요 !
+          일회용 컵 대신 텀블러를 사용하여 지구를 지키는데 한 걸음 나아가세요.
         </p>
       </div>
 

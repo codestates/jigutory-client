@@ -13,7 +13,7 @@ const IntroMypage = () => {
       </div>
 
       <div className="intro_mypage-desc-box">
-        <img src={turtle} alt="sea turtle" />
+        {/* <img src={turtle} alt="sea turtle" /> */}
         <div className="intro_mypage-desc1">
           {/* 
           <div>지구토리 유저가 되어 </div>
@@ -26,8 +26,8 @@ const IntroMypage = () => {
           </div> */}
           <p>
 
-            <span>환경지킴 지수</span>를 확인하세요 ! <br />
-            텀블러 사용 횟수를 기록하면 <span>나의 탄소 저감량</span>이 올라갑니다. <br />
+            <span>텀블러 사용 횟수</span>를 기록하세요 ! <br />
+            레벨과 뱃지를 획득할 수 있습니다.<br />
           </p>
         </div>
 

@@ -19,7 +19,6 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
             <div id="level_level_name">
               Lv.{levelInfo.level} {levelInfo.name}
             </div>
-            {/*<button>🔽 자세히 보기</button> */}
             <div id="level_desc" className="hide">
               {levelInfo.description}
             </div>
@@ -32,4 +31,3 @@ const LevelInfo = ({ levelInfo, handleCloseModal }) => {
 
 export default LevelInfo;
 
-// <div id="level_desc" className="hide">{splited.map((row, idx) => (<span id="level_desc_row" key={idx}>{row}.</span>))}</div>

@@ -58,12 +58,6 @@ const Footer = () => {
         >
           정다희
         </a>
-        {/* <div className="footer-info-dev">
-          <div>Front</div>
-          <div>Front</div>
-          <div>Back</div>
-          <div>Back</div>
-        </div> */}
       </div>
       <div className="footer-container-copyright">
         Copyright &copy; 2021 Jigutory All rights reserved

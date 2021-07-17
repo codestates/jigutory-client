@@ -1,5 +1,9 @@
 @import '../styles/_variables.scss';
 
+#map-container {
+  padding-top: 5.4rem;
+}
+
 #map {
   width: 100%;
   height: 650px;
@@ -50,9 +54,13 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  #map {
-    margin-top: 30px;
-    height: 798px;
+@media screen and (max-width: 1023px) {
+  #map-container {
+    padding-top: 5.4rem;
+
+    #map {
+      margin-top: 30px;
+      height: 798px;
+    }
   }
 }

@@ -2,6 +2,7 @@
 
 .store-container {
   text-align: center;
+  padding: 5.4rem;
 }
 
 .Store-item {
@@ -130,4 +131,10 @@
 
 .item-price {
   font-size: 15px;
+}
+
+@media screen and (max-width: 1023px) {
+  .store-container {
+    padding-top: 9.5rem;
+  }
 }

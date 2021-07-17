@@ -1,26 +1,20 @@
 import React from 'react';
 import mapGif from '../images/intro-function-map.gif';
-import searchImg from '../images/intro-search.svg';
-import mapImg from '../images/intro-map.svg';
+import searchImg from '../images/Search.svg';
+import mapImg from '../images/Navigation.svg';
 import '../styles/IntroMap.scss';
 
 const IntroMap = () => {
   return (
     <section className="intro_main">
-      <section className="intro_main-function">
-        <div className="intro_main-function-image">
-          <img src={mapGif} alt="지도 gif"></img>
-        </div>
-        <div className="intro_main-function-content">
-          <p>
-            <span>지구토리</span>
-            <br />
-            환경 보호를 위한 한 걸음,
-            <br />
-            지금 시작해보세요!
-          </p>
-        </div>
-      </section>
+      {/* //   <section className="intro_main-function">
+        //     <div className="intro_main-function-image">
+          //       <img src={mapGif} alt="지도 gif"></img>
+    //     </div>
+    //     <div className="intro_main-function-content">
+
+    //     </div>
+    //   </section> */}
       <section className="intro_main-map">
         <div className="intro_main-map-first">
           <div className="intro_main-map-first-image">
@@ -34,17 +28,17 @@ const IntroMap = () => {
           </div>
         </div>
         <div className="intro_main-map-second">
-          <div>
-            <img src={mapImg} alt="랜딩페이지 지도"></img>
-          </div>
           <div className="intro_main-map-second-content">
             <span>텀블러 사용혜택</span>을 주는
             <br />
             카페와 제로웨이스트샵을 찾아보세요!
           </div>
+          <div>
+            <img src={mapImg} alt="랜딩페이지 지도"></img>
+          </div>
         </div>
       </section>
-    </section>
+    </section >
     // <section className="intro_main">
     //   <section className="intro_main-function-map">
     //     <div className="intro_main-function-map-gif">

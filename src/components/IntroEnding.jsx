@@ -39,7 +39,7 @@ const IntroEnding = () => {
       </div>
 
       <div className="intro_end-btns">
-        <button id="intro_end-movetomap" onClick={() => history.push('/main')}>텀블러 혜택 카페 찾아보기</button>
+        <button id="intro_end-movetomap" onClick={() => history.push('/main')}>시작하기</button>
         <button id="intro_end-movetoshop" onClick={() => history.push('/store')}>텀블러 구매하기</button>
       </div>
 

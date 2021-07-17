@@ -102,7 +102,15 @@
     .intro_mypage-desc1 {
       font-size : 21px;
       font-weight: 600;
-
+      // div:nth-child(1) {
+      //   font-size : 13px;
+      // }
+      // div:nth-child(3) {
+      //   margin-top : 50px;
+      //   font-size : 10px;
+      // }
+    
+  
       span {
         line-height: 180%;
         font-weight: 600;
@@ -111,14 +119,17 @@
         padding : 4px 7px;
       }
     }
+
+
     .intro_mypage-desc2 {
       margin-top : 80px;
-      font-size : 16px;
+      font-size : 13px;
       font-weight: 500;
-      color : rgba(0, 0, 0, .6);
+      color : rgba(0, 0, 0, .4);
 
       p:nth-child(1){
         margin : 0;
+
         // width : 77%;
         // border-bottom : 1px solid $medium-blue-text;
       }
@@ -174,12 +185,13 @@
   .intro_store-desc1 {
     font-size: 24px;
     font-weight: 600;
+    
   }
 
   .intro_store-forest {
     margin-top: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: centㅏer;
     align-items: center;
     background-color: rgba(8, 70, 99, 0.3);
     border-radius : 50%;
@@ -227,3 +239,16 @@
     transform: none;
   }
 }
+
+
+// .intro_mypage-desc1 {
+//   font-size : 21px;
+//   font-weight: 600;
+
+//   span {
+//     line-height: 180%;
+//     font-weight: 600;
+//     font-size : 27px;
+//     background-color: rgba(255, 255, 255, .6);
+//     padding : 4px 7px;
+//   }

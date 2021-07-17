@@ -5,8 +5,11 @@
 .intro_end {
   background-color: rgba(8, 70, 99, 0.9);
   width: 100%;
+  height : 100vh;
   color: white;
   display: flex;
+  justify-content: center;
+  // align-items: center;
   flex-direction: column;
   padding: 80px; // 각 섹션의 패딩값
   img {
@@ -41,31 +44,33 @@
     align-items: center;
   }
 }
-#intro_end-movetomap, 
+#intro_end-movetomap,
 #intro_end-movetoshop {
-  width : 12rem;
-  margin : 7px;
+  width: 12rem;
+  margin: 7px;
   border-radius: 15px;
-  padding : 10px;
-  border : none;
+  padding: 10px;
+  border: none;
   font-weight: 500;
   background-color: $button-blue;
-  border : 1px solid rgba(255, 255, 255, 0.7);
-  color : white;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: white;
   &:hover {
-    background-color: rgba(255, 255, 255, .9);
-    color : $button-blue;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: $button-blue;
     font-weight: 700;
-    transition : .1s linear;
-    border : $button-blue;
+    transition: 0.1s linear;
+    border: $button-blue;
   }
 }
 
 // intro_mypage
 .intro_mypage {
+  height : 100vh;
   color: $title-blue;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 120px 80px;
   width: 100%;
   background-color: rgba(8, 70, 99, 0.09);
@@ -94,13 +99,13 @@
     width: 60%;
 
     img {
-      position : absolute;
-      right : 0;
-      z-index : -1;
-      width : 350px;
+      position: absolute;
+      right: 0;
+      z-index: -1;
+      width: 350px;
     }
     .intro_mypage-desc1 {
-      font-size : 21px;
+      font-size: 21px;
       font-weight: 600;
       // div:nth-child(1) {
       //   font-size : 13px;
@@ -114,9 +119,9 @@
       span {
         line-height: 180%;
         font-weight: 600;
-        font-size : 27px;
-        background-color: rgba(255, 255, 255, .6);
-        padding : 4px 7px;
+        font-size: 27px;
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 4px 7px;
       }
     }
 
@@ -134,7 +139,7 @@
         // border-bottom : 1px solid $medium-blue-text;
       }
       p:nth-child(2) {
-        margin : 0;
+        margin: 0;
         // width : 64%;
         // border-bottom : 1px solid $medium-blue-text;
       }
@@ -170,6 +175,7 @@
 // intro_store
 
 .intro_store {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -178,7 +184,7 @@
 
   .intro_store-tumblers {
     img {
-      width : 200px;
+      width: 200px;
       // animation : MovingTumblers 1s infinite;
     }
   }
@@ -194,7 +200,7 @@
     justify-content: centㅏer;
     align-items: center;
     background-color: rgba(8, 70, 99, 0.3);
-    border-radius : 50%;
+    border-radius: 50%;
     // animation : RotateForest 5s infinite;
   }
 
@@ -211,19 +217,17 @@
 }
 
 @keyframes MovingTumblers {
-
   0% {
     transform: none;
   }
 
   50% {
-    transform: translateY(-8px) 
+    transform: translateY(-8px);
   }
 
   100% {
     transform: none;
   }
-  
 }
 
 @keyframes RotateForest {

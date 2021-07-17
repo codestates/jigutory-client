@@ -5,12 +5,15 @@ import IntroMap from '../components/IntroMap';
 import IntroEnding from '../components/IntroEnding';
 import IntroMypage from '../components/IntroMypage';
 import IntroStore from '../components/IntroStore';
+import IntroHeader from '../components/IntroHeader';
+
 import axios from 'axios';
 
 function Intro() {
   return (
     <>
       <main className="intro-container">
+        <IntroHeader />
         <IntroMap />
         <IntroMypage />
         <IntroStore />

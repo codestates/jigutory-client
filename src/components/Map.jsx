@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
-import mapMarker from '../images/marker_lightblue.png';
+import mapMarker from '../images/map-marker.png';
 import EarthSpinner from './EarthSpinner';
 import '../styles/Map.scss';
 

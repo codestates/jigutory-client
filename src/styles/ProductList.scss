@@ -4,7 +4,6 @@
   text-align: center;
 }
 
-
 .Store-item {
   display: inline-flex;
   align-content: center;
@@ -14,7 +13,7 @@
   padding: 30px;
   // width: 600px;
   // height: 600px;
-  width : 500px;
+  width: 500px;
   height: 500px;
   box-shadow: 0px 0px 1rem rgb(206, 203, 203);
 }
@@ -22,18 +21,18 @@
 .item-img {
   // height: 330px;
   // width: 370px;
-  width : 300px;
-  height : 270px;
-  margin-bottom : 100px;
+  width: 300px;
+  height: 270px;
+  margin-bottom: 100px;
 }
 
 .item-List {
   // flex: 1 1 50%;
-  display : flex;
+  display: flex;
   justify-content: center;
-  align-items :center;
+  align-items: center;
   flex-direction: column;
-  padding : 0;
+  padding: 0;
 }
 
 .Store-item {
@@ -91,7 +90,7 @@
 .Store-item:hover figcaption,
 .Store-item.hover figcaption {
   // top: 420px;
-  top : 330px;
+  top: 330px;
   margin: 5px;
   margin-left: 10px;
   align-items: center;
@@ -100,29 +99,24 @@
 .item-button {
   // width: 100px;
   // height: 80px;
-  margin-top : 20px;
-  border : 1.5px solid $medium-blue;
+  margin-top: 20px;
+  border: 1.5px solid $medium-blue;
   background-color: transparent;
   border-radius: 3px;
-  padding : 7px 10px;
+  padding: 7px 10px;
   font-weight: 600;
-  color : $medium-blue;
-  width : 100%;
-    &:hover {
-      background-color: $medium-blue;
-      color : white;
-      transition : background-color .2s linear;
+  color: $medium-blue;
+  width: 100%;
+  &:hover {
+    background-color: $medium-blue;
+    color: white;
+    transition: background-color 0.2s linear;
   }
 }
 
-
-// body {
-//   font-family: 'Noto Sans KR', sans-serif;
-// }
-
 .item-name {
-  color : $title-blue;
-  font-size : 20px;
+  color: $title-blue;
+  font-size: 20px;
   text-align: center;
   font-weight: 700;
   // padding-bottom: 10px;
@@ -131,9 +125,9 @@
 
 .item-description {
   font-weight: 600;
-  font-size : 15px;
+  font-size: 15px;
 }
 
 .item-price {
-  font-size : 15px;
+  font-size: 15px;
 }

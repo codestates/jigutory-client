@@ -17,9 +17,9 @@ const IntroMypage = () => {
         <div className="intro_mypage-desc1">
           {/* 
           <div>지구토리 유저가 되어 </div>
-          <div>
+          <dizv>
             <span>나의 환경지킴 지수</span>를 확인하세요 !
-          </div>
+          </dizv>
 
           <div>
             텀블러 사용 횟수를 기록하여 나의 탄소 저람량을 확인하고 레벨과 뱃지를 획득하세요 !

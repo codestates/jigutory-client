@@ -16,9 +16,9 @@ const IntroStore = () => {
         {/* <img src={tumbler1} alt="item3" />
         <img src={tumblers2} alt="item3" />
         <img src={tumbler3} alt="item3" /> */}
-        {/* <img src={tumblers} alt="tumblers" /> */}
+        <img src={tumblers} alt="tumblers" />
 
-        <img src={shopping} alt="shopping" />
+        {/* <img src={shopping} alt="shopping" /> */}
       </div>
 
       <div className="intro_store-desc1">

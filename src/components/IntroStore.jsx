@@ -8,14 +8,16 @@ const IntroStore = () => {
   const history = useHistory();
   return (
     <section className="intro_store">
-      <div className="intro_store-tumblers" data-aos="fade-up"></div>
+      <div className="intro_store-tumblers" data-aos="fade-up">
+        <img src={tumblers} alt="tumblers" />
+      </div>
+
       <div className="intro_store-desc1" data-aos="fade-up">
         <p>지구토리 상점에서 나만의 텀블러를 골라보세요 !</p>
       </div>
-      {/* <img src={tumblers} alt="tumblers" width="150px" /> */}
-      <div className="intro_store-forest" data-aos="fade-up">
+      {/* <div className="intro_store-forest" data-aos="fade-up">
         <img src={forest} alt="forest" width="100px" />
-      </div>
+      </div> */}
       <div className="intro_store-desc2" data-aos="fade-up">
         <p>
           일회용 컵 대신 텀블러를 사용하여 지구를 지키는데 한 걸음 나아가세요.

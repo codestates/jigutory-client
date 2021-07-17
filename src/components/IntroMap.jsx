@@ -15,18 +15,22 @@ const IntroMap = () => {
         </div>
         <img src={mainImg} alt="랜딩 이미지"></img>
       </section>
+
       <section className="intro_main-function-map">
+
         <div className="intro_main-function-map-gif">
           <img src={mapGif} alt="지도 gif"></img>
         </div>
+
         <div className="intro_main-function-map-content">
-          <div>텀블러 할인 카페 찾기</div>
-          <div>
-            카테고리를 선택해 빠르고 쉽게
-            <br />
-            텀블러 할인 카페를 찾아보세요!
+          <div>지구토리의 지도를 통해 <br />
+
+            텀블러 사용혜택이 가득한 카페와 <br />
+            제로 웨이스트를 실천하고 있는 매장을 찾아보고 <br />
+            할인 금액별 카페도 조회해보세요!
           </div>
         </div>
+
       </section>
     </section>
   );

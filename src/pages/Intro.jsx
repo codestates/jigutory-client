@@ -1,15 +1,19 @@
-import React from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
-import { ScrollButton } from '../components/ScrollButton';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
 import IntroMap from '../components/IntroMap';
 import IntroEnding from '../components/IntroEnding';
 import IntroMypage from '../components/IntroMypage';
 import IntroStore from '../components/IntroStore';
 import IntroHeader from '../components/IntroHeader';
-
-import axios from 'axios';
+import { ScrollButton } from '../components/ScrollButton';
 
 function Intro() {
+  useEffect(() => {
+    AOS.init({
+      duration: 3000,
+    });
+  });
+
   return (
     <>
       <main className="intro-container">
@@ -24,4 +28,4 @@ function Intro() {
   );
 }
 
-export default withRouter(Intro);
+export default Intro;

@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import { ScrollButton } from '../components/ScrollButton';
-import '../styles/EditUser.scss';
+// import '../styles/EditUser.scss';
+import '../styles/ProductList.scss';
+
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 

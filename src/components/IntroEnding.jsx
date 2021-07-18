@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
-import Login from './Login';
 import axios from 'axios';
 import holdingcup from '../images/cup.png';
 import '../styles/IntroEnding.scss';
@@ -31,25 +30,28 @@ const IntroEnding = () => {
   return (
     <section className="intro_end">
       <div className="intro_end-desc">
-        <img src={holdingcup} alt="img" />
-        <p>
+        <img src={holdingcup} alt="img" data-aos="fade-up" />
+        <p data-aos="fade-up">
           지구토리는 <br />
           <span>{totalCnt.totalClicks}</span>개의 일회용 컵 사용을 줄였고,{' '}
           <br />
           <span>{totalCnt.totalCarbon}</span>g의 탄소배출을 저감했습니다.
         </p>
-        <div>
+        <div data-aos="fade-up">
           작은 행동 하나가 모여 지구를 살립니다. <br /> 지금 지구토리와
           함께하세요 !
         </div>
       </div>
-
-      <div className="intro_end-btns">
-        {/* <button onClick={() => history.push('/')}>로그인 / 회원가입</button> */}
-        <button onClick={() => history.push('/main')}>
-          텀블러 혜택 카페 찾아보기
+      <div className="intro_end-btns" data-aos="fade-up">
+        <button id="intro_end-movetomap" onClick={() => history.push('/main')}>
+          시작하기
         </button>
-        <button onClick={() => history.push('/store')}>텀블러 구매하기</button>
+        <button
+          id="intro_end-movetoshop"
+          onClick={() => history.push('/store')}
+        >
+          텀블러 구매하기
+        </button>
       </div>
     </section>
   );

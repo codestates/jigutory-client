@@ -2,148 +2,187 @@
 // intro_ending & intro_mypage 같이 있음
 
 // intro_ending
-.intro_end{
-  background-color: rgba(8, 70, 99, .9);
-  width : 100%;
-  color : white;
+.intro_end {
+  background-color: rgba(8, 70, 99, 0.9);
+  width: 100%;
+  height: 100vh;
+  color: white;
   display: flex;
+  justify-content: center;
+  // align-items: center;
   flex-direction: column;
-  padding : 80px; // 각 섹션의 패딩값
+  padding: 80px; // 각 섹션의 패딩값
   img {
-    width : 300px;
+    width: 300px;
     position: absolute;
-    right : 0;
+    right: 0;
   }
 
-  .intro_end-desc{
-    p{
+  .intro_end-desc {
+    p {
       line-height: 170%;
       font-weight: 600;
-      font-size : 28px;
-        span {
-          background-color: rgba(255, 255, 255, .1);
-          color : white;
-          font-size : 37px;
-          padding : 0 5px;
-        }
+      font-size: 35px;
+      span {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 45px;
+        padding: 0 5px;
+      }
     }
     div {
-      font-size : 17px;
+      font-size: 17px;
       font-weight: 500;
     }
   }
 
   .intro_end-btns {
-    margin-top : 80px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    button {
-      width : 12rem;
-      margin : 7px;
-      border-radius: 15px;
-      padding : 9px;
-      border : none;
-      font-weight: 500;
-      background-color: $button-blue;
-      border : 1.5px solid rgba(255, 255, 255, 0.7);
-      color : white;
-      &:hover {
-        background-color: rgba(255, 255, 255, .9);
-        color : $button-blue;
-        font-weight: 700;
-        transition : .1s linear;
-      }
-    }
+  }
+}
+#intro_end-movetomap,
+#intro_end-movetoshop {
+  width: 12rem;
+  margin: 7px;
+  border-radius: 13px;
+  padding: 12px 15px;
+  // border: none;
+  font-weight: 600;
+  font-size: 15px;
+  background-color: $button-blue;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: white;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: $button-blue;
+    font-weight: 800;
+    transition: 0.1s linear;
+    border: $button-blue;
   }
 }
 
 // intro_mypage
 .intro_mypage {
-  color : $title-blue;
-  display : flex;
+  height: 100vh;
+  color: $title-blue;
+  display: flex;
   justify-content: space-between;
-  padding :  120px 80px; 
-  width : 100%;
-  background-color: rgba(8, 70, 99, .09);
+  align-items: center;
+  padding: 120px 80px;
+  margin-left: 50px;
+  width: 100%;
+  // background-color: rgba(8, 70, 99, 0.09);
 
   div {
-    margin : 5px;
+    margin: 5px;
     p {
       line-height: 170%;
     }
   }
   .intro_mypage-gif {
-    max-width: 100%;
+    // max-width: 100%;
     // width : 35%;
     display: flex;
     align-items: center;
     img {
-      width : 440px;
+      width: 480px;
       // height: auto;
 
-      border : 13px solid rgba(255, 255, 255, .3);
-      border-radius: 5px;
+      // border: 13px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     }
   }
-  
-  .intro_mypage-desc-box {
-    width : 60%;
 
-    img {
-      position : absolute;
-      right : 0;
-      z-index : -1;
-      width : 420px;
-    }
+  .intro_mypage-desc-box {
+    width: 60%;
+    margin-left: 40px;
+
     .intro_mypage-desc1 {
-      font-size : 22px;
+      font-size: 25px;
       font-weight: 600;
-      
-      span{
+      div {
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom : 0;
+        padding-bottom : 0;
+      }
+      span {
         line-height: 180%;
         font-weight: 600;
-        font-size : 29px;
-        background-color: rgba(255, 255, 255, .6);
-        padding : 4px 7px;
+        font-size: 35px;
+        // background-color: rgba(255, 255, 255, 0.6);
+        // padding: 4px 7px;
       }
-
     }
-    .intro_mypage-desc2 {
-      margin-top : 80px;
-      font-size : 20px;
-      font-weight: 600;
 
-      p:nth-child(1){
-        width : 77%;
-        border-bottom : 1px solid $medium-blue-text;
+    .intro_mypage-desc2 {
+      margin-top: 80px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.4);
+
+      p:nth-child(1) {
+        margin: 0;
+
+        // width : 77%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
       p:nth-child(2) {
-        width : 64%;
-        border-bottom : 1px solid $medium-blue-text;
+        margin: 0;
+        // width : 64%;
+        // border-bottom : 1px solid $medium-blue-text;
       }
     }
   }
-
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .intro_end {
     img {
-      display : none;
+      display: none;
+    }
+    .intro_end-desc {
+      p {
+        font-size: 22px;
+        span {
+          font-size: 30px;
+        }
+      }
+      div {
+        font-size: 17px;
+        font-weight: 500;
+      }
     }
   }
 }
 
-@media screen and (max-width : 1023px) {
+@media screen and (max-width: 1023px) {
   .intro_mypage {
-    display : block;
+    display: flex;
+    flex-direction: column;
+    padding: 120px 33px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
     .intro_mypage-gif {
-      width : 100%;
+      display: block;
+      width: 100%;
+      text-align: center;
     }
+
     .intro_mypage-desc-box {
-    width : 100%;
+      display: block;
+      width: 100%;
+      text-align: center;
+
       img {
         display: none;
       }
@@ -151,49 +190,108 @@
   }
 }
 
-
 // intro_store
 
 .intro_store {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding : 80px;
+  padding: 80px;
+  background-color: rgba(8, 70, 99, 0.07);
 
-  .intro_store-tumblers  {
+  .intro_store-tumblers {
     img {
-      width : 200px;
-      // animation : 
+      width: 180px;
+      // animation : MovingTumblers 1s infinite;
     }
   }
   .intro_store-desc1 {
-    font-size : 24px;
+    font-size: 24px;
     font-weight: 600;
   }
 
   .intro_store-forest {
-    margin-top : 30px;
+    margin-top: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: centㅏer;
     align-items: center;
     background-color: rgba(8, 70, 99, 0.3);
-    border-radius : 50%;
+    border-radius: 50%;
+    // animation : RotateForest 5s infinite;
   }
 
   .intro_store-desc2 {
-    margin-top : 10px;
-    font-size : 16px;
+    margin-top: 10px;
+    font-size: 16px;
     font-weight: 600;
-    color : rgba(8, 70, 99, .8);
+    color: rgba(8, 70, 99, 0.8);
   }
   .intro_store-desc3 {
-    color : rgba(0, 0, 0, .5);
-    font-size : 12px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    margin-bottom: 20px;
   }
+}
 
+@media screen and (max-width: 620px) {
+  .intro_mypage {
+    display: flex;
+    flex-direction: column;
+    padding: 120px 33px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    .intro_mypage-gif {
+      display: block;
+      width: 100%;
+      text-align: center;
+
+      img {
+        width: 430px;
+      }
+    }
+  }
 }
 
 @keyframes MovingTumblers {
+  0% {
+    transform: none;
+  }
 
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: none;
+  }
 }
+
+@keyframes RotateForest {
+  0% {
+    transform: none;
+  }
+
+  50% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+// .intro_mypage-desc1 {
+//   font-size : 21px;
+//   font-weight: 600;
+
+//   span {
+//     line-height: 180%;
+//     font-weight: 600;
+//     font-size : 27px;
+//     background-color: rgba(255, 255, 255, .6);
+//     padding : 4px 7px;
+//   }

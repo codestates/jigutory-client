@@ -6,6 +6,9 @@ export default function OrderSummary({ message }) {
   const [totalSum, setTotalSum] = useState(0);
   const [userinfo, setuserInfo] = useState('');
   const [sum, setSum] = useState([]);
+  const [buying, cantBuy] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isEmpty, setIsEmpty] = useState('🛒 장바구니에 담긴 상품이 없습니다.');
 
   useEffect(() => {
     const dataLocalStorage = localStorage.getItem('userInfo');
@@ -56,7 +59,7 @@ export default function OrderSummary({ message }) {
   });
 
   function calculate(arr) {
-    let total = {
+    const total = {
       price: 0,
       quantity: 0,
     };
@@ -70,23 +73,26 @@ export default function OrderSummary({ message }) {
     setQuantitiy(total.quantity);
     setTotalSum(total.price);
     // console.log(`thisistotal`,total)
+    if (totalSum !== 0) {
+      setIsEmpty('');
+    }
     return total;
   }
+
+  const handleOrder = () => {
+    cantBuy('🛠 개발 중인 기능입니다');
+    setTimeout(() => cantBuy(''), 2000);
+    console.log('clickBuy');
+  };
 
   return (
     <div id="order-summary-container">
       <h4>주문 합계</h4>
-      <div id="order-summary">
-        총 아이템 개수 :{' '}
-        <span className="order-summary-text">{totalQuantitiy} 개</span>
-        <hr></hr>
-        <div id="order-summary-total">
-          합계 : <span className="order-summary-text">{totalSum} 원</span>
-        </div>
-        <div>
-        구매하기
-        </div>
-      </div>
+      <div id="order-summary">총 수량 : {totalQuantitiy} 개</div>
+      <div id="order-summary-total">합계 : {totalSum} 원</div>
+      <button onClick={handleOrder}>구매하기</button>
+      <div className="order-summary-buying">{buying}</div>
+      <div className="order-summary-buying">{isEmpty}</div>
     </div>
   );
 }

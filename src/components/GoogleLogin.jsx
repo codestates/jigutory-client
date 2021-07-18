@@ -16,7 +16,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
     const email = res.profileObj.email;
     const username = res.profileObj.givenName;
     const profileImage = res.profileObj.imageUrl;
-    // const password = res.googleId;
 
     handleLogin(token);
     localStorage.setItem('accessToken', token);
@@ -33,7 +32,6 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
           email: email,
           username: username,
           profileImage: profileImage,
-          // password: password,
         },
         {
           headers: {

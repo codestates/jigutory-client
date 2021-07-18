@@ -106,7 +106,13 @@
     .intro_mypage-desc1 {
       font-size: 25px;
       font-weight: 600;
-
+      div {
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom : 0;
+        padding-bottom : 0;
+      }
       span {
         line-height: 180%;
         font-weight: 600;

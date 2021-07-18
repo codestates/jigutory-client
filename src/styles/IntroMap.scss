@@ -118,14 +118,18 @@
 }
 
 @media screen and (max-width: 1023px) {
+  .intro_container {
+  }
   .intro_main-function {
+    padding-top : 6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-self: center;
     text-align: center;
-
+    
     .intro_main-function-image {
+      padding-top : 6rem;
       width: 100%;
       img {
         // width: 380px;

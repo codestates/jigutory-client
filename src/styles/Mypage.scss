@@ -1,0 +1,342 @@
+@import './_variables.scss';
+
+@keyframes SlideFromTop {
+  from {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes SlideFromTop {
+  from {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+#mypage-container-etc {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  #mypage-container-etc-video {
+    display: flex;
+    video {
+      width: 270px;
+      margin-right: 1rem;
+    }
+  }
+  #mypage-container-etc-desc {
+    div {
+      h4 {
+        color: $title-blue;
+        margin: 5px 0 5px 0;
+      }
+      p {
+        font-size: 11px;
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 400;
+      }
+      button {
+        padding: 6px;
+        border-radius: 15px;
+        background-color: $medium-blue;
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        &:hover {
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          color: rgba(0, 0, 0, 0.6);
+          background-color: transparent;
+          transition: 0.1s ease-in;
+          font-weight: 800;
+        }
+      }
+      #mypage-addfriends {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+#color-box {
+  background-color: $medium-blue;
+  width: 100%;
+  height: 380px;
+  position: absolute;
+  z-index: -1;
+}
+#mypage-container {
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5.4rem;
+}
+
+#mypage-wholebox {
+  display: flex;
+  justify-content: center;
+}
+
+#mypage-left-box,
+#mypage-right-box {
+  margin: 6rem 0 6rem 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+#mypage-left-box {
+  margin-right: 2rem;
+  align-items: center;
+  img {
+    width: 8rem;
+    height: 8rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+  }
+  .mypage-userinfo-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    * {
+      margin: 10px;
+    }
+    .mypage-userinfo-edit {
+      background: transparent;
+      border-radius: 30px;
+      padding: 10px 17px 10px 17px;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.6);
+
+      &:hover {
+        background-color: $medium-blue;
+        color: white;
+        border: none;
+        transition: background-color 0.5s linear;
+      }
+    }
+    .mypage-userinfo-username {
+      span {
+        font-weight: 600;
+      }
+      div {
+        font-size: 11px;
+      }
+    }
+    .mypage-userinfo-email {
+      font-size: 14px;
+    }
+  }
+}
+
+#mypage-right-box {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  div {
+    // top-middle-bottom 사이 간격 띄울때 여기서 margin 으로 조절하기
+    margin-bottom: 8px;
+  }
+  // right-box 안에 컨테이너 늘어나면 여기 추가
+  #mypage-container-level,
+  #mypage-container-total,
+  #mypage-container-badge {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 18px 0 18px 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 5px 2px rgba(11, 11, 11, 0.08);
+  }
+
+  .mypage-userinfo-mylevel,
+  .mypage-total-user {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+  }
+
+  .mypage-userinfo-mylevel-section,
+  .mypage-total-user-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mypage-level-click {
+    cursor: pointer;
+  }
+
+  .mypage-box-subtitle {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .mypage-handleclick {
+      background-color: transparent;
+    }
+    .fa-plus-circle {
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 1.2rem;
+      &:hover {
+        color: $green;
+        transition: color 0.2s linear;
+      }
+    }
+  }
+  .mypage-box-subtitle-level {
+    cursor: pointer;
+  }
+  .mypage-box-contents {
+    font-size: 1.6rem;
+  }
+  .mypage-mylevel {
+    cursor: pointer;
+  }
+  #mypage-smalltext {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// badge -----------------------------------------------
+
+#mypage-badge-header {
+  h3 {
+    margin-bottom: 0;
+  }
+  p {
+    padding-top: 0;
+    font-size: 11.5px;
+    color: $medium-blue-text;
+    .fa-exclamation-circle {
+      margin-right: 5px;
+      color: $medium-blue;
+    }
+  }
+}
+
+#mypage-container-badge {
+  display: flex;
+  flex-direction: column;
+
+  .mypage-badge-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    #mypage-badge-list-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      .mypage-badge-contentbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        margin: 0 1rem 0 1rem;
+        span {
+          font-size: 14px;
+        }
+        .fa-arrow-circle-up {
+          color: $light-blue;
+        }
+      }
+    }
+  }
+}
+
+#mypage-badgeinfo {
+  width: 630px;
+  display: flex;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 18px;
+  animation: SlideFromTop 1s ease-in-out;
+  #mypage-badgeinfo-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    margin: 0.5rem;
+
+    div:nth-child(1) {
+      img {
+        width: 180px;
+        height: 130px;
+        border-radius: 10px;
+        margin-left: 0;
+      }
+    }
+
+    div:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10px;
+      .mypage-badgeinfo-name {
+        color: $title-blue;
+        font-weight: 800;
+      }
+      .mypage-badgeinfo-description {
+        max-width: 100%;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.6);
+        line-height: 160%;
+      }
+    }
+  }
+}
+
+.badgeHide {
+  opacity: 0.2;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  #color-box {
+    background-color: $light-blue;
+  }
+  #mypage-left-box {
+    display: none;
+  }
+  #mypage-right-box {
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    width: 77%;
+  }
+  #mypage-container-level,
+  #mypage-container-total,
+  #mypage-container-badge {
+    width: 80%;
+  }
+  .mypage-userinfo-mylevel,
+  .mypage-total-user {
+    flex-direction: column;
+  }
+  #mypage-container-etc {
+    display: flex;
+    flex-direction: column;
+  }
+  #mypage-badgeinfo-box {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+}

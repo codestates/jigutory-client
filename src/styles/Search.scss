@@ -1,0 +1,98 @@
+@import './_variables.scss';
+
+@keyframes OpenList {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#search {
+  font-size: 13px;
+  position: absolute;
+  left: 0;
+  z-index: 900;
+  padding: 90px 5px 5px 5px;
+}
+
+#search-category {
+  background-color: rgba(255, 255, 255, 0.9);
+
+  button {
+    font-size: 11px;
+    padding: 4px;
+    margin: 3px 3px 2px 3px;
+    border-radius: 2px;
+    background-color: transparent;
+    font-weight: 600;
+
+    &:hover {
+      background-color: rgba(8, 70, 99, 0.7);
+      color: white;
+    }
+  }
+}
+
+#search-bar {
+  display: flex;
+  flex-direction: row;
+
+  input {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 256px;
+    padding: 11px 8px 11px 8px;
+    font-size: 14px;
+    border-radius: 2px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2), 0 5px 2px rgba(11, 11, 11, 0.08);
+
+    &::placeholder {
+      color: $medium-blue-text;
+      font-size: 13px;
+      padding-left: 3px;
+    }
+  }
+
+  button {
+    position: absolute;
+    right: 7px;
+    top: 44px;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+#search-result-list {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 5px;
+}
+
+#search-result-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  cursor: pointer;
+  animation: OpenList 0.1s linear;
+  &:hover {
+    font-weight: 600;
+    transform: scale(0.99);
+  }
+}
+
+// 검색창 클릭하면 검색창 길이 늘리고 테두리 날리고 키워드 사라지게
+#search-bar input:focus-within .seach-category button {
+  background-color: black;
+}
+
+.search-bar-input:focus .search-category-name {
+  display: none;
+  background-color: tomato;
+}
+
+@media screen and (max-width: 1023px) {
+  #search {
+    padding-top: 7.5rem;
+  }
+}

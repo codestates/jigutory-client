@@ -5,12 +5,7 @@ import axios from 'axios';
 import '../styles/AuthModal.scss';
 axios.defaults.withCredentials = true;
 
-function SignUp({
-  accessToken,
-  handleOpenSignUp,
-  handleCloseSignUp,
-  handleUserInfo,
-}) {
+function SignUp({ accessToken, handleOpenSignUp, handleCloseSignUp }) {
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -48,13 +43,11 @@ function SignUp({
     const min = 3;
     const regUsername = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣0-9a-z]+$/;
 
-    // 이름 길이 확인
     if (username.length < min) {
       setUsernameError('3자 이상 입력');
       return false;
     }
 
-    // 이름 정규식 확인
     if (!regUsername.test(username)) {
       setUsernameError('한글 / 영문 소문자 / 숫자만 허용');
       return false;
@@ -90,13 +83,11 @@ function SignUp({
     const max = 20;
     const regPassword = /^[0-9a-z-_.!?*]+$/;
 
-    // 비밀번호 길이 확인
     if (password.length < min || password.length > max) {
       setPasswordError('8~20자 입력');
       return false;
     }
 
-    // 비밀번호 정규식 확인
     if (!regPassword.test(password)) {
       setPasswordError('영문 소문자 / 숫자 / 특수문자(-_.!?*)만 허용');
       return false;
@@ -124,10 +115,6 @@ function SignUp({
           },
         )
         .then((res) => {
-          // handleUserInfo({
-          //   usename: res.data.username,
-          //   email: res.data.email,
-          // });
           setIsSignUp(true);
           setTimeout(() => {
             history.push('/intro');

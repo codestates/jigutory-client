@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import AOS from 'aos';
+import IntroHeader from '../components/IntroHeader';
 import IntroMap from '../components/IntroMap';
 import IntroEnding from '../components/IntroEnding';
 import IntroMypage from '../components/IntroMypage';
 import IntroStore from '../components/IntroStore';
-import IntroHeader from '../components/IntroHeader';
 import { ScrollButton } from '../components/ScrollButton';
+import AOS from 'aos';
 
 function Intro() {
   useEffect(() => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import useClickOutside from '../hooks/useClickOutside';
-// import badgeImg from '../images/mypage-badge.png';
 import '../styles/BadgeInfo.scss';
 
 export const BadgeInfo = ({ badge, selectedBadgeId, setSelectedBadgeId }) => {
@@ -11,10 +10,6 @@ export const BadgeInfo = ({ badge, selectedBadgeId, setSelectedBadgeId }) => {
   let domNode = useClickOutside(() => {
     setSelectedBadgeId();
   });
-
-  if (!selectedBadgeId || !badge) {
-    <div>나중에 다시 시도해 주세요! 뱃지를 불러올 수 없어요.</div>;
-  }
 
   return (
     <div id="badge-container" ref={domNode}>

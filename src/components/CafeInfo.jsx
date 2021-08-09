@@ -1,5 +1,10 @@
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useImperativeHandle,
+} from 'react';
 import axios from 'axios';
-import { useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
 import '../styles/CafeInfo.scss';
 
@@ -47,7 +52,7 @@ export const CafeInfo = ({ cafeToggleRef }) => {
       </button>
       <div id="cafe-toggle-info">
         <div id="cafe-toggle-info-image">
-          <img src={cafe.image} alt="이미지" />
+          <img src={cafe.image} alt="카페이미지" />
         </div>
         <div id="cafe-toggle-category">
           <div className="cafe-toggle-category-title">

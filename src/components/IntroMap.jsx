@@ -30,21 +30,6 @@ const IntroMap = () => {
         </div>
       </section>
     </section>
-    // <section className="intro_main">
-    //   <section className="intro_main-function-map">
-    //     <div className="intro_main-function-map-gif">
-    //       <img src={mapGif} alt="지도 gif"></img>
-    //     </div>
-    //     <div className="intro_main-function-map-content">
-    //       <div>
-    //         지구토리의 지도를 통해 <br />
-    //         텀블러 사용혜택이 가득한 카페와 <br />
-    //         제로 웨이스트를 실천하고 있는 매장을 찾아보고 <br />
-    //         할인 금액별 카페도 조회해보세요!
-    //       </div>
-    //     </div>
-    //   </section>
-    // </section>
   );
 };
 

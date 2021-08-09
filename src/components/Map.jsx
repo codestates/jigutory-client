@@ -1,12 +1,10 @@
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef, useImperativeHandle } from 'react';
 import mapMarker from '../images/map-marker.png';
-import EarthSpinner from './EarthSpinner';
 import '../styles/Map.scss';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
   const [markers, setMarkers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   let isClicked = false;
 
   const containerRef = useRef();
@@ -97,14 +95,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
         window.kakao.maps.event.addListener(marker, 'click', function () {
           cafeToggleRef.current.toggle(cafeId);
         });
-
-        // const clusterer = new window.kakao.maps.MarkerClusterer({
-        //   map: map,
-        //   averageCenter: true,
-        //   minLevel: 10,
-        // });
-
-        // clusterer.addMarkers(markers);
       });
     }
   }, [cafeToggleRef, isClicked, map, markers]);
@@ -115,6 +105,7 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
       map.panTo(latLng);
     },
   }));
+
   useImperativeHandle(markerManageRef, () => ({
     addMarker: (lat, lng, cafeId, name) => {
       setMarkers((prev) => [...prev, { lat, lng, cafeId, name }]);
@@ -124,7 +115,6 @@ export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   return (
     <>
       <div id="map-container">
-        {/* <EarthSpinner /> */}
         <div id="map" ref={containerRef}></div>
       </div>
     </>

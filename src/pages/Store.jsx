@@ -19,7 +19,7 @@ function Store({ handleLogin, accessToken, handleUserInfo, userInfo }) {
   useEffect(() => {
     axios
       .post(
-        `http://localhost:4000/product/list`,
+        process.env.REACT_APP_API_URL+`/product/list`,
         { email: userInfo.email },
         {
           headers: {
@@ -36,7 +36,7 @@ function Store({ handleLogin, accessToken, handleUserInfo, userInfo }) {
   const handleAdd = async (e) => {
     await axios
       .post(
-        `http://localhost:4000/product/list`,
+        process.env.REACT_APP_API_URL+`/product/list`,
         { email: userInfo.email, productId: e },
         {
           headers: {

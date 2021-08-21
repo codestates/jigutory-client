@@ -23,7 +23,7 @@ function Cart(accessToken, isLogin, userInfo, handleLogin) {
     if (userinfo.email) {
       await axios
         .post(
-          `http://localhost:4000/cart/read`,
+          process.env.REACT_APP_API_URL +`/cart/read`,
           {
             email: userinfo.email,
           },

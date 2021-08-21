@@ -39,7 +39,7 @@ export default function CartList({
     console.log(`thisisitemid`, itemid);
     axios
       .post(
-        `http://localhost:4000/cart/update`,
+        process.env.REACT_APP_API_URL +`/cart/update`,
         {
           email: userinfo.email,
           quantitiy: quantitiy,
@@ -59,7 +59,7 @@ export default function CartList({
     if (userinfo.email) {
       axios
         .post(
-          `http://localhost:4000/cart/count`,
+          process.env.REACT_APP_API_URL + `/cart/count`,
           {
             email: userinfo.email,
           },
@@ -72,7 +72,7 @@ export default function CartList({
         .then((res) => {
           axios
             .post(
-              `http://localhost:4000/product/list`,
+              process.env.REACT_APP_API_URL + `/product/list`,
               { email: userinfo.email },
               {
                 headers: {
@@ -90,7 +90,7 @@ export default function CartList({
   //아이템 삭제 기능
   const deleteItem = (id) => {
     axios.delete(
-      `http://localhost:4000/cart/delete`,
+      process.env.REACT_APP_API_URL+ `/cart/delete`,
       {
         data: {
           email: userinfo.email,

@@ -9,7 +9,7 @@ const DeleteUserModal = ({ accessToken, handleCloseModal, isLogout }) => {
 
   const withdrawRequestHandler = () => {
     axios
-      .delete(`http://localhost:4000/user/withdraw`, {
+      .delete(process.env.REACT_APP_API_URL + `/user/withdraw`, {
         headers: {
           authorization: accessToken,
           'Content-Type': 'application/json',

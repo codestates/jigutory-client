@@ -27,7 +27,7 @@ const GoogleBtn = ({ handleLogin, handleUserInfo }) => {
 
     await axios
       .post(
-        `http://localhost:4000/auth/googlesignin`,
+        process.env.REACT_APP_API_URL + `/auth/googlesignin`,
         {
           email: email,
           username: username,

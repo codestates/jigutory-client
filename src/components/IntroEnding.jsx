@@ -13,7 +13,7 @@ const IntroEnding = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/intropage', {
+      .get(process.env.REACT_APP_API_URL + `/intropage`, {
         headers: {
           'Content-Type': 'application/json',
         },

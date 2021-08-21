@@ -21,7 +21,7 @@ export default function OrderSummary({ message }) {
     if (userinfo.email) {
       axios
         .post(
-          `http://localhost:4000/cart/update`,
+          process.env.REACT_APP_API_URL + `/cart/update`,
           {
             email: userinfo.email,
             quantitiy: 1,
@@ -40,7 +40,7 @@ export default function OrderSummary({ message }) {
     if (userinfo.email) {
       axios
         .post(
-          `http://localhost:4000/cart/count`,
+          process.env.REACT_APP_API_URL + `/cart/count`,
           {
             email: userinfo.email,
           },

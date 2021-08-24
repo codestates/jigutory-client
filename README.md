@@ -20,7 +20,7 @@
 
 환경 보호를 위한 소중한 한걸음, &nbsp;_**지구토리**_&nbsp;와 함께 해보세요!
 
-### 🚀 **[지구토리로 출발!!!](http://www.jigutory.com)**
+### 🚀 **[지구토리로 출발!!!](https://jigutory.shop/)**
 
 <img src="https://user-images.githubusercontent.com/78947950/125779977-ca66bbdb-dd2d-400f-9621-ae2420df518a.png" width="500" height="400"/><br/>
 

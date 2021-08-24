@@ -4,22 +4,33 @@ import '../styles/Map.scss';
 
 export const Map = ({ mapMovementRef, markerManageRef, cafeToggleRef }) => {
   const [map, setMap] = useState();
+  const [center, setCenter] = useState();
   const [markers, setMarkers] = useState([]);
   let isClicked = false;
 
   const containerRef = useRef();
 
   useEffect(() => {
-    const latLng = new window.kakao.maps.LatLng(
-      37.55624134907669,
-      126.9723973896144,
-    );
-    const options = {
-      center: latLng,
-      level: 7,
-    };
-    setMap(new window.kakao.maps.Map(containerRef.current, options));
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      setCenter({
+        lat: coords.latitude,
+        lng: coords.longitude,
+      });
+    });
   }, []);
+
+  useEffect(() => {
+    if (center) {
+      const latLng = center
+        ? new window.kakao.maps.LatLng(center.lat, center.lng)
+        : new window.kakao.maps.LatLng(37.55624134907669, 126.9723973896144);
+      const options = {
+        center: latLng,
+        level: 7,
+      };
+      setMap(new window.kakao.maps.Map(containerRef.current, options));
+    }
+  }, [center]);
 
   useEffect(() => {
     if (map) {

@@ -18,7 +18,7 @@ function Cart(accessToken, isLogin, userInfo, handleLogin) {
     }
   }, [setuserInfo]);
 
-  // useEffect(() => {
+
   const initialCart = async () => {
     if (userinfo.email) {
       await axios
@@ -38,7 +38,7 @@ function Cart(accessToken, isLogin, userInfo, handleLogin) {
         });
     }
   };
-  // });
+  
   initialCart();
 
   return (

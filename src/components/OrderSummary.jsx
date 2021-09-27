@@ -5,9 +5,7 @@ export default function OrderSummary({ message }) {
   const [totalQuantitiy, setQuantitiy] = useState(0);
   const [totalSum, setTotalSum] = useState(0);
   const [userinfo, setuserInfo] = useState('');
-  const [sum, setSum] = useState([]);
   const [buying, cantBuy] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false);
   const [isEmpty, setIsEmpty] = useState('🛒 장바구니에 담긴 상품이 없습니다.');
 
   useEffect(() => {
@@ -52,37 +50,20 @@ export default function OrderSummary({ message }) {
         )
         .then((res) => {
           let arr = res.data.findCount.rows;
-          setSum(arr);
           calculate(arr);
         });
     }
   });
 
   function calculate(arr) {
-    const total = {
-      price: 0,
-      quantity: 0,
-    };
-    for (let i = 0; i < arr.length; i++) {
-      let quantity = arr[i].message;
-      let price = arr[i].totalPrice;
-      total.price += price;
-      total.quantity = total.quantity + quantity;
-    }
-
-    setQuantitiy(total.quantity);
-    setTotalSum(total.price);
-    // console.log(`thisistotal`,total)
     if (totalSum !== 0) {
       setIsEmpty('');
     }
-    return total;
   }
 
   const handleOrder = () => {
     cantBuy('🛠 개발 중인 기능입니다');
     setTimeout(() => cantBuy(''), 2000);
-    console.log('clickBuy');
   };
 
   return (
